@@ -20,8 +20,6 @@
   <AscensionOfKnowledge.description>This being has ascended into a Scholar of Knowledge.</AscensionOfKnowledge.description>
   <AscensionOfPower.label>Ascension of Power</AscensionOfPower.label>
   <AscensionOfPower.description>This being has ascended into a Warrior of Power.</AscensionOfPower.description>
-  <Tribulation.label>Tribulation</Tribulation.label>
-  <Tribulation.description>This being is undergoing Tribulation, the punishment of Heaven upon those that try to surpass the constraints of the Heavenly Qi. Tribulation progresses thier essence realm by 10 + (1% max progress) at the cost of 5 qi + 1% max qi. If they do not have the qi for the cost, they will be struck by damaging lightning and the tribulation will end early.</Tribulation.description>
     <!-- 
         hediff messages
     -->
