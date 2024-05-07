@@ -118,7 +118,7 @@ namespace Ascension
             QiPool_Hediff qiPool = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
             Realm_Hediff essenceRealm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
             Realm_Hediff bodyRealm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm) as Realm_Hediff;
-            if (cultivatorHediff != null && essenceRealm != null && bodyRealm != null && qiPool != null)
+            if (cultivatorHediff != null && essenceRealm != null || bodyRealm != null && qiPool != null)
             {
                 
                 //this part does the cultivation jobs based on type
