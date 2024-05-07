@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <HediffDef>
+    <defName>BasicQiArts</defName>
+	<label>Basic Qi Arts</label>
+	<description>Basic Qi Arts, includes the Qi Shoot and Qi Heal abilities.</description>
+    <hediffClass>Ascension.Scroll_Hediff</hediffClass>
+	<defaultLabelColor>(1.0, 1.0, 0.2)</defaultLabelColor>
+    <isBad>false</isBad>
+	<comps>
+      <li Class="Ascension.HediffCompProperties_AddScrollAbility">
+		<scrollCompAbilityDefList>
+			<li>QiHeal</li>
+			<li>QiBullet</li>
+		</scrollCompAbilityDefList>
+		<reqEssence>2</reqEssence>
+      </li>
+    </comps>
+  </HediffDef>
+  <HediffDef>
+    <defName>AdvancedQiArts</defName>
+	<label>Advanced Qi Arts</label>
+	<description>Advanced Qi Arts, includes the Qi Ressurection ability.</description>
+    <hediffClass>Ascension.Scroll_Hediff</hediffClass>
+	<defaultLabelColor>(1.0, 1.0, 0.2)</defaultLabelColor>
+    <isBad>false</isBad>
+	<comps>
+      <li Class="Ascension.HediffCompProperties_AddScrollAbility">
+		<scrollCompAbilityDefList>
+			<li>QiResurrection</li>
+			<li>QiFeed</li>
+		</scrollCompAbilityDefList>
+		<reqEssence>5</reqEssence>
+      </li>
+	  <li Class="Ascension.HediffCompProperties_AddScrollReq">
+		<reqHediffsList>
+			<li>BasicQiArts</li>
+		</reqHediffsList>
+      </li>
+    </comps>
+  </HediffDef>
+  <HediffDef>
+    <defName>BasicQiSwordArts</defName>
+	<label>Basic Qi Sword Arts</label>
+	<description>Basic Qi Sword Arts, includes the following spirit sword abilities: qi spirit sword throw, qi spirit sword stab and qi spirit sword slash.</description>
+    <hediffClass>Ascension.Scroll_Hediff</hediffClass>
+	<defaultLabelColor>(1.0, 1.0, 0.2)</defaultLabelColor>
+    <isBad>false</isBad>
+	<comps>
+      <li Class="Ascension.HediffCompProperties_AddScrollAbility">
+		<scrollCompAbilityDefList>
+			<li>SpiritSwordQiThrow</li>
+			<li>SpiritSwordQiStab</li>
+			<li>SpiritSwordQiSlash</li>
+		</scrollCompAbilityDefList>
+		<reqEssence>4</reqEssence>
+      </li>
+	  <li Class="Ascension.HediffCompProperties_AddScrollReq">
+		<reqHediffsList>
+			<li>BasicQiArts</li>
+			<li>SpiritSwordFusion</li>
+		</reqHediffsList>
+      </li>
+    </comps>
+  </HediffDef>
+  
+        <!--
+      WIP Scrolls
+	  
+	  
+	    <HediffDef>
+    <defName>BasicFistArts</defName>
+	<label>Basic Fist Arts</label>
+	<description>Basic Fist Arts, includes the following melee abilities: Sharpened Chop, Hardened Punch. The abilities damage also scales on manipulation.</description>
+    <hediffClass>Ascension.Scroll_Hediff</hediffClass>
+	<defaultLabelColor>(1.0, 1.0, 0.2)</defaultLabelColor>
+    <isBad>false</isBad>
+	<comps>
+      <li Class="Ascension.HediffCompProperties_AddScrollAbility">
+		<scrollCompAbilityDefList>
+			<li>SharpenedChop</li>
+			<li>HardenedPunch</li>
+		</scrollCompAbilityDefList>
+		<reqBody>2</reqBody>
+      </li>
+    </comps>
+  </HediffDef>
+  
+  
+  <HediffDef>
+    <defName>BasicQiFistArts</defName>
+	<label>Basic Open-Fist Arts</label>
+	<description>Basic Open-Fist Arts, includes the following melee abilities: Qi Empowered Chop, Qi Empowered Punch. The abilities damage also scales on manipulation, but have more damage than normal fist arts due to the infused qi.</description>
+    <hediffClass>Ascension.Scroll_Hediff</hediffClass>
+	<defaultLabelColor>(1.0, 1.0, 0.2)</defaultLabelColor>
+    <isBad>false</isBad>
+	<comps>
+      <li Class="Ascension.HediffCompProperties_AddScrollAbility">
+		<scrollCompAbilityDefList>
+			<li>QiEmpoweredChop</li>
+			<li>QiEmpoweredPunch</li>
+		</scrollCompAbilityDefList>
+		<reqBody>2</reqBody>
+		<reqEssence>2</reqEssence>
+      </li>
+	  <li Class="Ascension.HediffCompProperties_AddScrollReq">
+		<reqHediffsList>
+			<li>BasicFistArts</li>
+		</reqHediffsList>
+      </li>
+    </comps>
+  </HediffDef>
+	  
+	  
+      -->
+</Defs>

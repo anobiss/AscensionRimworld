@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>SpiritStone</defName>
+    <label>spirit stone</label>
+    <description>Qi condensed into its solid form. Once consumed it grants 10 qi. Used in production of golden pills for vastly more qi.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/SpiritStone</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <useHitPoints>false</useHitPoints>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <soundInteract>ChunkRock_Drop</soundInteract>
+    <soundDrop>ChunkRock_Drop</soundDrop>
+	<ingestible>
+	  <preferability>NeverForNutrition</preferability>
+      <maxNumToIngestAtOnce>1</maxNumToIngestAtOnce>
+      <defaultNumToIngestAtOnce>1</defaultNumToIngestAtOnce>
+	  <foodType>Processed</foodType>
+      <baseIngestTicks>100</baseIngestTicks>
+      <chairSearchRadius>0</chairSearchRadius>
+      <ingestSound>Ingest_Pill</ingestSound>
+      <ingestHoldUsesTable>false</ingestHoldUsesTable>
+      <ingestCommandString>Take {0}</ingestCommandString>
+      <ingestReportString>Taking {0}.</ingestReportString>
+      <drugCategory>Medical</drugCategory>
+      <outcomeDoers>
+        <li Class="Ascension.IngestionOutcomeDoer_GoldenPill">
+          <hediffDef>QiPool</hediffDef>
+          <amount>10</amount>
+		  <tier>1</tier>
+          <doToGeneratedPawnIfAddicted>true</doToGeneratedPawnIfAddicted>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+	<comps>
+      <li Class="CompProperties_Drug">
+		<isCombatEnhancingDrug>false</isCombatEnhancingDrug>
+        <listOrder>1010</listOrder>
+      </li>
+	   <li Class="Ascension.CompProperties_GatherQi">
+		<range>3</range>
+        <amount>7</amount>
+      </li>
+    </comps>
+    <statBases>
+      <MarketValue>5</MarketValue>
+      <Mass>0.5</Mass>
+    </statBases>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <deepCommonality>1</deepCommonality>
+    <deepCountPerPortion>15</deepCountPerPortion>
+    <deepLumpSizeRange>1~4</deepLumpSizeRange>
+    <burnableByRecipe>false</burnableByRecipe>
+    <smeltable>false</smeltable>
+    <allowedArchonexusCount>80</allowedArchonexusCount>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- 
+        Traits
+  -->
+  <DestructionAttunedSpiritCore.degreeDatas.0.label>Destruction Attuned Spirit Core</DestructionAttunedSpiritCore.degreeDatas.0.label>
+  <DestructionAttunedSpiritCore.degreeDatas.0.description>{PAWN_nameDef} has a Spirit Core that is attuned towards destructive properties. {PAWN_pronoun} is naturally extremley gifted and skillfull in the arts of combat and destruction.</DestructionAttunedSpiritCore.degreeDatas.0.description>
+  <CreationAttunedSpiritCore.degreeDatas.0.label>Creation Attuned Spirit Core</CreationAttunedSpiritCore.degreeDatas.0.label>
+  <CreationAttunedSpiritCore.degreeDatas.0.description>{PAWN_nameDef} has a Spirit Core that is attuned towards creative properties. {PAWN_pronoun} is naturally extremley gifted in the arts of creation and research.</CreationAttunedSpiritCore.degreeDatas.0.description>
+  <AngelicSpiritCore.degreeDatas.0.label>Angelic Spirit Core</AngelicSpiritCore.degreeDatas.0.label>
+  <AngelicSpiritCore.degreeDatas.0.description>{PAWN_nameDef} has a Spirit Core that has Angelic properties. {PAWN_pronoun} is blessed by the angelic wispers resonating from within thier spirit granting {PAWN_objective} innate life nurturing skills, and high social impact.</AngelicSpiritCore.degreeDatas.0.description>
+  <DemonicSpiritCore.degreeDatas.0.label>Demonic Spirit Core</DemonicSpiritCore.degreeDatas.0.label>
+  <DemonicSpiritCore.degreeDatas.0.description>{PAWN_nameDef} has a Spirit Core that is attuned towards demonic properties. {PAWN_pronoun} will often cave into the demands of the demonic voices from within their spirit and attempt to kill those around them, but in turn is granted god-like combat abilities, even greater than that of a destructive spirit core.</DemonicSpiritCore.degreeDatas.0.description>
+
+</LanguageData>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <HediffDef>
+    <defName>Tribulation</defName>
+    <label>Tribulation</label>
+    <description>This being is undergoing Tribulation, the punishment of Heaven upon those that oppose its will. During tribulation their movement is slowed immensely. If they have a Dao Pool, its energy will be converted into progression on their Ascendant Foundation or Psuedo-Immortality if the Foundation tier is XII. During every convsersion they are struck with non-damaging lightning. If the tribulation continues with less than 1 dao energy to convert, or they have the final tier of psuedo-immortality, they will be struck by damaging lightning and the tribulation will end.</description>
+    <hediffClass>Ascension.Tribulation_Hediff</hediffClass>
+	<defaultLabelColor>(1.0, 1.0, 0.2)</defaultLabelColor>
+    <isBad>false</isBad>
+    <comps>
+	  <li>
+		<compClass>Ascension.HediffComp_TribulationConversion</compClass>
+	  </li>
+    </comps>
+	<stages>
+      <li>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.7</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+</Defs>

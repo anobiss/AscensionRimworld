@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <HediffDef>
+    <defName>QiPool</defName>
+    <label>Qi Pool</label>
+	<description>Qi used in cultivation techniques and essence realm progression.</description>
+    <hediffClass>Ascension.QiPool_Hediff</hediffClass>
+	<defaultLabelColor>(0.0, 1.0, 0.0)</defaultLabelColor>
+    <isBad>false</isBad>
+  </HediffDef>
+</Defs>

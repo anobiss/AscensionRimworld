@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <ThingDef ParentName="MoteBase">
+    <defName>Mote_QiMistStencil</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>Terrain</altitudeLayer>
+    <mote>
+      <fadeInTime>0</fadeInTime>
+      <fadeOutTime>0</fadeOutTime>
+      <solidTime>999999</solidTime>
+      <needsMaintenance>True</needsMaintenance>
+    </mote>
+    <graphicData>
+      <graphicClass>Graphic_PawnBodySilhouette</graphicClass>
+      <shaderType>PawnSilhouetteStencil</shaderType>
+      <texPath>Things/Mote/Transparent</texPath>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase" Name="MoteQiMistBase" Abstract="True">
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <solidTime>0.45</solidTime>
+      <fadeInTime>0.1</fadeInTime>
+      <fadeOutTime>0.2</fadeOutTime>
+    </mote>
+    <graphicData>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <shaderType>PawnSilhouetteStencilColorAnimated</shaderType>
+      <drawSize>(0.65, 0.65)</drawSize>
+      <shaderParameters>
+        <_NumFrames>5</_NumFrames>
+        <_FramesPerSec>7.5</_FramesPerSec>
+      </shaderParameters>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteQiMistBase">
+    <defName>Mote_QiMistA</defName>
+    <graphicData>
+      <texPath>Things/Mote/QiMist/QiMistA</texPath>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteQiMistBase">
+    <defName>Mote_QiMistB</defName>
+    <graphicData>
+      <texPath>Things/Mote/QiMist/QiMistB</texPath>
+    </graphicData>
+  </ThingDef>
+  
+</Defs>

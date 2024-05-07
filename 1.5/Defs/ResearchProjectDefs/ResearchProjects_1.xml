@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ResearchProjectDef>
+    <defName>QiManipulation</defName>
+    <label>Qi Manipulation</label>
+    <description>Make spirit stones from organics, and build Soul Cauldrons.</description>
+    <baseCost>666</baseCost>
+    <techLevel>Neolithic</techLevel>
+	<tab>Ascension</tab>
+    <researchViewX>0.00</researchViewX>
+    <researchViewY>0.20</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>GoldenPillProduction</defName>
+    <label>Golden Pill Production</label>
+    <description>Produce Golden Pills.</description>
+    <baseCost>7777</baseCost>
+    <techLevel>Medieval</techLevel>
+	<tab>Ascension</tab>
+    <prerequisites>
+      <li>QiManipulation</li>
+    </prerequisites>
+    <researchViewX>1.00</researchViewX>
+    <researchViewY>0.20</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AscensionPillProduction</defName>
+    <label>Ascension Pill Production</label>
+    <description>Produce Ascension Pills.</description>
+    <baseCost>7777</baseCost>
+    <techLevel>Medieval</techLevel>
+	<tab>Ascension</tab>
+    <prerequisites>
+      <li>GoldenPillProduction</li>
+    </prerequisites>
+    <researchViewX>2.00</researchViewX>
+    <researchViewY>0.20</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>SpiritSwordManifestation</defName>
+    <label>Spirit Sword Manifestation</label>
+    <description>Manifest Spirit Swords from Soul Shards in the Soul Cauldron.</description>
+    <baseCost>7777</baseCost>
+    <techLevel>Medieval</techLevel>
+	<tab>Ascension</tab>
+    <prerequisites>
+      <li>QiManipulation</li>
+    </prerequisites>
+    <researchViewX>1.00</researchViewX>
+    <researchViewY>0.85</researchViewY>
+  </ResearchProjectDef>
+</Defs>
+

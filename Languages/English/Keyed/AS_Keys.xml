@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <AS_Foundation>Foundation</AS_Foundation>
+  
+  
+  
+    <!-- Settings -->
+  <AS_AbilityChance>Cultivator Ability Chance: </AS_AbilityChance>
+  <AS_AbilityChanceDesc>Determines the probability of a cultivator gaining random scroll arts / abilities when spawned. Slightly below displayed percentage if no useable scrolls are found.</AS_AbilityChanceDesc>
+  <AS_PCChance>Powerful Cultivator Chance: </AS_PCChance>
+  <AS_PCChanceDesc>Determines the probability of a random cultivators realm progression being high end when spawned. This only effects thier given realm, so if essence realm chance is at 0 you wont get any truly powerful cultivators.</AS_PCChanceDesc>
+  <AS_ERChance>Essence Realm Chance: </AS_ERChance>
+  <AS_ERChanceDesc>Determines the probability of random cultivators being in a essence realm when spawned. Essence realms are after body realms.</AS_ERChanceDesc>
+  <AS_LogHeals>Log Heals</AS_LogHeals>
+  <AS_LogHealsDesc>Enable if you want to log heals from this mod in console. May flood the console if too many heals take place.</AS_LogHealsDesc>
+  <AS_CultivatorChance>Cultivator Spawn Chance: </AS_CultivatorChance>
+  <AS_CultivatorChanceDesc>Determines the probability of a pawn being a cultivator with random realm progression when spawned.</AS_CultivatorChanceDesc>
+  <AS_PIChance>Pseudo-Immortal Spawn Chance: </AS_PIChance>
+  <AS_PIChanceDesc>Determines the probability of a pawn being a Pseudo-Immortal cultivator when spawned, only effects randomly generated cultivators.</AS_PIChanceDesc>
+  
+  
+  
+  
+  
+    <!-- Scrolls -->
+  <AS_ScrollAReq>Scroll requires art: </AS_ScrollAReq>
+  <AS_ScrollHERReq>Scroll requires higher essence realm: </AS_ScrollHERReq>
+  <AS_ScrollHBRReq>Scroll requires higher body realm: </AS_ScrollHBRReq>
+  <AS_ScrollAL>Ability in scroll already learned.</AS_ScrollAL>
+  
+  
+  <AS_AutoCType>Auto-Cultivate Type: </AS_AutoCType>
+  <AS_AutoCStart>Auto-Cultivation Start Time: </AS_AutoCStart>
+  <AS_AutoCEnd>Auto-Cultivation End Time: </AS_AutoCEnd>
+  
+  
+  <AS_RealmAuto>Realm</AS_RealmAuto>
+  <AS_RealmAutoDesc>Auto-cultivate Current Realm. (This includes gathering qi if they are in a essence realm)</AS_RealmAutoDesc>
+  <AS_RealmOnlyAuto>Realm Only</AS_RealmOnlyAuto>
+  <AS_EssenceRealmOnlyAutoDesc>Auto-cultivate Essence Realm only. (This excludes gathering qi if they are in a essence realm)</AS_EssenceRealmOnlyAutoDesc>
+  <AS_QiGatheringAuto>Gather Qi</AS_QiGatheringAuto>
+  <AS_QiGatheringAutoDesc>Automatically gather Qi only.</AS_QiGatheringAutoDesc>
+  
+  
+  <AS_TConversionsLeft> Qi to essence realm progress conversions left.</AS_TConversionsLeft>
+  <AS_RefineQi>Refine Qi</AS_RefineQi>
+  <AS_RefineQiDesc>Meditate for 2 hours divided by cultivation speed to Refine Qi into progress on essence realms. 10% max qi plus 2 qi is used in each refinement, progressing by the same amount of qi used.</AS_RefineQiDesc>
+  <AS_Exercise>Exercise</AS_Exercise>
+  <AS_ExerciseDesc>Exercise for 4 hours divided by cultivation speed to progress  10 + (1% max progress) in the current body realm.</AS_ExerciseDesc>
+  <AS_QiGathering>Qi Gathering</AS_QiGathering>
+  <AS_QiGatheringDesc>Meditate for 3 hours divided by cultivation speed to gather natural qi from your surroundings. Generates 1 qi plus the amount of Gather Qi in the cultivators position.</AS_QiGatheringDesc>
+  <AS_Breakthrough>Breakthrough</AS_Breakthrough>
+  <AS_BreakthroughEssenceDesc>Meditate for 7 hours divided by cultivation speed to breakthrough to the next realm.</AS_BreakthroughEssenceDesc>
+  <AS_BreakthroughBodyDesc>Exercise for 7 hours divided by cultivation speed to breakthrough to the next realm.</AS_BreakthroughBodyDesc>
+  
+  <AS_GatherQi>Gather Qi</AS_GatherQi>
+  <AS_GatherQiRange>Range</AS_GatherQiRange>
+  <AS_GatherQiRangeDesc>How far the object with Gather Qi permeates its surroundings.</AS_GatherQiRangeDesc>
+  <AS_GatherQiAmount>Qi Amount</AS_GatherQiAmount>
+  <AS_GatherQiAmountDesc>The amount of Qi that the object with Gather Qi grants to its surroundings </AS_GatherQiAmountDesc>
+  
+  <AS_CanBreakThrough>Breakthrough Possible</AS_CanBreakThrough>
+  <AS_CanBreakThroughDesc>{PAWN} can now breakthrough past {REALM}.</AS_CanBreakThroughDesc>
+  
+  <AS_Qi>Qi</AS_Qi>
+  <AS_QiPool>Qi Pool</AS_QiPool>
+  <AS_Technique>Technique</AS_Technique>
+  <AS_BodyRealm>Body Realm: </AS_BodyRealm>
+  <AS_BodyRealmDec>The current body realm of the cultivator. Body realm cultivation provides enchanced bodily functions, and is needed to surpass the bodies limits of qi storage to progress to the essence realms.(Essence realms start after breakthrough of the last body realm 'Flesh Molding') </AS_BodyRealmDec>
+  <AS_EssenceRealm>Essence Realm: </AS_EssenceRealm>
+  <AS_EssenceRealmDec>The current essence realm of the cultivator. Essence realm cultivation provides passive qi generation.</AS_EssenceRealmDec>
+
+  <AS_Name>Ascension</AS_Name>
+  <TabDao>Dao</TabDao>
+  <AS_Dao>Dao</AS_Dao>
+  <AS_Cultivation>Cultivation</AS_Cultivation>
+  <AS_AscendantFoundation>Ascendant Foundation</AS_AscendantFoundation>
+  <AS_FoundationT1>Tier I</AS_FoundationT1>
+  <AS_FoundationT2>Tier II</AS_FoundationT2>
+  <AS_FoundationT3>Tier III</AS_FoundationT3>
+  <AS_FoundationT4>Tier IV</AS_FoundationT4>
+  <AS_FoundationT5>Tier V</AS_FoundationT5>
+  <AS_FoundationT6>Tier VI</AS_FoundationT6>
+  <AS_FoundationT7>Tier VII</AS_FoundationT7>
+  <AS_FoundationT8>Tier VIII</AS_FoundationT8>
+  <AS_FoundationT9>Tier IX</AS_FoundationT9>
+  <AS_FoundationT10>Tier X</AS_FoundationT10>
+  <AS_FoundationT11>Tier XI</AS_FoundationT11>
+  <AS_FoundationT12>Tier XII</AS_FoundationT12>
+  <AS_PseudoImmortality>Pseudo-Immortality</AS_PseudoImmortality>
+  <AS_PIT1>Tier I Dao King</AS_PIT1>
+  <AS_PIT2>Tier II Dao Sovereign</AS_PIT2>
+  <AS_PIT3>Tier III Dao Sage</AS_PIT3>
+  <AS_PIT4>Tier IV Dao Saint</AS_PIT4>
+  <AS_PIT5>Tier V Dao Celestial</AS_PIT5>
+  <AS_PIT6>Tier VI Grand Emperor</AS_PIT6>
+  <AS_PIT7>Tier VII Supmreme God Emperor</AS_PIT7>
+  <AS_CBreakthrough>Breakthrough</AS_CBreakthrough>
+  <AS_CBreakthroughDesc>Meditate for hours to breakthrough to the next tier of Ascendant Foundation or Pseudo-Immortalality.</AS_CBreakthroughDesc>
+  <AS_BreakthroughDesc>{0} had a breakthrough to {1}.</AS_BreakthroughDesc>
+  <AbilityDisabledNoAFOrPI>Ability disabled, no Ascendant Foundation or Pseudo-Immortality found.</AbilityDisabledNoAFOrPI>
+  <AbilityDisabledERProgLow>Ability disabled, Essence Realm not high enough.</AbilityDisabledERProgLow>
+  <AbilityDisabledBRProgLow>Ability disabled, Body Realm not high enough.</AbilityDisabledBRProgLow>
+  <AbilityDisabledPIProgLow>Ability disabled, Pseudo-Immortality tier too low.</AbilityDisabledPIProgLow>
+  <AbilityDisabledNoQiPool>Ability disabled, no qi pool found.</AbilityDisabledNoQiPool>
+  <AbilityDisabledNoQi>Ability disabled, not enough qi in pool.</AbilityDisabledNoQi>
+  <AbilityDisabledNoHediff>Ability disabled, requires </AbilityDisabledNoHediff>
+  <AbilityQiCost>Dao cost</AbilityQiCost>
+  <AS_HumanoidCultivator>Humanoid Cultivator Spawns Only</AS_HumanoidCultivator>
+  <AS_HumanoidCultivatorDesc>Enable if you want the spawn chance to only affect humanoid pawns.</AS_HumanoidCultivatorDesc>
+  <AS_MachineCultivator>Machine Cultivators</AS_MachineCultivator>
+  <AS_MachineCultivatorDesc>Enable if you want the spawn chance to affect mechanical pawns. Enabling is not recommended for Biotech users unless you want to randomly gestate pseudo-immortal mechs.</AS_MachineCultivatorDesc>
+  <AS_OPGoldenPills>Same Ascendant Foundation Tier As Golden Pill Tier</AS_OPGoldenPills>
+  <AS_OPGoldenPillsDesc>DO NOT ENABLE ON "SERIOUS" PLAYTHROUGHS. Enable if you want Golden Pills to give the same tier of Ascendant Foundation as the tier of the Golden Pill. This makes foundation building extremley easy using high tier pills especially since it BYPASSES BREAKTHROUGHS, so it is not recommended for any serious playthough.</AS_OPGoldenPillsDesc>
+
+
+  <AS_QFSLabel> Dao Energy</AS_QFSLabel>
+  <AS_QPAmountLabel> Qi</AS_QPAmountLabel>
+
+</LanguageData>

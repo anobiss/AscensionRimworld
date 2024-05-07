@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffDef>
+    <defName>Cultivator</defName>
+	<label>CULTIVATOR</label>
+	<description>Cultivator invisible hediff, you should not be able to see this.</description>
+    <hediffClass>Ascension.Cultivator_Hediff</hediffClass>
+	<defaultLabelColor>(0.7, 1.0, 0.7)</defaultLabelColor>
+	<maxSeverity>12.0</maxSeverity>
+	<scenarioCanAdd>true</scenarioCanAdd>
+    <isBad>false</isBad>
+    <initialSeverity>0.01</initialSeverity>
+  </HediffDef>
+  
+</Defs>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <TimeAssignmentDef>
+    <defName>Cultivate</defName>
+    <label>Cultivate</label>
+    <color>(255,255,0)</color>
+    <allowRest>false</allowRest>
+  </TimeAssignmentDef>
+
+</Defs>

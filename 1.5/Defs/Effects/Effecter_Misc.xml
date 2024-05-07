@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <EffecterDef>
+    <defName>QiMist</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <moteDef>Mote_QiMistA</moteDef>
+        <burstCount>1</burstCount>
+        <chancePerTick>0.125</chancePerTick>
+        <scale>0.9~1.1</scale>
+        <spawnLocType>RandomDrawPosOnTarget</spawnLocType>
+        <attachToSpawnThing>true</attachToSpawnThing>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <moteDef>Mote_QiMistB</moteDef>
+        <burstCount>1</burstCount>
+        <chancePerTick>0.125</chancePerTick>
+        <scale>1~1.4</scale>
+        <spawnLocType>RandomDrawPosOnTarget</spawnLocType>
+        <attachToSpawnThing>true</attachToSpawnThing>
+      </li>
+    </children>
+  </EffecterDef>
+  
+</Defs>

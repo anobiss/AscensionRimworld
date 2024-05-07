@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--========= Cultivation jobs ============-->
+  <JobDef>
+    <defName>AS_GoToCulivationSpot</defName>
+    <driverClass>Ascension.JobDriver_GoToCulivationSpot</driverClass>
+    <reportString>walking to cultivation spot</reportString>
+  </JobDef>
+  
+  <JobDef>
+    <defName>AS_BreakthroughEssence</defName>
+    <driverClass>Ascension.JobDriver_BreakthroughEssence</driverClass>
+    <reportString>essence realm breakthrough</reportString>
+  </JobDef>
+  
+  <JobDef>
+    <defName>AS_BreakthroughBody</defName>
+    <driverClass>Ascension.JobDriver_BreakthroughBody</driverClass>
+    <reportString>body realm breakthrough</reportString>
+  </JobDef>
+  
+    <JobDef>
+    <defName>AS_RefineQiJob</defName>
+    <driverClass>Ascension.JobDriver_RefineQi</driverClass>
+    <reportString>refining qi</reportString>
+  </JobDef>
+  
+    <JobDef>
+    <defName>AS_QiGatheringJob</defName>
+    <driverClass>Ascension.JobDriver_QiGathering</driverClass>
+    <reportString>qi gathering</reportString>
+  </JobDef>
+  
+    <JobDef>
+    <defName>AS_ExerciseJob</defName>
+    <driverClass>Ascension.JobDriver_Exercise</driverClass>
+    <reportString>exercising</reportString>
+  </JobDef>
+  
+    <!--========= Weird odd jobs
+something
+	============-->
+	
+	
+</Defs>

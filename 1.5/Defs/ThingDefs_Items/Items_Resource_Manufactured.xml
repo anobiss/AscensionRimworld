@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <!--
+      Scrolls
+	  
+	  
+      -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>BasicQiScroll</defName>
+    <label>Basic Qi Arts Scroll</label>
+    <description>A basic Qi Arts scroll, capable of teaching those with the foundation establisment essence realm or higher: Qi Shoot and Qi Heal abilities.</description>
+    <graphicData>
+      <texPath>Things/Item/Misc/BasicQiScroll</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stackLimit>12</stackLimit>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <statBases>
+      <MaxHitPoints>12</MaxHitPoints>
+      <MarketValue>555</MarketValue>
+      <Mass>0.8</Mass>
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.0</DeteriorationRate>
+    </statBases>
+    <intricate>true</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags>
+      <li>RewardStandardHighFreq</li>
+    </thingSetMakerTags>
+	<tradeability>None</tradeability>
+	<comps>
+      <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Use {0_label}</useLabel><!-- text_todo -->
+        <useDuration>0</useDuration>
+        <warmupMote>Mote_QiMistStencil</warmupMote>
+      </li>
+      <li Class="Ascension.CompProperties_UseEffect_AbilityScroll"><!-- abilities are defined in the hediff comps -->
+		<scrollHediffDef>BasicQiArts</scrollHediffDef>
+      </li>
+    </comps>
+	<allowedArchonexusCount>100</allowedArchonexusCount>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>AdvancedQiScroll</defName>
+    <label>Advanced Qi Arts Scroll</label>
+    <description>A advanced Qi Arts scroll, capable of teaching those with the soul transformation essence realm and Basic Qi Arts the Qi Ressurection ability.</description>
+    <graphicData>
+      <texPath>Things/Item/Misc/AdvancedQiScroll</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stackLimit>12</stackLimit>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <statBases>
+      <MaxHitPoints>777</MaxHitPoints>
+      <MarketValue>2222</MarketValue>
+      <Mass>0.8</Mass>
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.0</DeteriorationRate>
+    </statBases>
+    <intricate>true</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags>
+      <li>RewardStandardMidFreq</li>
+    </thingSetMakerTags>
+	<tradeability>None</tradeability>
+	<comps>
+      <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Use {0_label}</useLabel><!-- text_todo -->
+        <useDuration>0</useDuration>
+        <warmupMote>Mote_QiMistStencil</warmupMote>
+      </li>
+      <li Class="Ascension.CompProperties_UseEffect_AbilityScroll">
+		<scrollHediffDef>AdvancedQiArts</scrollHediffDef>
+      </li>
+    </comps>
+	<allowedArchonexusCount>100</allowedArchonexusCount>
+  </ThingDef>
+  
+  <ThingDef ParentName="ResourceBase">
+    <defName>BasicQiSwordScroll</defName>
+    <label>Basic Qi Spirit Sword Arts Scroll</label>
+    <description>A basic Qi Spirit Sword Arts scroll, capable of teaching those with the soul transformation essence realm and Basic Qi Arts the following spirit sword abilities: qi spirit sword throw, qi spirit sword stab and qi spirit sword slash.</description>
+    <graphicData>
+      <texPath>Things/Item/Misc/BasicQiSwordScroll</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stackLimit>12</stackLimit>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <statBases>
+      <MaxHitPoints>777</MaxHitPoints>
+      <MarketValue>555</MarketValue>
+      <Mass>0.8</Mass>
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.0</DeteriorationRate>
+    </statBases>
+    <intricate>true</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags>
+      <li>RewardStandardHighFreq</li>
+    </thingSetMakerTags>
+	<tradeability>None</tradeability>
+	<comps>
+      <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Use {0_label}</useLabel><!-- text_todo -->
+        <useDuration>0</useDuration>
+        <warmupMote>Mote_QiMistStencil</warmupMote>
+      </li>
+      <li Class="Ascension.CompProperties_UseEffect_AbilityScroll">
+		<scrollHediffDef>BasicQiSwordArts</scrollHediffDef>
+      </li>
+    </comps>
+	<allowedArchonexusCount>100</allowedArchonexusCount>
+  </ThingDef>
+</Defs>

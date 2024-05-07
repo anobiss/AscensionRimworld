@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <FleckDef ParentName="FleckBase">
+    <defName>FlashQi</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <solidTime>0.07</solidTime>
+    <fadeOutTime>0.06</fadeOutTime>
+    <graphicData>
+      <texPath>Things/Mote/FlashQi</texPath>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+    <growthRate>6.9</growthRate>
+  </FleckDef>
+
+</Defs>

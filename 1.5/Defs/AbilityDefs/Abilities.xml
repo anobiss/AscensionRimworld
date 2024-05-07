@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <AbilityCategoryDef>
+    <defName>QiTechnique</defName>
+    <displayOrder>1001</displayOrder>
+  </AbilityCategoryDef>
+      <!--
+      <warmupTime>294</warmupTime> 7 hours base, increase by 1 every tier of foundation, 3 every tier of psuedo-immortality
+	  cost 7.77
+      -->
+  
+  
+    <!--
+      Qi Manipulation Arts
+      -->
+	  
+  <AbilityDef ParentName="AbilityTouchBase">
+    <defName>QiHeal</defName>
+    <label>Qi heal</label>
+    <description>Use qi to quickly heal wounds.</description>
+    <iconPath>UI/Abilities/QiHeal</iconPath>
+    <stunTargetWhileCasting>true</stunTargetWhileCasting>
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <warmupMote>Mote_QiMistStencil</warmupMote>
+    <warmupEffecter>QiMist</warmupEffecter>
+    <warmupStartSound>QiHeal_Cast</warmupStartSound>
+    <jobDef>CastAbilityOnThingMelee</jobDef>
+    <category>QiTechnique</category>
+    <displayOrder>400</displayOrder>
+    <hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <verbProperties>
+      <verbClass>Verb_CastAbilityTouch</verbClass>
+      <drawAimPie>false</drawAimPie>
+      <range>-1</range>
+      <warmupTime>30</warmupTime>
+	  <ai_IsWeapon>false</ai_IsWeapon>
+      <targetParams>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetSelf>true</canTargetSelf>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetMechs>false</canTargetMechs>
+        <canTargetBloodfeeders>true</canTargetBloodfeeders>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>100</cost>
+      </li>
+      <li Class="Ascension.CompProperties_AbilityQiHeal">
+      </li>
+      <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef>
+    <defName>QiBullet</defName>
+    <label>qi bullet</label>
+    <description>Create a condesed ball of qi to shoot like a bullet at the target. Does very little damage but is extremley precise.</description>
+    <iconPath>UI/Abilities/QiBullet</iconPath>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <aiCanUse>true</aiCanUse>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>14</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>QiBullet</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>10</cost>
+      </li>
+      <li Class="CompProperties_AbilityLaunchProjectile">
+        <projectileDef>QiBullet</projectileDef>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>QiBullet</defName>
+    <label>qi bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/QiBullet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>RangedStab</damageDef>
+      <damageAmountBase>3</damageAmountBase>
+      <armorPenetrationBase>1</armorPenetrationBase>
+      <stoppingPower>1</stoppingPower>
+      <speed>24</speed>
+    </projectile>
+  </ThingDef>
+
+  <AbilityDef ParentName="AbilityTouchBase">
+    <defName>QiResurrection</defName>
+    <label>qi resurrect</label>
+    <description>Use a massive amount of qi to infuse a corpse's body with new life, repairing degenerated cell structures and kickstarting vital functions. The older and worse-preserved the corpse is, the more likely it is that they will come back with memory loss or health conditions. This ability seems to clog the qi pathways used in it somehow, so it can only be used once every 3 days.</description>
+    <iconPath>UI/Abilities/QiResurrection</iconPath>
+	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <cooldownTicksRange>180000</cooldownTicksRange> <!-- 3 days -->
+    <warmupMote>Mote_QiMistStencil</warmupMote>
+    <warmupEffecter>QiMist</warmupEffecter>
+    <warmupStartSound>QiHeal_Cast</warmupStartSound>
+    <category>QiTechnique</category>
+    <displayOrder>600</displayOrder>
+    <hostile>false</hostile>
+    <sendMessageOnCooldownComplete>true</sendMessageOnCooldownComplete>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <verbProperties>
+      <verbClass>Verb_CastAbilityTouch</verbClass>
+      <drawAimPie>false</drawAimPie>
+      <range>-1</range>
+      <warmupTime>120</warmupTime>
+      <soundCast>QiHeal_Cast</soundCast>
+	  <ai_IsWeapon>false</ai_IsWeapon>
+      <targetParams>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetCorpses>true</canTargetCorpses>
+        <canTargetMechs>false</canTargetMechs>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_Resurrect" />
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>100000</cost>
+      </li>
+    </comps>
+  </AbilityDef>
+ 
+   <AbilityDef ParentName="AbilityTouchBase">
+    <defName>QiFeed</defName>
+    <label>qi feed</label>
+    <description>Convert 10,000 qi into nutrients as needed. Use to toggle on or off.</description>
+    <iconPath>UI/Abilities/QiFeed</iconPath>
+	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <warmupMote>Mote_QiMistStencil</warmupMote>
+    <warmupEffecter>QiMist</warmupEffecter>
+    <warmupStartSound>QiHeal_Cast</warmupStartSound>
+    <category>QiTechnique</category>
+    <displayOrder>600</displayOrder>
+    <hostile>false</hostile>
+    <sendMessageOnCooldownComplete>true</sendMessageOnCooldownComplete>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+	<targetRequired>false</targetRequired>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+	  <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+      <drawAimPie>false</drawAimPie>
+      <range>-1</range>
+      <warmupTime>2</warmupTime>
+      <soundCast>QiHeal_Cast</soundCast>
+	  <ai_IsWeapon>false</ai_IsWeapon>
+      <targetParams>
+		<canTargetSelf>true</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityHediffToggle">
+        <hediffDef>QiFeed</hediffDef>
+      </li>
+    </comps>
+  </AbilityDef>
+  
+        <!--
+      Body Art Abilities
+	  
+	  
+  <AbilityCategoryDef>
+    <defName>BodyTechnique</defName>
+    <displayOrder>1001</displayOrder>
+  </AbilityCategoryDef>
+  
+  <AbilityDef ParentName="AbilityTouchBase">
+    <defName>SharpenedChop</defName>
+    <label>sharpened chop</label>
+    <description>Use a sharpened chop on the target. Damage scales with manipulation.</description>
+    <iconPath>UI/Icons/Genes/Gene_Bloodfeeder</iconPath>
+    <category>BodyTechnique</category>
+    <displayOrder>100</displayOrder>
+    <warmupEffecter>Bloodfeed_Warmup</warmupEffecter>
+    <warmupStartSound>Bloodfeed_Cast</warmupStartSound>
+    <hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <verbProperties>
+      <verbClass>Verb_CastAbilityTouch</verbClass>
+      <drawAimPie>false</drawAimPie>
+      <range>-1</range>
+      <warmupTime>2</warmupTime>
+      <targetParams>
+        <canTargetSelf>false</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityFleckOnTarget">
+        <fleckDef>BloodSplash</fleckDef>
+      </li>
+    </comps>
+  </AbilityDef>
+  
+  <AbilityDef ParentName="AbilityTouchBase">
+    <defName>HardenedPunch</defName>
+    <label>hardened punch</label>
+    <description>Use a hardened punch on the target. Damage scales with manipulation.</description>
+    <iconPath>UI/Icons/Genes/Gene_Bloodfeeder</iconPath>
+    <category>BodyTechnique</category>
+    <displayOrder>100</displayOrder>
+    <warmupEffecter>Bloodfeed_Warmup</warmupEffecter>
+    <warmupStartSound>Bloodfeed_Cast</warmupStartSound>
+    <hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <verbProperties>
+      <verbClass>Verb_CastAbilityTouch</verbClass>
+      <drawAimPie>false</drawAimPie>
+      <range>-1</range>
+      <warmupTime>2</warmupTime>
+      <targetParams>
+        <canTargetSelf>false</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityFleckOnTarget">
+        <fleckDef>BloodSplash</fleckDef>
+      </li>
+    </comps>
+  </AbilityDef>
+	  
+	  
+	  
+	  
+      -->
+  
+  
+  
+      <!--
+      Weapon Abilities
+      -->
+	  
+  <AbilityCategoryDef>
+    <defName>SpiritWeaponAbility</defName>
+    <displayOrder>1001</displayOrder>
+  </AbilityCategoryDef>
+
+  <AbilityDef>
+    <defName>ManifestSpiritSword</defName>
+    <label>manifest spirit sword</label>
+    <description>Manifest a physical spirit sword.</description>
+    <iconPath>Things/Item/Equipment/WeaponMelee/SpiritSword</iconPath>
+    <cooldownTicksRange>60</cooldownTicksRange>
+	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+	<hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <category>SpiritWeaponAbility</category>
+    <displayOrder>200</displayOrder>
+    <aiCanUse>false</aiCanUse>
+	<targetRequired>false</targetRequired>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>-1</range>
+      <warmupTime>3</warmupTime>
+	  <ai_IsWeapon>false</ai_IsWeapon>
+      <soundCast>QiHeal_Cast</soundCast>
+	  <targetParams>
+        <canTargetSelf>True</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityManifestSpiritSword">
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef>
+    <defName>SpiritSwordQiThrow</defName>
+    <label>qi spirit sword throw</label>
+    <description>Summon an absorbed spirit sword and infuse it with qi to launch it at a target.</description>
+    <iconPath>UI/Abilities/QiSpiritSwordThrow</iconPath>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <aiCanUse>true</aiCanUse>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>7</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>QiBullet</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>777</cost>
+		<reqHediffDef>SpiritSwordFusion</reqHediffDef>
+      </li>
+      <li Class="CompProperties_AbilityLaunchProjectile">
+        <projectileDef>ThrownQiSpiritSword</projectileDef>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>ThrownQiSpiritSword</defName>
+    <label>thrown qi infused spirit sword</label>
+    <graphicData>
+      <texPath>Things/Projectile/QiSpiritSword</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(2.4,2.4)</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>RangedStab</damageDef>
+      <damageAmountBase>12</damageAmountBase>
+      <armorPenetrationBase>1</armorPenetrationBase>
+      <stoppingPower>2</stoppingPower>
+      <speed>27</speed>
+    </projectile>
+  </ThingDef>
+
+  <AbilityDef>
+    <defName>SpiritSwordQiStab</defName>
+    <label>qi spirit sword stab</label>
+    <description>Summon an absorbed spirit sword and infuse it with qi to empower a stab at a target.</description>
+    <iconPath>UI/Abilities/QiSpiritSwordStab</iconPath>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <aiCanUse>true</aiCanUse>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>2</range>
+      <warmupTime>0.3</warmupTime>
+      <soundCast>QiBullet</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>555</cost>
+		<reqHediffDef>SpiritSwordFusion</reqHediffDef>
+      </li>
+      <li Class="CompProperties_AbilityLaunchProjectile">
+        <projectileDef>StabbingQiSpiritSword</projectileDef>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>StabbingQiSpiritSword</defName>
+    <label>stabbing qi infused spirit sword</label>
+    <graphicData>
+      <texPath>Things/Projectile/QiSpiritSword</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(2.4,2.4)</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Stab</damageDef>
+      <damageAmountBase>17</damageAmountBase>
+      <armorPenetrationBase>2</armorPenetrationBase>
+      <stoppingPower>2</stoppingPower>
+      <speed>50</speed>
+    </projectile>
+  </ThingDef>
+
+  <AbilityDef>
+    <defName>SpiritSwordQiSlash</defName>
+    <label>qi spirit sword slash</label>
+    <description>Summon an absorbed spirit sword and infuse it with qi to empower a slash at a target.</description>
+    <iconPath>UI/Abilities/QiSpiritSwordSlash</iconPath>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <aiCanUse>true</aiCanUse>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>2</range>
+      <warmupTime>0.3</warmupTime>
+      <soundCast>QiBullet</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>555</cost>
+		<reqHediffDef>SpiritSwordFusion</reqHediffDef>
+      </li>
+      <li Class="CompProperties_AbilityLaunchProjectile">
+        <projectileDef>SlashingQiSpiritSword</projectileDef>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>SlashingQiSpiritSword</defName>
+    <label>slashing qi infused spirit sword</label>
+    <graphicData>
+      <texPath>Things/Projectile/QiSpiritSwordSlash</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(2.4,2.4)</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Cut</damageDef>
+      <damageAmountBase>17</damageAmountBase>
+      <armorPenetrationBase>1</armorPenetrationBase>
+      <stoppingPower>2</stoppingPower>
+      <speed>50</speed>
+    </projectile>
+  </ThingDef>
+
+
+</Defs>

@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <HediffDef>
+    <defName>BodyRealm</defName>
+	<label>Body Realm</label>
+    <description>The current body realm, body realms grant progressive improvements to bodily functions. Cultivators must first make thier bodies strong enough through these realms in order to be able to gather more Qi (Leading to the essence realms). Body cultivation speed is not influenced by a tiles Qi.</description>
+	<hediffClass>Ascension.Realm_Hediff</hediffClass>
+	<scenarioCanAdd>true</scenarioCanAdd>
+	<defaultLabelColor>(0.7, 1.0, 0.7)</defaultLabelColor>
+    <isBad>false</isBad>
+    <stages>
+	  <li>
+        <label>Body Forging</label>
+        <minSeverity>0.01</minSeverity>
+		<extraTooltip>The body is trained and forged to withstand the strains imposed by further realms.</extraTooltip>
+      </li>
+	  <li>
+		<tale>AS_BloodRefiningBreakthrough</tale>
+        <label>Blood Refining</label>
+        <minSeverity>2</minSeverity>
+		<extraTooltip>Circulation of blood is refined to supply enough oxygen for muscles in the next realm. Grants improved breathing, blood filtration and blood pumping.</extraTooltip>
+		<naturalHealingFactor>1.1</naturalHealingFactor>
+		<capMods>
+          <li>
+            <capacity>BloodFiltration</capacity>
+            <offset>0.2</offset>
+          </li>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>0.2</offset>
+          </li>
+          <li>
+            <capacity>Breathing</capacity>
+            <offset>0.1</offset>
+          </li>
+        </capMods>
+      </li>
+	  <li>
+		<tale>AS_OrganRefiningBreakthrough</tale>
+        <label>Organ Refining</label>
+        <minSeverity>3</minSeverity>
+		<extraTooltip>Circulation of blood is refined to supply enough oxygen for muscles in the next realm. Grants improved breathing, blood filtration and blood pumping.</extraTooltip>
+		<naturalHealingFactor>1.1</naturalHealingFactor>
+		<capMods>
+          <li>
+            <capacity>BloodFiltration</capacity>
+            <offset>0.3</offset>
+          </li>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>0.3</offset>
+          </li>
+          <li>
+            <capacity>Breathing</capacity>
+            <offset>0.3</offset>
+          </li>
+		  <li>
+            <capacity>Metabolism</capacity>
+            <offset>0.3</offset>
+          </li>
+        </capMods>
+      </li>
+	  <li>
+		<tale>AS_MuscleForgingBreakthrough</tale>
+        <label>Muscle Forging</label>
+        <minSeverity>4</minSeverity>
+		<extraTooltip>Muscles are strengthened and forged to have to enough power to forge bones in the next realm. Grants improved manipulation, breathing, blood filtration and blood pumping.</extraTooltip>
+		<naturalHealingFactor>1.3</naturalHealingFactor>
+		<painFactor>0.9</painFactor>
+		<capMods>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>0.25</offset>
+          </li>
+          <li>
+            <capacity>BloodFiltration</capacity>
+            <offset>0.4</offset>
+          </li>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>0.4</offset>
+          </li>
+          <li>
+            <capacity>Breathing</capacity>
+            <offset>0.5</offset>
+          </li>
+		  <li>
+            <capacity>Metabolism</capacity>
+            <offset>0.4</offset>
+          </li>
+        </capMods>
+      </li>
+	  <li>
+		<tale>AS_TendonRefiningBreakthrough</tale>
+        <label>Tendon Refining</label>
+        <minSeverity>5</minSeverity>
+		<extraTooltip>Muscles are strengthened and forged to have to enough power to forge bones in the next realm. Grants improved manipulation, breathing, blood filtration and blood pumping.</extraTooltip>
+		<naturalHealingFactor>1.3</naturalHealingFactor>
+		<painFactor>0.9</painFactor>
+		<capMods>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>0.4</offset>
+          </li>
+          <li>
+            <capacity>BloodFiltration</capacity>
+            <offset>0.5</offset>
+          </li>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>0.5</offset>
+          </li>
+          <li>
+            <capacity>Breathing</capacity>
+            <offset>0.5</offset>
+          </li>
+		  <li>
+            <capacity>Metabolism</capacity>
+            <offset>0.45</offset>
+          </li>
+        </capMods>
+      </li>
+	  <li>
+		<tale>AS_BoneForgingBreakthrough</tale>
+        <label>Bone Forging</label>
+        <minSeverity>6</minSeverity>
+		<extraTooltip>Bones are hardened and forged to be able to withstand the forces imposed by further realms. Grants improved manipulation, breathing, blood filtration and blood pumping.</extraTooltip>
+		<naturalHealingFactor>1.7</naturalHealingFactor>
+		<painFactor>0.7</painFactor>
+		<capMods>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>0.45</offset>
+          </li>
+          <li>
+            <capacity>BloodFiltration</capacity>
+            <offset>0.7</offset>
+          </li>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>0.7</offset>
+          </li>
+          <li>
+            <capacity>Breathing</capacity>
+            <offset>0.7</offset>
+          </li>
+		  <li>
+            <capacity>Metabolism</capacity>
+            <offset>0.5</offset>
+          </li>
+        </capMods>
+      </li>
+	  <li>
+		<tale>AS_FleshMoldingBreakthrough</tale>
+        <label>Flesh Molding</label>
+        <minSeverity>7</minSeverity>
+		<extraTooltip>The flesh of the body is molded to surpass its previous limits. Improves all bodily functions.</extraTooltip>
+		<naturalHealingFactor>3</naturalHealingFactor>
+		<painFactor>0.5</painFactor>
+		<capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.2</offset>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>0.5</offset>
+          </li>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>0.5</offset>
+          </li>
+		  <li>
+            <capacity>Hearing</capacity>
+            <offset>0.5</offset>
+          </li>
+          <li>
+            <capacity>BloodFiltration</capacity>
+            <offset>1.77</offset>
+          </li>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>1.77</offset>
+          </li>
+          <li>
+            <capacity>Breathing</capacity>
+            <offset>1.77</offset>
+          </li>
+          <li>
+            <capacity>Metabolism</capacity>
+            <offset>1</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+  
+</Defs>

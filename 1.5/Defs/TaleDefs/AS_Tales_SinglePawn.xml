@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <!-- 
+        body realm tales
+  -->
+  <TaleDef>
+    <defName>AS_BloodRefiningBreakthrough</defName>
+    <label>blood refining breakthrough</label>
+    <taleClass>Tale_SinglePawn</taleClass>
+    <type>Volatile</type>
+    <baseInterest>2</baseInterest>
+    <rulePack>
+      <rulesStrings>        
+	    <li>tale_noun->[PAWN_nameDef]'s blood refining breakthrough</li>
+        <li>image->[PAWN_nameFull] [eat_gerund] blood refining body realm [circumstance_group]</li>
+        <li>eat_gerund->made a breakthrough into</li>
+        <li>eat_gerund->achieved </li>
+        <li>eat_gerund->cultivated into</li>
+        <li>circumstance_phrase->with a sense of purpose</li>
+		<li>circumstance_phrase->while holding back tears</li>
+        <li>circumstance_phrase->while the heavens protested with lightning</li>
+        <li>circumstance_phrase->with relative ease</li>
+        <li>circumstance_phrase->while others look on</li>
+        <li>desc_sentence->[PAWN_nameDef] is seen covered in sweat.</li>
+        <li>desc_sentence->[PAWN_nameDef]'s body seems to be at its limits.</li>
+      </rulesStrings>
+    </rulePack>
+  </TaleDef>
+  
+  
+  <TaleDef>
+    <defName>AS_OrganRefiningBreakthrough</defName>
+    <label>organ refining breakthrough</label>
+    <taleClass>Tale_SinglePawn</taleClass>
+    <type>Volatile</type>
+    <baseInterest>2</baseInterest>
+    <rulePack>
+      <rulesStrings>        
+	    <li>tale_noun->[PAWN_nameDef]'s organ refining breakthrough</li>
+        <li>image->[PAWN_nameFull] [eat_gerund] organ refining body realm[circumstance_group]</li>
+        <li>eat_gerund->made a breakthrough into</li>
+        <li>eat_gerund->achieved</li>
+        <li>eat_gerund->cultivated into</li>
+        <li>circumstance_phrase->with a sense of purpose</li>
+		<li>circumstance_phrase->while holding back tears</li>
+        <li>circumstance_phrase->while the heavens protested with lightning</li>
+        <li>circumstance_phrase->with relative ease</li>
+        <li>circumstance_phrase->while others look on</li>
+        <li>desc_sentence->[PAWN_nameDef] is seen covered in sweat.</li>
+        <li>desc_sentence->[PAWN_nameDef]'s body seems to be at its limits.</li>
+      </rulesStrings>
+    </rulePack>
+  </TaleDef>
+  
+  <TaleDef>
+    <defName>AS_MuscleForgingBreakthrough</defName>
+    <label>muscle forging breakthrough</label>
+    <taleClass>Tale_SinglePawn</taleClass>
+    <type>Volatile</type>
+    <baseInterest>2</baseInterest>
+    <rulePack>
+      <rulesStrings>        
+	    <li>tale_noun->[PAWN_nameDef]'s muscle forging breakthrough</li>
+        <li>image->[PAWN_nameFull] [eat_gerund] muscle forging body realm[circumstance_group]</li>
+        <li>eat_gerund->made a breakthrough into</li>
+        <li>eat_gerund->achieved</li>
+        <li>eat_gerund->cultivated into</li>
+        <li>circumstance_phrase->with a sense of purpose</li>
+		<li>circumstance_phrase->while holding back tears</li>
+        <li>circumstance_phrase->while the heavens protested with lightning</li>
+        <li>circumstance_phrase->with relative ease</li>
+        <li>circumstance_phrase->while others look on</li>
+        <li>desc_sentence->[PAWN_nameDef] is seen covered in sweat.</li>
+        <li>desc_sentence->[PAWN_nameDef]'s body seems to be at its limits.</li>
+      </rulesStrings>
+    </rulePack>
+  </TaleDef>
+  
+  <TaleDef>
+    <defName>AS_TendonRefiningBreakthrough</defName>
+    <label>tendon refining breakthrough</label>
+    <taleClass>Tale_SinglePawn</taleClass>
+    <type>Volatile</type>
+    <baseInterest>2</baseInterest>
+    <rulePack>
+      <rulesStrings>        
+	    <li>tale_noun->[PAWN_nameDef]'s tendon refining breakthrough</li>
+        <li>image->[PAWN_nameFull] [eat_gerund] tendon refining body realm[circumstance_group]</li>
+        <li>eat_gerund->made a breakthrough into</li>
+        <li>eat_gerund->achieved</li>
+        <li>eat_gerund->cultivated into</li>
+        <li>circumstance_phrase->with a sense of purpose</li>
+		<li>circumstance_phrase->while holding back tears</li>
+        <li>circumstance_phrase->while the heavens protested with lightning</li>
+        <li>circumstance_phrase->with relative ease</li>
+        <li>circumstance_phrase->while others look on</li>
+        <li>desc_sentence->[PAWN_nameDef] is seen covered in sweat.</li>
+        <li>desc_sentence->[PAWN_nameDef]'s body seems to be at its limits.</li>
+      </rulesStrings>
+    </rulePack>
+  </TaleDef>
+  
+  <TaleDef>
+    <defName>AS_BoneForgingBreakthrough</defName>
+    <label>bone forging breakthrough</label>
+    <taleClass>Tale_SinglePawn</taleClass>
+    <type>Volatile</type>
+    <baseInterest>2</baseInterest>
+    <rulePack>
+      <rulesStrings>        
+	    <li>tale_noun->[PAWN_nameDef]'s bone forging breakthrough</li>
+        <li>image->[PAWN_nameFull] [eat_gerund] bone forging [circumstance_group]</li>
+        <li>eat_gerund->made a breakthrough into</li>
+        <li>eat_gerund->achieved a</li>
+        <li>eat_gerund->cultivated a</li>
+        <li>circumstance_phrase->with a sense of purpose</li>
+		<li>circumstance_phrase->while holding back tears</li>
+        <li>circumstance_phrase->while the heavens protested with lightning</li>
+        <li>circumstance_phrase->with relative ease</li>
+        <li>circumstance_phrase->while others look on</li>
+        <li>desc_sentence->[PAWN_nameDef] is seen covered in sweat.</li>
+        <li>desc_sentence->[PAWN_nameDef]'s body seems to be at its limits.</li>
+      </rulesStrings>
+    </rulePack>
+  </TaleDef>
+  
+      <TaleDef>
+    <defName>AS_FleshMoldingBreakthrough</defName>
+    <label>flesh molding breakthrough</label>
+    <taleClass>Tale_SinglePawn</taleClass>
+    <type>Volatile</type>
+    <baseInterest>2</baseInterest>
+    <rulePack>
+      <rulesStrings>        
+	    <li>tale_noun->[PAWN_nameDef]'s flesh molding breakthrough</li>
+        <li>image->[PAWN_nameFull] [eat_gerund] flesh molding [circumstance_group]</li>
+        <li>eat_gerund->made a breakthrough into</li>
+        <li>eat_gerund->achieved a</li>
+        <li>eat_gerund->cultivated a</li>
+        <li>circumstance_phrase->with a sense of purpose</li>
+		<li>circumstance_phrase->while holding back tears</li>
+        <li>circumstance_phrase->while the heavens protested with lightning</li>
+        <li>circumstance_phrase->with relative ease</li>
+        <li>circumstance_phrase->while others look on</li>
+        <li>desc_sentence->[PAWN_nameDef] is seen covered in sweat.</li>
+        <li>desc_sentence->[PAWN_nameDef]'s body seems to be at its limits.</li>
+      </rulesStrings>
+    </rulePack>
+  </TaleDef>
+  
+    <!-- 
+        essence realm tales
+  -->
+
+  <TaleDef>
+    <defName>AS_FoundationEstablishmentBreakthrough</defName>
+    <label>foundation breakthrough</label>
+    <taleClass>Tale_SinglePawn</taleClass>
+    <type>Volatile</type>
+    <baseInterest>2</baseInterest>
+    <rulePack>
+      <rulesStrings>        
+	    <li>tale_noun->[PAWN_nameDef]'s foundation breakthrough</li>
+        <li>image->[PAWN_nameFull] [eat_gerund] spirit foundation [circumstance_group]</li>
+        <li>eat_gerund->made a breakthrough into</li>
+        <li>eat_gerund->achieved a</li>
+        <li>eat_gerund->cultivated a</li>
+        <li>circumstance_phrase->with a sense of purpose</li>
+		<li>circumstance_phrase->while holding back tears</li>
+        <li>circumstance_phrase->while the heavens protested with lightning</li>
+        <li>circumstance_phrase->with relative ease</li>
+        <li>circumstance_phrase->while others look on</li>
+        <li>desc_sentence->[PAWN_nameDef] is seen hovering above the ground while meditating.</li>
+        <li>desc_sentence->Lightning is seen striking [PAWN_nameDef]'s body.</li>
+      </rulesStrings>
+    </rulePack>
+  </TaleDef>
+  
+  <TaleDef>
+    <defName>AS_GoldenCoreBreakthrough</defName>
+    <label>golden core breakthrough</label>
+    <taleClass>Tale_SinglePawn</taleClass>
+    <type>Volatile</type>
+    <baseInterest>2</baseInterest>
+    <rulePack>
+      <rulesStrings>        
+	    <li>tale_noun->[PAWN_nameDef]'s golden core breakthrough</li>
+        <li>image->[PAWN_nameFull] [eat_gerund] golden core [circumstance_group]</li>
+        <li>eat_gerund->made a breakthrough into</li>
+        <li>eat_gerund->achieved a</li>
+        <li>eat_gerund->cultivated a</li>
+        <li>circumstance_phrase->with a sense of purpose</li>
+		<li>circumstance_phrase->while holding back tears</li>
+        <li>circumstance_phrase->while the heavens protested with lightning</li>
+        <li>circumstance_phrase->with relative ease</li>
+        <li>circumstance_phrase->while others look on</li>
+        <li>desc_sentence->[PAWN_nameDef] is seen hovering above the ground while meditating.</li>
+        <li>desc_sentence->Lightning is seen striking [PAWN_nameDef]'s body.</li>
+      </rulesStrings>
+    </rulePack>
+  </TaleDef>
+  
+  <TaleDef>
+    <defName>AS_NascentSoulBreakthrough</defName>
+    <label>nascent soul breakthrough</label>
+    <taleClass>Tale_SinglePawn</taleClass>
+    <type>Volatile</type>
+    <baseInterest>2</baseInterest>
+    <rulePack>
+      <rulesStrings>        
+	    <li>tale_noun->[PAWN_nameDef]'s nascent soul breakthrough</li>
+        <li>image->[PAWN_nameFull] [eat_gerund] nascent soul [circumstance_group]</li>
+        <li>eat_gerund->made a breakthrough into</li>
+        <li>eat_gerund->achieved a</li>
+        <li>eat_gerund->cultivated a</li>
+        <li>circumstance_phrase->with a sense of purpose</li>
+		<li>circumstance_phrase->while holding back tears</li>
+        <li>circumstance_phrase->while the heavens protested with lightning</li>
+        <li>circumstance_phrase->with relative ease</li>
+        <li>circumstance_phrase->while others look on</li>
+        <li>desc_sentence->[PAWN_nameDef] is seen hovering above the ground while meditating.</li>
+        <li>desc_sentence->Lightning is seen striking [PAWN_nameDef]'s body.</li>
+      </rulesStrings>
+    </rulePack>
+  </TaleDef>
+  
+  <TaleDef>
+    <defName>AS_SoulTransformationBreakthrough</defName>
+    <label>Soul Transformation breakthrough</label>
+    <taleClass>Tale_SinglePawn</taleClass>
+    <type>Volatile</type>
+    <baseInterest>2</baseInterest>
+    <rulePack>
+      <rulesStrings>        
+	    <li>tale_noun->[PAWN_nameDef]'s soul transformation breakthrough</li>
+        <li>image->[PAWN_nameFull] [eat_gerund] soul transformation [circumstance_group]</li>
+        <li>eat_gerund->made a breakthrough into</li>
+        <li>eat_gerund->achieved a</li>
+        <li>eat_gerund->cultivated a</li>
+        <li>circumstance_phrase->with a sense of purpose</li>
+		<li>circumstance_phrase->while holding back tears</li>
+        <li>circumstance_phrase->while the heavens protested with lightning</li>
+        <li>circumstance_phrase->with relative ease</li>
+        <li>circumstance_phrase->while others look on</li>
+        <li>desc_sentence->[PAWN_nameDef] is seen hovering above the ground while meditating.</li>
+        <li>desc_sentence->Lightning is seen striking [PAWN_nameDef]'s body.</li>
+      </rulesStrings>
+    </rulePack>
+  </TaleDef>
+
+  <TaleDef>
+    <defName>AS_PsuedoImmortalBreakthrough</defName>
+    <label>psuedo immortality breakthrough</label>
+    <taleClass>Tale_SinglePawn</taleClass>
+    <type>Volatile</type>
+    <baseInterest>4</baseInterest>
+    <rulePack>
+      <rulesStrings>        
+	    <li>tale_noun->[PAWN_nameDef]'s psuedo-immortality breakthrough</li>
+        <li>image->[PAWN_nameFull] [eat_gerund] psuedo-immortality [circumstance_group]</li>
+        <li>eat_gerund->made a breakthrough into</li>
+        <li>eat_gerund->ascended to</li>
+        <li>eat_gerund->achieved</li>
+        <li>eat_gerund->cultivated</li>
+        <li>circumstance_phrase->with a sense of purpose</li>
+		<li>circumstance_phrase->while holding back tears</li>
+        <li>circumstance_phrase->while the heavens protested with lightning</li>
+        <li>circumstance_phrase->with relative ease</li>
+        <li>circumstance_phrase->while others look on</li>
+        <li>desc_sentence->[PAWN_nameDef] is seen hovering above the ground while meditating.</li>
+        <li>desc_sentence->Lightning is seen striking [PAWN_nameDef]'s body.</li>
+      </rulesStrings>
+    </rulePack>
+  </TaleDef>
+  
+  <TaleDef>
+    <defName>AS_ProfoundImmortalBreakthrough</defName>
+    <label>profound immortality breakthrough</label>
+    <taleClass>Tale_SinglePawn</taleClass>
+    <type>Volatile</type>
+    <baseInterest>7</baseInterest>
+    <rulePack>
+      <rulesStrings>        
+	    <li>tale_noun->[PAWN_nameDef]'s profound immortality breakthrough</li>
+        <li>image->[PAWN_nameFull] [eat_gerund] profound immortality [circumstance_group]</li>
+        <li>eat_gerund->made a breakthrough into</li>
+        <li>eat_gerund->ascended to</li>
+        <li>eat_gerund->achieved</li>
+        <li>eat_gerund->cultivated</li>
+        <li>circumstance_phrase->with a sense of purpose</li>
+		<li>circumstance_phrase->while holding back tears</li>
+        <li>circumstance_phrase->while the heavens protested with lightning</li>
+        <li>circumstance_phrase->with relative ease</li>
+        <li>circumstance_phrase->while others look on</li>
+        <li>desc_sentence->[PAWN_nameDef] is seen hovering above the ground while meditating.</li>
+        <li>desc_sentence->Lightning is seen striking [PAWN_nameDef]'s body.</li>
+      </rulesStrings>
+    </rulePack>
+  </TaleDef>
+      <!-- 
+        immortal tales
+  -->
+  
+</Defs>

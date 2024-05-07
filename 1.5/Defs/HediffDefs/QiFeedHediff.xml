@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <HediffDef>
+    <defName>QiFeed</defName>
+    <label>QiFeed</label>
+	<description>Converts 10,000 qi from qi pool into nutrients when needed.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+	<defaultLabelColor>(0.0, 1.0, 0.0)</defaultLabelColor>
+    <isBad>false</isBad>
+    <comps>
+	  <li>
+		<compClass>Ascension.HediffComp_QiFeed</compClass>
+	  </li>
+	  <li MayRequire="dubwise.dubsbadhygiene">
+		<compClass>AscensionDubsLib.HediffComp_QiDrink</compClass>
+	  </li>
+    </comps>
+  </HediffDef>
+</Defs>

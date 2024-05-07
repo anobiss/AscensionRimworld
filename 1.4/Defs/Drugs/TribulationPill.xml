@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="DrugPillBase">
+    <defName>TribulationPill</defName>
+    <label>Tribulation Pill</label>
+    <description>A pill that artificially incur tribulation on who uses it. The length of the tribulation is increased with quality. 
+	Tribulation is the punishment of Heaven upon those that oppose its will. During tribulation their movement is slowed immensely. If they have a Dao Pool, its energy will be converted into progression on their Ascendant Foundation or Psuedo-Immortality if the Foundation tier is XII. During every convsersion they are struck with non-damaging lightning. If the tribulation continues with less than 1 dao energy to convert, or they have the final tier of psuedo-immortality, they will be struck by damaging lightning and the tribulation will end.</description>
+    <graphicData>
+      <texPath>Things/Item/Drug/TribulationPill</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <statBases>
+      <Mass>0.03</Mass>
+    </statBases>
+    <techLevel>Neolithic</techLevel>
+    <minRewardCount>3</minRewardCount>
+    <ingestible>
+      <drugCategory>Medical</drugCategory>
+      <outcomeDoers>
+        <li Class="Ascension.IngestionOutcomeDoer_GiveHediffFromQuality">
+          <hediffDef>Tribulation</hediffDef>
+          <severity>0.1</severity>
+          <doToGeneratedPawnIfAddicted>true</doToGeneratedPawnIfAddicted>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+	<comps>
+      <li Class="CompProperties_Drug">
+		<isCombatEnhancingDrug>false</isCombatEnhancingDrug>
+        <listOrder>1011</listOrder>
+      </li>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+    </comps>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags><li>RewardStandardLowFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>8</allowedArchonexusCount>
+  </ThingDef>
+
+</Defs>

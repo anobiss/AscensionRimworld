@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="DrugPillBase">
+    <defName>BreakthroughPill</defName>
+    <label>Breakthrough Pill</label>
+    <description>A pill that artificially breaksthrough any cultivator realm at 100% progression.</description>
+    <graphicData>
+      <texPath>Things/Item/Drug/BreakthroughPill</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <statBases>
+      <Mass>0.03</Mass>
+    </statBases>
+    <techLevel>Neolithic</techLevel>
+    <minRewardCount>3</minRewardCount>
+    <ingestible>
+      <drugCategory>Medical</drugCategory>
+      <outcomeDoers>
+        <li Class="Ascension.IngestionOutcomeDoer_GiveBreakthrough">
+        </li>
+      </outcomeDoers>
+    </ingestible>
+	<comps>
+      <li Class="CompProperties_Drug">
+		<isCombatEnhancingDrug>false</isCombatEnhancingDrug>
+        <listOrder>1011</listOrder>
+      </li>
+    </comps>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags><li>RewardStandardLowFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>8</allowedArchonexusCount>
+  </ThingDef>
+</Defs>
