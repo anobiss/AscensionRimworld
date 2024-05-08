@@ -20,6 +20,11 @@ namespace Ascension
         public float cultivationSpeedOffset = 1;//base is multiplied with this 
 
 
+        //inner cauldron/anima conversion. cap is ignored when anima conversion.
+        public int innerCauldronLimit = 1200;
+        public int innerCauldronQi = 0;
+
+
         public override bool Visible
         {
             get
@@ -35,6 +40,8 @@ namespace Ascension
             Scribe_Values.Look(ref startTime, "startTime");
             Scribe_Values.Look(ref endTime, "endTime");
             Scribe_Values.Look(ref autoCultivateType, "autoCultivateType");
+            Scribe_Values.Look(ref innerCauldronLimit, "innerCauldronLimit");
+            Scribe_Values.Look(ref innerCauldronQi, "innerCauldronQi");
             base.ExposeData();
         }
     }

@@ -129,10 +129,14 @@ namespace Ascension
                         if (pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm))
                         {
                             // Essence Realm cultivation, includes gathering qi for tribulation
-                            int totalQiRefineCost = (5 + (qiPool.maxAmount / 100)) * 10;
+                            int totalQiRefineCost = 2 + (qiPool.maxAmount / 10);
                             if (essenceRealm.progress >= essenceRealm.maxProgress)//auto attempt breakthrough when possible.
                             {
                                 return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughEssence, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
+                            }
+                            if (totalQiRefineCost > qiPool.maxAmount)
+                            {
+                                return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
                             }
                             if (totalQiRefineCost < qiPool.amount)
                             {

@@ -517,6 +517,14 @@ namespace Ascension
             }
             Widgets.DrawLineHorizontal(0f, curY + qiBarRect.height + 35, rect.width, Color.gray);
             Rect realmsRect = new Rect(rect.x+rect.width, rect.y, (rect.width/3)*2, rect.height);
+
+            //bottom half of realms rect is our cultivationStats rect.
+
+
+            //DrawCultivationStats will show our cultivation speed and its factors, along with the current tiles qi
+
+
+
             float underQiHeight = qiBarRect.height + 45f;
             DrawRealms(pawn, realmsRect, underQiHeight, curY);
             GUI.color = Color.white;

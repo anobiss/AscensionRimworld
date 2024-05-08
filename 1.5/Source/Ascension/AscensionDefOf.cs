@@ -21,6 +21,7 @@ namespace Ascension
         public static ThingDef CultivationSpot;
 
         public static JobDef AS_RefineQiJob;
+        public static JobDef AS_RefineQiCauldronJob;
         public static JobDef AS_QiGatheringJob;
         public static JobDef AS_ExerciseJob;
 

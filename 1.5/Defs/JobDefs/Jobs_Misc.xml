@@ -20,6 +20,12 @@
     <reportString>refining qi</reportString>
   </JobDef>
   
+      <JobDef>
+    <defName>AS_RefineQiCauldronJob</defName>
+    <driverClass>Ascension.JobDriver_RefineQiCauldron</driverClass>
+    <reportString>refining inner cauldron qi</reportString>
+  </JobDef>
+  
     <JobDef>
     <defName>AS_QiGatheringJob</defName>
     <driverClass>Ascension.JobDriver_QiGathering</driverClass>

@@ -110,6 +110,11 @@ namespace Ascension
         public static void UpdateQiMax(QiPool_Hediff hediff)
         {
             hediff.maxAmount = (int)Math.Floor((hediff.pawn.RaceProps.baseBodySize * 100f) * hediff.maxAmountOffset);
+            Cultivator_Hediff cultivatorHediff = hediff.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
+            if (cultivatorHediff != null)
+            {
+                hediff.maxAmount += cultivatorHediff.innerCauldronQi;
+            }
         }
         public static void IncreaseQi(Pawn pawn, int amount, bool noExplosion = false)
         {
@@ -203,7 +208,35 @@ namespace Ascension
             ProgressTier(hediff, progress);
         }
 
-
+        public static void CauldronIncrease(Pawn pawn, int amount)
+        {
+            //checks if they have the cultivator hediff and if not gives it
+            Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator, false) as Cultivator_Hediff;
+            if (cultivatorHediff == null)
+            {
+                pawn.health.AddHediff(AscensionDefOf.Cultivator);
+            }
+            Realm_Hediff essenceHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm, false) as Realm_Hediff;
+            if (essenceHediff != null)
+            {
+                if (essenceHediff.Severity < 3)
+                {
+                    if (cultivatorHediff.innerCauldronQi + amount < cultivatorHediff.innerCauldronLimit)
+                    {
+                        cultivatorHediff.innerCauldronQi += amount;
+                    }
+                }else
+                {
+                    cultivatorHediff.innerCauldronQi += amount;// if the hediff isnt null and isnt less than 3 we know they have a golden core and therefore cap should be removed
+                }
+            }else
+            {
+                if (cultivatorHediff.innerCauldronQi + amount < cultivatorHediff.innerCauldronLimit)
+                {
+                    cultivatorHediff.innerCauldronQi += amount;
+                }
+            }
+        }
 
 
         public static HediffDef RandomAbilityScroll(HashSet<HediffDef> alreadyAdded, Pawn pawn)//used with random ability chance setting in harmony addiction generator patch to select random ability fo pawns
