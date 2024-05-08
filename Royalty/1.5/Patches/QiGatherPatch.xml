@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationInsert">
+    <xpath>Defs/ThingDef[defName="AnimusStone"]/comps/li[@Class="CompProperties_MeditationFocus"]</xpath>
+    <order>Append</order>
+    <value>
+      <li Class="Ascension.CompProperties_GatherQi">
+		<range>5</range>
+        <amount>50</amount>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationInsert">
+    <xpath>Defs/ThingDef[defName="NatureShrine_Large"]/comps/li[@Class="CompProperties_MeditationFocus"]</xpath>
+    <order>Append</order>
+    <value>
+      <li Class="Ascension.CompProperties_GatherQi">
+		<range>5</range>
+        <amount>35</amount>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationInsert">
+    <xpath>Defs/ThingDef[defName="NatureShrine_Small"]/comps/li[@Class="CompProperties_MeditationFocus"]</xpath>
+    <order>Append</order>
+    <value>
+      <li Class="Ascension.CompProperties_GatherQi">
+		<range>4</range>
+        <amount>25</amount>
+      </li>
+    </value>
+  </Operation>
+</Patch>

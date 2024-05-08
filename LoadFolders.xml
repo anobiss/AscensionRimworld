@@ -10,6 +10,7 @@
 	<v1.5>
 		<li>/</li>
 		<li>1.5</li>
+		<li IfModActive="Ludeon.RimWorld.Royalty">Royalty/1.5</li>
 		<li IfModActive="dubwise.dubsbadhygiene">Dubs/1.5</li>
 	</v1.5>
 </loadFolders>

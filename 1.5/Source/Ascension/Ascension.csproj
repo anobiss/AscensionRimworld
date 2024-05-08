@@ -101,7 +101,6 @@
     <Compile Include="IngestionOutcomeDoer_RefineQi.cs" />
     <Compile Include="JobDriver_BreakthroughBody.cs" />
     <Compile Include="JobDriver_Exercise.cs" />
-    <Compile Include="JobDriver_GoToCulivationSpot.cs" />
     <Compile Include="JobDriver_QiGathering.cs" />
     <Compile Include="JobDriver_RefineQi.cs" />
     <Compile Include="JobGiver_Cultivate.cs" />

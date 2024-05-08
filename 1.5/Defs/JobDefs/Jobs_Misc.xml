@@ -3,12 +3,6 @@
 
   <!--========= Cultivation jobs ============-->
   <JobDef>
-    <defName>AS_GoToCulivationSpot</defName>
-    <driverClass>Ascension.JobDriver_GoToCulivationSpot</driverClass>
-    <reportString>walking to cultivation spot</reportString>
-  </JobDef>
-  
-  <JobDef>
     <defName>AS_BreakthroughEssence</defName>
     <driverClass>Ascension.JobDriver_BreakthroughEssence</driverClass>
     <reportString>essence realm breakthrough</reportString>

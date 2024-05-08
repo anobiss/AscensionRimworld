@@ -22,7 +22,6 @@ namespace Ascension
 
         public static JobDef AS_RefineQiJob;
         public static JobDef AS_QiGatheringJob;
-        public static JobDef AS_GoToCulivationSpot;
         public static JobDef AS_ExerciseJob;
 
         //cultivator hidden hediff
