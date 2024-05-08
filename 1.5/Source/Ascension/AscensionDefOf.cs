@@ -25,7 +25,6 @@ namespace Ascension
         public static JobDef AS_GoToCulivationSpot;
         public static JobDef AS_ExerciseJob;
 
-        public static HediffDef Tribulation;
         //cultivator hidden hediff
         public static HediffDef Cultivator;
 

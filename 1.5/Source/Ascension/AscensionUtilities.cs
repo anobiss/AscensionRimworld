@@ -77,19 +77,20 @@ namespace Ascension
                 }
             }
         }
-        public static void UpdateCultivationSpeed(Cultivator_Hediff cultivatorHediff)//we do this before starting jobs, 
+        public static float UpdateCultivationSpeed(Cultivator_Hediff cultivatorHediff)//we do this before starting jobs to update the cultivation speed, we return a float to make sure we have cultivation speed after update
         {
+            float cultivationSpeed = 0;//if cult speed is 0 we know we messed something up. 
             if (cultivatorHediff != null)
             {
-                //we do these speed calcs in all cultivation realms                  here we do the base times the speedoffset then times it by our mood but plus some so they cancultivate when upset
-                cultivatorHediff.cultivationSpeed = (cultivatorHediff.cultivationBaseSpeed * cultivatorHediff.cultivationSpeedOffset);
-                if(cultivatorHediff.pawn.needs.mood != null)
+                //we do these speed calcs in all cultivation realms                  here we do the base times the speedoffset 
+                cultivationSpeed = (cultivatorHediff.cultivationBaseSpeed * cultivatorHediff.cultivationSpeedOffset);
+                Log.Message("first cultivation speed is" + cultivationSpeed);
+                if (cultivatorHediff.pawn.needs.mood != null)
                 {
-                    cultivatorHediff.cultivationSpeed = cultivatorHediff.cultivationSpeed * (0.4f + cultivatorHediff.pawn.needs.mood.CurLevelPercentage);
+                    //then times it by our mood but plus some so they can cultivate when upset
+                    cultivationSpeed *= (0.4f + cultivatorHediff.pawn.needs.mood.CurLevelPercentage);
+                    Log.Message("second cultivation speed is" + cultivationSpeed);
                 }
-
-                //do mood and base * offset no matter what
-
                 //check if they are in essence realm, then check for nearby gather qi things.
                 if (cultivatorHediff.pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm))
                 {
@@ -97,9 +98,11 @@ namespace Ascension
 
                     QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
                     int qiTile = qiGatherMapComp.GetQiGatherAt(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.y);
-                    cultivatorHediff.cultivationSpeed = cultivatorHediff.cultivationSpeed * (qiTile / 100);
+                    cultivationSpeed *= (qiTile / 100);
                 }
+                cultivatorHediff.cultivationSpeed = cultivationSpeed;
             }
+            return cultivationSpeed;
         }
 
         public static void UpdateQiMax(QiPool_Hediff hediff)
