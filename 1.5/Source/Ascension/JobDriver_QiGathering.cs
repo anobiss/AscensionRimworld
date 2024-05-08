@@ -28,6 +28,7 @@ namespace Ascension
             Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
             if (cultivatorHediff != null)
             {
+                //log important only for testing
                 Log.Message("cultivation speed is" + cultivatorHediff.cultivationSpeed);
                 float cultivationTicks = DurationTicks/AscensionUtilities.UpdateCultivationSpeed(cultivatorHediff);
                 cultivationJobTicks = (int)Math.Floor(cultivationTicks);
