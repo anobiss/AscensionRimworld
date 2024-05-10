@@ -13,6 +13,8 @@ namespace Ascension
     {
         public bool occupied = false;
 
+        public Pawn spotUser;//this is assigned to whoever is occupying it
+
         public int priority = 1;
         public CompProperties_CultivationSpot()
         {

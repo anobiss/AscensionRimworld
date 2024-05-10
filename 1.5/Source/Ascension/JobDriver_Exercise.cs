@@ -19,7 +19,14 @@ namespace Ascension
         //does this part afte time calculations not before
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            return true;
+            if (job.GetTarget(SpotInd) != pawn)
+            {
+                return pawn.MapHeld.reservationManager.Reserve(pawn, job, job.GetTarget(SpotInd), 1, -1, null, errorOnFailed);
+            }
+            else
+            {
+                return true;
+            }
         }
 
         protected override IEnumerable<Toil> MakeNewToils()
@@ -52,6 +59,10 @@ namespace Ascension
                 maxBody += bodyHediff.maxProgress / 100;//for adding 1 percent body to amount
             }
             AscensionUtilities.TierProgress(pawn, AscensionDefOf.BodyRealm, maxBody);
+            if (job.GetTarget(SpotInd) != pawn)
+            {
+                pawn.MapHeld.reservationManager.Release(job.GetTarget(SpotInd), pawn, job);
+            }
         }
     }
 }

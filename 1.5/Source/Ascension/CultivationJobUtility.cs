@@ -11,6 +11,44 @@ namespace Ascension
 {
     public class CultivationJobUtility
     {
+        public static Thing FindCultivationSpot(Pawn pawn)//returns the cultivation spot a pawn should be using, if none returns the pawn itself.
+        {
+            Thing cultivationSpotThing = pawn;//if no cultivation spot just cultivate where the pawn currently is
+            if (pawn.Faction == Faction.OfPlayer)
+            {
+                int lastCultSpotPriority = 0;
+                IReadOnlyList<Pawn> readOnlyList = pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction);
+                foreach (Building building in pawn.Map.listerBuildings.allBuildingsColonist)
+                {
+                    if (!pawn.MapHeld.reservationManager.IsReserved(building))
+                    {
+                        if (building.HasComp<CompCultivationSpot>())
+                        {
+                            CompCultivationSpot cultivationSpot = building.GetComp<CompCultivationSpot>();
+                            if (pawn.CanReach(building.Position, PathEndMode.OnCell, Danger.None))
+                            {
+                                if (lastCultSpotPriority < cultivationSpot.Props.priority)
+                                {
+                                    lastCultSpotPriority = cultivationSpot.Props.priority;
+                                    cultivationSpotThing = building;
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+            return cultivationSpotThing;
+        }
+
         public static bool CanCultivateNow(Pawn pawn)
         {
             if (pawn.Faction.HostileTo(Faction.OfPlayer))//dont want hostiles cultivating
@@ -78,40 +116,8 @@ namespace Ascension
             return false;
         }
 
-        public static IntVec3 FindCultivationSpot(Pawn pawn)
-        {
-            //here we get the 
-            IntVec3 cultivationPosition = pawn.Position;//if no cultivation spot just cultivate where the pawn currently is
-            if (pawn.Faction == Faction.OfPlayer)
-            {
-                int lastCultSpotPriority = 0;
-                IReadOnlyList<Pawn> readOnlyList = pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction);
-                foreach (Building building in pawn.Map.listerBuildings.allBuildingsColonist)
-                {
-                    if (building.HasComp<CompCultivationSpot>())
-                    {
-                        CompCultivationSpot cultivationSpot = building.GetComp<CompCultivationSpot>();
-                        if (!cultivationSpot.Props.occupied && pawn.CanReach(building.Position, PathEndMode.OnCell, Danger.None))
-                        {
-                            if (lastCultSpotPriority < cultivationSpot.Props.priority)
-                            {
-                                cultivationPosition = building.PositionHeld;
-                                lastCultSpotPriority = cultivationSpot.Props.priority;
-                            }
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-            }
-            return cultivationPosition;
-        }
+
+
         public static Job GetCultivationJob(Pawn pawn)
         {
             Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
@@ -132,30 +138,36 @@ namespace Ascension
                             int totalQiRefineCost = 2 + (qiPool.maxAmount / 10);
                             if (essenceRealm.progress >= essenceRealm.maxProgress)//auto attempt breakthrough when possible.
                             {
-                                return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughEssence, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
+                                return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughEssence, pawn, FindCultivationSpot(pawn));
                             }
                             if (totalQiRefineCost > qiPool.maxAmount)
                             {
-                                return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
-                            }
-                            if (totalQiRefineCost < qiPool.amount)
+                                int totalInnerQiRefineCost = 2 + (qiPool.maxAmount / 50);//2 plus 2%
+                                if (totalInnerQiRefineCost <= qiPool.amount)
+                                {
+                                    return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, pawn, FindCultivationSpot(pawn));
+                                }else
+                                {
+                                    return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                                }
+                            }else if (totalQiRefineCost <= qiPool.amount)
                             {
-                                return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiJob, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
+                                return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiJob, pawn, FindCultivationSpot(pawn));
                             }
                             else
                             {
-                                return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
+                                return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
                             }
                         }else if (pawn.health.hediffSet.HasHediff(AscensionDefOf.BodyRealm))
                         {
                             // Body Realm cultivation. 
                             if (bodyRealm.progress >= bodyRealm.maxProgress)//auto attempt breakthrough when possible.
                             {
-                                return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughBody, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
+                                return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughBody, pawn, FindCultivationSpot(pawn));
                             }
-                            return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
+                            return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, FindCultivationSpot(pawn));
                         }
-                        return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
+                        return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, FindCultivationSpot(pawn));
                         break;
                     case 2:
                         //auto realm but without trib
@@ -164,7 +176,7 @@ namespace Ascension
                             // Essence Realm cultivation only, excludes gathering qi for tribulation
                             if (essenceRealm.progress >= essenceRealm.maxProgress)//auto attempt breakthrough when possible.
                             {
-                                return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughEssence, pawn);
+                                return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughEssence, pawn, FindCultivationSpot(pawn));
                             }
                         }
                         else if (pawn.health.hediffSet.HasHediff(AscensionDefOf.BodyRealm))
@@ -172,19 +184,19 @@ namespace Ascension
                             // Body Realm cultivation. 
                             if (bodyRealm.progress >= bodyRealm.maxProgress)//auto attempt breakthrough when possible.
                             {
-                                return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughBody, pawn);
+                                return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughBody, pawn, FindCultivationSpot(pawn));
                             }
-                            return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn);
+                            return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, FindCultivationSpot(pawn));
                         }
-                        return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn);
+                        return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, FindCultivationSpot(pawn));
                         break;
                     case 3:
                         // Qi Gathering only. Just gather Qi instead of cultivating a realm.
-                        return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn);
+                        return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
                         break;
                     default:
                         Log.Message("Ascension error autoCultivateType beyond normal allowed range.");
-                        return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn);
+                        return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
                         break;
                 }
             }else

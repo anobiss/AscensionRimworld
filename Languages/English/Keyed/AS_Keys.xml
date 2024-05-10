@@ -19,8 +19,24 @@
   <AS_PIChanceDesc>Determines the probability of a pawn being a Pseudo-Immortal cultivator when spawned, only effects randomly generated cultivators.</AS_PIChanceDesc>
   
   
+  <AS_CultivationSpeed>Cultivation Speed: {SPEED}</AS_CultivationSpeed>
+  <AS_CultivationSpeedDesc>The speed at which cultivators do cultivation jobs like Exercise, Refine Qi, Gather Qi, Breakthroughs, etc.</AS_CultivationSpeedDesc>
+  <AS_QiTile>Gather Qi: {QITILE}</AS_QiTile>
+  <AS_QiTileDesc>The amount of Qi in the cultivators current position. Increases gather qi yield by the same amount and increases cultivation speed by 1/100th the amount.</AS_QiTileDesc>
+  <AS_CSFactorBaseOffset>Base Speed: {BASE} * Offset: {OFFSET}</AS_CSFactorBaseOffset>
+  <AS_CSFactorMood> * 0.4 + Mood: {MOOD}</AS_CSFactorMood>
+  <AS_CSFactorQiTile> * 1 + Gather Qi Divided by 100: {QITILE}</AS_CSFactorQiTile>
+  <AS_CSFactorsDesc>The factors influencing cultivation speed. </AS_CSFactorsDesc>
   
+  <AS_InnerC>Inner Cauldron: {ICQI} / {ICMAX}</AS_InnerC>
+  <AS_InnerCDesc>The Inner Cauldron increases a cultivators max Qi by the amount of Qi refined into it.</AS_InnerCDesc>
+  <AS_AnimaC>Anima Conversion: {ICQI}</AS_AnimaC>
+  <AS_AnimaCDesc>Inner Cauldron converts into Anima Conversion once a Golden Core is cultivated. Anima Conversion also grants max qi but is uncapped and can be increased indefinitely by cultivating it for long enough.</AS_AnimaCDesc>
   
+  <AS_InnerCJob>Refine Inner Cauldron Qi</AS_InnerCJob>
+  <AS_InnerCJobDesc>Meditate for 6 hours divided by cultivation speed to refine 2 + 2% max qi into the Inner Cauldron to grant more max qi equal to the amount refined if not at the limit.</AS_InnerCJobDesc>
+  <AS_AnimaCJob>Anima Conversion</AS_AnimaCJob>
+  <AS_AnimaCJobDesc>Meditate for 6 hours divided by cultivation speed to convert 2 + 2% max qi into Anima to grant more max qi equal to the amount converted.</AS_AnimaCJobDesc>
   
     <!-- Scrolls -->
   <AS_ScrollAReq>Scroll requires art: </AS_ScrollAReq>
@@ -37,7 +53,7 @@
   <AS_RealmAuto>Realm</AS_RealmAuto>
   <AS_RealmAutoDesc>Auto-cultivate Current Realm. (This includes gathering qi if they are in a essence realm)</AS_RealmAutoDesc>
   <AS_RealmOnlyAuto>Realm Only</AS_RealmOnlyAuto>
-  <AS_EssenceRealmOnlyAutoDesc>Auto-cultivate Essence Realm only. (This excludes gathering qi if they are in a essence realm)</AS_EssenceRealmOnlyAutoDesc>
+  <AS_RealmOnlyAutoDesc>Auto-cultivate Current Realm only. (This excludes gathering qi if they are in a essence realm)</AS_RealmOnlyAutoDesc>
   <AS_QiGatheringAuto>Gather Qi</AS_QiGatheringAuto>
   <AS_QiGatheringAutoDesc>Automatically gather Qi only.</AS_QiGatheringAutoDesc>
   

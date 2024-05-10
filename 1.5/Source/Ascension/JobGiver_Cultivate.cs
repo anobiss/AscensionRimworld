@@ -18,7 +18,12 @@ namespace Ascension
         {
             if (CultivationJobUtility.CanCultivateNow(pawn))
             {
-                return 7.2f;
+                float priority = 7.2f;
+                if (pawn.workSettings != null)
+                {
+                    priority = pawn.workSettings.GetPriority(AscensionDefOf.Cultivation);
+                }
+                return priority;
             }
             return 0f;
         }

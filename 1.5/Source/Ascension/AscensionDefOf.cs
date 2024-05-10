@@ -25,6 +25,8 @@ namespace Ascension
         public static JobDef AS_QiGatheringJob;
         public static JobDef AS_ExerciseJob;
 
+        public static WorkTypeDef Cultivation;
+
         //cultivator hidden hediff
         public static HediffDef Cultivator;
 

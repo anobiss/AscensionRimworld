@@ -17,7 +17,14 @@ namespace Ascension
         //does this part after time calculations not before
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            return true;
+            if (job.GetTarget(SpotInd) != pawn)
+            {
+                return pawn.MapHeld.reservationManager.Reserve(pawn, job, job.GetTarget(SpotInd), 1, -1, null, errorOnFailed);
+            }
+            else
+            {
+                return true;
+            }
         }
 
         protected override IEnumerable<Toil> MakeNewToils()
@@ -44,6 +51,10 @@ namespace Ascension
         private void Breakthrough()
         {
             AscensionUtilities.TierBreakthrough((Realm_Hediff)pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm));
+            if (job.GetTarget(SpotInd) != pawn)
+            {
+                pawn.MapHeld.reservationManager.Release(job.GetTarget(SpotInd), pawn, job);
+            }
         }
     }
 }

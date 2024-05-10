@@ -19,7 +19,14 @@ namespace Ascension
         //does this part afte time calculations not before
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            return true;
+            if (job.GetTarget(SpotInd) != pawn)
+            {
+                return pawn.MapHeld.reservationManager.Reserve(pawn, job, job.GetTarget(SpotInd), 1, -1, null, errorOnFailed);
+            }
+            else
+            {
+                return true;
+            }
         }
 
         protected override IEnumerable<Toil> MakeNewToils()
@@ -44,19 +51,28 @@ namespace Ascension
         }
         private void RefineQi()
         {
+            Log.Message("refineing qi");
             QiPool_Hediff qiPool = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool, false) as QiPool_Hediff;
-            Realm_Hediff essenceHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm) as Realm_Hediff;
+            Realm_Hediff essenceHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
             if (qiPool != null && essenceHediff != null)
             {
                 int qiCost = 2 + (qiPool.maxAmount / 10);// 10% + 2
                 if (qiPool.amount >= qiCost)
                 {
-                    if (essenceHediff.progress < essenceHediff.maxProgress) // this is so we dont get the breakthroughpossible message over and over again
-                    {
-                        AscensionUtilities.TierProgress(pawn, AscensionDefOf.EssenceRealm, qiCost);
-                        qiPool.amount -= qiCost;
-                    }
+                    Log.Message("increasing progression by "+ qiCost);
+                    AscensionUtilities.TierProgress(pawn, AscensionDefOf.EssenceRealm, qiCost);
+                    qiPool.amount -= qiCost;
+                }else
+                {
+                    Log.Message("cost too high");
                 }
+            }else
+            {
+                Log.Message("no qipool or essence realm");
+            }
+            if (job.GetTarget(SpotInd) != pawn)
+            {
+                pawn.MapHeld.reservationManager.Release(job.GetTarget(SpotInd), pawn, job);
             }
         }
     }

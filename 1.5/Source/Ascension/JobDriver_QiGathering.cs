@@ -14,11 +14,17 @@ namespace Ascension
     {
         private const int DurationTicks = 7500;//3 hours
         public const TargetIndex SpotInd = TargetIndex.B;
-
         //does this part afte time calculations not before
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            return true;
+            if (job.GetTarget(SpotInd) != pawn)
+            {
+                return pawn.MapHeld.reservationManager.Reserve(pawn, job, job.GetTarget(SpotInd), 1, -1, null, errorOnFailed);
+            }
+            else
+            {
+                return true;
+            }
         }
 
         protected override IEnumerable<Toil> MakeNewToils()
@@ -50,6 +56,10 @@ namespace Ascension
             QiGatherMapComponent qiGatherMapComp = pawn.Map.GetComponent<QiGatherMapComponent>();
             int qiAmount = qiGatherMapComp.GetQiGatherAt(pawn.Position.x, pawn.Position.y)+1;
             AscensionUtilities.IncreaseQi(pawn, qiAmount, true);
+            if (job.GetTarget(SpotInd) != pawn)
+            {
+                pawn.MapHeld.reservationManager.Release(job.GetTarget(SpotInd), pawn, job);
+            }
         }
     }
 }

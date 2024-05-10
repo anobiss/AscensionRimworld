@@ -87,6 +87,7 @@
     <Compile Include="CompUseEffect_AbilityScroll.cs" />
     <Compile Include="CompUseEffect_Absorb_SpiritSword.cs" />
     <Compile Include="CultivationJobUtility.cs" />
+    <Compile Include="CultivationReservationUtility.cs" />
     <Compile Include="DaoCardUtility.cs" />
     <Compile Include="HediffCompProperties_AddScrollAbility.cs" />
     <Compile Include="HediffCompProperties_AddScrollReq.cs" />

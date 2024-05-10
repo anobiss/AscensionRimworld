@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <WorkTypeDef>
+    <defName>Cultivation</defName>
+    <labelShort>cultivation</labelShort>
+    <pawnLabel>Cultivator</pawnLabel>
+    <gerundLabel>cultivating</gerundLabel>
+    <description>Cultivate the type set in the cultivation tab.</description>
+    <verb>Cultivate</verb>
+    <naturalPriority>1000</naturalPriority>
+    <alwaysStartActive>true</alwaysStartActive>
+  </WorkTypeDef>
+  
+</Defs>

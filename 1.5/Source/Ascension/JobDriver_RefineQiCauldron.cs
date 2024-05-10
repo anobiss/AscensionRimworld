@@ -8,18 +8,28 @@ using Verse.AI;
 using Verse;
 using RimWorld;
 using static HarmonyLib.Code;
+using static UnityEngine.GraphicsBuffer;
+using System.Reflection.Emit;
+using System.Security.Principal;
 
 namespace Ascension
 {
     public class JobDriver_RefineQiCauldron : JobDriver
     {
-        private const int DurationTicks = 10000;//4 hours
+        private const int DurationTicks = 15000;//6 hours
         public const TargetIndex SpotInd = TargetIndex.B;
 
         //does this part afte time calculations not before
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            return true;
+            if (job.GetTarget(SpotInd) != pawn)
+            {
+                return pawn.MapHeld.reservationManager.Reserve(pawn, job, job.GetTarget(SpotInd), 1, -1, null, errorOnFailed);
+            }
+            else
+            {
+                return true;
+            }
         }
 
         protected override IEnumerable<Toil> MakeNewToils()
@@ -57,6 +67,10 @@ namespace Ascension
                         qiPool.amount -= qiCost;
                     }
                 }
+            }
+            if (job.GetTarget(SpotInd) != pawn)
+            {
+                pawn.MapHeld.reservationManager.Release(job.GetTarget(SpotInd), pawn, job);
             }
         }
     }

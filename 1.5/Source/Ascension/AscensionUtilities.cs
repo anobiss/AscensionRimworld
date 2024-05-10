@@ -84,12 +84,10 @@ namespace Ascension
             {
                 //we do these speed calcs in all cultivation realms                  here we do the base times the speedoffset 
                 cultivationSpeed = (cultivatorHediff.cultivationBaseSpeed * cultivatorHediff.cultivationSpeedOffset);
-                Log.Message("first cultivation speed is" + cultivationSpeed);
                 if (cultivatorHediff.pawn.needs.mood != null)
                 {
                     //then times it by our mood but plus some so they can cultivate when upset
                     cultivationSpeed *= (0.4f + cultivatorHediff.pawn.needs.mood.CurLevelPercentage);
-                    Log.Message("second cultivation speed is" + cultivationSpeed);
                 }
                 //check if they are in essence realm, then check for nearby gather qi things.
                 if (cultivatorHediff.pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm))
@@ -98,9 +96,9 @@ namespace Ascension
 
                     QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
                     int qiTile = qiGatherMapComp.GetQiGatherAt(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.y);
-                    Log.Message("qi at position is" + qiTile);
+                    //Log.Message("qi at position is" + qiTile);
                     cultivationSpeed *= (1 + qiTile / 100);//its 1 plus 1% qitile
-                    Log.Message("essence realm cultivation speed is" + cultivationSpeed);
+                    //Log.Message("essence realm cultivation speed is" + cultivationSpeed);
                 }
                 cultivatorHediff.cultivationSpeed = cultivationSpeed;
             }
@@ -168,6 +166,7 @@ namespace Ascension
             if (hediff.progress + progress < hediff.maxProgress)
             {
                 hediff.progress += progress;
+                Log.Message("increased realm progress by "+progress);
             }
             else
             {
@@ -195,14 +194,13 @@ namespace Ascension
             {
                 pawn.health.AddHediff(AscensionDefOf.QiPool);
             }
-            if (!pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm))
-            {
-                pawn.health.AddHediff(AscensionDefOf.EssenceRealm).Severity = 1;
-            }
 
-            if (!pawn.health.hediffSet.HasHediff(AscensionDefOf.BodyRealm))
+            if (hediffDef == AscensionDefOf.BodyRealm)
             {
-                pawn.health.AddHediff(AscensionDefOf.BodyRealm).Severity = 1;
+                if (!pawn.health.hediffSet.HasHediff(AscensionDefOf.BodyRealm))
+                {
+                    pawn.health.AddHediff(AscensionDefOf.BodyRealm).Severity = 1;
+                }
             }
             Realm_Hediff hediff = (Realm_Hediff)pawn.health.hediffSet.GetFirstHediffOfDef(hediffDef, false);
             ProgressTier(hediff, progress);
@@ -368,7 +366,7 @@ namespace Ascension
             {
                 if (realmHediff.progress >= realmHediff.maxProgress)
                 {
-                    int maxSeverityCap = 5;
+                    int maxSeverityCap = 7;
                     if (realmHediff.def == AscensionDefOf.EssenceRealm)
                     {
                         maxSeverityCap = 7;
