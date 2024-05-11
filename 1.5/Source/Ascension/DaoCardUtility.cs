@@ -157,7 +157,6 @@ namespace Ascension
             float num = rect.x + 17f;
             Rect outRect = new Rect(0f, 0f, rect.width, rect.height - curTechBarY);
             Rect viewRect = new Rect(0f, 0f, rect.width - 16f, scrollViewHeight);
-            Widgets.BeginScrollView(outRect, ref scrollPosition, viewRect);
 
             if (!pawn.health.hediffSet.hediffs.NullOrEmpty())
             {
@@ -180,7 +179,6 @@ namespace Ascension
                     }
                 }
             }
-            Widgets.EndScrollView();
             Widgets.EndGroup();
             curY += 10f;
             curY += 6f;

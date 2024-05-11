@@ -5,7 +5,7 @@
     <defName>QiManipulation</defName>
     <label>Qi Manipulation</label>
     <description>Make spirit stones from organics, and build Soul Cauldrons.</description>
-    <baseCost>666</baseCost>
+    <baseCost>777</baseCost>
     <techLevel>Neolithic</techLevel>
 	<tab>Ascension</tab>
     <researchViewX>0.00</researchViewX>

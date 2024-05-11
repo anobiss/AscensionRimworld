@@ -6,7 +6,7 @@
     <label>Qi Refinement Pill</label>
     <description>A pill that artificially refines qi, only works after a cultivator has surpassed body realms and has enough Qi.</description>
     <graphicData>
-      <texPath>Things/Item/Drug/TribulationPill</texPath>
+      <texPath>Things/Item/Drug/RefineQiPill</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <rotatable>false</rotatable>
@@ -26,9 +26,6 @@
       <li Class="CompProperties_Drug">
 		<isCombatEnhancingDrug>false</isCombatEnhancingDrug>
         <listOrder>1011</listOrder>
-      </li>
-      <li>
-        <compClass>CompQuality</compClass>
       </li>
     </comps>
     <tradeTags>

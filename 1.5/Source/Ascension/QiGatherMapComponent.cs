@@ -1,5 +1,7 @@
 ﻿using RimWorld;
+using RimWorld.Utility;
 using System;
+using System.Reflection;
 using UnityEngine;
 using Verse;
 
@@ -15,10 +17,30 @@ namespace Ascension
     {
         public int[] qiGrid; // 1D array acting as the QiGrid
 
+
+
+        public override void MapComponentOnGUI()
+        {
+            int gridSize = (int)Math.Sqrt(qiGrid.Length / 3); // Calculate grid size
+            for (int x = 0; x < gridSize; x++)
+            {
+                for (int y = 0; y < gridSize; y++)
+                {
+                    int index = y * gridSize + x;
+                    int qiAmount = GetQiGatherAt(x, y); // Get qi amount at the current position
+                    Vector3 worldPos = new Vector3(x + 0.5f, Altitudes.AltitudeFor(AltitudeLayer.MetaOverlays) + 0.1f, y + 0.5f); // Get world position of the cell
+                    Vector2 labelPos = Find.Camera.WorldToScreenPoint(worldPos); // Convert world position to screen position
+                    Color color = qiAmount > 0 ? Color.white : Color.clear; // Set color to white if qiAmount > 0, otherwise clear
+                    string qiString = qiAmount.ToString(); // Convert qi amount to string
+                                                           // Draw label with qi amount
+                    Widgets.Label(new Rect(labelPos.x, labelPos.y, 100f, 100f), qiString);
+                }
+            }
+        }
         // Adds qi at the given position within the specified radius.
         public void AddQiGatherAt(int centerX, int centerY, int radius, int amount)
         {
-            int gridSize = (int)Math.Sqrt(qiGrid.Length / 3);
+            int gridSize = (int)Math.Sqrt(qiGrid.Length);
             // Iterate through the grid
             for (int x = 0; x < gridSize; x++)
             {
@@ -31,17 +53,16 @@ namespace Ascension
                     if (dx * dx + dy * dy <= radius * radius)
                     {
                         // Increase the qi amount for the cell
-                        qiGrid[index * 3 + 2] += amount;
+                        qiGrid[index + 2] += amount;
                     }
                 }
             }
-            LogQiGrid();
         }
 
         // Removes qi at the given position within the specified radius.
         public void RemoveQiGatherAt(int centerX, int centerY, int radius, int amount)
         {
-            int gridSize = (int)Math.Sqrt(qiGrid.Length / 3);
+            int gridSize = (int)Math.Sqrt(qiGrid.Length);
             // Iterate through the grid
             for (int x = 0; x < gridSize; x++)
             {
@@ -54,47 +75,29 @@ namespace Ascension
                     if (dx * dx + dy * dy <= radius * radius)
                     {
                         // Decrease the qi amount for the cell
-                        qiGrid[index * 3 + 2] -= amount;
+                        qiGrid[index + 2] -= amount;
                     }
                 }
             }
-            LogQiGrid();
         }
 
         // Gets the qi amount at the specified position.
         public int GetQiGatherAt(int x, int y)
         {
-            int gridSize = (int)Math.Sqrt(qiGrid.Length / 3);
+            int gridSize = (int)Math.Sqrt(qiGrid.Length);
             if (x >= 0 && x < gridSize && y >= 0 && y < gridSize)
             {
                 int index = y * gridSize + x;
-                return qiGrid[index * 3 + 2];
+                return qiGrid[index + 2];
             }
             return 0; // Return 0 if coordinates are out of bounds
-        }
-
-        // Logs the QiGrid
-        public void LogQiGrid()
-        {
-            Log.Message("Updated Qi Grid:");
-            int gridSize = (int)Math.Sqrt(qiGrid.Length / 3);
-            for (int y = 0; y < gridSize; y++)
-            {
-                string row = ""; // Initialize an empty string to store the qi amounts for the row
-                for (int x = 0; x < gridSize; x++)
-                {
-                    int index = y * gridSize + x;
-                    row += qiGrid[index * 3 + 2].ToString() + " "; // Append the qi amount followed by a space
-                }
-                Log.Message(row.TrimEnd()); // Log the row containing the qi amounts, trimming any trailing space
-            }
         }
 
         public QiGatherMapComponent(Map map)
             : base(map)
         {
             int numGridCells = map.cellIndices.NumGridCells;
-            qiGrid = new int[numGridCells * 3]; // Initialize QiGrid with the number of grid cells
+            qiGrid = new int[numGridCells]; // Initialize QiGrid with the number of grid cells
         }
     }
 }
