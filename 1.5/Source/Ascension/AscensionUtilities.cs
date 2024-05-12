@@ -95,7 +95,7 @@ namespace Ascension
                     //we increase the speed here by the amount of gather qi in the tile divided by 100
 
                     QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
-                    int qiTile = qiGatherMapComp.GetQiGatherAt(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.y);
+                    int qiTile = qiGatherMapComp.GetQiGatherAt(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z);
                     //Log.Message("qi at position is" + qiTile);
                     cultivationSpeed *= (1 + qiTile / 100);//its 1 plus 1% qitile
                     //Log.Message("essence realm cultivation speed is" + cultivationSpeed);

@@ -54,7 +54,7 @@ namespace Ascension
             QiPool_Hediff qiPool = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
 
             QiGatherMapComponent qiGatherMapComp = pawn.Map.GetComponent<QiGatherMapComponent>();
-            int qiAmount = qiGatherMapComp.GetQiGatherAt(pawn.Position.x, pawn.Position.y)+1;
+            int qiAmount = qiGatherMapComp.GetQiGatherAt(pawn.Position.x, pawn.Position.z)+1;
             AscensionUtilities.IncreaseQi(pawn, qiAmount, true);
             if (job.GetTarget(SpotInd) != pawn)
             {

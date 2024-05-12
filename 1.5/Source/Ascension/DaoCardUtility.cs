@@ -426,7 +426,7 @@ namespace Ascension
                 int qiTile = 0;
                 if (qiGatherMapComp != null)
                 {
-                    qiTile = qiGatherMapComp.GetQiGatherAt(pawn.Position.x, pawn.Position.y);
+                    qiTile = qiGatherMapComp.GetQiGatherAt(pawn.Position.x, pawn.Position.z);
                     if (pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm))
                     {
                         translatedSpeedFactorText += "AS_CSFactorQiTile".Translate((qiTile / 100f).ToString("0.#").Named("QITILE"));
