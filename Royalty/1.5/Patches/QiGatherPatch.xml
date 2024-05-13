@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
   <Operation Class="PatchOperationInsert">
+    <xpath>Defs/ThingDef[defName="Plant_TreeAnima"]/comps/li[@Class="CompProperties_MeditationFocus"]</xpath>
+    <order>Append</order>
+    <value>
+      <li Class="Ascension.CompProperties_GatherQi">
+		<range>12</range>
+        <amount>55</amount>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationInsert">
     <xpath>Defs/ThingDef[defName="AnimusStone"]/comps/li[@Class="CompProperties_MeditationFocus"]</xpath>
     <order>Append</order>
     <value>
       <li Class="Ascension.CompProperties_GatherQi">
 		<range>5</range>
-        <amount>50</amount>
+        <amount>25</amount>
       </li>
     </value>
   </Operation>
@@ -15,8 +25,8 @@
     <order>Append</order>
     <value>
       <li Class="Ascension.CompProperties_GatherQi">
-		<range>5</range>
-        <amount>35</amount>
+		<range>4</range>
+        <amount>5</amount>
       </li>
     </value>
   </Operation>
@@ -26,7 +36,7 @@
     <value>
       <li Class="Ascension.CompProperties_GatherQi">
 		<range>4</range>
-        <amount>25</amount>
+        <amount>3</amount>
       </li>
     </value>
   </Operation>
