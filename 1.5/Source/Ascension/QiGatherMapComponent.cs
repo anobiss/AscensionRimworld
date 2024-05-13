@@ -31,7 +31,7 @@ namespace Ascension
                     if (qiAmount != 0)
                     {
                         Vector3 labelPos = (Vector3)GenMapUI.LabelDrawPosFor(new IntVec3(x, 0, z)); // Assuming y-coordinate is always 0
-                        Color color = Color.Lerp(Color.black, Color.white, (float)qiAmount / 100f); // Example: Color based on qiAmount
+                        Color color = Color.Lerp(Color.white, Color.yellow, (float)qiAmount / 250f); // Example: Color based on qiAmount
                         GenMapUI.DrawThingLabel(labelPos, qiAmount.ToString(), color);
                     }
                 }
