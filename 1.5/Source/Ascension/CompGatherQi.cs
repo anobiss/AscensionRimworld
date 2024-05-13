@@ -45,13 +45,13 @@ namespace Ascension
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             QiGatherMapComponent qiGatherMapComp = parent.Map.GetComponent<QiGatherMapComponent>();
-            qiGatherMapComp.AddQiGatherAt(parent.Position.x, parent.Position.y, Props.range, Props.amount);
+            qiGatherMapComp.AddQiGatherAt(parent.Position.x, parent.Position.z, Props.range, Props.amount);
             base.PostSpawnSetup(respawningAfterLoad);
         }
         public override void PostDeSpawn(Map map)
         {
             QiGatherMapComponent qiGatherMapComp = map.GetComponent<QiGatherMapComponent>();
-            qiGatherMapComp.RemoveQiGatherAt(parent.Position.x, parent.Position.y, Props.range, Props.amount);
+            qiGatherMapComp.RemoveQiGatherAt(parent.Position.x, parent.Position.z, Props.range, Props.amount);
             base.PostDeSpawn(map);
         }
     }
