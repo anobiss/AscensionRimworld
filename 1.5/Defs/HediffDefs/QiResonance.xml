@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <HediffDef>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defName>QiResonance</defName>
+    <label>qi resonance</label>
+    <description>This being has qi resonance resulting in 0.1 increased cultivation speed offset and 500% increased qi recovery. Lasts 3 days.</description>
+	<defaultLabelColor>(1.0, 1.0, 1.0)</defaultLabelColor>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="Ascension.HediffCompProperties_QiRecovery">
+        <offset>5</offset>
+		<cultivationSpeedOffset>0.1</cultivationSpeedOffset>
+      </li>
+    </comps>
+  </HediffDef>
+</Defs>

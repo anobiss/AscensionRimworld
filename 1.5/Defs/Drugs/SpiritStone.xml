@@ -4,7 +4,7 @@
   <ThingDef ParentName="ResourceBase">
     <defName>SpiritStone</defName>
     <label>spirit stone</label>
-    <description>Qi condensed into its solid form. Once consumed it grants 10 qi. Used in production of golden pills for vastly more qi.</description>
+    <description>Qi condensed into its solid form. Once consumed it grants 10 qi and gives the consumer Qi Resonance(gives 0.1 increased cultivation speed offset and 500% increased qi recovery) for 3 days. Used in production of golden pills for vastly more qi.</description>
     <graphicData>
       <texPath>Things/Item/Resource/SpiritStone</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -30,6 +30,11 @@
           <hediffDef>QiPool</hediffDef>
           <amount>10</amount>
 		  <tier>1</tier>
+          <doToGeneratedPawnIfAddicted>true</doToGeneratedPawnIfAddicted>
+        </li>
+		<li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>QiResonance</hediffDef>
+          <severity>1.00</severity>
           <doToGeneratedPawnIfAddicted>true</doToGeneratedPawnIfAddicted>
         </li>
       </outcomeDoers>

@@ -27,24 +27,58 @@ namespace Ascension
             this.ticksToQi--;
             if (this.ticksToQi <= 0)
             {
-                int tier = ((int)Math.Floor(parent.Severity));
-                if (tier >=  2 && tier <= 7)
+                Cultivator_Hediff cultivatorHediff = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
+                if (cultivatorHediff != null)
                 {
-                    //checks to make sure we dont explode the pawn passivley
-                    int qiRate = passiveQiRates[tier - 1]; //1 because arrays start at 0 
-                    float qiMax = maxQiRates[tier - 1];
-                    QiPool_Hediff qiPool = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
-                    if (qiPool == null)
+                    cultivatorHediff.qiRecoverySpeed = (int)Math.Floor(cultivatorHediff.qiRecoverySpeedOffset + 1f);
+                    tickRate = (int)Math.Floor(2500 / cultivatorHediff.qiRecoverySpeed);
+                    int tier = ((int)Math.Floor(parent.Severity));
+                    if (tier <= 7)
                     {
-                        HediffSet hediffSet = Pawn.health.hediffSet;
-                        //gives hediffs that r missing.
-                        Pawn.health.AddHediff(AscensionDefOf.QiPool);
-                        qiPool = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff; // set qiPool to new hediff to garentee qipool references
+                        cultivatorHediff.qiRecoverySpeed = (int)Math.Floor(cultivatorHediff.qiRecoverySpeedOffset + 1f);
+                        tickRate = (int)Math.Floor(2500 / cultivatorHediff.qiRecoverySpeed);
+                        float qiMax;
+                        int qiRate;
+                        if (tier < 1)
+                        {
+                            cultivatorHediff.qiRecoveryAmount = passiveQiRates[1];
+                            qiMax = maxQiRates[1];
+                        }
+                        else
+                        {
+                            cultivatorHediff.qiRecoveryAmount = passiveQiRates[tier - 1];
+                            qiMax = maxQiRates[tier - 1];
+                        }
+                        //checks to make sure we dont explode the pawn passivley
+
+                        QiPool_Hediff qiPool = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
+                        if (qiPool == null)
+                        {
+
+                            HediffSet hediffSet = Pawn.health.hediffSet;
+                            //gives hediffs that r missing.
+                            Pawn.health.AddHediff(AscensionDefOf.QiPool);
+                            qiPool = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff; // set qiPool to new hediff to garentee qipool references
+                        }
+                        qiPool.maxAmountOffset = qiMax;
+                        AscensionUtilities.UpdateQiMax(qiPool);
+                        AscensionUtilities.IncreaseQi(Pawn, cultivatorHediff.qiRecoveryAmount, true);
                     }
-                    qiPool.maxAmountOffset = qiMax;
-                    AscensionUtilities.UpdateQiMax(qiPool);
-                    AscensionUtilities.IncreaseQi(Pawn, qiRate, true);
+                    else if (tier > 7)
+                    {
+                        QiPool_Hediff qiPool = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
+                        if (qiPool == null)
+                        {
+                            HediffSet hediffSet = Pawn.health.hediffSet;
+                            //gives hediffs that r missing.
+                            Pawn.health.AddHediff(AscensionDefOf.QiPool);
+                            qiPool = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff; // set qiPool to new hediff to garentee qipool references
+                        }
+                        AscensionUtilities.UpdateQiMax(qiPool);
+                        AscensionUtilities.IncreaseQi(Pawn, passiveQiRates[6], true);
+                    }
                 }
+
                 ticksToQi = tickRate;
             }
         }

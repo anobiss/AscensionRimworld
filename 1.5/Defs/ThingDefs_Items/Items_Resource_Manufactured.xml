@@ -1,6 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
+  <ThingDef ParentName="ResourceBase">
+    <defName>Spiritwood</defName>
+    <label>spiritwood</label>
+    <description>Spiritwood from spirit trees. Unlike normal wood it has Gather Qi and is not flammable.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/Spiritwood</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <soundInteract>Wood_Drop</soundInteract>
+    <soundDrop>Wood_Drop</soundDrop>
+    <statBases>
+      <MarketValue>250</MarketValue>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>0.4</Mass> 
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.1</DeteriorationRate>
+    </statBases>
+    <burnableByRecipe>true</burnableByRecipe>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <minRewardCount>3</minRewardCount>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <allowedArchonexusCount>50</allowedArchonexusCount>
+	<comps>
+	   <li Class="Ascension.CompProperties_GatherQi">
+		<range>4</range>
+        <amount>20</amount>
+      </li>
+    </comps>
+  </ThingDef>
     <!--
       Scrolls
 	  

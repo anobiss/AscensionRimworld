@@ -230,44 +230,68 @@ namespace Ascension
 
         private static void DrawPawnQi(Pawn pawn, Rect rect, QiPool_Hediff qiPool)
         {
-            float num = rect.x + 17f;
-            Rect rect2 = new Rect(num, rect.y + rect.height / 2f - 16f, 32f, 32f);
-            num += 42f;
-            Text.Anchor = TextAnchor.MiddleLeft;
-            Rect qiLabelRect = new Rect(num, rect.y, rect.width / 2f - num, rect.height);//label rect
+            float labelWidth = rect.width / 2f - 17f;
+            Rect qiLabelRect = new Rect(rect.x + 59f, rect.y, labelWidth, rect.height);
+            Rect barRect = new Rect(rect.x + 17f, rect.y + rect.height / 2f - 16f, rect.width - 43f, 32f);
+            Rect gatherButtonRect = new Rect(barRect.x, barRect.y + barRect.height + 5f, barRect.width, barRect.height);
+
             Widgets.Label(qiLabelRect, "AS_QiPool".Translate());
-            Text.Anchor = TextAnchor.UpperLeft;
-            num += qiLabelRect.width + 10f;
-            Rect rect4 = new Rect(rect2.x, rect.y + rect.height / 2f - 16f, 0f, 32f);
-            Rect rect5 = new Rect(num, rect.y + rect.height / 2f - 16f, rect.width - num - 26f, 32f);
-            rect4.xMax = rect5.xMax;
-            if (Mouse.IsOver(rect4))
+
+            if (Mouse.IsOver(barRect))
             {
-                Widgets.DrawHighlight(rect4);
+                Widgets.DrawHighlight(barRect);
             }
+
             float qiRatio = (float)qiPool.amount / (float)qiPool.maxAmount;
             GUI.color = Color.white;
-            Widgets.FillableBar(rect4.ContractedBy(2f), qiRatio);
-            Text.Anchor = TextAnchor.MiddleCenter;
-            Widgets.Label(rect4, qiPool.amount+"/"+qiPool.maxAmount+" "+ "AS_Qi".Translate());
-            Rect rectGathering = new Rect(rect4.x, rect4.y+rect4.height+5f, rect4.width, rect4.height);
-            if (CanControl(pawn))
+            Widgets.FillableBar(barRect.ContractedBy(2f), qiRatio);
+            string qiBarText = "AS_QiPoolBar".Translate(qiPool.amount.ToString("0.#").Named("QI"), qiPool.maxAmount.ToString("0.#").Named("MAXQI"));
+            Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
+            Realm_Hediff essenceRealm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
+            if (cultivatorHediff != null && essenceRealm != null)
             {
-                if (qiPool.amount < qiPool.maxAmount)
+                qiBarText += "AS_QiPoolBarRecovery".Translate(cultivatorHediff.qiRecoveryAmount.ToString().Named("QIRECOVERYAMOUNT"));
+                if (cultivatorHediff.qiRecoverySpeed < 1)
                 {
-                    if (Widgets.ButtonText(rectGathering, "AS_QiGathering".Translate()))
-                    {
-                        Job job = JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
-                        SoundDefOf.Tick_Low.PlayOneShotOnCamera();
-                        pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
-                    }
-                    if (Mouse.IsOver(rectGathering))
-                    {
-                        Widgets.DrawHighlight(rectGathering);
-                        TooltipHandler.TipRegion(rectGathering, "AS_QiGatheringDesc".Translate());
-                    }
+                    qiBarText += "AS_QiPoolBarRecoveryHours".Translate(((2500/cultivatorHediff.qiRecoverySpeed)/2500).ToString("0.#").Named("QIRECOVERYSPEED"));
+                    //hours logic
                 }
+                else if (2500 / cultivatorHediff.qiRecoverySpeed == 2500)//2500 is hour
+                {
+                    qiBarText += "AS_QiPoolBarRecoveryHour".Translate();
+                    //hour logic
+                }
+                else if (2500 / cultivatorHediff.qiRecoverySpeed < 2500 && 2500 / cultivatorHediff.qiRecoverySpeed > 41.6)
+                {
+                    qiBarText += "AS_QiPoolBarRecoveryMinutes".Translate(((2500/cultivatorHediff.qiRecoverySpeed)/41.6).ToString("0.#").Named("QIRECOVERYSPEED"));
+                    //minutes
+                }
+                else if (2500 / cultivatorHediff.qiRecoverySpeed == 41.6)
+                {
+                    qiBarText += "AS_QiPoolBarRecoveryMinute".Translate();
+                    //minute logic
+                }
+                else if (2500 / cultivatorHediff.qiRecoverySpeed < 41.6)//less than a min
+                {
+                    qiBarText += "AS_QiPoolBarRecoverySeconds".Translate(((2500 / cultivatorHediff.qiRecoverySpeed) / 0.69f).ToString("0.#").Named("QIRECOVERYSPEED"));
+                    //seconds logic
+                }
+            }
+            Widgets.Label(barRect, qiBarText);
 
+            if (CanControl(pawn) && qiPool.amount < qiPool.maxAmount)
+            {
+                if (Widgets.ButtonText(gatherButtonRect, "AS_QiGathering".Translate()))
+                {
+                    Job job = JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
+                    SoundDefOf.Tick_Low.PlayOneShotOnCamera();
+                    pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+                }
+                if (Mouse.IsOver(gatherButtonRect))
+                {
+                    Widgets.DrawHighlight(gatherButtonRect);
+                    TooltipHandler.TipRegion(gatherButtonRect, "AS_QiGatheringDesc".Translate());
+                }
             }
             Text.Anchor = TextAnchor.UpperLeft;
         }

@@ -91,10 +91,12 @@
     <Compile Include="DaoCardUtility.cs" />
     <Compile Include="HediffCompProperties_AddScrollAbility.cs" />
     <Compile Include="HediffCompProperties_AddScrollReq.cs" />
+    <Compile Include="HediffCompProperties_QiRecovery.cs" />
     <Compile Include="HediffCompProperties_Realm.cs" />
     <Compile Include="HediffComp_AddScrollAbility.cs" />
     <Compile Include="HediffComp_AddScrollReq.cs" />
     <Compile Include="HediffComp_EssenceRealm.cs" />
+    <Compile Include="HediffComp_QiRecovery.cs" />
     <Compile Include="HediffComp_QiShield.cs" />
     <Compile Include="HediffComp_Realm.cs" />
     <Compile Include="IngestionOutcomeDoer_Exercise.cs" />

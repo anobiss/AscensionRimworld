@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationInsert">
+    <xpath>Defs/ThingDef[defName="GoldenCube"]/comps/li[@Class="CompProperties_Forbiddable"]</xpath>
+    <order>Append</order>
+    <value>
+      <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>80</amount>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationInsert">
+    <xpath>Defs/ThingDef[defName="MonolithFragment"]/comps/li[@Class="CompProperties_Studiable"]</xpath>
+    <order>Append</order>
+    <value>
+      <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>250</amount>
+      </li>
+    </value>
+  </Operation>
+</Patch>

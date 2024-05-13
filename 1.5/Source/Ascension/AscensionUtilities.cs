@@ -326,7 +326,8 @@ namespace Ascension
         //    }
         //    return hediff_Realm;
         //}
-        public static readonly int[] maxProgressionRates = { 500, 1200, 7000, 42000,120000, 240000}; // max qi offset to set to when advancing. first is tier 2
+        public static readonly int[] maxProgressionRatesBody = { 100, 500, 700, 1200, 2000,4000, 7000}; // max qi offset to set to when advancing. first is tier 2
+        public static readonly int[] maxProgressionRatesEssence = { 100, 1200, 7000, 42000, 12000, 240000, 1000000 }; // max qi offset to set to when advancing. first is tier 2
         public static void UpdateMaxProg(Realm_Hediff realmHediff)
         {
             int tier = ((int)Math.Floor(realmHediff.Severity));
@@ -336,7 +337,7 @@ namespace Ascension
                 {
                     if (tier >= 2)
                     {
-                        int progMax = maxProgressionRates[tier - 2];
+                        int progMax = maxProgressionRatesEssence[tier - 1];
                         realmHediff.maxProgress = progMax;
                     }else
                     {
@@ -348,7 +349,7 @@ namespace Ascension
             {
                 if (tier >= 2 && tier <= 5)
                 {
-                    int progMax = maxProgressionRates[tier - 2];
+                    int progMax = maxProgressionRatesBody[tier - 1];
                     realmHediff.maxProgress = progMax;
                 }
             }

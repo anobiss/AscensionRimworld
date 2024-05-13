@@ -15,8 +15,8 @@
     <order>Append</order>
     <value>
       <li Class="Ascension.CompProperties_GatherQi">
-		<range>5</range>
-        <amount>25</amount>
+		<range>9</range>
+        <amount>12</amount>
       </li>
     </value>
   </Operation>

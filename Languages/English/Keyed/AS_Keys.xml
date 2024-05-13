@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
+
+  <AS_QiPoolBar>{QI} / {MAXQI} Qi</AS_QiPoolBar>
+  
+   <!-- its only like this for better translation support -->
+  <AS_QiPoolBarRecovery> + {QIRECOVERYAMOUNT} every</AS_QiPoolBarRecovery>
+  <AS_QiPoolBarRecoveryHours> {QIRECOVERYSPEED} hours.</AS_QiPoolBarRecoveryHours>
+  <AS_QiPoolBarRecoveryHour> hour.</AS_QiPoolBarRecoveryHour>
+  <AS_QiPoolBarRecoveryMinutes> {QIRECOVERYSPEED} minutes.</AS_QiPoolBarRecoveryMinutes>
+  <AS_QiPoolBarRecoveryMinute> minute.</AS_QiPoolBarRecoveryMinute>
+  <AS_QiPoolBarRecoverySeconds>{QIRECOVERYSPEED} seconds.</AS_QiPoolBarRecoverySeconds>
+
   <AS_Foundation>Foundation</AS_Foundation>
   
   <AS_DisplayQi>Display Gather Qi Grid: </AS_DisplayQi>
