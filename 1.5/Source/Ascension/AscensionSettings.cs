@@ -11,6 +11,9 @@ namespace Ascension
         /// <summary>
         /// Default settings.
         /// </summary>
+        /// 
+        public bool displayQiGrid = true;
+
         public bool humanoidOnlyBool = false;
         public bool logHealsBool = false;
         public bool opGoldenPillsBool = false;
@@ -23,6 +26,7 @@ namespace Ascension
         public float EssenceChance = 0.1f;
         public override void ExposeData()
         {
+            Scribe_Values.Look(ref displayQiGrid, "displayQiGrid", true);
             Scribe_Values.Look(ref humanoidOnlyBool, "humanoidOnlyBool");
             Scribe_Values.Look(ref machineCultivatorBool, "machineCultivatorBool");
             Scribe_Values.Look(ref opGoldenPillsBool, "opGoldenPillsBool");
@@ -52,7 +56,7 @@ namespace Ascension
         {
             Listing_Standard listingStandard = new Listing_Standard();
             listingStandard.Begin(inRect);
-
+            listingStandard.CheckboxLabeled("AS_DisplayQi".Translate(), ref settings.displayQiGrid, "AS_DisplayQiDesc".Translate());
             listingStandard.CheckboxLabeled("AS_HumanoidCultivator".Translate(), ref settings.humanoidOnlyBool, "AS_HumanoidCultivatorDesc".Translate());
             listingStandard.CheckboxLabeled("AS_MachineCultivator".Translate(), ref settings.machineCultivatorBool, "AS_MachineCultivatorDesc".Translate());
             listingStandard.CheckboxLabeled("AS_OPGoldenPills".Translate(), ref settings.opGoldenPillsBool, "AS_OPGoldenPillsDesc".Translate());

@@ -2,7 +2,8 @@
 <LanguageData>
   <AS_Foundation>Foundation</AS_Foundation>
   
-  
+  <AS_DisplayQi>Display Gather Qi Grid: </AS_DisplayQi>
+  <AS_DisplayQiDesc>Display the gather qi values on the map/screen.</AS_DisplayQiDesc>
   
     <!-- Settings -->
   <AS_AbilityChance>Cultivator Ability Chance: </AS_AbilityChance>

@@ -20,19 +20,21 @@ namespace Ascension
         public override void MapComponentOnGUI()
         {
             base.MapComponentOnGUI();
-
-            int gridSize = Mathf.RoundToInt(Mathf.Sqrt(qiGrid.Length / 3));
-
-            for (int z = gridSize - 1; z >= 0; z--)
+            if (LoadedModManager.GetMod<AscensionMod>().GetSettings<AscensionSettings>().displayQiGrid == true)
             {
-                for (int x = 0; x < gridSize; x++)
+                int gridSize = Mathf.RoundToInt(Mathf.Sqrt(qiGrid.Length / 3));
+
+                for (int z = gridSize - 1; z >= 0; z--)
                 {
-                    int qiAmount = GetQiGatherAt(x, z); // Access Qi amount using GetQiGatherAt method
-                    if (qiAmount != 0)
+                    for (int x = 0; x < gridSize; x++)
                     {
-                        Vector3 labelPos = (Vector3)GenMapUI.LabelDrawPosFor(new IntVec3(x, 0, z)); // Assuming y-coordinate is always 0
-                        Color color = Color.Lerp(Color.white, Color.yellow, (float)qiAmount / 250f); // Example: Color based on qiAmount
-                        GenMapUI.DrawThingLabel(labelPos, qiAmount.ToString(), color);
+                        int qiAmount = GetQiGatherAt(x, z); // Access Qi amount using GetQiGatherAt method
+                        if (qiAmount != 0)
+                        {
+                            Vector3 labelPos = (Vector3)GenMapUI.LabelDrawPosFor(new IntVec3(x, 0, z)); // Assuming y-coordinate is always 0
+                            Color color = Color.Lerp(Color.white, Color.yellow, (float)qiAmount / 250f); // Example: Color based on qiAmount
+                            GenMapUI.DrawThingLabel(labelPos, qiAmount.ToString(), color);
+                        }
                     }
                 }
             }
