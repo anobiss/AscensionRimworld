@@ -58,9 +58,9 @@
   </RecipeDef>
   
   <RecipeDef>
-    <defName>MakeTribulationPill</defName>
-    <label>Make Tribulation Pill</label>
-    <description>Make a Tribulation Pill.</description>
+    <defName>MakeQiRefinementPill</defName>
+    <label>Make Qi Refinement Pill</label>
+    <description>Make a Qi Refinement Pill.</description>
     <researchPrerequisite>QiManipulation</researchPrerequisite>
     <jobString>Creating Tribulation Pill.</jobString>
     <workAmount>777</workAmount>
@@ -72,7 +72,7 @@
       <li>SoulCauldron</li>
     </recipeUsers>
     <products>
-      <TribulationPill>1</TribulationPill>
+      <QiRefinementPill>1</QiRefinementPill>
     </products>
     <ingredients>
 	  <li>

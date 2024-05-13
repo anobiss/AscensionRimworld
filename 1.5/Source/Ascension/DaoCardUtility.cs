@@ -437,8 +437,7 @@ namespace Ascension
 
                 if (qiGatherMapComp != null)
                 {
-                    //Widgets.Label(QiTileRect, "AS_QiTile".Translate(qiTile.Named("QITILE")));
-                    Widgets.Label(QiTileRect, qiTile.ToString()+"x" + pawn.Position.x.ToString() + "z" + pawn.Position.z.ToString());
+                    Widgets.Label(QiTileRect, "AS_QiTile".Translate(qiTile.Named("QITILE")));
                     innerCRect.y += QiTileRect.height;
                 }
 

@@ -4,7 +4,7 @@
   <ResearchProjectDef>
     <defName>QiManipulation</defName>
     <label>Qi Manipulation</label>
-    <description>Make spirit stones from organics, and build Soul Cauldrons.</description>
+    <description>Make spirit stones from organics, qi cushions, and build Soul Cauldrons.</description>
     <baseCost>777</baseCost>
     <techLevel>Neolithic</techLevel>
 	<tab>Ascension</tab>

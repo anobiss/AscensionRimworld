@@ -43,5 +43,8 @@
 			<priority>2</priority>
 		</li>
 	</comps>
+	<researchPrerequisites>
+      <li>QiManipulation</li>
+    </researchPrerequisites>
   </ThingDef>
 </Defs>
