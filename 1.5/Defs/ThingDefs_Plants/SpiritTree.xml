@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="DeciduousTreeBase">
+    <defName>AS_Plant_TreeSpirit</defName>
+    <label>spirit tree</label>
+    <description>A spirit tree that can be chopped for spirit wood. Has more gather qi at a lower range than the spiritwood obtained from harvesting it.</description>
+	<comps>
+	   <li Class="Ascension.CompProperties_GatherQi">
+		<range>2</range>
+        <amount>25</amount>
+      </li>
+    </comps>
+    <graphicData>
+      <texPath>Things/Plant/SpiritTree</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+      <shadowData>
+        <volume>(0.24, 0.4, 0.13)</volume>
+        <offset>(-0.03,0,-0.44)</offset>
+      </shadowData>
+      <shaderParameters>
+        <_FallColorSource>(0.373, 0.427, 0.313)</_FallColorSource>
+        <_FallTransitionRange>(0.02, 0.14)</_FallTransitionRange>
+      </shaderParameters>
+    </graphicData>
+    <statBases>
+      <Beauty>9</Beauty>
+    </statBases>
+    <plant>
+      <growDays>120</growDays>
+	  <harvestedThingDef>Spiritwood</harvestedThingDef>
+      <leaflessGraphicPath>Things/Plant/SpiritTree_Leafless</leaflessGraphicPath>
+      <immatureGraphicPath>Things/Plant/SpiritTree_Immature</immatureGraphicPath>
+      <harvestWork>1800</harvestWork>
+      <harvestYield>2</harvestYield>
+      <wildClusterRadius>17</wildClusterRadius>
+      <wildClusterWeight>25</wildClusterWeight>
+      <visualSizeRange>1.5~2.3</visualSizeRange>
+    </plant>
+  </ThingDef>
+
+</Defs>

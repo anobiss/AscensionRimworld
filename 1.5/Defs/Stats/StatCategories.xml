@@ -8,4 +8,9 @@
     <displayOrder>27</displayOrder>
   </StatCategoryDef>
   
+    <StatCategoryDef>
+    <defName>ElementEmit</defName>
+    <label>Element Emit</label>
+    <displayOrder>28</displayOrder>
+  </StatCategoryDef>
 </Defs>

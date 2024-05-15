@@ -20,6 +20,8 @@ namespace Ascension
         public static JobDef AS_BreakthroughBody;
         public static ThingDef CultivationSpot;
 
+        public static ThingDef AS_Plant_TreeSpirit;
+
         public static JobDef AS_RefineQiJob;
         public static JobDef AS_RefineQiCauldronJob;
         public static JobDef AS_QiGatheringJob;
@@ -31,6 +33,7 @@ namespace Ascension
         public static HediffDef Cultivator;
 
         public static StatCategoryDef GatherQi;
+        public static StatCategoryDef ElementEmit;
 
         //realm hediffs
         public static HediffDef EssenceRealm;

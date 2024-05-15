@@ -72,6 +72,7 @@
     <Compile Include="CompAbilityEffect_ManifestSpiritSword.cs" />
     <Compile Include="CompAwfulExplosive.cs" />
     <Compile Include="CompCultivationSpot.cs" />
+    <Compile Include="CompElementEmit.cs" />
     <Compile Include="CompGatherQi.cs" />
     <Compile Include="CompProperties_AbilityBodyMelee.cs" />
     <Compile Include="CompProperties_AbilityHediffToggle.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="CompProperties_AbilityManifestSpiritSword.cs" />
     <Compile Include="CompProperties_AwfulExplosive.cs" />
     <Compile Include="CompProperties_CultivationSpot.cs" />
+    <Compile Include="CompProperties_ElementEmit.cs" />
     <Compile Include="CompProperties_GatherQi.cs" />
     <Compile Include="CompProperties_UseEffect_AbilityScroll.cs" />
     <Compile Include="CompProperties_UseEffect_Absorb_SpiritSword.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="HediffComp_QiRecovery.cs" />
     <Compile Include="HediffComp_QiShield.cs" />
     <Compile Include="HediffComp_Realm.cs" />
+    <Compile Include="IncidentWorker_SpiritTreeConversion.cs" />
     <Compile Include="IngestionOutcomeDoer_Exercise.cs" />
     <Compile Include="IngestionOutcomeDoer_GiveBreakthrough.cs" />
     <Compile Include="IngestionOutcomeDoer_RefineQi.cs" />
@@ -108,6 +111,7 @@
     <Compile Include="JobDriver_RefineQiCauldron.cs" />
     <Compile Include="JobDriver_RefineQi.cs" />
     <Compile Include="JobGiver_Cultivate.cs" />
+    <Compile Include="ElementEmitMapComponent.cs" />
     <Compile Include="QiGatherMapComponent.cs" />
     <Compile Include="Realm_Hediff.cs" />
     <Compile Include="ITab_Pawn_Dao.cs" />
