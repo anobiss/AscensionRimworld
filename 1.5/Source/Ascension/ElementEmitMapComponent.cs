@@ -1,7 +1,5 @@
-﻿
-using RimWorld;
+﻿using RimWorld;
 using System;
-using System.Text;
 using UnityEngine;
 using Verse;
 
@@ -9,7 +7,9 @@ namespace Ascension
 {
     public class ElementEmitMapComponent : MapComponent
     {
-        public int[] qiGrid;
+        private const int ElementCount = 6; // Number of elements
+        private int[] cellElements;
+        private int gridSize;
 
         public enum Element
         {
@@ -23,148 +23,224 @@ namespace Ascension
 
         public ElementEmitMapComponent(Map map) : base(map)
         {
-            int numGridCells = map.cellIndices.NumGridCells;
-            qiGrid = new int[numGridCells * Enum.GetValues(typeof(Element)).Length];
+            gridSize = Mathf.RoundToInt(Mathf.Sqrt(map.cellIndices.NumGridCells));
+            cellElements = new int[gridSize * gridSize * ElementCount];
         }
-
-
 
         public override void MapComponentOnGUI()
         {
             base.MapComponentOnGUI();
-            int gridSize = Mathf.RoundToInt(Mathf.Sqrt(qiGrid.Length / Enum.GetValues(typeof(Element)).Length));
 
-            for (int z = gridSize - 1; z >= 0; z--)
+            for (int x = 0; x < gridSize; x++)
             {
-                for (int x = 0; x < gridSize; x++) // for each cell on the grid/map
+                for (int z = 0; z < gridSize; z++)
                 {
-                    bool hasValue = false;
-                    StringBuilder labelText = new StringBuilder();
-
-                    foreach (Element element in Enum.GetValues(typeof(Element)))
+                    IntVec2 cell = new IntVec2(x, z);
+                    if (HasElements(cell))
                     {
-                        int emitAmount = GetElementEmitAt(x, z, element);
-                        if (emitAmount != 0)
+                        int elementCount = CountElements(cell);
+                        float yOffset = -20f;
+
+                        foreach (Element element in Enum.GetValues(typeof(Element)))
                         {
-                            hasValue = true;
-                            labelText.AppendLine($"{element}: {emitAmount}");
+                            int amount = GetElementAt(cell, element);
+
+                            if (amount > 0)
+                            {
+                                Color color = GetElementColor(element, amount);
+                                string guiText = $"{element}:{amount}";
+                                if (element == Element.Fire)
+                                {
+                                    guiText = "AS_FireDisplay";
+                                }
+                                else if (element == Element.Earth)
+                                {
+                                    guiText = "AS_EarthDisplay";
+                                }
+                                else if (element == Element.Metal)
+                                {
+                                    guiText = "AS_MetalDisplay";
+                                }
+                                else if (element == Element.Water)
+                                {
+                                    guiText = "AS_WaterDisplay";
+                                }
+                                else if (element == Element.Wood)
+                                {
+                                    guiText = "AS_WoodDisplay";
+                                }
+                                else if (element == Element.None)
+                                {
+                                    guiText = "AS_NoneDisplay";
+                                }
+                                guiText = guiText.Translate(amount.Named("AMOUNT"));
+                                Vector3 labelPos = (Vector3)GenMapUI.LabelDrawPosFor(new IntVec3(cell.x, 0, cell.z)) + Vector3.up * yOffset;
+                                GenMapUI.DrawThingLabel(labelPos, guiText, color);
+                                yOffset += 10f; // Adjust vertical position for next element
+                            }
                         }
                     }
-
-                    if (hasValue)
-                    {
-                        Vector3 labelPos = (Vector3)GenMapUI.LabelDrawPosFor(new IntVec3(x, 0, z));
-                        GenMapUI.DrawThingLabel(labelPos, labelText.ToString().TrimEnd(), Color.white);
-                    }
                 }
             }
         }
 
-        public void AddElementEmitAt(int centerX, int centerZ, int radius, int amount, Element element)
+        private int GetIndex(IntVec2 cell, Element element)
         {
-            int gridSize = (int)Math.Sqrt(qiGrid.Length / Enum.GetValues(typeof(Element)).Length);
-            for (int x = 0; x < gridSize; x++)
+            return (cell.z * gridSize + cell.x) * ElementCount + (int)element;
+        }
+
+        public void AddElementAt(IntVec2 centerCell, int radius, int amount, Element element)
+        {
+            for (int x = centerCell.x - radius; x <= centerCell.x + radius; x++)
             {
-                for (int z = 0; z < gridSize; z++)
+                for (int z = centerCell.z - radius; z <= centerCell.z + radius; z++)
                 {
-                    int index = (z * gridSize + x) * Enum.GetValues(typeof(Element)).Length;
-                    int dx = x - centerX;
-                    int dz = z - centerZ;
-                    if (dx * dx + dz * dz <= radius * radius)
+                    IntVec2 cell = new IntVec2(x, z);
+                    if (IsValidCell(cell) && IsWithinCircle(centerCell, radius, cell))
                     {
-                        qiGrid[index + (int)element] += amount;
-                        HandleElementRelations(x, z, amount, element);
+                        int index = GetIndex(cell, element);
+                        cellElements[index] += amount;
                     }
                 }
             }
         }
 
-        public void RemoveElementEmitAt(int centerX, int centerZ, int radius, int amount, Element element)
+        public void RemoveElementAt(IntVec2 centerCell, int radius, int amount, Element element)
         {
-            int gridSize = (int)Math.Sqrt(qiGrid.Length / Enum.GetValues(typeof(Element)).Length);
-            for (int x = 0; x < gridSize; x++)
+            for (int x = centerCell.x - radius; x <= centerCell.x + radius; x++)
             {
-                for (int z = 0; z < gridSize; z++)
+                for (int z = centerCell.z - radius; z <= centerCell.z + radius; z++)
                 {
-                    int index = (z * gridSize + x) * Enum.GetValues(typeof(Element)).Length;
-                    int dx = x - centerX;
-                    int dz = z - centerZ;
-                    if (dx * dx + dz * dz <= radius * radius)
+                    IntVec2 cell = new IntVec2(x, z);
+                    if (IsValidCell(cell) && IsWithinCircle(centerCell, radius, cell))
                     {
-                        qiGrid[index + (int)element] -= amount;
-                        HandleElementRelations(x, z, -amount, element);
+                        int index = GetIndex(cell, element);
+                        cellElements[index] = Mathf.Max(0, cellElements[index] - amount);
                     }
                 }
             }
         }
 
-        public int GetElementEmitAt(int x, int z, Element element)
+        private bool IsWithinCircle(IntVec2 centerCell, int radius, IntVec2 cell)
         {
-            int gridSize = (int)Math.Sqrt(qiGrid.Length / Enum.GetValues(typeof(Element)).Length);
-            if (x >= 0 && x < gridSize && z >= 0 && z < gridSize)
+            return Mathf.Pow(cell.x - centerCell.x, 2) + Mathf.Pow(cell.z - centerCell.z, 2) <= radius * radius;
+        }
+
+        public int GetElementAt(IntVec2 cell, Element element)
+        {
+            if (IsValidCell(cell))
             {
-                int index = (z * gridSize + x) * Enum.GetValues(typeof(Element)).Length;
-                return qiGrid[index + (int)element];
+                int index = GetIndex(cell, element);
+                return cellElements[index];
             }
             return 0;
         }
 
-        private void HandleElementRelations(int x, int z, int amount, Element element)
+        private bool IsValidCell(IntVec2 cell)
+        {
+            return cell.x >= 0 && cell.x < gridSize && cell.z >= 0 && cell.z < gridSize;
+        }
+
+        private bool HasElements(IntVec2 cell)
+        {
+            int startIndex = (cell.z * gridSize + cell.x) * ElementCount;
+            for (int i = startIndex; i < startIndex + ElementCount; i++)
+            {
+                if (cellElements[i] > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private int CountElements(IntVec2 cell)
+        {
+            int count = 0;
+            int startIndex = (cell.z * gridSize + cell.x) * ElementCount;
+            for (int i = startIndex; i < startIndex + ElementCount; i++)
+            {
+                if (cellElements[i] > 0)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        private Color GetElementColor(Element element, int amount)
         {
             switch (element)
             {
                 case Element.Metal:
-                    ModifyElementAt(x, z, amount, Element.Water);
-                    ModifyElementAt(x, z, -amount, Element.Wood);
-                    break;
+                    return Color.gray;
                 case Element.Water:
-                    ModifyElementAt(x, z, amount, Element.Wood);
-                    ModifyElementAt(x, z, -amount, Element.Fire);
-                    break;
+                    return Color.cyan;
                 case Element.Wood:
-                    ModifyElementAt(x, z, amount, Element.Fire);
-                    ModifyElementAt(x, z, -amount, Element.Earth);
-                    break;
+                    return Color.green;
                 case Element.Fire:
-                    ModifyElementAt(x, z, amount, Element.Earth);
-                    ModifyElementAt(x, z, -amount, Element.Metal);
-                    break;
+                    return Color.red;
                 case Element.Earth:
-                    ModifyElementAt(x, z, amount, Element.Metal);
-                    ModifyElementAt(x, z, -amount, Element.Water);
-                    break;
-            }
-        }
-
-        private void ModifyElementAt(int x, int z, int amount, Element element)
-        {
-            if (amount > 0)
-            {
-                AddElementEmitAt(x, z, 1, amount, element);
-            }
-            else if (amount < 0)
-            {
-                RemoveElementEmitAt(x, z, 1, -amount, element);
-            }
-        }
-
-        private Color GetElementColor(Element element, int qiAmount)
-        {
-            switch (element)
-            {
-                case Element.Metal:
-                    return Color.Lerp(Color.white, Color.gray, (float)qiAmount / 250f);
-                case Element.Water:
-                    return Color.Lerp(Color.white, Color.blue, (float)qiAmount / 250f);
-                case Element.Wood:
-                    return Color.Lerp(Color.white, Color.green, (float)qiAmount / 250f);
-                case Element.Fire:
-                    return Color.Lerp(Color.white, Color.red, (float)qiAmount / 250f);
-                case Element.Earth:
-                    return Color.Lerp(Color.white, Color.yellow, (float)qiAmount / 250f);
+                    return new Color(0.7f, 0.4f, 0f);//brown
                 default:
                     return Color.white;
             }
         }
+        public int CalculateElementValueAt(IntVec2 cell, Element element)
+        {
+            int baseValue = cellElements[GetIndex(cell, element)];
+            int totalValue = baseValue; // Start with the current element value
+
+            foreach (Element sourceElement in Enum.GetValues(typeof(Element)))
+            {
+                if (sourceElement == element) continue; // Skip self
+
+                int sourceIndex = GetIndex(cell, sourceElement);
+                int sourceValue = cellElements[sourceIndex];
+
+                if (sourceValue > 0) // Only affect if the source element value is above zero
+                {
+                    switch (sourceElement)
+                    {
+                        case Element.Metal:
+                            if (element == Element.Water && baseValue > 0)
+                                totalValue += sourceValue;
+                            if (element == Element.Wood && baseValue > 0)
+                                totalValue -= sourceValue;
+                            break;
+                        case Element.Water:
+                            if (element == Element.Wood && baseValue > 0)
+                                totalValue += sourceValue;
+                            if (element == Element.Fire && baseValue > 0)
+                                totalValue -= sourceValue;
+                            break;
+                        case Element.Wood:
+                            if (element == Element.Fire && baseValue > 0)
+                                totalValue += sourceValue;
+                            if (element == Element.Earth && baseValue > 0)
+                                totalValue -= sourceValue;
+                            break;
+                        case Element.Fire:
+                            if (element == Element.Earth && baseValue > 0)
+                                totalValue += sourceValue;
+                            if (element == Element.Metal && baseValue > 0)
+                                totalValue -= sourceValue;
+                            break;
+                        case Element.Earth:
+                            if (element == Element.Metal && baseValue > 0)
+                                totalValue += sourceValue;
+                            if (element == Element.Water && baseValue > 0)
+                                totalValue -= sourceValue;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            return Mathf.Max(0, totalValue); // Ensure non-negative values
+        }
+
+
     }
 }

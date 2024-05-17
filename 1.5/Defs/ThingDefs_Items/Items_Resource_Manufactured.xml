@@ -2,6 +2,204 @@
 <Defs>
 
   <ThingDef ParentName="ResourceBase">
+    <defName>LuminaCore</defName>
+    <label>lumina core</label>
+    <description>The essence of a rare meteorite. Its rare special physical properties make it very valuable.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/Spiritwood</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <soundInteract>Wood_Drop</soundInteract>
+    <soundDrop>Wood_Drop</soundDrop>
+    <statBases>
+      <MarketValue>1000</MarketValue>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>0.4</Mass> 
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.1</DeteriorationRate>
+    </statBases>
+    <burnableByRecipe>false</burnableByRecipe>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <minRewardCount>3</minRewardCount>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <allowedArchonexusCount>50</allowedArchonexusCount>
+	<comps>
+	   <li Class="Ascension.CompProperties_GatherQi">
+		<range>2</range>
+        <amount>35</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>4</range>
+        <amount>12</amount>
+		<element>Metal</element>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>FireEssenceBar</defName>
+    <label>fire essence bar</label>
+    <description>A bar made out of the essence of fire. Constantly heats its surroundings.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/Spiritwood</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <soundInteract>Wood_Drop</soundInteract>
+    <soundDrop>Wood_Drop</soundDrop>
+    <statBases>
+      <MarketValue>250</MarketValue>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>0.4</Mass> 
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.1</DeteriorationRate>
+    </statBases>
+    <burnableByRecipe>false</burnableByRecipe>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <minRewardCount>3</minRewardCount>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <allowedArchonexusCount>50</allowedArchonexusCount>
+	<comps>
+	  <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>30</heatPerSecond>
+      </li>
+	   <li Class="Ascension.CompProperties_GatherQi">
+		<range>2</range>
+        <amount>30</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>3</range>
+        <amount>12</amount>
+		<element>Fire</element>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>IceEssenceBar</defName>
+    <label>ice essence bar</label>
+    <description>A bar made out of the essence of ice. Constantly cools its surroundings.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/Spiritwood</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <soundInteract>Wood_Drop</soundInteract>
+    <soundDrop>Wood_Drop</soundDrop>
+    <statBases>
+      <MarketValue>250</MarketValue>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>0.4</Mass> 
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.1</DeteriorationRate>
+    </statBases>
+    <burnableByRecipe>false</burnableByRecipe>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <minRewardCount>3</minRewardCount>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <allowedArchonexusCount>50</allowedArchonexusCount>
+	<comps>
+	  <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>-30</heatPerSecond>
+      </li>
+	  <li Class="Ascension.CompProperties_GatherQi">
+		<range>2</range>
+        <amount>30</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>3</range>
+        <amount>12</amount>
+		<element>Water</element>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>DragonFeces</defName>
+    <label>dragon feces</label>
+    <description>It's dragon poop. Disgusting.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/Spiritwood</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <soundInteract>Wood_Drop</soundInteract>
+    <soundDrop>Wood_Drop</soundDrop>
+    <statBases>
+      <MarketValue>1000</MarketValue>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>0.4</Mass> 
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.1</DeteriorationRate>
+    </statBases>
+    <burnableByRecipe>false</burnableByRecipe>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <minRewardCount>3</minRewardCount>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <allowedArchonexusCount>50</allowedArchonexusCount>
+	<comps>
+	   <li Class="Ascension.CompProperties_GatherQi">
+		<range>2</range>
+        <amount>90</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>2</range>
+        <amount>3</amount>
+		<element>Earth</element>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>StoneEssence</defName>
+    <label>stone essence</label>
+    <description>The essence of stone.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/Spiritwood</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <soundInteract>Wood_Drop</soundInteract>
+    <soundDrop>Wood_Drop</soundDrop>
+    <statBases>
+      <MarketValue>250</MarketValue>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>0.4</Mass> 
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.1</DeteriorationRate>
+    </statBases>
+    <burnableByRecipe>false</burnableByRecipe>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <minRewardCount>3</minRewardCount>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <allowedArchonexusCount>50</allowedArchonexusCount>
+	<comps>
+	   <li Class="Ascension.CompProperties_GatherQi">
+		<range>2</range>
+        <amount>20</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>3</amount>
+		<element>Earth</element>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
     <defName>Spiritwood</defName>
     <label>spiritwood</label>
     <description>Spiritwood from spirit trees. Unlike normal wood it has Gather Qi and is not flammable.</description>
@@ -30,6 +228,11 @@
 	   <li Class="Ascension.CompProperties_GatherQi">
 		<range>4</range>
         <amount>20</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>3</range>
+        <amount>5</amount>
+		<element>Wood</element>
       </li>
     </comps>
   </ThingDef>

@@ -7,6 +7,7 @@ using Verse;
 using Verse.AI;
 using static RimWorld.PsychicRitualRoleDef;
 using static Verse.SpecificApparelRequirement;
+using Random = System.Random;
 
 namespace Ascension
 {
@@ -29,6 +30,30 @@ namespace Ascension
         public int innerCauldronQi = 0;
 
 
+        public ElementEmitMapComponent.Element element = ElementEmitMapComponent.Element.None;
+
+        public override void PostMake()
+        {
+            base.PostMake();
+            if (element == ElementEmitMapComponent.Element.None)
+            {
+                // Array of possible elements
+                ElementEmitMapComponent.Element[] possibleElements = new ElementEmitMapComponent.Element[]
+                {
+            ElementEmitMapComponent.Element.Water,
+            ElementEmitMapComponent.Element.Fire,
+            ElementEmitMapComponent.Element.Earth,
+            ElementEmitMapComponent.Element.Metal,
+            ElementEmitMapComponent.Element.Wood
+                };
+
+                // Create a new random number generator
+                Random random = new Random();
+
+                // Assign a random element from the array
+                element = possibleElements[random.Next(possibleElements.Length)];
+            }
+        }
         public override bool Visible
         {
             get
@@ -40,7 +65,7 @@ namespace Ascension
         {
             Scribe_Values.Look(ref qiRecoverySpeed, "qiRecoverySpeed");
             Scribe_Values.Look(ref qiRecoverySpeedOffset, "qiRecoverySpeedOffset");
-
+            Scribe_Values.Look(ref element, "element");
             Scribe_Values.Look(ref cultivationSpeedOffset, "cultivationSpeedOffset");
             Scribe_Values.Look(ref cultivationBaseSpeed, "cultivationBaseSpeed");
             Scribe_Values.Look(ref cultivationSpeed, "cultivationSpeed");

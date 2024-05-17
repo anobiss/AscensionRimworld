@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
+  <AS_CurrentElement>Current Element - {ELEMENT}: {AMOUNT} </AS_CurrentElement>
 
+
+
+  <AS_Water>Water</AS_Water>
+  <AS_Wood>Wood</AS_Wood>
+  <AS_Fire>Fire</AS_Fire>
+  <AS_Metal>Metal</AS_Metal>
+  <AS_Earth>Earth</AS_Earth>
+  <AS_None>None</AS_None>
+
+
+
+  <AS_WaterDisplay>WA: {AMOUNT}</AS_WaterDisplay>
+  <AS_WoodDisplay>WO: {AMOUNT}</AS_WoodDisplay>
+  <AS_FireDisplay>F: {AMOUNT}</AS_FireDisplay>
+  <AS_MetalDisplay>M: {AMOUNT}</AS_MetalDisplay>
+  <AS_EarthDisplay>E: {AMOUNT}</AS_EarthDisplay>
+  <AS_NoneDisplay>N: {AMOUNT}</AS_NoneDisplay>
+
+  <AS_ElementEmit>Element Emit</AS_ElementEmit>
+  <AS_ElementEmitRange>Range</AS_ElementEmitRange>
+  <AS_ElementEmitRangeDesc>How far the object with Element Emit permeates its surroundings with its element.</AS_ElementEmitRangeDesc>
+  <AS_ElementEmitAmount>Qi Amount</AS_ElementEmitAmount>
+  <AS_ElementEmitAmountDesc>The amount of the element emitted that the object with Element Emit grants to its surroundings </AS_ElementEmitAmountDesc>
+  <AS_ElementEmitElement>Element</AS_ElementEmitElement>
+  <AS_ElementEmitElementDesc>The element emitted with by the object.</AS_ElementEmitElementDesc>
+  
   <AS_QiPoolBar>{QI} / {MAXQI} Qi</AS_QiPoolBar>
   
    <!-- its only like this for better translation support -->
@@ -38,7 +65,13 @@
   <AS_CSFactorBaseOffset>Base Speed: {BASE} * Offset: {OFFSET}</AS_CSFactorBaseOffset>
   <AS_CSFactorMood> * 0.4 + Mood: {MOOD}</AS_CSFactorMood>
   <AS_CSFactorQiTile> * 1 + Gather Qi Divided by 100: {QITILE}</AS_CSFactorQiTile>
+  
+  <AS_CSFactorElement> * 1 + {ELEMENT} Divided by 100: {AMOUNT}</AS_CSFactorElement>
+  
   <AS_CSFactorsDesc>The factors influencing cultivation speed. </AS_CSFactorsDesc>
+  
+  
+  
   
   <AS_InnerC>Inner Cauldron: {ICQI} / {ICMAX}</AS_InnerC>
   <AS_InnerCDesc>The Inner Cauldron increases a cultivators max Qi by the amount of Qi refined into it.</AS_InnerCDesc>

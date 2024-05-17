@@ -450,21 +450,48 @@ namespace Ascension
                     translatedSpeedFactorText += "AS_CSFactorMood".Translate(pawn.needs.mood.CurLevelPercentage.ToString("0.#").Named("MOOD"));
                 }
                 QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
+                ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
                 int qiTile = 0;
                 if (qiGatherMapComp != null)
                 {
+
                     qiTile = qiGatherMapComp.GetQiGatherAt(pawn.Position.x, pawn.Position.z);
                     if (pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm))
                     {
                         translatedSpeedFactorText += "AS_CSFactorQiTile".Translate((qiTile / 100f).ToString("0.#").Named("QITILE"));
                     }
                 }
-
+                string elementText = "AS_None";
+                if (cultivatorHediff.element == ElementEmitMapComponent.Element.Earth)
+                {
+                    elementText = "AS_Earth";
+                }
+                else if (cultivatorHediff.element == ElementEmitMapComponent.Element.Metal)
+                {
+                    elementText = "AS_Metal";
+                }
+                else if (cultivatorHediff.element == ElementEmitMapComponent.Element.Water)
+                {
+                    elementText = "AS_Water";
+                }
+                else if (cultivatorHediff.element == ElementEmitMapComponent.Element.Fire)
+                {
+                    elementText = "AS_Fire";
+                }
+                else if (cultivatorHediff.element == ElementEmitMapComponent.Element.Wood)
+                {
+                    elementText = "AS_Wood";
+                }
+                if (elementEmitMapComp != null)
+                {
+                    translatedSpeedFactorText += "AS_CSFactorElement".Translate(elementText.Translate().Named("ELEMENT"),(1+(elementEmitMapComp.CalculateElementValueAt(new IntVec2(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z), cultivatorHediff.element)/100f)).ToString("0.#").Named("AMOUNT"));
+                }
                 Widgets.Label(SpeedFactorsRect, translatedSpeedFactorText);
 
                 if (qiGatherMapComp != null)
                 {
-                    Widgets.Label(QiTileRect, "AS_QiTile".Translate(qiTile.Named("QITILE")));
+                    
+                    Widgets.Label(QiTileRect, "AS_CurrentElement".Translate(elementText.Translate().Named("ELEMENT"), elementEmitMapComp.CalculateElementValueAt(new IntVec2(pawn.Position.x, pawn.Position.z), cultivatorHediff.element).Named("AMOUNT")) +"AS_QiTile".Translate(qiTile.Named("QITILE")));
                     innerCRect.y += QiTileRect.height;
                 }
 

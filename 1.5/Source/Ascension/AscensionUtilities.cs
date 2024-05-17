@@ -100,6 +100,8 @@ namespace Ascension
                     cultivationSpeed *= (1 + qiTile / 100);//its 1 plus 1% qitile
                     //Log.Message("essence realm cultivation speed is" + cultivationSpeed);
                 }
+                ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
+                cultivationSpeed *= 1 + (elementEmitMapComp.CalculateElementValueAt(new IntVec2(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z), cultivatorHediff.element) / 100f);
                 cultivatorHediff.cultivationSpeed = cultivationSpeed;
             }
             return cultivationSpeed;

@@ -38,7 +38,38 @@ namespace Ascension
                 reportText: "AS_ElementEmitRangeDesc".Translate(),
                 displayPriorityWithinCategory: 200
             );
-
+            string elementText = "AS_None";
+            if (Props.element == "Wood")
+            {
+                elementText = "AS_Wood";
+            }
+            else if (Props.element == "Fire")
+            {
+                elementText = "AS_Fire";
+            }
+            else if (Props.element == "Earth")
+            {
+                elementText = "AS_Earth";
+            }
+            else if (Props.element == "Metal")
+            {
+                elementText = "AS_Metal";
+            }
+            else if (Props.element == "Water")
+            {
+                elementText = "AS_Water";
+            }
+            else if (Props.element == "None")
+            {
+                elementText = "AS_None";
+            }
+            elementText = elementText.Translate();
+            yield return new StatDrawEntry(
+              category: AscensionDefOf.ElementEmit,
+              label: "AS_ElementEmitElement".Translate(), valueString: elementText,
+              reportText: "AS_ElementEmitElementDesc".Translate(),
+              displayPriorityWithinCategory: 200
+            );
 
         }
 
@@ -46,13 +77,13 @@ namespace Ascension
         {
 
             ElementEmitMapComponent qiGatherMapComp = parent.Map.GetComponent<ElementEmitMapComponent>();
-            qiGatherMapComp.AddElementEmitAt(parent.Position.x, parent.Position.z, Props.range, Props.amount, GetPropsElement(Props.element));
+            qiGatherMapComp.AddElementAt(new IntVec2 (parent.Position.x, parent.Position.z), Props.range, Props.amount, GetPropsElement(Props.element));
             base.PostSpawnSetup(respawningAfterLoad);
         }
         public override void PostDeSpawn(Map map)
         {
             ElementEmitMapComponent qiGatherMapComp = map.GetComponent<ElementEmitMapComponent>();
-            qiGatherMapComp.RemoveElementEmitAt(parent.Position.x, parent.Position.z, Props.range, Props.amount, GetPropsElement(Props.element));
+            qiGatherMapComp.RemoveElementAt(new IntVec2 (parent.Position.x, parent.Position.z), Props.range, Props.amount, GetPropsElement(Props.element));
             base.PostDeSpawn(map);
         }
         private static ElementEmitMapComponent.Element GetPropsElement(string elementText)
