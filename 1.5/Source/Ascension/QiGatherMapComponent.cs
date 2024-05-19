@@ -13,6 +13,8 @@ namespace Ascension
     // Updates to the grid should work almost exactly like the GlowGrid.
     public class QiGatherMapComponent : MapComponent
     {
+
+
         public int[] qiGrid; // 1D array acting as the QiGrid
 
         // Override MapComponentOnGUI to draw Qi amounts on the map

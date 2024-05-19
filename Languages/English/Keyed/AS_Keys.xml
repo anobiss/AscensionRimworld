@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
+  <AS_ChangePriority>Change Priority</AS_ChangePriority>
+  <AS_ChangePriorityDesc>Change the priority of the cultivation spot.</AS_ChangePriorityDesc>
+
+  <AS_ChangeRealm>Change Realm</AS_ChangeRealm>
+  <AS_ChangeRealmDesc>Change the target realm of the cultivation spot.</AS_ChangeRealmDesc>
+
+  <AS_ChangeElement>Change Element</AS_ChangeElement>
+  <AS_ChangeElementDesc>Change the target element of the cultivation spot.</AS_ChangeElementDesc>
+
   <AS_CultivationSpotInspect>Priority: {PRIORITY}, Realm Type: {REALM}, Element Type: {ELEMENT}</AS_CultivationSpotInspect>
   
   <AS_Any>Any</AS_Any>

@@ -415,7 +415,7 @@ namespace Ascension
                 DrawPawnRealm(realmRect, realmHediff);
                 if (CanControl(pawn))
                 {
-                    if (realmHediff.progress >= realmHediff.maxProgress && realmHediff.Severity < 7)// draw body breakthrough
+                    if (realmHediff.progress >= realmHediff.maxProgress)// draw body breakthrough dont check severity since it breaksthrough into essence at max anyways
                     {
                         DrawRealmBreakthrough(pawn, breakthroughRect, realmHediff); //draw the breakthrough button when at 100%
                         meditationRect.y += meditationRect.height;

@@ -104,6 +104,10 @@ namespace Ascension
                 cultivationSpeed *= 1 + (elementEmitMapComp.CalculateElementValueAt(new IntVec2(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z), cultivatorHediff.element) / 100f);
                 cultivatorHediff.cultivationSpeed = cultivationSpeed;
             }
+            if (cultivationSpeed < 0.1f)//slowest is 0.1.
+            {
+                cultivationSpeed = 0.1f;
+            }
             return cultivationSpeed;
         }
 
@@ -236,6 +240,7 @@ namespace Ascension
                     cultivatorHediff.innerCauldronQi += amount;
                 }
             }
+            UpdateQiMax(pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff);
         }
 
 

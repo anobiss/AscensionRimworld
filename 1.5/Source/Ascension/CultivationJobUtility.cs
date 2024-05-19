@@ -11,45 +11,52 @@ namespace Ascension
 {
     public class CultivationJobUtility
     {
-        public static Thing FindCultivationSpot(Pawn pawn)//returns the cultivation spot a pawn should be using, if none returns the pawn itself.
+        public static Thing FindCultivationSpot(Pawn pawn)
         {
-            Thing cultivationSpotThing = pawn;//if no cultivation spot just cultivate where the pawn currently is
-            if (pawn.Faction == Faction.OfPlayer)
-            {
-                int lastCultSpotPriority = 0;
-                IReadOnlyList<Pawn> readOnlyList = pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction);
-                foreach (Building building in pawn.Map.listerBuildings.allBuildingsColonist)
-                {
-                    if (!pawn.MapHeld.reservationManager.IsReserved(building))
-                    {
-                        if (building.HasComp<CompCultivationSpot>())
-                        {
-                            CompCultivationSpot cultivationSpot = building.GetComp<CompCultivationSpot>();
-                            if (pawn.CanReach(building.Position, PathEndMode.OnCell, Danger.None))
-                            {
-                                if (lastCultSpotPriority < cultivationSpot.priority)
-                                {
-                                    if (cultivationSpot.elementType == "Any")
-                                    {
-                                        lastCultSpotPriority = cultivationSpot.priority;
-                                        cultivationSpotThing = building;
-                                        break;
-                                    }
+            bool isEssenceRealm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) != null;
+            CultivationMapComponent qiGatherMapComp = pawn.Map.GetComponent<CultivationMapComponent>();
+            Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
 
-                                }
-                            }
-                            else
-                            {
-                                continue;
-                            }
-                        }
-                    }
-                    else
+            if (qiGatherMapComp == null || cultivatorHediff == null || pawn.Faction != Faction.OfPlayer)
+            {
+                return pawn;
+            }
+
+            Thing cultivationSpotThing = pawn;
+            int lastCultSpotPriority = 0;
+
+            foreach (CompCultivationSpot cultivationSpot in qiGatherMapComp.CultivationSpots)
+            {
+                if (pawn.MapHeld.reservationManager.IsReserved(cultivationSpot.parent) ||
+                    !pawn.CanReach(cultivationSpot.parent.Position, PathEndMode.OnCell, Danger.None))
+                {
+                    continue;
+                }
+
+                bool validSpot = false;
+                if (cultivationSpot.priority > lastCultSpotPriority)
+                {
+                    switch (cultivationSpot.realmType)
                     {
-                        continue;
+                        case "Body" when !isEssenceRealm:
+                        case "Essence" when isEssenceRealm:
+                        case "Any":
+                            if (cultivationSpot.elementType == "Any" ||
+                                cultivationSpot.elementType == cultivatorHediff.element.ToString())
+                            {
+                                validSpot = true;
+                            }
+                            break;
                     }
                 }
+
+                if (validSpot)
+                {
+                    lastCultSpotPriority = cultivationSpot.priority;
+                    cultivationSpotThing = cultivationSpot.parent;
+                }
             }
+
             return cultivationSpotThing;
         }
 

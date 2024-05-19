@@ -13,5 +13,10 @@ namespace Ascension
     {
         public static readonly Texture2D UIBreakthrough = ContentFinder<Texture2D>.Get("UI/Abilities/Breakthrough", true);
         public static readonly Texture2D UIQiIcon = ContentFinder<Texture2D>.Get("UI/Icons/QiIcon", true);
+
+        public static readonly Texture2D ChangePriority = ContentFinder<Texture2D>.Get("UI/Commands/ChangePriority", true);
+        public static readonly Texture2D ChangeRealm = ContentFinder<Texture2D>.Get("UI/Commands/ChangeRealm", true);
+        public static readonly Texture2D ChangeElement = ContentFinder<Texture2D>.Get("UI/Commands/ChangeElement", true);
+
     }
 }

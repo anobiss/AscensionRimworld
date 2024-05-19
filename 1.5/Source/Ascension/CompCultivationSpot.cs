@@ -13,15 +13,30 @@ namespace Ascension
 {
     public class CompCultivationSpot : ThingComp
     {
-
         public CompProperties_CultivationSpot Props => (CompProperties_CultivationSpot)props;
         public int priority;
         public string realmType;
         public string elementType;
         //display current priority, realm and element type here
+        public override void PostSpawnSetup(bool respawningAfterLoad)
+        {
+            if (!respawningAfterLoad)
+            {
+                priority = Props.priority;
+                realmType = Props.realmType;
+                elementType = Props.elementType;
+            }
+            CultivationMapComponent cultivationMapComp = parent.MapHeld.GetComponent<CultivationMapComponent>();
+            cultivationMapComp.CultivationSpots.Add(this);
 
-
-
+            base.PostSpawnSetup(respawningAfterLoad);
+        }
+        public override void PostDeSpawn(Map map)
+        {
+            CultivationMapComponent cultivationMapComp = map.GetComponent<CultivationMapComponent>();
+            cultivationMapComp.CultivationSpots.Remove(this);
+            base.PostDeSpawn(map);
+        }
         public override string CompInspectStringExtra()
         {
             string realmTypeText = "AS_Any";//any is "Any"
@@ -59,16 +74,91 @@ namespace Ascension
             return "AS_CultivationSpotInspect".Translate(priority.ToString().Named("PRIORITY"), realmTypeText.Translate().Named("REALM"), elementText.Translate().Named("ELEMENT"));
         }
 
-        public override void PostSpawnSetup(bool respawningAfterLoad)
+        private void changePriority()
         {
-            base.PostSpawnSetup(respawningAfterLoad);
-            if (!respawningAfterLoad)
+            priority = (priority + 1) % 8;
+        }
+        private void changeRealmType()
+        {
+            switch (realmType)
             {
-                priority = Props.priority;
-                realmType = Props.realmType;
-                elementType = Props.elementType;
+                case "Any":
+                    realmType = "Body";
+                    break;
+                case "Body":
+                    realmType = "Essence";
+                    break;
+                case "Essence":
+                    realmType = "Any";
+                    break;
             }
         }
+        private void changeElementType()
+        {
+            switch (elementType)
+            {
+                case "Any":
+                    elementType = "Earth";
+                    break;
+                case "Earth":
+                    elementType = "Metal";
+                    break;
+                case "Metal":
+                    elementType = "Water";
+                    break;
+                case "Water":
+                    elementType = "Wood";
+                    break;
+                case "Wood":
+                    elementType = "Fire";
+                    break;
+                case "Fire":
+                    elementType = "Any";
+                    break;
+            }
+        }
+        public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        {
+            Command_Action commandP = new Command_Action()
+            {
+                defaultLabel = "AS_ChangePriority".Translate(),
+                defaultDesc = "AS_ChangePriorityDesc".Translate(),
+                Order = 5f,
+                icon = AscensionTextures.ChangePriority,
+            };
+            commandP.action = delegate
+            {
+                changePriority();
+            };
+            yield return commandP;
+
+            Command_Action commandR = new Command_Action()
+            {
+                defaultLabel = "AS_ChangeRealm".Translate(),
+                defaultDesc = "AS_ChangeRealmDesc".Translate(),
+                Order = 6f,
+                icon = AscensionTextures.ChangeRealm,
+            };
+            commandR.action = delegate
+            {
+                changeRealmType();
+            };
+            yield return commandR;
+
+            Command_Action commandE = new Command_Action()
+            {
+                defaultLabel = "AS_ChangeElement".Translate(),
+                defaultDesc = "AS_ChangeElementDesc".Translate(),
+                Order = 7f,
+                icon = AscensionTextures.ChangeRealm,
+            };
+            commandE.action = delegate
+            {
+                changeElementType();
+            };
+            yield return commandE;
+        }
+
         public override void PostExposeData()
         {
             base.PostExposeData();
