@@ -27,11 +27,15 @@ namespace Ascension
                             CompCultivationSpot cultivationSpot = building.GetComp<CompCultivationSpot>();
                             if (pawn.CanReach(building.Position, PathEndMode.OnCell, Danger.None))
                             {
-                                if (lastCultSpotPriority < cultivationSpot.Props.priority)
+                                if (lastCultSpotPriority < cultivationSpot.priority)
                                 {
-                                    lastCultSpotPriority = cultivationSpot.Props.priority;
-                                    cultivationSpotThing = building;
-                                    break;
+                                    if (cultivationSpot.elementType == "Any")
+                                    {
+                                        lastCultSpotPriority = cultivationSpot.priority;
+                                        cultivationSpotThing = building;
+                                        break;
+                                    }
+
                                 }
                             }
                             else

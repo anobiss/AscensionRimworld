@@ -48,34 +48,8 @@ namespace Ascension
                             if (amount > 0)
                             {
                                 Color color = GetElementColor(element, amount);
-                                string guiText = $"{element}:{amount}";
-                                if (element == Element.Fire)
-                                {
-                                    guiText = "AS_FireDisplay";
-                                }
-                                else if (element == Element.Earth)
-                                {
-                                    guiText = "AS_EarthDisplay";
-                                }
-                                else if (element == Element.Metal)
-                                {
-                                    guiText = "AS_MetalDisplay";
-                                }
-                                else if (element == Element.Water)
-                                {
-                                    guiText = "AS_WaterDisplay";
-                                }
-                                else if (element == Element.Wood)
-                                {
-                                    guiText = "AS_WoodDisplay";
-                                }
-                                else if (element == Element.None)
-                                {
-                                    guiText = "AS_NoneDisplay";
-                                }
-                                guiText = guiText.Translate(amount.Named("AMOUNT"));
                                 Vector3 labelPos = (Vector3)GenMapUI.LabelDrawPosFor(new IntVec3(cell.x, 0, cell.z)) + Vector3.up * yOffset;
-                                GenMapUI.DrawThingLabel(labelPos, guiText, color);
+                                GenMapUI.DrawThingLabel(labelPos, amount.ToString(), color);
                                 yOffset += 10f; // Adjust vertical position for next element
                             }
                         }
@@ -238,7 +212,7 @@ namespace Ascension
                 }
             }
 
-            return Mathf.Max(0, totalValue); // Ensure non-negative values
+            return totalValue;
         }
 
 

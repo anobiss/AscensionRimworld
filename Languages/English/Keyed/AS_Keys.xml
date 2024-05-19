@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
+  <AS_CultivationSpotInspect>Priority: {PRIORITY}, Realm Type: {REALM}, Element Type: {ELEMENT}</AS_CultivationSpotInspect>
+  
+  <AS_Any>Any</AS_Any>
+  <AS_CSEssenceRealm>Essence</AS_CSEssenceRealm>
+  <AS_CSBodyRealm>Body</AS_CSBodyRealm>
+  
   <AS_CurrentElement>Current Element - {ELEMENT}: {AMOUNT} </AS_CurrentElement>
 
-
-
+    <!-- element names -->
   <AS_Water>Water</AS_Water>
   <AS_Wood>Wood</AS_Wood>
   <AS_Fire>Fire</AS_Fire>
@@ -12,7 +17,7 @@
   <AS_None>None</AS_None>
 
 
-
+    <!-- display for elements -->
   <AS_WaterDisplay>WA: {AMOUNT}</AS_WaterDisplay>
   <AS_WoodDisplay>WO: {AMOUNT}</AS_WoodDisplay>
   <AS_FireDisplay>F: {AMOUNT}</AS_FireDisplay>

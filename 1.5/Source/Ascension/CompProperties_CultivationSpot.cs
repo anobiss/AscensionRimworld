@@ -16,6 +16,10 @@ namespace Ascension
         public Pawn spotUser;//this is assigned to whoever is occupying it
 
         public int priority = 1;
+
+        public string elementType = "Any";
+
+        public string realmType = "Any";
         public CompProperties_CultivationSpot()
         {
             compClass = typeof(CompCultivationSpot);
