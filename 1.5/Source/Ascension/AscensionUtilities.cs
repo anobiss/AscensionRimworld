@@ -333,7 +333,7 @@ namespace Ascension
         //    }
         //    return hediff_Realm;
         //}
-        public static readonly int[] maxProgressionRatesBody = { 100, 500, 700, 1200, 2000,4000, 7000}; // max qi offset to set to when advancing. first is tier 2
+        public static readonly int[] maxProgressionRatesBody = { 100, 200, 420, 500, 700, 1200, 2400}; // max qi offset to set to when advancing. first is tier 2
         public static readonly int[] maxProgressionRatesEssence = { 100, 1200, 7000, 42000, 12000, 240000, 1000000 }; // max qi offset to set to when advancing. first is tier 2
         public static void UpdateMaxProg(Realm_Hediff realmHediff)
         {
