@@ -6,8 +6,8 @@
     <label>lumina core</label>
     <description>The essence of a rare meteorite. Its rare special physical properties make it very valuable.</description>
     <graphicData>
-      <texPath>Things/Item/Resource/Spiritwood</texPath>
-      <graphicClass>Graphic_StackCount</graphicClass>
+      <texPath>Things/Item/Treasure/LuminaCore</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <soundInteract>Wood_Drop</soundInteract>
     <soundDrop>Wood_Drop</soundDrop>
@@ -16,16 +16,14 @@
       <MaxHitPoints>150</MaxHitPoints>
       <Mass>0.4</Mass> 
       <Flammability>0.0</Flammability>
-      <DeteriorationRate>0.1</DeteriorationRate>
+      <DeteriorationRate>0.0</DeteriorationRate>
     </statBases>
     <burnableByRecipe>false</burnableByRecipe>
     <healthAffectsPrice>false</healthAffectsPrice>
-    <minRewardCount>3</minRewardCount>
     <thingCategories>
       <li>ResourcesRaw</li>
     </thingCategories>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <allowedArchonexusCount>50</allowedArchonexusCount>
 	<comps>
 	   <li Class="Ascension.CompProperties_GatherQi">
 		<range>2</range>
@@ -37,6 +35,14 @@
 		<element>Metal</element>
       </li>
     </comps>
+	<tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <stackLimit>1</stackLimit>
+	<minRewardCount>2</minRewardCount>
+	<tradeability>All</tradeability>
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>3</allowedArchonexusCount>
   </ThingDef>
 
   <ThingDef ParentName="ResourceBase">
@@ -44,8 +50,8 @@
     <label>fire essence bar</label>
     <description>A bar made out of the essence of fire. Constantly heats its surroundings.</description>
     <graphicData>
-      <texPath>Things/Item/Resource/Spiritwood</texPath>
-      <graphicClass>Graphic_StackCount</graphicClass>
+      <texPath>Things/Item/Treasure/FireEssenceBar</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <soundInteract>Wood_Drop</soundInteract>
     <soundDrop>Wood_Drop</soundDrop>
@@ -54,16 +60,14 @@
       <MaxHitPoints>150</MaxHitPoints>
       <Mass>0.4</Mass> 
       <Flammability>0.0</Flammability>
-      <DeteriorationRate>0.1</DeteriorationRate>
+      <DeteriorationRate>0.0</DeteriorationRate>
     </statBases>
     <burnableByRecipe>false</burnableByRecipe>
     <healthAffectsPrice>false</healthAffectsPrice>
-    <minRewardCount>3</minRewardCount>
     <thingCategories>
       <li>ResourcesRaw</li>
     </thingCategories>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <allowedArchonexusCount>50</allowedArchonexusCount>
 	<comps>
 	  <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
@@ -79,6 +83,14 @@
 		<element>Fire</element>
       </li>
     </comps>
+	<tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <stackLimit>1</stackLimit>
+	<minRewardCount>2</minRewardCount>
+	<tradeability>All</tradeability>
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>5</allowedArchonexusCount>
   </ThingDef>
 
   <ThingDef ParentName="ResourceBase">
@@ -86,8 +98,8 @@
     <label>ice essence bar</label>
     <description>A bar made out of the essence of ice. Constantly cools its surroundings.</description>
     <graphicData>
-      <texPath>Things/Item/Resource/Spiritwood</texPath>
-      <graphicClass>Graphic_StackCount</graphicClass>
+      <texPath>Things/Item/Treasure/IceEssenceBar</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <soundInteract>Wood_Drop</soundInteract>
     <soundDrop>Wood_Drop</soundDrop>
@@ -96,16 +108,14 @@
       <MaxHitPoints>150</MaxHitPoints>
       <Mass>0.4</Mass> 
       <Flammability>0.0</Flammability>
-      <DeteriorationRate>0.1</DeteriorationRate>
+      <DeteriorationRate>0.0</DeteriorationRate>
     </statBases>
     <burnableByRecipe>false</burnableByRecipe>
     <healthAffectsPrice>false</healthAffectsPrice>
-    <minRewardCount>3</minRewardCount>
     <thingCategories>
       <li>ResourcesRaw</li>
     </thingCategories>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <allowedArchonexusCount>50</allowedArchonexusCount>
 	<comps>
 	  <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
@@ -121,6 +131,14 @@
 		<element>Water</element>
       </li>
     </comps>
+	<tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <stackLimit>1</stackLimit>
+	<minRewardCount>2</minRewardCount>
+	<tradeability>All</tradeability>
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>5</allowedArchonexusCount>
   </ThingDef>
 
   <ThingDef ParentName="ResourceBase">
@@ -138,16 +156,14 @@
       <MaxHitPoints>150</MaxHitPoints>
       <Mass>0.4</Mass> 
       <Flammability>0.0</Flammability>
-      <DeteriorationRate>0.1</DeteriorationRate>
+      <DeteriorationRate>0.0</DeteriorationRate>
     </statBases>
     <burnableByRecipe>false</burnableByRecipe>
     <healthAffectsPrice>false</healthAffectsPrice>
-    <minRewardCount>3</minRewardCount>
     <thingCategories>
       <li>ResourcesRaw</li>
     </thingCategories>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <allowedArchonexusCount>50</allowedArchonexusCount>
 	<comps>
 	   <li Class="Ascension.CompProperties_GatherQi">
 		<range>2</range>
@@ -159,6 +175,14 @@
 		<element>Earth</element>
       </li>
     </comps>
+	<tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <stackLimit>1</stackLimit>
+	<minRewardCount>1</minRewardCount>
+	<tradeability>Sellable</tradeability>
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>7</allowedArchonexusCount>
   </ThingDef>
 
   <ThingDef ParentName="ResourceBase">
@@ -166,8 +190,8 @@
     <label>stone essence</label>
     <description>The essence of stone.</description>
     <graphicData>
-      <texPath>Things/Item/Resource/Spiritwood</texPath>
-      <graphicClass>Graphic_StackCount</graphicClass>
+      <texPath>Things/Item/Treasure/StoneEssence</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <soundInteract>Wood_Drop</soundInteract>
     <soundDrop>Wood_Drop</soundDrop>
@@ -176,16 +200,14 @@
       <MaxHitPoints>150</MaxHitPoints>
       <Mass>0.4</Mass> 
       <Flammability>0.0</Flammability>
-      <DeteriorationRate>0.1</DeteriorationRate>
+      <DeteriorationRate>0.0</DeteriorationRate>
     </statBases>
     <burnableByRecipe>false</burnableByRecipe>
     <healthAffectsPrice>false</healthAffectsPrice>
-    <minRewardCount>3</minRewardCount>
     <thingCategories>
       <li>ResourcesRaw</li>
     </thingCategories>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <allowedArchonexusCount>50</allowedArchonexusCount>
 	<comps>
 	   <li Class="Ascension.CompProperties_GatherQi">
 		<range>2</range>
@@ -197,12 +219,20 @@
 		<element>Earth</element>
       </li>
     </comps>
+	<tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <stackLimit>1</stackLimit>
+	<minRewardCount>4</minRewardCount>
+	<tradeability>All</tradeability>
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>10</allowedArchonexusCount>
   </ThingDef>
 
   <ThingDef ParentName="ResourceBase">
     <defName>Spiritwood</defName>
     <label>spiritwood</label>
-    <description>Spiritwood from spirit trees. Unlike normal wood it has Gather Qi and is not flammable.</description>
+    <description>Spiritwood from spirit trees. Unlike normal wood it has Gather Qi, does not deteriorate, and is not flammable.</description>
     <graphicData>
       <texPath>Things/Item/Resource/Spiritwood</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
@@ -214,16 +244,14 @@
       <MaxHitPoints>150</MaxHitPoints>
       <Mass>0.4</Mass> 
       <Flammability>0.0</Flammability>
-      <DeteriorationRate>0.1</DeteriorationRate>
+      <DeteriorationRate>0.0</DeteriorationRate>
     </statBases>
     <burnableByRecipe>true</burnableByRecipe>
     <healthAffectsPrice>false</healthAffectsPrice>
-    <minRewardCount>3</minRewardCount>
     <thingCategories>
       <li>ResourcesRaw</li>
     </thingCategories>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <allowedArchonexusCount>50</allowedArchonexusCount>
 	<comps>
 	   <li Class="Ascension.CompProperties_GatherQi">
 		<range>4</range>
@@ -235,6 +263,14 @@
 		<element>Wood</element>
       </li>
     </comps>
+	<tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <stackLimit>3</stackLimit>
+	<minRewardCount>3</minRewardCount>
+	<tradeability>All</tradeability>
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>50</allowedArchonexusCount>
   </ThingDef>
     <!--
       Scrolls

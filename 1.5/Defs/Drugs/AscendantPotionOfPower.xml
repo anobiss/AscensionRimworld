@@ -15,7 +15,6 @@
       <Mass>0.1</Mass>
     </statBases>
     <techLevel>Ultra</techLevel>
-    <minRewardCount>1</minRewardCount>
     <ingestible>
       <drugCategory>Medical</drugCategory>
       <outcomeDoers>
@@ -38,6 +37,7 @@
     <tradeTags>
       <li>ExoticMisc</li>
     </tradeTags>
+	<minRewardCount>1</minRewardCount>
 	<tradeability>Sellable</tradeability>
     <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
     <allowedArchonexusCount>1</allowedArchonexusCount>

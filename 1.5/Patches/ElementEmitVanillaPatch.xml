@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
-  <Operation Class="PatchOperationInsert">
-    <xpath>Defs/BiomeDef[defName="Steel"]/smeltable</xpath>
+      
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="SteamGeyser"]</xpath>
+    <order>Append</order>
+    <value>
+	<comps>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>2</range>
+        <amount>3</amount>
+		<element>Water</element>
+      </li>
+    </comps>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Steel"]</xpath>
+    <order>Append</order>
+    <value>
+	<comps>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>0</range>
+        <amount>1</amount>
+		<element>Metal</element>
+      </li>
+    </comps>
+    </value>
+  </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Silver"]</xpath>
     <order>Append</order>
     <value>
 	<comps>
@@ -14,4 +43,107 @@
     </value>
   </Operation>
   
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Gold"]</xpath>
+    <order>Append</order>
+    <value>
+	<comps>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>0</range>
+        <amount>3</amount>
+		<element>Metal</element>
+      </li>
+    </comps>
+    </value>
+  </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plasteel"]</xpath>
+    <order>Append</order>
+    <value>
+	<comps>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>0</range>
+        <amount>3</amount>
+		<element>Metal</element>
+      </li>
+    </comps>
+    </value>
+  </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Uranium"]</xpath>
+    <order>Append</order>
+    <value>
+	<comps>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>0</range>
+        <amount>3</amount>
+		<element>Metal</element>
+      </li>
+    </comps>
+    </value>
+  </Operation>
+  
+  
+  
+  
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Jade"]</xpath>
+    <order>Append</order>
+    <value>
+	<comps>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>3</amount>
+		<element>Earth</element>
+      </li>
+    </comps>
+    </value>
+  </Operation>
+  
+  
+  
+  
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="WoodLog"]</xpath>
+    <order>Append</order>
+    <value>
+	<comps>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>0</range>
+        <amount>1</amount>
+		<element>Wood</element>
+      </li>
+    </comps>
+    </value>
+  </Operation>
+
+	  
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Cloth"]/comps</xpath>
+    <order>Append</order>
+    <value>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>0</range>
+        <amount>1</amount>
+		<element>Wood</element>
+      </li>
+    </value>
+  </Operation>
+  
+
+  
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="DevilstrandCloth"]/comps</xpath>
+    <order>Append</order>
+    <value>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>0</range>
+        <amount>1</amount>
+		<element>Fire</element>
+      </li>
+    </value>
+  </Operation>
 </Patch>
