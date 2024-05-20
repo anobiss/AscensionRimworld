@@ -74,6 +74,7 @@
     <Compile Include="CompCultivationSpot.cs" />
     <Compile Include="CompElementEmit.cs" />
     <Compile Include="CompGatherQi.cs" />
+    <Compile Include="CompConstantHeatPusher.cs" />
     <Compile Include="CompProperties_AbilityBodyMelee.cs" />
     <Compile Include="CompProperties_AbilityHediffToggle.cs" />
     <Compile Include="CompProperties_AbilityQiCost.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="CompProperties_AbilityHediffGiver.cs" />
     <Compile Include="CompProperties_AbilityManifestSpiritSword.cs" />
     <Compile Include="CompProperties_AwfulExplosive.cs" />
+    <Compile Include="CompProperties_ConstantHeatPusher.cs" />
     <Compile Include="CompProperties_CultivationSpot.cs" />
     <Compile Include="CompProperties_ElementEmit.cs" />
     <Compile Include="CompProperties_GatherQi.cs" />

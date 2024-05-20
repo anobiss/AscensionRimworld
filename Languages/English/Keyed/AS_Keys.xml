@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
+  <AS_SpiritTreeConversion>Spirit Tree Conversion</AS_SpiritTreeConversion>
+  <AS_SpiritTreeConversionDesc>A sudden surge of Qi has converted a tree into a spirit tree.</AS_SpiritTreeConversionDesc>
+
+
+
   <AS_ChangePriority>Change Priority</AS_ChangePriority>
   <AS_ChangePriorityDesc>Change the priority of the cultivation spot.</AS_ChangePriorityDesc>
 

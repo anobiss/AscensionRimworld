@@ -48,13 +48,14 @@
   <ThingDef ParentName="ResourceBase">
     <defName>FireEssenceBar</defName>
     <label>fire essence bar</label>
-    <description>A bar made out of the essence of fire. Constantly heats its surroundings.</description>
+    <description>A bar made out of the essence of fire. Constantly heats its surroundings to no practical limit. Can lead to deadly fires if not stored properly.</description>
     <graphicData>
       <texPath>Things/Item/Treasure/FireEssenceBar</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <soundInteract>Wood_Drop</soundInteract>
     <soundDrop>Wood_Drop</soundDrop>
+    <tickerType>Normal</tickerType>
     <statBases>
       <MarketValue>250</MarketValue>
       <MaxHitPoints>150</MaxHitPoints>
@@ -69,9 +70,8 @@
     </thingCategories>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
 	<comps>
-	  <li Class="CompProperties_HeatPusher">
-        <compClass>CompHeatPusherPowered</compClass>
-        <heatPerSecond>30</heatPerSecond>
+	  <li Class="Ascension.CompProperties_ConstantHeatPusher">
+        <heat>30</heat>
       </li>
 	   <li Class="Ascension.CompProperties_GatherQi">
 		<range>2</range>
@@ -96,7 +96,7 @@
   <ThingDef ParentName="ResourceBase">
     <defName>IceEssenceBar</defName>
     <label>ice essence bar</label>
-    <description>A bar made out of the essence of ice. Constantly cools its surroundings.</description>
+    <description>A bar made out of the essence of ice. Constantly cools its surroundings to no practical limit. Can lead to deadly freezes if not stored properly.</description>
     <graphicData>
       <texPath>Things/Item/Treasure/IceEssenceBar</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -116,10 +116,10 @@
       <li>ResourcesRaw</li>
     </thingCategories>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <tickerType>Normal</tickerType>
 	<comps>
-	  <li Class="CompProperties_HeatPusher">
-        <compClass>CompHeatPusherPowered</compClass>
-        <heatPerSecond>-30</heatPerSecond>
+	  <li Class="Ascension.CompProperties_ConstantHeatPusher">
+        <heat>-30</heat>
       </li>
 	  <li Class="Ascension.CompProperties_GatherQi">
 		<range>2</range>

@@ -7,6 +7,8 @@ namespace Ascension
     [DefOf]
     public static class AscensionDefOf
     {
+
+
         //misc stuffs
         public static Verse.HediffDef SpiritSwordFusion;
         public static HediffDef QiPool;
