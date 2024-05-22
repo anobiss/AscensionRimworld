@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-
   <ResearchProjectDef>
     <defName>QiManipulation</defName>
-    <label>Qi Manipulation</label>
+    <label>qi manipulation</label>
     <description>Make spirit stones from organics, qi cushions, and build Soul Cauldrons.</description>
     <baseCost>777</baseCost>
     <techLevel>Neolithic</techLevel>
@@ -14,21 +13,21 @@
 
   <ResearchProjectDef>
     <defName>GoldenPillProduction</defName>
-    <label>Golden Pill Production</label>
+    <label>golden pill production</label>
     <description>Produce Golden Pills.</description>
     <baseCost>7777</baseCost>
     <techLevel>Medieval</techLevel>
 	<tab>Ascension</tab>
     <prerequisites>
-      <li>QiManipulation</li>
+      <li>BasicPillProduction</li>
     </prerequisites>
-    <researchViewX>1.00</researchViewX>
-    <researchViewY>0.20</researchViewY>
+  <researchViewX>2.50</researchViewX>
+  <researchViewY>0.20</researchViewY>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
     <defName>AscensionPillProduction</defName>
-    <label>Ascension Pill Production</label>
+    <label>Ascension pill production</label>
     <description>Produce Ascension Pills.</description>
     <baseCost>7777</baseCost>
     <techLevel>Medieval</techLevel>
@@ -36,13 +35,41 @@
     <prerequisites>
       <li>GoldenPillProduction</li>
     </prerequisites>
-    <researchViewX>2.00</researchViewX>
-    <researchViewY>0.20</researchViewY>
+  <researchViewX>3.50</researchViewX>
+  <researchViewY>0.20</researchViewY>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
+    <defName>EssenceRefinement</defName>
+    <label>Essence refinement</label>
+    <description>Refine fire and ice essence ores into their respective bars.</description>
+    <baseCost>7777</baseCost>
+    <techLevel>Medieval</techLevel>
+	<tab>Ascension</tab>
+    <prerequisites>
+      <li>QiManipulation</li>
+    </prerequisites>
+  <researchViewX>1.50</researchViewX>
+  <researchViewY>1.00</researchViewY>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef>
+    <defName>BasicPillProduction</defName>
+    <label>Basic pill production</label>
+    <description>Make pills that artificially progress a cultivator.</description>
+    <baseCost>7777</baseCost>
+    <techLevel>Medieval</techLevel>
+	<tab>Ascension</tab>
+    <prerequisites>
+      <li>QiManipulation</li>
+    </prerequisites>
+    <researchViewX>1.50</researchViewX>
+    <researchViewY>0.20</researchViewY>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef>
     <defName>SpiritSwordManifestation</defName>
-    <label>Spirit Sword Manifestation</label>
+    <label>Spirit sword manifestation</label>
     <description>Manifest Spirit Swords from Soul Shards in the Soul Cauldron.</description>
     <baseCost>7777</baseCost>
     <techLevel>Medieval</techLevel>
@@ -50,8 +77,9 @@
     <prerequisites>
       <li>QiManipulation</li>
     </prerequisites>
-    <researchViewX>1.00</researchViewX>
-    <researchViewY>0.85</researchViewY>
+  <researchViewX>1.50</researchViewX>
+  <researchViewY>1.70</researchViewY>
   </ResearchProjectDef>
+  
 </Defs>
 

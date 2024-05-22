@@ -18,8 +18,8 @@ namespace Ascension
             Cultivator_Hediff cultivatorHediff = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
             if (cultivatorHediff != null)
             {
-                cultivatorHediff.cultivationSpeedOffset = Props.cultivationSpeedOffset + 1;
-                cultivatorHediff.qiRecoverySpeedOffset = Props.offset;
+                cultivatorHediff.cultivationSpeedOffset += Props.cultivationSpeedOffset;
+                cultivatorHediff.qiRecoverySpeedOffset += Props.offset;
             }
         }
         private int ticksToRemove = 180000;//3 days
@@ -30,6 +30,12 @@ namespace Ascension
             if (this.ticksToRemove <= 0)
             {
                 parent.Severity = 0;
+                Cultivator_Hediff cultivatorHediff = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
+                if (cultivatorHediff != null)
+                {
+                    cultivatorHediff.cultivationSpeedOffset -= Props.cultivationSpeedOffset;
+                    cultivatorHediff.qiRecoverySpeedOffset -= Props.offset;
+                }
             }
         }
 

@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 	<ThingDef ParentName="BuildingBase">
-		<defName>SoulCauldron</defName>
-		<label>Soul Cauldron</label>
-		<description>A cauldron imbuued with a souls flame, used to create golden pills and other soul-related products.</description>
+		<defName>SpiritCauldron</defName>
+		<label>spirit cauldron</label>
+		<description>A cauldron imbued with a spirit stone, used to create various pills and other cultivation-related products.</description>
 		<thingClass>Building_WorkTable</thingClass>
 		<designationCategory>Production</designationCategory>
 		<constructionSkillPrerequisite>7</constructionSkillPrerequisite>
@@ -12,7 +12,8 @@
 		<fillPercent>0.75</fillPercent>
 		<passability>PassThroughOnly</passability>
 		<pathCost>70</pathCost>
-    	<blockWind>true</blockWind>
+    	<blockWind>false</blockWind>
+		<surfaceType>Item</surfaceType>
 		<statBases>
 			<MaxHitPoints>300</MaxHitPoints>
 			<WorkToBuild>7777</WorkToBuild>
@@ -26,12 +27,11 @@
 		</inspectorTabs>
 		<stuffCategories>
 			<li>Metallic</li>
-			<li>Woody</li>
 			<li>Stony</li>
 		</stuffCategories>
 		<costStuffCount>70</costStuffCount>
 		<costList>
-			<Steel>30</Steel>
+			<SpiritStone>7</SpiritStone>
 		</costList>
 		<drawerType>MapMeshAndRealTime</drawerType>
     	<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
@@ -49,5 +49,10 @@
 		<researchPrerequisites>
 			<li>QiManipulation</li>
 		</researchPrerequisites>
+		<comps>
+			<li Class="Ascension.CompProperties_CultivationCauldron">
+				<baseQi>70</baseQi>
+			</li>
+		</comps>
 	</ThingDef>
 </Defs>

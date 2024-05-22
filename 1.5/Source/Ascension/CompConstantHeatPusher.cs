@@ -23,7 +23,6 @@ namespace Ascension
             base.CompTick();
             if (parent.IsHashIntervalTick(60) && ShouldPushHeatNow)
             {
-                Log.Message("heated by " + Props.heat);
                 GenTemperature.PushHeat(parent.PositionHeld, parent.MapHeld, Props.heat);
             }
         }
@@ -33,7 +32,6 @@ namespace Ascension
             base.CompTickRare();
             if (ShouldPushHeatNow)
             {
-                Log.Message("heated by "+Props.heat);
                 GenTemperature.PushHeat(parent.PositionHeld, parent.MapHeld, Props.heat * 4.1666665f);
             }
         }

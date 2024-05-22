@@ -8,9 +8,15 @@
     <displayOrder>27</displayOrder>
   </StatCategoryDef>
   
-    <StatCategoryDef>
+  <StatCategoryDef>
     <defName>ElementEmit</defName>
     <label>Element Emit</label>
+    <displayOrder>28</displayOrder>
+  </StatCategoryDef>
+  
+    <StatCategoryDef>
+    <defName>CultivationCauldron</defName>
+    <label>Spirit Cauldron</label>
     <displayOrder>28</displayOrder>
   </StatCategoryDef>
 </Defs>

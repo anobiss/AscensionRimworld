@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using HarmonyLib;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,8 +14,9 @@ namespace Ascension
     public class CompElementEmit : ThingComp
     {
         public CompProperties_ElementEmit Props => (CompProperties_ElementEmit)props;
-
-
+        public int amount = 0;
+        public int range = 0;
+        public string element = "None";
         public override IEnumerable<StatDrawEntry> SpecialDisplayStats()
         {
             IEnumerable<StatDrawEntry> enumerable = base.SpecialDisplayStats();
@@ -75,9 +77,11 @@ namespace Ascension
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
-
+            amount = Props.amount;
+            range = Props.range;
+            element = Props.element;
             ElementEmitMapComponent qiGatherMapComp = parent.Map.GetComponent<ElementEmitMapComponent>();
-            qiGatherMapComp.AddElementAt(new IntVec2 (parent.Position.x, parent.Position.z), Props.range, Props.amount, GetPropsElement(Props.element));
+            qiGatherMapComp.AddElementAt(new IntVec2 (parent.Position.x, parent.Position.z), range, amount, GetPropsElement(element));
             base.PostSpawnSetup(respawningAfterLoad);
         }
         public override void PostDeSpawn(Map map)
@@ -111,5 +115,13 @@ namespace Ascension
             }
             return element;
         }
+
+        //public override void PostExposeData()
+        //{
+        //    base.PostExposeData();
+        //    Scribe_Values.Look<int>(ref amount, "amount", Props.amount, false);
+        //    Scribe_Values.Look<int>(ref range, "range", Props.range, false);
+        //    Scribe_Values.Look<string>(ref element, "element", Props.element, false);
+        //}
     }
 }

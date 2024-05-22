@@ -4,7 +4,7 @@
   <ThingDef ParentName="DrugPillBase">
     <defName>AscensionPill</defName>
     <label>Ascension Pill</label>
-    <description>The final pill beyond all golden pills. This pill grants the user ALLOT of Qi. From 500 to 5000 qi depending on quality. Will explode at awful quality.</description>
+    <description>The final pill beyond all golden pills. This pill grants the user ALLOT of Qi. From 5k to 50k qi depending on quality. Will explode at awful quality.</description>
     <graphicData>
       <texPath>Things/Item/Drug/AscensionPill</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -21,7 +21,7 @@
       <outcomeDoers>
         <li Class="Ascension.IngestionOutcomeDoer_GiveHediffFromQuality">
           <hediffDef>QiPool</hediffDef>
-          <amount>500</amount>
+          <amount>5000</amount>
           <doToGeneratedPawnIfAddicted>true</doToGeneratedPawnIfAddicted>
         </li>
       </outcomeDoers>

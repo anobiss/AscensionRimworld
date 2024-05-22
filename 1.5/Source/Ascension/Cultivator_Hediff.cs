@@ -22,7 +22,7 @@ namespace Ascension
 
         public int qiRecoveryAmount = 0;
         public float qiRecoverySpeed = 1;
-        public float qiRecoverySpeedOffset = 0;
+        public float qiRecoverySpeedOffset = 0; // qiRecovery is recalced not saved
 
 
         //inner cauldron/anima conversion. cap is ignored when anima conversion.
@@ -64,7 +64,7 @@ namespace Ascension
         public override void ExposeData()
         {
             Scribe_Values.Look(ref qiRecoverySpeed, "qiRecoverySpeed");
-            Scribe_Values.Look(ref qiRecoverySpeedOffset, "qiRecoverySpeedOffset");
+            //Scribe_Values.Look(ref qiRecoverySpeedOffset, "qiRecoverySpeedOffset");
             Scribe_Values.Look(ref element, "element");
             Scribe_Values.Look(ref cultivationSpeedOffset, "cultivationSpeedOffset");
             Scribe_Values.Look(ref cultivationBaseSpeed, "cultivationBaseSpeed");

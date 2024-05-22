@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
-      
+    <!--  Trees  -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[@Name="TreeBase"]</xpath>
+    <order>Append</order>
+    <value>
+	<comps>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>0</range>
+        <amount>1</amount>
+		<element>Wood</element>
+      </li>
+    </comps>
+    </value>
+  </Operation>
+  
+    <!--  Misc  -->
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="SteamGeyser"]</xpath>
     <order>Append</order>
@@ -15,6 +30,21 @@
     </value>
   </Operation>
 
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="ShipChunk"]</xpath>
+    <order>Append</order>
+    <value>
+	<comps>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>3</amount>
+		<element>Metal</element>
+      </li>
+    </comps>
+    </value>
+  </Operation>
+
+    <!--  Resources  -->
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="Steel"]</xpath>
     <order>Append</order>

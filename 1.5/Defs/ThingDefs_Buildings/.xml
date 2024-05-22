@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="FurnitureBase">
+    <defName>QiCushion</defName>
+    <label>qi cushion</label>
+    <description>Designates a spot for cultivation. Cultivators can cultivate here to progress thier realms.</description>
+    <uiOrder>2050</uiOrder>
+    <graphicData>
+      <texPath>Things/Building/Misc/QiCushion</texPath>
+      <graphicClass>Graphic_Single</graphicClass> 
+      <drawSize>1.2</drawSize>
+    </graphicData>
+	<altitudeLayer>FloorEmplacement</altitudeLayer>
+    <uiIconScale>0.80</uiIconScale>
+	<costList>
+      <SpiritStone>25</SpiritStone>
+    </costList>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+	  <li>Metallic</li>
+	  <li>Woody</li>
+	  <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>40</costStuffCount>
+    <building>
+      <destroySound>BuildingDestroyed_Soft_Small</destroySound>
+	  <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+    </building>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <WorkToBuild>400</WorkToBuild>
+      <Mass>5</Mass>
+      <Comfort>0.75</Comfort>
+    </statBases>
+	<comps>
+		<li Class="Ascension.CompProperties_GatherQi">
+			<range>0</range>
+			<amount>60</amount>
+        </li>
+		<li Class="Ascension.CompProperties_CultivationSpot">
+			<priority>2</priority>
+		</li>
+	</comps>
+	<researchPrerequisites>
+      <li>QiManipulation</li>
+    </researchPrerequisites>
+  </ThingDef>
+</Defs>

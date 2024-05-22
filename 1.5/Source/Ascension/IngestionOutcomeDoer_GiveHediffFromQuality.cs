@@ -40,7 +40,7 @@ namespace Ascension
 
                 if (this.hediffDef == QiPool)// do qi adding logic here
                 {
-                    AscensionUtilities.IncreaseQi(pawn, (int)Math.Floor(amount * 100));
+                    AscensionUtilities.IncreaseQi(pawn, (int)Math.Floor(num));
                 }
                 else
                 {

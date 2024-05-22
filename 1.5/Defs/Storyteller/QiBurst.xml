@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <IncidentDef>
+    <defName>QiBurst</defName>
+    <label>qi burst</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>World</li>
+    </targetTags>
+    <workerClass>Ascension.IncidentWorker_QiBurst</workerClass>
+    <gameCondition>QiBurst</gameCondition>
+    <letterLabel>Qi Burst</letterLabel>
+    <letterDef>PositiveEvent</letterDef>
+    <baseChance>1.1</baseChance>
+    <minRefireDays>25</minRefireDays>
+    <durationDays>0.125~0.35</durationDays>
+	<!--<tale>QiBurst</tale> not done yet-->
+  </IncidentDef>
+</Defs>

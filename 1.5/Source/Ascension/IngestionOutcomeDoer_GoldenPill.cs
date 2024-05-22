@@ -8,6 +8,7 @@ namespace Ascension
 {
     public class IngestionOutcomeDoer_GoldenPill : IngestionOutcomeDoer
     {
+
         AscensionSettings settings = LoadedModManager.GetMod<AscensionMod>().GetSettings<AscensionSettings>();
         protected override void DoIngestionOutcomeSpecial(Pawn pawn, Thing ingested, int ingestedCount)
         {

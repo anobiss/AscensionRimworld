@@ -1,10 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
+  <RecipeDef>
+    <defName>RefineIceEssence</defName>
+    <label>smelt ice essence bars from ore</label>
+    <description>Use heat and Qi to extract a bar of ice essence from its ore.</description>
+    <jobString>Smelting ice essence bars.</jobString>
+    <workAmount>400</workAmount>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <researchPrerequisite>EssenceRefinement</researchPrerequisite>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+	<recipeUsers>
+      <li>SpiritCauldron</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>IceEssenceOre</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <products>
+      <IceEssenceBar>1</IceEssenceBar>
+    </products>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>IceEssenceOre</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>RefineFireEssence</defName>
+    <label>smelt fire essence bars from ore</label>
+    <description>Use heat and Qi to extract a bar of fire essence from its ore.</description>
+    <jobString>Smelting fire essence bars.</jobString>
+    <workAmount>400</workAmount>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <researchPrerequisite>EssenceRefinement</researchPrerequisite>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+	<recipeUsers>
+      <li>SpiritCauldron</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>FireEssenceOre</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <products>
+      <FireEssenceBar>1</FireEssenceBar>
+    </products>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>FireEssenceOre</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+
 
     <RecipeDef>
-    <defName>AdministerGoldenPillTV</defName>
-    <label>administer golden pill tier V</label>
-    <description>Administer a Golden Pill Tier V as a healer.</description>
+    <defName>AdministerHeavenlyGoldenPill</defName>
+    <label>administer heavenly golden pill</label>
+    <description>Administer a heavenly golden pill as a healer.</description>
     <workerClass>Recipe_AdministerUsableItem</workerClass>
     <jobString>Administering Golden Pill Tier V.</jobString>
     <targetsBodyPart>false</targetsBodyPart>
@@ -16,7 +83,7 @@
       <li>
         <filter>
           <thingDefs>
-            <li>GoldenPillTV</li>
+            <li>HeavenlyGoldenPill</li>
           </thingDefs>
         </filter>
         <count>1</count>
@@ -24,7 +91,7 @@
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
-        <li>GoldenPillTV</li>
+        <li>HeavenlyGoldenPill</li>
       </thingDefs>
     </fixedIngredientFilter>
   </RecipeDef>
@@ -59,9 +126,9 @@
   
   <RecipeDef>
     <defName>MakeQiRefinementPill</defName>
-    <label>Make Qi Refinement Pill</label>
-    <description>Make a Qi Refinement Pill.</description>
-    <researchPrerequisite>QiManipulation</researchPrerequisite>
+    <label>Make qi refinement pill</label>
+    <description>Make a qi refinement pill.</description>
+    <researchPrerequisite>BasicPillProduction</researchPrerequisite>
     <jobString>Creating Tribulation Pill.</jobString>
     <workAmount>777</workAmount>
 	<workSkill>Crafting</workSkill>
@@ -69,7 +136,7 @@
     <effectWorking>Smelt</effectWorking>
 	<soundWorking>Recipe_Smelt</soundWorking>
     <recipeUsers>
-      <li>SoulCauldron</li>
+      <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
       <QiRefinementPill>1</QiRefinementPill>
@@ -89,8 +156,8 @@
   <RecipeDef>
     <defName>MakeBreakthroughPill</defName>
     <label>Make Breakthrough Pill</label>
-    <description>Make a Breakthrough Pill.</description>
-    <researchPrerequisite>QiManipulation</researchPrerequisite>
+    <description>Make a breakthrough pill.</description>
+    <researchPrerequisite>BasicPillProduction</researchPrerequisite>
     <jobString>Creating Breakthrough Pill.</jobString>
     <workAmount>777</workAmount>
 	<workSkill>Crafting</workSkill>
@@ -98,7 +165,7 @@
     <effectWorking>Smelt</effectWorking>
 	<soundWorking>Recipe_Smelt</soundWorking>
     <recipeUsers>
-      <li>SoulCauldron</li>
+      <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
       <BreakthroughPill>1</BreakthroughPill>
@@ -117,17 +184,17 @@
   
     <RecipeDef>
     <defName>MakeExercisePill</defName>
-    <label>Make Exercise Pill</label>
-    <description>Make a Exercise Pill.</description>
-    <researchPrerequisite>QiManipulation</researchPrerequisite>
-    <jobString>Creating Exercise Pill.</jobString>
+    <label>Make exercise pill</label>
+    <description>Make a exercise pill.</description>
+    <researchPrerequisite>BasicPillProduction</researchPrerequisite>
+    <jobString>Creating exercise pill.</jobString>
     <workAmount>777</workAmount>
 	<workSkill>Crafting</workSkill>
     <workSpeedStat>SmeltingSpeed</workSpeedStat>
     <effectWorking>Smelt</effectWorking>
 	<soundWorking>Recipe_Smelt</soundWorking>
     <recipeUsers>
-      <li>SoulCauldron</li>
+      <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
       <ExercisePill>1</ExercisePill>
@@ -153,25 +220,25 @@
   </RecipeDef>
   
   <RecipeDef>
-    <defName>MakeGoldenPillTI</defName>
-    <label>Make Golden Pill Tier I</label>
-    <description>Make a Tier I Golden Pill.</description>
-    <researchPrerequisite>GoldenPillProduction</researchPrerequisite>
-    <jobString>Creating Golden Pill Tier I.</jobString>
-    <workAmount>777</workAmount>
+    <defName>MakeGoldenPill</defName>
+    <label>Make golden pill</label>
+    <description>Make a golden pill.</description>
+	<researchPrerequisite>GoldenPillProduction</researchPrerequisite>
+    <jobString>Creating golden pill.</jobString>
+    <workAmount>999</workAmount>
 	<workSkill>Crafting</workSkill>
     <workSpeedStat>SmeltingSpeed</workSpeedStat>
     <effectWorking>Smelt</effectWorking>
 	<soundWorking>Recipe_Smelt</soundWorking>
 	<skillRequirements>
-      <Crafting>7</Crafting>
-	  <Cooking>7</Cooking>
+      <Crafting>10</Crafting>
+	  <Cooking>10</Cooking>
     </skillRequirements>
     <recipeUsers>
-      <li>SoulCauldron</li>
+      <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
-      <GoldenPillTI>1</GoldenPillTI>
+      <GoldenPill>1</GoldenPill>
     </products>
     <ingredients>
 	  <li>
@@ -200,62 +267,13 @@
       </li>
     </ingredients>
   </RecipeDef>
-  
-  <RecipeDef>
-    <defName>MakeGoldenPillTII</defName>
-    <label>Make Golden Pill Tier II</label>
-    <description>Make a Tier II Golden Pill.</description>
-	<researchPrerequisite>GoldenPillProduction</researchPrerequisite>
-    <jobString>Creating Golden Pill Tier II.</jobString>
-    <workAmount>999</workAmount>
-	<workSkill>Crafting</workSkill>
-    <workSpeedStat>SmeltingSpeed</workSpeedStat>
-    <effectWorking>Smelt</effectWorking>
-	<soundWorking>Recipe_Smelt</soundWorking>
-	<skillRequirements>
-      <Crafting>10</Crafting>
-	  <Cooking>10</Cooking>
-    </skillRequirements>
-    <recipeUsers>
-      <li>SoulCauldron</li>
-    </recipeUsers>
-    <products>
-      <GoldenPillTII>1</GoldenPillTII>
-    </products>
-    <ingredients>
-	  <li>
-        <filter>
-          <thingDefs>
-            <li>GoldenPillTI</li>
-          </thingDefs>
-        </filter>
-        <count>1</count>
-      </li> 
-	  <li>
-        <filter>
-          <thingDefs>
-            <li>SpiritStone</li>
-          </thingDefs>
-        </filter>
-        <count>2</count>
-      </li>
-	  <li>
-        <filter>
-          <thingDefs>
-            <li>Gold</li>
-          </thingDefs>
-        </filter>
-        <count>0.3</count>
-      </li>
-    </ingredients>
-  </RecipeDef>
  
   <RecipeDef>
-    <defName>MakeGoldenPillTIII</defName>
-    <label>Make Golden Pill Tier III</label>
-    <description>Make a Tier III Golden Pill.</description>
+    <defName>MakeImperialGoldenPill</defName>
+    <label>Make imperial golden pill</label>
+    <description>Make a imperial golden pill.</description>
 	<researchPrerequisite>GoldenPillProduction</researchPrerequisite>
-    <jobString>Creating Golden Pill Tier III.</jobString>
+    <jobString>Creating imperial golden pill.</jobString>
     <workAmount>1777</workAmount>
 	<workSkill>Crafting</workSkill>
     <workSpeedStat>SmeltingSpeed</workSpeedStat>
@@ -266,24 +284,16 @@
 	  <Cooking>12</Cooking>
     </skillRequirements>
     <recipeUsers>
-      <li>SoulCauldron</li>
+      <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
-      <GoldenPillTIII>1</GoldenPillTIII>
+      <ImperialGoldenPill>1</ImperialGoldenPill>
     </products>
     <ingredients>
 	  <li>
         <filter>
           <thingDefs>
-            <li>GoldenPillTI</li>
-          </thingDefs>
-        </filter>
-        <count>1</count>
-      </li>
-	  <li>
-        <filter>
-          <thingDefs>
-            <li>GoldenPillTII</li>
+            <li>GoldenPill</li>
           </thingDefs>
         </filter>
         <count>1</count>
@@ -299,62 +309,12 @@
     </ingredients>
   </RecipeDef>
   
-  
   <RecipeDef>
-    <defName>MakeGoldenPillTIV</defName>
-    <label>Make Golden Pill Tier IV</label>
-    <description>Make a Tier IV Golden Pill.</description>
+    <defName>MakeHeavenlyGoldenPill</defName>
+    <label>Make heavenly golden pill</label>
+    <description>Make a heavenly golden pill.</description>
 	<researchPrerequisite>GoldenPillProduction</researchPrerequisite>
-    <jobString>Creating Golden Pill Tier IV.</jobString>
-    <workAmount>2777</workAmount>
-	<workSkill>Crafting</workSkill>
-    <workSpeedStat>SmeltingSpeed</workSpeedStat>
-    <effectWorking>Smelt</effectWorking>
-	<soundWorking>Recipe_Smelt</soundWorking>
-	<skillRequirements>
-      <Crafting>14</Crafting>
-	  <Cooking>14</Cooking>
-    </skillRequirements>
-    <recipeUsers>
-      <li>SoulCauldron</li>
-    </recipeUsers>
-    <products>
-      <GoldenPillTIV>1</GoldenPillTIV>
-    </products>
-    <ingredients>
-	  <li>
-        <filter>
-          <thingDefs>
-            <li>GoldenPillTIII</li>
-          </thingDefs>
-        </filter>
-        <count>1</count>
-      </li>
-	  <li>
-        <filter>
-          <thingDefs>
-            <li>GoldenPillTI</li>
-          </thingDefs>
-        </filter>
-        <count>1</count>
-      </li>
-	  <li>
-        <filter>
-          <thingDefs>
-            <li>SpiritStone</li>
-          </thingDefs>
-        </filter>
-        <count>12</count>
-      </li>
-    </ingredients>
-  </RecipeDef>
-  
-  <RecipeDef>
-    <defName>MakeGoldenPillTV</defName>
-    <label>Make Golden Pill Tier V</label>
-    <description>Make a Tier V Golden Pill.</description>
-	<researchPrerequisite>GoldenPillProduction</researchPrerequisite>
-    <jobString>Creating Golden Pill Tier V.</jobString>
+    <jobString>Creating heavenly golden pill.</jobString>
     <workAmount>5000</workAmount>
 	<workSkill>Crafting</workSkill>
     <workSpeedStat>SmeltingSpeed</workSpeedStat>
@@ -365,16 +325,16 @@
 	  <Cooking>17</Cooking>
     </skillRequirements>
     <recipeUsers>
-      <li>SoulCauldron</li>
+      <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
-      <GoldenPillTV>1</GoldenPillTV>
+      <HeavenlyGoldenPill>1</HeavenlyGoldenPill>
     </products>
     <ingredients>
 	  <li>
         <filter>
           <thingDefs>
-            <li>GoldenPillTIV</li>
+            <li>ImperialGoldenPill</li>
           </thingDefs>
         </filter>
         <count>1</count>
@@ -408,8 +368,8 @@
   
   <RecipeDef>
     <defName>MakeAscensionPill</defName>
-    <label>Make Ascension Pill</label>
-    <description>Make a Ascension Pill. Ascension Pills will explode when made at awful quality.</description>
+    <label>Make ascension pill</label>
+    <description>Make a ascension pill. Ascension pills will explode when made at awful quality.</description>
 	<researchPrerequisite>AscensionPillProduction</researchPrerequisite>
     <jobString>Creating Ascension Pill.</jobString>
     <workAmount>7777</workAmount>
@@ -422,7 +382,7 @@
 	  <Cooking>7</Cooking>
     </skillRequirements>
     <recipeUsers>
-      <li>SoulCauldron</li>
+      <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
       <AscensionPill>1</AscensionPill>
@@ -431,7 +391,7 @@
 	  <li>
         <filter>
           <thingDefs>
-            <li>GoldenPillTV</li>
+            <li>HeavenlyGoldenPill</li>
           </thingDefs>
         </filter>
         <count>1</count>
@@ -444,15 +404,23 @@
         </filter>
         <count>77</count>
       </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>Spiritwood</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
     </ingredients>
   </RecipeDef>
 
   <RecipeDef>
     <defName>ManifestSpiritSword</defName>
-    <label>Manifst a Spirit Sword</label>
-    <description>Manifest a Spirit Sword into this realm using many fragments of souls trapped here. It takes a great deal of skill and intelligence to summon forth a Spirit Sword.</description>
+    <label>Manifest spirit sword</label>
+    <description>Manifest a Spirit Sword into this realm using Qi from a large amount of spirit stones. It takes a large amount of skill and intelligence to create a Spirit Sword.</description>
 	<researchPrerequisite>SpiritSwordManifestation</researchPrerequisite>
-    <jobString>Brewing Golden Pill Tier V.</jobString>
+    <jobString>Manifesting spirit sword</jobString>
     <workAmount>7777</workAmount>
     <workSpeedStat>ResearchSpeed</workSpeedStat>
     <effectWorking>Smelt</effectWorking>
@@ -462,7 +430,7 @@
 	  <Intellectual>17</Intellectual>
     </skillRequirements>
     <recipeUsers>
-      <li>SoulCauldron</li>
+      <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
       <SpiritSword>1</SpiritSword>
@@ -492,7 +460,7 @@
     <allowMixingIngredients>true</allowMixingIngredients>
     <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
 	<recipeUsers>
-      <li>SoulCauldron</li>
+      <li>SpiritCauldron</li>
     </recipeUsers>
     <ingredients>
       <li>

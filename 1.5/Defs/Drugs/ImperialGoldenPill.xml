@@ -2,16 +2,16 @@
 <Defs>
 
   <ThingDef ParentName="DrugPillBase">
-    <defName>GoldenPillTI</defName>
-    <label>Golden Pill Tier I</label>
-    <description>The first tier of golden pills used to gain large amounts of Qi quickly. Grants 50 Qi.</description>
+    <defName>ImperialGoldenPill</defName>
+    <label>imperial golden pill</label>
+    <description>A imperial golden pill that can be used to gain large amounts of Qi quickly. The amount of Qi granted scales with quality. Grants 500 Qi at normal quality and 2.5k qi at legendary quality.</description>
     <graphicData>
-      <texPath>Things/Item/Drug/GoldenPillTI</texPath>
+      <texPath>Things/Item/Drug/ImperialGoldenPill</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <rotatable>false</rotatable>
     <statBases>
-      <MarketValue>900.9</MarketValue>
+      <MarketValue>6043.6</MarketValue>
       <Mass>0.03</Mass>
     </statBases>
     <techLevel>Ultra</techLevel>
@@ -19,11 +19,9 @@
     <ingestible>
       <drugCategory>Medical</drugCategory>
       <outcomeDoers>
-        <li Class="Ascension.IngestionOutcomeDoer_GoldenPill">
+        <li Class="Ascension.IngestionOutcomeDoer_GiveHediffFromQuality">
           <hediffDef>QiPool</hediffDef>
-          <amount>50</amount>
-		  <tier>1</tier>
-          <doToGeneratedPawnIfAddicted>true</doToGeneratedPawnIfAddicted>
+          <amount>250</amount>
         </li>
       </outcomeDoers>
     </ingestible>
@@ -31,6 +29,9 @@
       <li Class="CompProperties_Drug">
 		<isCombatEnhancingDrug>false</isCombatEnhancingDrug>
         <listOrder>1010</listOrder>
+      </li>
+      <li>
+        <compClass>CompQuality</compClass>
       </li>
     </comps>
     <tradeTags>

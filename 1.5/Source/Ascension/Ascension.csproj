@@ -64,6 +64,7 @@
     <Compile Include="AscensionTextures.cs" />
     <Compile Include="AscensionUtilities.cs" />
     <Compile Include="Ascension_Harmony.cs" />
+    <Compile Include="Ascension_PostHarmony.cs" />
     <Compile Include="CompAbilityEffect_AbilityQiCost.cs" />
     <Compile Include="CompAbilityEffect_BodyMelee.cs" />
     <Compile Include="CompAbilityEffect_HediffToggle.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="CompAbilityEffect_HediffGiver.cs" />
     <Compile Include="CompAbilityEffect_ManifestSpiritSword.cs" />
     <Compile Include="CompAwfulExplosive.cs" />
+    <Compile Include="CompCultivationCauldron.cs" />
     <Compile Include="CompCultivationSpot.cs" />
     <Compile Include="CompElementEmit.cs" />
     <Compile Include="CompGatherQi.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="CompProperties_AbilityManifestSpiritSword.cs" />
     <Compile Include="CompProperties_AwfulExplosive.cs" />
     <Compile Include="CompProperties_ConstantHeatPusher.cs" />
+    <Compile Include="CompProperties_CultivationCauldron.cs" />
     <Compile Include="CompProperties_CultivationSpot.cs" />
     <Compile Include="CompProperties_ElementEmit.cs" />
     <Compile Include="CompProperties_GatherQi.cs" />
@@ -94,6 +97,7 @@
     <Compile Include="CultivationMapComponent.cs" />
     <Compile Include="CultivationReservationUtility.cs" />
     <Compile Include="DaoCardUtility.cs" />
+    <Compile Include="GameCondition_QiBurst.cs" />
     <Compile Include="HediffCompProperties_AddScrollAbility.cs" />
     <Compile Include="HediffCompProperties_AddScrollReq.cs" />
     <Compile Include="HediffCompProperties_QiRecovery.cs" />
@@ -104,11 +108,13 @@
     <Compile Include="HediffComp_QiRecovery.cs" />
     <Compile Include="HediffComp_QiShield.cs" />
     <Compile Include="HediffComp_Realm.cs" />
+    <Compile Include="IncidentWorker_QiBurst.cs" />
     <Compile Include="IncidentWorker_SpiritTreeConversion.cs" />
     <Compile Include="IngestionOutcomeDoer_Exercise.cs" />
     <Compile Include="IngestionOutcomeDoer_GiveBreakthrough.cs" />
     <Compile Include="IngestionOutcomeDoer_RefineQi.cs" />
     <Compile Include="JobDriver_BreakthroughBody.cs" />
+    <Compile Include="JobDriver_BreakthroughGoldenCore.cs" />
     <Compile Include="JobDriver_Exercise.cs" />
     <Compile Include="JobDriver_QiGathering.cs" />
     <Compile Include="JobDriver_RefineQiCauldron.cs" />

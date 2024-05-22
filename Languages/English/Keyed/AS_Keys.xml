@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
+
+
+  <AS_CultivationCauldronInspect>Base Qi: {BASEQI}, Current Qi: {QI} Max Quality: {QUALITY}</AS_CultivationCauldronInspect>
+  <AS_CultivationCauldronBaseQi>Base Qi</AS_CultivationCauldronBaseQi>
+  <AS_CultivationCauldronBaseQiDesc>The base amount of qi the cauldron has on its own.</AS_CultivationCauldronBaseQiDesc>
+  <AS_CultivationCauldronCurrentQi>Current Qi</AS_CultivationCauldronCurrentQi>
+  <AS_CultivationCauldronCurrentQiDesc>The total amount of qi on all the tiles the cauldron occupies, plus Base Qi. Determines the max quality of products produced from the cauldron.</AS_CultivationCauldronCurrentQiDesc>
+  <AS_CultivationCauldronMaxQuality>Max Quality</AS_CultivationCauldronMaxQuality>
+  <AS_CultivationCauldronMaxQualityDesc>The maximum quality of products made in this cauldron. Scales with Current Qi.</AS_CultivationCauldronMaxQualityDesc>
+  
+  
   <AS_SpiritTreeConversion>Spirit Tree Conversion</AS_SpiritTreeConversion>
   <AS_SpiritTreeConversionDesc>A sudden surge of Qi has converted a tree into a spirit tree.</AS_SpiritTreeConversionDesc>
 

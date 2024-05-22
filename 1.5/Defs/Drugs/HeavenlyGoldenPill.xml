@@ -2,11 +2,11 @@
 <Defs>
 
   <ThingDef ParentName="DrugPillBase">
-    <defName>GoldenPillTV</defName>
-    <label>Golden Pill Tier V</label>
-    <description>The fifth tier of golden pills used to gain large amounts of Qi quickly. Grants 1000 Qi. They can also be used to the same effect as a healer mech serum.</description>
+    <defName>HeavenlyGoldenPill</defName>
+    <label>heavenly golden pill</label>
+    <description>A heavenly golden pill that can be used to gain large amounts of Qi quickly. The amount of Qi granted scales with quality. Grants 2000 Qi at normal quality, 10k Qi at legendary quality. Can also be used to heal wounds.</description>
     <graphicData>
-      <texPath>Things/Item/Drug/GoldenPillTV</texPath>
+      <texPath>Things/Item/Drug/HeavenlyGoldenPill</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <rotatable>false</rotatable>
@@ -19,18 +19,16 @@
     <ingestible>
       <drugCategory>Medical</drugCategory>
       <outcomeDoers>
-        <li Class="Ascension.IngestionOutcomeDoer_GoldenPill">
+        <li Class="Ascension.IngestionOutcomeDoer_GiveHediffFromQuality">
           <hediffDef>QiPool</hediffDef>
           <amount>1000</amount>
-		  <tier>5</tier>
-          <doToGeneratedPawnIfAddicted>true</doToGeneratedPawnIfAddicted>
         </li>
       </outcomeDoers>
     </ingestible>
 	<comps>
 	  <li Class="CompProperties_Usable">
         <useJob>UseItem</useJob>
-        <useLabel>Use Golden Pill Tier V to Heal</useLabel>
+        <useLabel>Use heavenly golden pill to heal</useLabel>
         <useDuration>600</useDuration>
       </li>
       <li Class="CompProperties_UseEffect">
@@ -39,6 +37,9 @@
       <li Class="CompProperties_Drug">
 		<isCombatEnhancingDrug>false</isCombatEnhancingDrug>
         <listOrder>1010</listOrder>
+      </li>
+      <li>
+        <compClass>CompQuality</compClass>
       </li>
     </comps>
     <tradeTags>

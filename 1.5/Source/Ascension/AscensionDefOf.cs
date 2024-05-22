@@ -37,6 +37,7 @@ namespace Ascension
 
         public static StatCategoryDef GatherQi;
         public static StatCategoryDef ElementEmit;
+        public static StatCategoryDef CultivationCauldron;
 
         //realm hediffs
         public static HediffDef EssenceRealm;

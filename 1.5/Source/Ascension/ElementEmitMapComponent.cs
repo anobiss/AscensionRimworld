@@ -1,5 +1,7 @@
 ﻿using RimWorld;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Verse;
 
@@ -31,24 +33,28 @@ namespace Ascension
         {
             base.MapComponentOnGUI();
 
-            for (int x = 0; x < gridSize; x++)
+            IntVec3 mouseCell = UI.MouseCell();
+            int cellCount = GenRadial.NumCellsInRadius(8.9f);
+            List<IntVec3> cellsInRadius = GenRadial.RadialCellsAround(mouseCell, 8.9f, true).ToList();
+
+            foreach (IntVec3 cell in cellsInRadius)
             {
-                for (int z = 0; z < gridSize; z++)
+                if (cell.x >= 0 && cell.z >= 0 && cell.x < gridSize && cell.z < gridSize) // Ensure cell is within grid bounds
                 {
-                    IntVec2 cell = new IntVec2(x, z);
-                    if (HasElements(cell))
+                    IntVec2 intVec2Cell = new IntVec2(cell.x, cell.z);
+                    if (HasElements(intVec2Cell))
                     {
-                        int elementCount = CountElements(cell);
+                        int elementCount = CountElements(intVec2Cell);
                         float yOffset = -20f;
 
                         foreach (Element element in Enum.GetValues(typeof(Element)))
                         {
-                            int amount = GetElementAt(cell, element);
+                            int amount = GetElementAt(intVec2Cell, element);
 
                             if (amount > 0)
                             {
                                 Color color = GetElementColor(element, amount);
-                                Vector3 labelPos = (Vector3)GenMapUI.LabelDrawPosFor(new IntVec3(cell.x, 0, cell.z)) + Vector3.up * yOffset;
+                                Vector3 labelPos = (Vector3)GenMapUI.LabelDrawPosFor(new IntVec3(intVec2Cell.x, 0, intVec2Cell.z)) + Vector3.up * yOffset;
                                 GenMapUI.DrawThingLabel(labelPos, amount.ToString(), color);
                                 yOffset += 10f; // Adjust vertical position for next element
                             }

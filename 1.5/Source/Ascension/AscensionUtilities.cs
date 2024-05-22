@@ -80,6 +80,8 @@ namespace Ascension
         public static float UpdateCultivationSpeed(Cultivator_Hediff cultivatorHediff)//we do this before starting jobs to update the cultivation speed, we return a float to make sure we have cultivation speed after update
         {
             float cultivationSpeed = 0;//if cult speed is 0 we know we messed something up. 
+            QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
+            ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
             if (cultivatorHediff != null)
             {
                 //we do these speed calcs in all cultivation realms                  here we do the base times the speedoffset 
@@ -90,18 +92,18 @@ namespace Ascension
                     cultivationSpeed *= (0.4f + cultivatorHediff.pawn.needs.mood.CurLevelPercentage);
                 }
                 //check if they are in essence realm, then check for nearby gather qi things.
-                if (cultivatorHediff.pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm))
+                if (cultivatorHediff.pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm) && qiGatherMapComp != null)
                 {
                     //we increase the speed here by the amount of gather qi in the tile divided by 100
-
-                    QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
                     int qiTile = qiGatherMapComp.GetQiGatherAt(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z);
                     //Log.Message("qi at position is" + qiTile);
                     cultivationSpeed *= (1 + qiTile / 100);//its 1 plus 1% qitile
                     //Log.Message("essence realm cultivation speed is" + cultivationSpeed);
                 }
-                ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
-                cultivationSpeed *= 1 + (elementEmitMapComp.CalculateElementValueAt(new IntVec2(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z), cultivatorHediff.element) / 100f);
+                if (elementEmitMapComp != null)
+                {
+                    cultivationSpeed *= 1 + (elementEmitMapComp.CalculateElementValueAt(new IntVec2(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z), cultivatorHediff.element) / 100f);
+                }
                 cultivatorHediff.cultivationSpeed = cultivationSpeed;
             }
             if (cultivationSpeed < 0.1f)//slowest is 0.1.

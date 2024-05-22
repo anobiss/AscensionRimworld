@@ -1,6 +1,174 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
+      <!--
+      Ores
+      -->
+  
+  
+  <ThingDef ParentName="ResourceBase">
+    <defName>FireEssenceOre</defName>
+    <label>fire essence ore</label>
+    <description>Unrefined fire essence ore. A large amount can be smelted into a fire essence bar.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/FireEssenceOre</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <soundInteract>Stone_Drop</soundInteract>
+    <soundDrop>Stone_Drop</soundDrop>
+    <statBases>
+      <MarketValue>50</MarketValue>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>0.4</Mass> 
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.0</DeteriorationRate>
+    </statBases>
+    <burnableByRecipe>false</burnableByRecipe>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+	<comps>
+	   <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>3</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>3</amount>
+		<element>Fire</element>
+      </li>
+    </comps>
+	<tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <stackLimit>77</stackLimit>
+	<minRewardCount>2</minRewardCount>
+	<tradeability>All</tradeability>
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>3</allowedArchonexusCount>
+  </ThingDef>
+  
+  <ThingDef ParentName="RockBase">
+    <defName>MineableFireEssenceOre</defName>
+    <label>fire essence ore</label>
+    <description>Rock containing unrefined fire essence ore.</description>
+    <graphicData>
+      <texPath>Things/Building/Linked/RockFlecked_Atlas</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(89,68,68)</color>
+      <colorTwo>(255,20,20)</colorTwo>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>1500</MaxHitPoints>
+    </statBases>
+    <building>
+      <isResourceRock>true</isResourceRock>
+      <mineableThing>FireEssenceOre</mineableThing>
+      <mineableYield>3</mineableYield>
+      <mineableScatterCommonality>0.07</mineableScatterCommonality>
+      <mineableScatterLumpSizeRange>2~8</mineableScatterLumpSizeRange>
+      <veinMineable>true</veinMineable>
+    </building>
+	<comps>
+	   <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>3</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>3</amount>
+		<element>Fire</element>
+      </li>
+    </comps>
+  </ThingDef>
 
+  
+  <ThingDef ParentName="ResourceBase">
+    <defName>IceEssenceOre</defName>
+    <label>ice essence ore</label>
+    <description>Unrefined ice essence ore. A large amount can be smelted into a fire essence bar.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/IceEssenceOre</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <soundInteract>Stone_Drop</soundInteract>
+    <soundDrop>Stone_Drop</soundDrop>
+    <statBases>
+      <MarketValue>50</MarketValue>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>0.4</Mass> 
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.0</DeteriorationRate>
+    </statBases>
+    <burnableByRecipe>false</burnableByRecipe>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+	<comps>
+	   <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>7</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>3</amount>
+		<element>Water</element>
+      </li>
+    </comps>
+	<tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <stackLimit>77</stackLimit>
+	<minRewardCount>2</minRewardCount>
+	<tradeability>All</tradeability>
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>3</allowedArchonexusCount>
+  </ThingDef>
+  
+  
+    <ThingDef ParentName="RockBase">
+    <defName>MineableIceEssenceOre</defName>
+    <label>ice essence ore</label>
+    <description>Rock containing unrefined ice essence ore.</description>
+    <graphicData>
+      <texPath>Things/Building/Linked/RockFlecked_Atlas</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(68,89,89)</color>
+      <colorTwo>(20,255,255)</colorTwo>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>1500</MaxHitPoints>
+    </statBases>
+    <building>
+      <isResourceRock>true</isResourceRock>
+      <mineableThing>IceEssenceOre</mineableThing>
+      <mineableYield>3</mineableYield>
+      <mineableScatterCommonality>0.07</mineableScatterCommonality>
+      <mineableScatterLumpSizeRange>2~8</mineableScatterLumpSizeRange>
+      <veinMineable>true</veinMineable>
+    </building>
+	<comps>
+	   <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>7</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>3</amount>
+		<element>Water</element>
+      </li>
+    </comps>
+  </ThingDef>
+  
+    <!--
+      Treassures
+      -->
+	  
   <ThingDef ParentName="ResourceBase">
     <defName>LuminaCore</defName>
     <label>lumina core</label>
@@ -9,10 +177,10 @@
       <texPath>Things/Item/Treasure/LuminaCore</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <soundInteract>Wood_Drop</soundInteract>
-    <soundDrop>Wood_Drop</soundDrop>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
     <statBases>
-      <MarketValue>1000</MarketValue>
+      <MarketValue>950</MarketValue>
       <MaxHitPoints>150</MaxHitPoints>
       <Mass>0.4</Mass> 
       <Flammability>0.0</Flammability>
@@ -53,8 +221,8 @@
       <texPath>Things/Item/Treasure/FireEssenceBar</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <soundInteract>Wood_Drop</soundInteract>
-    <soundDrop>Wood_Drop</soundDrop>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
     <tickerType>Normal</tickerType>
     <statBases>
       <MarketValue>250</MarketValue>
@@ -101,8 +269,8 @@
       <texPath>Things/Item/Treasure/IceEssenceBar</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <soundInteract>Wood_Drop</soundInteract>
-    <soundDrop>Wood_Drop</soundDrop>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
     <statBases>
       <MarketValue>250</MarketValue>
       <MaxHitPoints>150</MaxHitPoints>
@@ -152,7 +320,7 @@
     <soundInteract>Wood_Drop</soundInteract>
     <soundDrop>Wood_Drop</soundDrop>
     <statBases>
-      <MarketValue>1000</MarketValue>
+      <MarketValue>1700</MarketValue>
       <MaxHitPoints>150</MaxHitPoints>
       <Mass>0.4</Mass> 
       <Flammability>0.0</Flammability>
@@ -193,10 +361,10 @@
       <texPath>Things/Item/Treasure/StoneEssence</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <soundInteract>Wood_Drop</soundInteract>
-    <soundDrop>Wood_Drop</soundDrop>
+    <soundInteract>Stone_Drop</soundInteract>
+    <soundDrop>Stone_Drop</soundDrop>
     <statBases>
-      <MarketValue>250</MarketValue>
+      <MarketValue>350</MarketValue>
       <MaxHitPoints>150</MaxHitPoints>
       <Mass>0.4</Mass> 
       <Flammability>0.0</Flammability>
@@ -227,6 +395,41 @@
 	<tradeability>All</tradeability>
     <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
     <allowedArchonexusCount>10</allowedArchonexusCount>
+  </ThingDef>
+  
+    <ThingDef ParentName="RockBase">
+    <defName>MineableStoneEssence</defName>
+    <label>stone essence ore</label>
+    <description>Rock containing stone essence.</description>
+    <graphicData>
+      <texPath>Things/Building/Linked/RockFlecked_Atlas</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(188,188,188)</color>
+      <colorTwo>(140,212,212)</colorTwo>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>1500</MaxHitPoints>
+    </statBases>
+    <building>
+      <isResourceRock>true</isResourceRock>
+      <mineableThing>StoneEssence</mineableThing>
+      <mineableYield>1</mineableYield>
+      <mineableScatterCommonality>0.04</mineableScatterCommonality>
+      <mineableScatterLumpSizeRange>1~4</mineableScatterLumpSizeRange>
+      <veinMineable>true</veinMineable>
+    </building>
+	<comps>
+	   <li Class="Ascension.CompProperties_GatherQi">
+		<range>2</range>
+        <amount>20</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>3</amount>
+		<element>Earth</element>
+      </li>
+    </comps>
   </ThingDef>
 
   <ThingDef ParentName="ResourceBase">
@@ -272,11 +475,11 @@
     <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
     <allowedArchonexusCount>50</allowedArchonexusCount>
   </ThingDef>
+  
     <!--
       Scrolls
-	  
-	  
       -->
+	  
   <ThingDef ParentName="ResourceBase">
     <defName>BasicQiScroll</defName>
     <label>Basic Qi Arts Scroll</label>
