@@ -93,7 +93,7 @@ namespace Ascension
                     if (qiPool != null)
                     {
                         //if they dont have enough qi to tribulate they shouldnt cultivate unless they can breakthrough;
-                        int totalTribulationCost = (5 + (qiPool.maxAmount / 100)) * 10;
+                        long totalTribulationCost = (5 + (qiPool.maxAmount / 100)) * 10;
                         if (qiPool.amount < totalTribulationCost)
                         {
                             if (essenceRealm.progress < essenceRealm.maxProgress)
@@ -146,14 +146,44 @@ namespace Ascension
                         if (pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm))
                         {
                             // Essence Realm cultivation, includes gathering qi for tribulation
-                            int totalQiRefineCost = 2 + (qiPool.maxAmount / 10);
+                            long totalQiRefineCost = 2 + (qiPool.maxAmount / 10);
                             if (essenceRealm.progress >= essenceRealm.maxProgress)//auto attempt breakthrough when possible.
                             {
-                                return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughEssence, pawn, FindCultivationSpot(pawn));
+                                if (essenceRealm.Severity >= 2 && essenceRealm.Severity < 3)
+                                {
+                                    if (cultivatorHediff.innerCauldronQi>= cultivatorHediff.innerCauldronLimit)
+                                    {
+                                        if (qiPool.amount >= qiPool.maxAmount)
+                                        {
+                                            return JobMaker.MakeJob(AscensionDefOf.AS_GoldenCoreBreakthrough, pawn, FindCultivationSpot(pawn));
+                                        }else
+                                        {
+                                            return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                                        }
+                                    }else
+                                    {
+                                        long totalInnerQiRefineCost = 2 + (qiPool.maxAmount / 50);//2 plus 2%
+                                        if (totalInnerQiRefineCost <= qiPool.amount)
+                                        {
+                                            return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, pawn, FindCultivationSpot(pawn));
+                                        }
+                                        else
+                                        {
+                                            return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                                        }
+                                    }
+                                }
+                                else if (essenceRealm.Severity < 7)
+                                {
+                                    return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughEssence, pawn, FindCultivationSpot(pawn));
+                                }else
+                                {
+                                    return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                                }
                             }
                             if (totalQiRefineCost > qiPool.maxAmount)
                             {
-                                int totalInnerQiRefineCost = 2 + (qiPool.maxAmount / 50);//2 plus 2%
+                                long totalInnerQiRefineCost = 2 + (qiPool.maxAmount / 50);//2 plus 2%
                                 if (totalInnerQiRefineCost <= qiPool.amount)
                                 {
                                     return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, pawn, FindCultivationSpot(pawn));
@@ -187,7 +217,40 @@ namespace Ascension
                             // Essence Realm cultivation only, excludes gathering qi for tribulation
                             if (essenceRealm.progress >= essenceRealm.maxProgress)//auto attempt breakthrough when possible.
                             {
-                                return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughEssence, pawn, FindCultivationSpot(pawn));
+                                if (essenceRealm.Severity >= 2 && essenceRealm.Severity < 3)
+                                {
+                                    if (cultivatorHediff.innerCauldronQi >= cultivatorHediff.innerCauldronLimit)
+                                    {
+                                        if (qiPool.amount >= qiPool.maxAmount)
+                                        {
+                                            return JobMaker.MakeJob(AscensionDefOf.AS_GoldenCoreBreakthrough, pawn, FindCultivationSpot(pawn));
+                                        }
+                                        else
+                                        {
+                                            return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                                        }
+                                    }
+                                    else
+                                    {
+                                        long totalInnerQiRefineCost = 2 + (qiPool.maxAmount / 50);//2 plus 2%
+                                        if (totalInnerQiRefineCost <= qiPool.amount)
+                                        {
+                                            return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, pawn, FindCultivationSpot(pawn));
+                                        }
+                                        else
+                                        {
+                                            return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                                        }
+                                    }
+                                }
+                                else if (essenceRealm.Severity < 7)
+                                {
+                                    return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughEssence, pawn, FindCultivationSpot(pawn));
+                                }
+                                else
+                                {
+                                    return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                                }
                             }
                         }
                         else if (pawn.health.hediffSet.HasHediff(AscensionDefOf.BodyRealm))

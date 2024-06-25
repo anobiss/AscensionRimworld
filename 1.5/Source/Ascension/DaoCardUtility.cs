@@ -1,20 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
-using LudeonTK;
 using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.AI;
-using static System.Collections.Specialized.BitVector32;
 using Verse.Sound;
-using static HarmonyLib.Code;
-using Unity.Jobs;
-using Verse.Noise;
-using System.Reflection.Emit;
-using RimWorld.Planet;
 
 namespace Ascension
 {
@@ -23,52 +15,46 @@ namespace Ascension
     {
 
 
-        private static bool CanControl(Pawn pawn)
+        private static bool CanControl()
         {
-            Pawn selPawnForGear = pawn;
-            if (selPawnForGear.Downed || selPawnForGear.InMentalState)
+            if (selectedPawn.Downed || selectedPawn.InMentalState)
             {
                 return false;
             }
-            if (selPawnForGear.Faction != Faction.OfPlayer && !selPawnForGear.IsPrisonerOfColony)
+            if (selectedPawn.Faction != Faction.OfPlayer && !selectedPawn.IsPrisonerOfColony)
             {
                 return false;
             }
-            if (selPawnForGear.IsPrisonerOfColony && selPawnForGear.Spawned && !selPawnForGear.Map.mapPawns.AnyFreeColonistSpawned)
+            if (selectedPawn.IsPrisonerOfColony && selectedPawn.Spawned && !selectedPawn.Map.mapPawns.AnyFreeColonistSpawned)
             {
                 return false;
             }
-            if (selPawnForGear.IsPrisonerOfColony && (PrisonBreakUtility.IsPrisonBreaking(selPawnForGear) || (selPawnForGear.CurJob != null && selPawnForGear.CurJob.exitMapOnArrival)))
+            if (selectedPawn.IsPrisonerOfColony && (PrisonBreakUtility.IsPrisonBreaking(selectedPawn) || (selectedPawn.CurJob != null && selectedPawn.CurJob.exitMapOnArrival)))
             {
                 return false;
             }
             return true;
         }
 
-        private static bool highlight = true;
-
         private static float scrollViewHeight = 0f;
 
 
         private static bool onTechniqueTab = false;
 
-        private static readonly Color HighlightColor = new Color(0.5f, 0.5f, 0.5f, 1f);
-
-        private static readonly Color StaticHighlightColor = new Color(0.75f, 0.75f, 0.85f, 1f);
-
+        public static Pawn selectedPawn;
         public static void DrawPawnDaoCard(Rect outRect, Pawn pawn, Thing thingForMedBills)
         {
-            
+            selectedPawn = pawn;
             outRect.y += 20f;
             outRect.height -= 20f;
             outRect = outRect.Rounded();
             Rect rect = new Rect(outRect.x, outRect.y, outRect.width * 1f, outRect.height).Rounded();
             Rect rect2 = new Rect(rect.xMax, outRect.y, outRect.width - rect.width, outRect.height);
             rect.yMin += 11f;
-            DrawDaoSummary(rect, pawn, thingForMedBills);
+            DrawDaoSummary(rect);
         }
 
-        public static void DrawDaoSummary(Rect rect, Pawn pawn, Thing thingForMedBills)
+        public static void DrawDaoSummary(Rect rect)
         {
             GUI.color = Color.white;
             Widgets.DrawMenuSection(rect);
@@ -92,16 +78,16 @@ namespace Ascension
             if (onTechniqueTab)
             {
                 PlayerKnowledgeDatabase.KnowledgeDemonstrated(ConceptDefOf.MedicalOperations, KnowledgeAmount.FrameDisplayed);
-                curY = DrawTechniqueTab(rect, pawn, curY);
+                curY = DrawTechniqueTab(rect, curY);
             }
             else
             {
-                curY = DrawCultivationTab(rect, pawn, curY);
+                curY = DrawCultivationTab(rect, curY);
             }
             Text.Font = GameFont.Small;
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
-            
+
             Widgets.EndGroup();
         }
 
@@ -122,7 +108,7 @@ namespace Ascension
                     {
                         if (Widgets.ButtonImage(abilityRect, ContentFinder<Texture2D>.Get(abilityDef.iconPath), true, abilityDef.description))
                         {
-                            if (CanControl(scrollHediff.pawn))
+                            if (CanControl())
                             {
                                 scrollHediff.pawn.abilities.GainAbility(abilityDef);
                             }
@@ -133,7 +119,7 @@ namespace Ascension
                         GUI.color = Color.grey;
                         if (Widgets.ButtonImage(abilityRect, ContentFinder<Texture2D>.Get(abilityDef.iconPath), true, abilityDef.description))
                         {
-                            if (CanControl(scrollHediff.pawn))
+                            if (CanControl())
                             {
                                 scrollHediff.pawn.abilities.RemoveAbility(abilityDef);
                             }
@@ -147,7 +133,7 @@ namespace Ascension
         }
         private static Vector2 scrollPosition = Vector2.zero;
 
-        private static float DrawTechniqueTab(Rect rect, Pawn pawn, float curY)
+        private static float DrawTechniqueTab(Rect rect, float curY)
         {
             //techniq tab shows a list of learned scrolls and thier abilities with the abilities being buttons that toggle them on or off the pawn
 
@@ -158,9 +144,9 @@ namespace Ascension
             Rect outRect = new Rect(0f, 0f, rect.width, rect.height - curTechBarY);
             Rect viewRect = new Rect(0f, 0f, rect.width - 16f, scrollViewHeight);
 
-            if (!pawn.health.hediffSet.hediffs.NullOrEmpty())
+            if (!selectedPawn.health.hediffSet.hediffs.NullOrEmpty())
             {
-                foreach (Hediff hediff in pawn.health.hediffSet.hediffs)
+                foreach (Hediff hediff in selectedPawn.health.hediffSet.hediffs)
                 {
                     HediffDef hediffDef = hediff.def;
                     if (AscensionStaticStartUtils.ScrollHediffList.Contains(hediffDef))
@@ -169,7 +155,7 @@ namespace Ascension
                         if (scrollHediff != null)//do the technique bars here
                         {
                             //first we make the rect and the label for the technique art
-                            Rect techLabelRect = new Rect(num, curY+curTechBarY, rect.width / 2f - num, rect.height/5);//label rect
+                            Rect techLabelRect = new Rect(num, curY + curTechBarY, rect.width / 2f - num, rect.height / 5);//label rect
                             Text.Anchor = TextAnchor.UpperCenter;
                             GUI.color = scrollHediff.LabelColor;
                             Widgets.Label(techLabelRect, scrollHediff.Label);
@@ -185,50 +171,10 @@ namespace Ascension
             return curY;//so we know what y the next one is.
         }
 
-        private static void DrawPawnRealm(Rect rect, Realm_Hediff realm)
-        {
-            float num = rect.x + 17f;
-            Rect rect2 = new Rect(num, rect.y + rect.height / 2f - 16f, 32f, 32f);
-            num += 42f;
-            num += (rect.width / 2f) + 10f;
-            Rect rect4 = new Rect(rect2.x, rect.y + rect.height / 2f - 16f, 0f, 32f);
-            Rect rect5 = new Rect(num, rect.y + rect.height / 2f - 16f, rect.width - num - 26f, 32f);
-            rect4.xMax = rect5.xMax;
-            if (Mouse.IsOver(rect4))
-            {
-                Widgets.DrawHighlight(rect4);
-                TooltipHandler.TipRegion(rect4, realm.CurStage.extraTooltip);
-            }
-            float realmRatio = (float)realm.progress / (float)realm.maxProgress;
-            float realmColorMod = realm.Severity / 5f;
-            if (realm.def == AscensionDefOf.EssenceRealm)
-            {
-                GUI.color = new Color(0.8f, 0.8f, 1f - realmColorMod, 1f);//sets bar color based on severity
-                Widgets.FillableBar(rect4.ContractedBy(4f), realmRatio);
-                GUI.color = Color.white;
-                Text.Anchor = TextAnchor.MiddleCenter;
-                GUI.color = new Color(1f, 1f, 1f - realmColorMod, 1f);//sets text color based on severity
-                Text.Font = GameFont.Small;
-                Widgets.Label(rect4.ContractedBy(0.5f), "AS_EssenceRealm".Translate() + realm.Label + " - " + realm.progress + "/" + realm.maxProgress);
-            }else if (realm.def == AscensionDefOf.BodyRealm)
-            {
-                GUI.color = new Color(0.8f, 1f - realmColorMod, 1f - realmColorMod, 1f);//sets bar color based on severity
-                Widgets.FillableBar(rect4.ContractedBy(4f), realmRatio);
-                GUI.color = Color.white;
-                Text.Anchor = TextAnchor.MiddleCenter;
-                GUI.color = new Color(1f, 1f - realmColorMod, 1f - realmColorMod, 1f);//sets bar color based on severity
-                Text.Font = GameFont.Small;
-                Widgets.Label(rect4.ContractedBy(0.5f), "AS_BodyRealm".Translate() + realm.Label + " - " + realm.progress + "/" + realm.maxProgress);
-            }else
-            {
-                Log.Message("Ascension error: the realm attempting to be drawn is not body or essence");
-            }
-        }
-
         //make draw pawn realms that works like this
 
 
-        private static void DrawPawnQi(Pawn pawn, Rect rect, QiPool_Hediff qiPool)
+        private static void DrawPawnQi(Rect rect)
         {
             float labelWidth = rect.width / 2f - 17f;
             Rect qiLabelRect = new Rect(rect.x + 59f, rect.y, labelWidth, rect.height);
@@ -242,53 +188,51 @@ namespace Ascension
                 Widgets.DrawHighlight(barRect);
             }
 
-            float qiRatio = (float)qiPool.amount / (float)qiPool.maxAmount;
+            float qiRatio = (float)qiPoolHediff.amount / (float)qiPoolHediff.maxAmount;
             GUI.color = Color.white;
             Widgets.FillableBar(barRect.ContractedBy(2f), qiRatio);
-            string qiBarText = "AS_QiPoolBar".Translate(qiPool.amount.ToString("0.#").Named("QI"), qiPool.maxAmount.ToString("0.#").Named("MAXQI"));
-            Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
-            Realm_Hediff essenceRealm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
-            if (cultivatorHediff != null && essenceRealm != null)
+            string qiBarText = "AS_QiPoolBar".Translate(qiPoolHediff.amount.ToString("0.#").Named("QI"), qiPoolHediff.maxAmount.ToString("0.#").Named("MAXQI"));
+            if (CultivatorHediff != null && eRealmHediff != null)
             {
-                if (cultivatorHediff.qiRecoverySpeed != 0)
+                if (CultivatorHediff.qiRecoverySpeed != 0)
                 {
-                    qiBarText += "AS_QiPoolBarRecovery".Translate(cultivatorHediff.qiRecoveryAmount.ToString().Named("QIRECOVERYAMOUNT"));
-                    if (cultivatorHediff.qiRecoverySpeed < 1)
+                    qiBarText += "AS_QiPoolBarRecovery".Translate(CultivatorHediff.qiRecoveryAmount.ToString().Named("QIRECOVERYAMOUNT"));
+                    if (CultivatorHediff.qiRecoverySpeed < 1)
                     {
-                        qiBarText += "AS_QiPoolBarRecoveryHours".Translate(((2500 / cultivatorHediff.qiRecoverySpeed) / 2500).ToString("0.#").Named("QIRECOVERYSPEED"));
+                        qiBarText += "AS_QiPoolBarRecoveryHours".Translate(((2500 / CultivatorHediff.qiRecoverySpeed) / 2500).ToString("0.#").Named("QIRECOVERYSPEED"));
                         //hours logic
                     }
-                    else if (2500 / cultivatorHediff.qiRecoverySpeed == 2500)//2500 is hour
+                    else if (2500 / CultivatorHediff.qiRecoverySpeed == 2500)//2500 is hour
                     {
                         qiBarText += "AS_QiPoolBarRecoveryHour".Translate();
                         //hour logic
                     }
-                    else if (2500 / cultivatorHediff.qiRecoverySpeed < 2500 && 2500 / cultivatorHediff.qiRecoverySpeed > 41.6)
+                    else if (2500 / CultivatorHediff.qiRecoverySpeed < 2500 && 2500 / CultivatorHediff.qiRecoverySpeed > 41.6)
                     {
-                        qiBarText += "AS_QiPoolBarRecoveryMinutes".Translate(((2500 / cultivatorHediff.qiRecoverySpeed) / 41.6).ToString("0.#").Named("QIRECOVERYSPEED"));
+                        qiBarText += "AS_QiPoolBarRecoveryMinutes".Translate(((2500 / CultivatorHediff.qiRecoverySpeed) / 41.6).ToString("0.#").Named("QIRECOVERYSPEED"));
                         //minutes
                     }
-                    else if (2500 / cultivatorHediff.qiRecoverySpeed == 41.6)
+                    else if (2500 / CultivatorHediff.qiRecoverySpeed == 41.6)
                     {
                         qiBarText += "AS_QiPoolBarRecoveryMinute".Translate();
                         //minute logic
                     }
-                    else if (2500 / cultivatorHediff.qiRecoverySpeed < 41.6)//less than a min
+                    else if (2500 / CultivatorHediff.qiRecoverySpeed < 41.6)//less than a min
                     {
-                        qiBarText += "AS_QiPoolBarRecoverySeconds".Translate(((2500 / cultivatorHediff.qiRecoverySpeed) / 0.69f).ToString("0.#").Named("QIRECOVERYSPEED"));
+                        qiBarText += "AS_QiPoolBarRecoverySeconds".Translate(((2500 / CultivatorHediff.qiRecoverySpeed) / 0.69f).ToString("0.#").Named("QIRECOVERYSPEED"));
                         //seconds logic
                     }
                 }
             }
             Widgets.Label(barRect, qiBarText);
 
-            if (CanControl(pawn) && qiPool.amount < qiPool.maxAmount)
+            if (CanControl() && qiPoolHediff.amount < qiPoolHediff.maxAmount)
             {
                 if (Widgets.ButtonText(gatherButtonRect, "AS_QiGathering".Translate()))
                 {
-                    Job job = JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
+                    Job job = JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn));
                     SoundDefOf.Tick_Low.PlayOneShotOnCamera();
-                    pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+                    selectedPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
                 }
                 if (Mouse.IsOver(gatherButtonRect))
                 {
@@ -299,64 +243,114 @@ namespace Ascension
             Text.Anchor = TextAnchor.UpperLeft;
         }
 
-        private static void DrawRealmBreakthrough(Pawn pawn, Rect rect, Realm_Hediff realm)
-        {
+        #region Realms
+        private static Texture2D cultivatorFullTexture = AscensionTextures.UICultivatorIcon;
+        private static Texture2D cultivatorEmptyTexture = AscensionTextures.UICultivatorEmptyIcon;
+        private static Texture2D goldenCoreTexture = AscensionTextures.UIGoldenCoreIcon;
 
-            float num = rect.x + 17f;
-            Rect rect2 = new Rect(num, rect.y + rect.height / 2f - 16f, 32f, 32f);
-            num += 42f;
-            Text.Anchor = TextAnchor.MiddleLeft;
-            Rect qiLabelRect = new Rect(num, rect.y, rect.width / 2f - num, rect.height);//label rect
-            Widgets.Label(qiLabelRect, "AS_QiPool".Translate());
-            Text.Anchor = TextAnchor.UpperLeft;
-            num += qiLabelRect.width + 10f;
-            Rect rect4 = new Rect(rect2.x, rect.y + rect.height / 2f - 16f, 0f, 32f);
-            Rect rect5 = new Rect(num, rect.y + rect.height / 2f - 16f, rect.width - num - 26f, 32f);
-            rect4.xMax = rect5.xMax;
-            if (Mouse.IsOver(rect4))
+        private static void DrawPawnRealm(Rect rect)
+        {
+            Realm_Hediff realm = bRealmHediff;
+            if (eRealmHediff != null)
             {
-                Widgets.DrawHighlight(rect4);
+                realm = eRealmHediff;
             }
-            Text.Anchor = TextAnchor.MiddleCenter;
-            Widgets.Label(rect4, "AS_QiPool".Translate());
-            if (Widgets.ButtonText(rect4, "AS_Breakthrough".Translate()))
+
+            if (realm != null)
             {
-                Job job;
-                SoundDefOf.Tick_Low.PlayOneShotOnCamera();
-                if (realm.def == AscensionDefOf.EssenceRealm)
+                Rect realmTextureRect = new Rect(rect.x, rect.y + 35, rect.width, rect.height);
+                Rect realmLabelRect = new Rect(realmTextureRect.x, realmTextureRect.yMin - 20f, rect.width, 35f);
+
+                if (Mouse.IsOver(realmLabelRect))
                 {
-                    job = JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughEssence, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
-                    pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+                    Widgets.DrawHighlight(realmLabelRect);
+                    TooltipHandler.TipRegion(realmLabelRect, realm.CurStage.extraTooltip);
                 }
-                else if (realm.def == AscensionDefOf.BodyRealm)
+
+                float realmRatio = (float)realm.progress / realm.maxProgress;
+
+                // Draw the empty texture
+                GUI.DrawTexture(realmTextureRect, cultivatorEmptyTexture);
+
+
+                // Draw the full texture based on the progress
+                if (realmRatio > 0)
                 {
-                    job = JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughBody, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
-                    pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+                    Rect fullRect = new Rect(realmTextureRect.x, realmTextureRect.y + realmTextureRect.height - (realmTextureRect.height * realmRatio), realmTextureRect.width, realmTextureRect.height * realmRatio);
+                    Rect texCoords = new Rect(0f, 0f, 1f, realmRatio);
+                    GUI.DrawTextureWithTexCoords(fullRect, cultivatorFullTexture, texCoords);
                 }
+
+                Color barColor = realm.def == AscensionDefOf.EssenceRealm ? new Color(0.8f, 0.8f, 1f - realm.Severity / 5f, 1f) : new Color(0.8f, 1f - realm.Severity / 5f, 1f - realm.Severity / 5f, 1f);
+
+                GUI.color = Color.white; // Reset color for the text
+                Text.Anchor = TextAnchor.MiddleCenter;
+                Text.Font = GameFont.Small;
+                string realmProgressText = "AS_RealmProgress".Translate(realm.CurStage.label.Named("REALM"), realm.progress.Named("CURRENT"), realm.maxProgress.Named("MAX"));
+                GUI.color = Color.white;
+
+                Widgets.Label(realmLabelRect, realmProgressText);
+
+                if (CultivatorHediff.goldenCoreScore > 0)
+                {
+                    Rect goldenCoreTextureRect = new Rect(realmTextureRect.x + (realmTextureRect.width - 32f) / 2f, realmTextureRect.y + (realmTextureRect.height - 32f) / 2f, 32f, 32f);
+                    GUI.DrawTexture(goldenCoreTextureRect, goldenCoreTexture);
+
+                    Rect goldenCoreLabelRect = new Rect(realmTextureRect.x, goldenCoreTextureRect.y, rect.width, 35f);
+                    GUI.color = Color.gray;
+                    Widgets.Label(goldenCoreLabelRect, "AS_GoldenCoreLabel".Translate(CultivatorHediff.goldenCoreScore.Named("SCORE")));
+                    GUI.color = Color.white;
+                    if (Mouse.IsOver(goldenCoreTextureRect))
+                    {
+                        Widgets.DrawHighlight(goldenCoreTextureRect);
+                        TooltipHandler.TipRegion(goldenCoreTextureRect, "AS_GoldenCoreDesc".Translate(CultivatorHediff.goldenCoreScore.Named("SCORE")));
+                    }
+                }
+
+                GUI.color = Color.white; // Ensure GUI color is reset after drawing
             }
-            if (realm.def == AscensionDefOf.EssenceRealm)
-            {
-                TooltipHandler.TipRegionByKey(rect4, "AS_BreakthroughEssenceDesc");
-            }
-            else if (realm.def == AscensionDefOf.BodyRealm)
-            {
-                TooltipHandler.TipRegionByKey(rect4, "AS_BreakthroughBodyDesc");
-            }else
-            {
-                Log.Message("Ascension error: tooltip undecided realm not body or essence.");
-            }
+
         }
 
-
-        private static void DrawMeditationButton(Pawn pawn, Rect rect, bool isExercise)
+        private static void DrawRealmBreakthrough(Rect rect, Realm_Hediff realm)
         {
+            float barWidth = rect.width - 26f;
+            Rect barRect = new Rect(rect.x + 17f, rect.y + rect.height / 2f - 16f, barWidth, 32f);
+            string tooltipKey = realm.def == AscensionDefOf.EssenceRealm ? "AS_BreakthroughEssenceDesc" : "AS_BreakthroughBodyDesc";
+            if (Mouse.IsOver(barRect))
+            {
+                Widgets.DrawHighlight(barRect);
+            }
+
+            Text.Anchor = TextAnchor.MiddleCenter;
+            Widgets.Label(barRect, "AS_QiPool".Translate());
+            if (realm.def == AscensionDefOf.EssenceRealm && realm.Severity >= 2 && realm.Severity < 3)// golden core breakthrough
+            {
+                tooltipKey = "AS_GoldenCoreBreakthroughDesc".Translate();
+                if (Widgets.ButtonText(barRect, "AS_GoldenCoreBreakthrough".Translate())) // normal breakthrough
+                {
+                    Job job = JobMaker.MakeJob(AscensionDefOf.AS_GoldenCoreBreakthrough, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn));
+                    selectedPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+                }
+            }
+            else if (Widgets.ButtonText(barRect, "AS_Breakthrough".Translate())) // normal breakthrough
+            {
+                Job job = JobMaker.MakeJob(realm.def == AscensionDefOf.EssenceRealm ? AscensionDefOf.AS_BreakthroughEssence : AscensionDefOf.AS_BreakthroughBody, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn));
+                selectedPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+            }
+            TooltipHandler.TipRegionByKey(barRect, tooltipKey);
+        }
+
+        private static void DrawMeditationButton(Rect rect, bool isExercise)
+        {
+            QiPool_Hediff qiPool = selectedPawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
+
             if (isExercise)
             {
                 if (Widgets.ButtonText(rect, "AS_Exercise".Translate()))
                 {
-                    Job job = JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
-                    SoundDefOf.Tick_Low.PlayOneShotOnCamera();
-                    pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+                    Job job = JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn));
+                    selectedPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
                 }
                 if (Mouse.IsOver(rect))
                 {
@@ -364,346 +358,431 @@ namespace Ascension
                     TooltipHandler.TipRegion(rect, "AS_ExerciseDesc".Translate());
                 }
             }
-            else
+            else if (qiPool != null && qiPool.amount >= 2 + qiPool.maxAmount / 10)
             {
-                QiPool_Hediff qiPool = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
-                if (qiPool != null)
+                if (Widgets.ButtonText(rect, "AS_RefineQi".Translate()))
                 {
-                    int qiCost = 2 + (qiPool.maxAmount / 10);
-                    if (qiPool.amount >= qiCost)
-                    {
-                        if (Widgets.ButtonText(rect, "AS_RefineQi".Translate()))
-                        {
-                            Job job = JobMaker.MakeJob(AscensionDefOf.AS_RefineQiJob, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
-                            SoundDefOf.Tick_Low.PlayOneShotOnCamera();
-                            pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
-                        }
-                        if (Mouse.IsOver(rect))
-                        {
-                            Widgets.DrawHighlight(rect);
-                            TooltipHandler.TipRegion(rect, "AS_RefineQiDesc".Translate());
-                        }
-                    }
+                    Job job = JobMaker.MakeJob(AscensionDefOf.AS_RefineQiJob, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn));
+                    selectedPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
                 }
-
-            }
-        }
-
-        private static void DrawRealms(Pawn pawn, Rect rect, float height, float curY)
-        {
-            Realm_Hediff realmHediff;
-            Rect realmRect = new Rect(0f, curY + height + 4f, rect.width, 40f);
-            Rect breakthroughRect = new Rect(0f, curY + height + realmRect.height - 2f, rect.width, 40f);
-            Rect meditationRect = new Rect(breakthroughRect.x + (breakthroughRect.width / 4), breakthroughRect.y, breakthroughRect.width / 2, breakthroughRect.height);
-            if (pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm))
-            {
-                realmHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
-                DrawPawnRealm(realmRect, realmHediff);
-                if (CanControl(pawn))
-                {
-                    if (realmHediff.progress >= realmHediff.maxProgress && realmHediff.Severity < 7)// draw body breakthrough
-                    {
-                        DrawRealmBreakthrough(pawn, breakthroughRect, realmHediff); //draw the breakthrough button when at 100%
-                        meditationRect.y += meditationRect.height;
-                    }
-                    DrawMeditationButton(pawn, meditationRect, false);
-                }
-            }
-            else if (pawn.health.hediffSet.HasHediff(AscensionDefOf.BodyRealm))
-            {
-                realmHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm) as Realm_Hediff;
-                DrawPawnRealm(realmRect, realmHediff);
-                if (CanControl(pawn))
-                {
-                    if (realmHediff.progress >= realmHediff.maxProgress)// draw body breakthrough dont check severity since it breaksthrough into essence at max anyways
-                    {
-                        DrawRealmBreakthrough(pawn, breakthroughRect, realmHediff); //draw the breakthrough button when at 100%
-                        meditationRect.y += meditationRect.height;
-                    }
-                    DrawMeditationButton(pawn, meditationRect, true);
-                }
-            }
-            Rect cultivationStatsRect = new Rect(realmRect.x, meditationRect.y + meditationRect.height, realmRect.width, realmRect.height-15f);
-            DrawCultivationStats(pawn, cultivationStatsRect);
-
-
-
-
-        }
-        private static void DrawCultivationStats(Pawn pawn, Rect rect)
-        {
-
-            GUI.color = Color.white;
-            Rect SpeedFactorsRect = new Rect(rect.x, rect.y + rect.height, rect.width, rect.height+10f);
-            Rect QiTileRect = SpeedFactorsRect;
-            QiTileRect.height -= 10f;
-            QiTileRect.y += SpeedFactorsRect.height;
-            Rect innerCRect = QiTileRect;
-            Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
-            if (cultivatorHediff != null)
-            {
-                Widgets.Label(rect, "AS_CultivationSpeed".Translate(AscensionUtilities.UpdateCultivationSpeed(cultivatorHediff).ToString("0.#").Named("SPEED")));
-
-                string translatedSpeedFactorText = "AS_CSFactorBaseOffset".Translate(cultivatorHediff.cultivationBaseSpeed.ToString("0.#").Named("BASE"), cultivatorHediff.cultivationSpeedOffset.ToString("0.#").Named("OFFSET"));
-                if (pawn.needs.mood != null)
-                {
-                    translatedSpeedFactorText += "AS_CSFactorMood".Translate(pawn.needs.mood.CurLevelPercentage.ToString("0.#").Named("MOOD"));
-                }
-                QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
-                ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
-                int qiTile = 0;
-                if (qiGatherMapComp != null)
-                {
-
-                    qiTile = qiGatherMapComp.GetQiGatherAt(pawn.Position.x, pawn.Position.z);
-                    if (pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm))
-                    {
-                        translatedSpeedFactorText += "AS_CSFactorQiTile".Translate((qiTile / 100f).ToString("0.#").Named("QITILE"));
-                    }
-                }
-                string elementText = "AS_None";
-                if (cultivatorHediff.element == ElementEmitMapComponent.Element.Earth)
-                {
-                    elementText = "AS_Earth";
-                }
-                else if (cultivatorHediff.element == ElementEmitMapComponent.Element.Metal)
-                {
-                    elementText = "AS_Metal";
-                }
-                else if (cultivatorHediff.element == ElementEmitMapComponent.Element.Water)
-                {
-                    elementText = "AS_Water";
-                }
-                else if (cultivatorHediff.element == ElementEmitMapComponent.Element.Fire)
-                {
-                    elementText = "AS_Fire";
-                }
-                else if (cultivatorHediff.element == ElementEmitMapComponent.Element.Wood)
-                {
-                    elementText = "AS_Wood";
-                }
-                if (elementEmitMapComp != null)
-                {
-                    translatedSpeedFactorText += "AS_CSFactorElement".Translate(elementText.Translate().Named("ELEMENT"),(1+(elementEmitMapComp.CalculateElementValueAt(new IntVec2(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z), cultivatorHediff.element)/100f)).ToString("0.#").Named("AMOUNT"));
-                }
-                Widgets.Label(SpeedFactorsRect, translatedSpeedFactorText);
-
-                if (qiGatherMapComp != null)
-                {
-                    
-                    Widgets.Label(QiTileRect, "AS_CurrentElement".Translate(elementText.Translate().Named("ELEMENT"), elementEmitMapComp.CalculateElementValueAt(new IntVec2(pawn.Position.x, pawn.Position.z), cultivatorHediff.element).Named("AMOUNT")) +"AS_QiTile".Translate(qiTile.Named("QITILE")));
-                    innerCRect.y += QiTileRect.height;
-                }
-
-                Realm_Hediff essenceHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm, false) as Realm_Hediff;
-                string innerCText = "AS_InnerC".Translate(cultivatorHediff.innerCauldronQi.Named("ICQI"), cultivatorHediff.innerCauldronLimit.Named("ICMAX"));
-                string innerCDesc = "AS_InnerCDesc".Translate();
-                string innerCJob = "AS_InnerCJob".Translate();
-                string innerCJobDesc = "AS_InnerCJobDesc".Translate();
-                GUI.color = Color.yellow;
-                if (essenceHediff != null)
-                {
-                    if (essenceHediff.Severity >= 3)
-                    {
-                        GUI.color = Color.magenta;
-                        innerCText = "AS_AnimaC".Translate(cultivatorHediff.innerCauldronQi.Named("ICQI"));
-                        innerCDesc = "AS_AnimaCDesc".Translate();
-                        innerCJob = "AS_AnimaCJob".Translate();
-                        innerCJobDesc = "AS_AnimaCJobDesc".Translate();
-                    }
-                }
-
-                Widgets.Label(innerCRect, innerCText);
-                Rect innerCButtonRect = innerCRect;
-                innerCButtonRect.y += innerCRect.height;
-                innerCButtonRect.x += innerCButtonRect.width / 4;
-                innerCButtonRect.width /= 2f;
-
-                QiPool_Hediff qiPool = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
-
-                if (qiPool != null)
-                {
-                    int qiCost = 2 + (qiPool.maxAmount / 50);// 2% + 2
-                    if (qiPool.amount >= qiCost)
-                    {
-                        if (Widgets.ButtonText(innerCButtonRect, innerCJob))
-                        {
-                            Job job = JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, pawn, CultivationJobUtility.FindCultivationSpot(pawn));
-                            SoundDefOf.Tick_Low.PlayOneShotOnCamera();
-                            pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
-                        }
-
-                        if (Mouse.IsOver(innerCButtonRect))
-                        {
-                            Widgets.DrawHighlight(innerCButtonRect);
-                            TooltipHandler.TipRegion(innerCButtonRect, innerCJobDesc);
-                        }
-                    }
-                }
-
-                GUI.color = Color.white;
-
-
                 if (Mouse.IsOver(rect))
                 {
                     Widgets.DrawHighlight(rect);
-                    TooltipHandler.TipRegion(rect, "AS_CultivationSpeedDesc".Translate());
-                }
-
-                if (Mouse.IsOver(SpeedFactorsRect))
-                {
-                    Widgets.DrawHighlight(SpeedFactorsRect);
-                    TooltipHandler.TipRegion(SpeedFactorsRect, "AS_CSFactorsDesc".Translate());
-                }
-
-                if (Mouse.IsOver(QiTileRect))
-                {
-                    Widgets.DrawHighlight(QiTileRect);
-                    TooltipHandler.TipRegion(QiTileRect, "AS_QiTileDesc".Translate());
-                }
-
-                if (Mouse.IsOver(innerCRect))
-                {
-                    Widgets.DrawHighlight(innerCRect);
-                    TooltipHandler.TipRegion(innerCRect, innerCDesc);
+                    TooltipHandler.TipRegion(rect, "AS_RefineQiDesc".Translate());
                 }
             }
         }
 
-        private static void DrawSchedule(Pawn pawn, Rect rect, float height, float curY)
+        private static void DrawRealms(Rect rect, float height, float curY)
         {
-            Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
-            if (cultivatorHediff != null)
+            Realm_Hediff realmHediff = null;
+            Rect realmRect = new Rect(rect.width / 4, (curY + (rect.width / 5)), rect.width / 2, rect.width / 2);
+            Rect meditationRect = new Rect(0f, curY + height + realmRect.height, rect.width, 20f);
+            Rect cultivationStatsRect = new Rect(meditationRect.x, meditationRect.y+ meditationRect.height, meditationRect.width, 20f);
+
+            if (eRealmHediff != null)
             {
-                //realm auto cultivation
-                Rect autoCultivatorRect = new Rect(rect.x, curY + height + 4f, rect.width, rect.height / 12);
-                Text.Anchor = TextAnchor.MiddleLeft;
-                Widgets.Label(autoCultivatorRect, "AS_AutoCType".Translate());
-                Text.Anchor = TextAnchor.MiddleRight;
-                Text.Anchor = TextAnchor.UpperLeft;
-                Rect autoRealmButton = new Rect(rect.x, curY + height + 4f + autoCultivatorRect.height, rect.width - 3f, rect.height / 12);
-                TaggedString autoCultivatorTypeText;
-                TaggedString autoCultivatorTypeDescText;
-                if (cultivatorHediff.autoCultivateType == 1)
+                realmHediff = eRealmHediff as Realm_Hediff;
+            }
+            else if (bRealmHediff != null)
+            {
+                realmHediff = bRealmHediff as Realm_Hediff;
+            }
+
+            if (realmHediff != null)
+            {
+                DrawPawnRealm(realmRect);
+
+                if (CanControl() && realmHediff.progress >= realmHediff.maxProgress && realmHediff.Severity < 7)// this displays breakthrough when it should
                 {
+                    DrawRealmBreakthrough(meditationRect, realmHediff);
+                    // meditation button because if they can breakthrough they shouldnt be able to refine qi
+                    cultivationStatsRect.y += meditationRect.height;
+                }else if (CanControl() && realmHediff.progress < realmHediff.maxProgress) //this displays the qi refine button instead if they cant breakthrough.
+                {
+                    DrawMeditationButton(meditationRect, realmHediff != null && realmHediff.def == AscensionDefOf.BodyRealm);
+                    cultivationStatsRect.y += meditationRect.height;
+                }
+
+                DrawCultivationStatsBasic(cultivationStatsRect);
+            }
+
+
+        }
+        #endregion
+
+
+
+
+
+
+
+
+        #region Cultivation Stats
+
+        private static void DrawCultivationStatsBasic(Rect rect)
+        {
+            GUI.color = Color.white;
+
+            Rect qiTileRect = new Rect(rect.x,rect.y+ rect.height, rect.width, rect.height);
+            Rect innerCRect = new Rect(rect.x, qiTileRect.y + qiTileRect.height + 10f, rect.width, rect.height);
+
+            if (CultivatorHediff == null)
+                return;
+
+            DrawCultivationSpeed(rect);
+            DrawQiTile(qiTileRect);
+            DrawInnerCauldron(innerCRect);
+
+            DrawHighlightsAndTooltips(rect, qiTileRect, innerCRect);
+        }
+
+
+        private static void DrawCultivationStats(Rect rect)
+        {
+            GUI.color = Color.white;
+            Cultivator_Hediff cultivatorHediff = selectedPawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
+            if (cultivatorHediff == null)
+                return;
+
+            Rect speedFactorsRect = rect;
+            speedFactorsRect.height = 40f;
+
+            Rect maxQiFactorRect = speedFactorsRect;
+            maxQiFactorRect.y += speedFactorsRect.height;
+
+            DrawSpeedFactors(speedFactorsRect);
+            DrawMaxQiFactors(maxQiFactorRect);
+
+        }
+
+        private static void DrawCultivationSpeed(Rect rect)
+        {
+            Widgets.Label(rect, "AS_CultivationSpeed".Translate(
+                AscensionUtilities.UpdateCultivationSpeed(CultivatorHediff).ToString("0.#").Named("SPEED")));
+        }
+
+        private static void DrawSpeedFactors(Rect speedFactorsRect)
+        {
+            string translatedSpeedFactorText = "AS_CSFactorBaseOffset".Translate(
+                CultivatorHediff.cultivationBaseSpeed.ToString("0.#").Named("BASE"),
+                CultivatorHediff.cultivationSpeedOffset.ToString("0.#").Named("OFFSET"));
+
+            if (selectedPawn.needs.mood != null)
+            {
+                translatedSpeedFactorText += "AS_CSFactorMood".Translate(
+                    selectedPawn.needs.mood.CurLevelPercentage.ToString("0.#").Named("MOOD"));
+            }
+
+            QiGatherMapComponent qiGatherMapComp = CultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
+            if (qiGatherMapComp != null)
+            {
+                int qiTile = qiGatherMapComp.GetQiGatherAt(selectedPawn.Position.x, selectedPawn.Position.z);
+                if (selectedPawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm))
+                {
+                    translatedSpeedFactorText += "AS_CSFactorQiTile".Translate(
+                        (qiTile / 100f).ToString("0.#").Named("QITILE"));
+                }
+            }
+
+            ElementEmitMapComponent elementEmitMapComp = CultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
+            string elementText = TranslateElement(CultivatorHediff.element);
+            if (elementEmitMapComp != null)
+            {
+                translatedSpeedFactorText += "AS_CSFactorElement".Translate(
+                    elementText.Translate().Named("ELEMENT"),
+                    (1 + (elementEmitMapComp.CalculateElementValueAt(
+                        new IntVec2(CultivatorHediff.pawn.Position.x, CultivatorHediff.pawn.Position.z), CultivatorHediff.element) / 100f))
+                        .ToString("0.#").Named("AMOUNT"));
+            }
+            speedFactorsRect.height = 35f;
+            Widgets.Label(speedFactorsRect, "AS_CSFactorLabel".Translate());
+            speedFactorsRect.y += 35f;
+            speedFactorsRect.height = 35f;
+            Widgets.Label(speedFactorsRect, translatedSpeedFactorText);
+            AddHighlightAndTooltip(speedFactorsRect, "AS_CSFactorsDesc", Color.white);
+        }
+
+        //prob need to make it so we only grab the hediffs once
+        private static void DrawMaxQiFactors(Rect speedFactorsRect)
+        {
+            speedFactorsRect.height = 50f;
+            speedFactorsRect.y += 40f;
+            if (qiPoolHediff == null) return;
+
+            StringBuilder translatedSpeedFactorText = new StringBuilder();
+
+            //we always have body size, offset. we have realm if we are in essence realm.
+
+            //body size times 100, then realm and (if above 0) gc scores are added, then offset is applied, then inner cauldron is added
+            translatedSpeedFactorText.Append("AS_MQFactorBodySize".Translate(selectedPawn.RaceProps.baseBodySize.ToString("0.#").Named("BS")));
+
+            if (eRealmHediff != null)
+            {
+                translatedSpeedFactorText.Append("AS_MQFactorRealm".Translate(qiPoolHediff.realmMaxAmountOffset.ToString().Named("REALM")));
+            }
+
+            if (CultivatorHediff.goldenCoreScore > 0)
+            {
+                translatedSpeedFactorText.Append("AS_MQFactorGC".Translate(CultivatorHediff.goldenCoreScore.ToString().Named("GC")));
+                translatedSpeedFactorText.Append("AS_MQFactorOffset".Translate(qiPoolHediff.maxAmountOffset.ToString("0.#").Named("OFFSET")));
+                translatedSpeedFactorText.Append("AS_MQFactorAC".Translate(CultivatorHediff.innerCauldronQi.ToString().Named("AC")));
+            }
+            else
+            {
+                translatedSpeedFactorText.Append("AS_MQFactorOffset".Translate(qiPoolHediff.maxAmountOffset.ToString("0.#").Named("OFFSET")));
+                translatedSpeedFactorText.Append("AS_MQFactorIC".Translate(CultivatorHediff.innerCauldronQi.ToString().Named("IC")));
+            }
+            Widgets.Label(speedFactorsRect, "AS_MQFactorLabel".Translate());
+            speedFactorsRect.y += 25f;
+            speedFactorsRect.height = 50f;
+            Widgets.Label(speedFactorsRect, translatedSpeedFactorText.ToString());
+            AddHighlightAndTooltip(speedFactorsRect, "AS_MQFactorsDesc", Color.white);
+        }
+
+
+        private static void DrawQiTile(Rect qiTileRect)
+        {
+            QiGatherMapComponent qiGatherMapComp = CultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
+            ElementEmitMapComponent elementEmitMapComp = CultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
+
+            if (qiGatherMapComp != null && elementEmitMapComp != null)
+            {
+                string elementText = TranslateElement(CultivatorHediff.element);
+                int qiTile = qiGatherMapComp.GetQiGatherAt(selectedPawn.Position.x, selectedPawn.Position.z);
+                Widgets.Label(qiTileRect,
+                    "AS_CurrentElement".Translate(elementText.Translate().Named("ELEMENT"),
+                    elementEmitMapComp.CalculateElementValueAt(
+                        new IntVec2(selectedPawn.Position.x, selectedPawn.Position.z), CultivatorHediff.element).Named("AMOUNT")) +
+                    "AS_QiTile".Translate(qiTile.Named("QITILE")));
+            }
+        }
+
+        private static void DrawInnerCauldron(Rect innerCRect)
+        {
+
+            string innerCText = "AS_InnerC".Translate(
+                CultivatorHediff.innerCauldronQi.Named("ICQI"),
+                CultivatorHediff.innerCauldronLimit.Named("ICMAX"));
+            string innerCDesc = "AS_InnerCDesc".Translate();
+            string innerCJob = "AS_InnerCJob".Translate();
+            string innerCJobDesc = "AS_InnerCJobDesc".Translate();
+
+            GUI.color = Color.yellow;
+            if (eRealmHediff != null && eRealmHediff.Severity >= 3)
+            {
+                GUI.color = Color.magenta;
+                innerCText = "AS_AnimaC".Translate(CultivatorHediff.innerCauldronQi.Named("ICQI"));
+                innerCDesc = "AS_AnimaCDesc".Translate();
+                innerCJob = "AS_AnimaCJob".Translate();
+                innerCJobDesc = "AS_AnimaCJobDesc".Translate();
+            }
+
+            Widgets.Label(innerCRect, innerCText);
+
+            Rect innerCButtonRect = new Rect(innerCRect.x + innerCRect.width / 4, innerCRect.y + innerCRect.height, innerCRect.width / 2f, innerCRect.height);
+
+            if (qiPoolHediff != null)
+            {
+                long qiCost = 2 + (qiPoolHediff.maxAmount / 50); // 2% + 2
+                if (qiPoolHediff.amount >= qiCost)
+                {
+                    if (Widgets.ButtonText(innerCButtonRect, innerCJob))
+                    {
+                        Job job = JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn));
+                        SoundDefOf.Tick_Low.PlayOneShotOnCamera();
+                        selectedPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+                    }
+
+                    if (Mouse.IsOver(innerCButtonRect))
+                    {
+                        Widgets.DrawHighlight(innerCButtonRect);
+                        TooltipHandler.TipRegion(innerCButtonRect, innerCJobDesc);
+                    }
+                }
+            }
+        }
+
+        private static string TranslateElement(ElementEmitMapComponent.Element element)
+        {
+            return element switch
+            {
+                ElementEmitMapComponent.Element.Earth => "AS_Earth",
+                ElementEmitMapComponent.Element.Metal => "AS_Metal",
+                ElementEmitMapComponent.Element.Water => "AS_Water",
+                ElementEmitMapComponent.Element.Fire => "AS_Fire",
+                ElementEmitMapComponent.Element.Wood => "AS_Wood",
+                _ => "AS_None"
+            };
+        }
+
+        private static void DrawHighlightsAndTooltips(Rect rect, Rect qiTileRect, Rect innerCRect)
+        {
+            Color highlightColor = new Color(0.8f, 0.8f, 0.8f, 0.5f); // Slightly darker highlight color
+
+            AddHighlightAndTooltip(rect, "AS_CultivationSpeedDesc", highlightColor);
+
+            AddHighlightAndTooltip(qiTileRect, "AS_QiTileDesc", highlightColor);
+            AddHighlightAndTooltip(innerCRect, "AS_InnerCDesc", highlightColor);
+
+            GUI.color = Color.white;
+        }
+        private static void AddHighlightAndTooltip(Rect rect, string tooltipKey, Color highlightColor)
+        {
+            if (Mouse.IsOver(rect))
+            {
+                GUI.color = highlightColor;
+                Widgets.DrawHighlight(rect);
+                TooltipHandler.TipRegion(rect, tooltipKey.Translate());
+                GUI.color = Color.white;
+            }
+        }
+
+
+        #endregion
+
+        #region Schedule
+
+
+        private static void DrawSchedule(Rect rect, float height, float curY)
+        {
+            Cultivator_Hediff cultivatorHediff = CultivatorHediff;
+            if (cultivatorHediff == null) return;
+
+            float scheduleBarHieght = 20f;
+            float scheduleButtonHieght = 35f;
+            // Realm auto cultivation
+            Rect autoCultivatorRect = new Rect(rect.x, curY + height + 4f, rect.width, scheduleBarHieght);
+            DrawAutoTypeLabel(autoCultivatorRect, "AS_AutoCType");
+
+            Rect autoRealmButton = new Rect(rect.x, autoCultivatorRect.yMax, rect.width - 3f, scheduleButtonHieght);
+            DrawAutoCultivationButton(autoRealmButton);
+
+            Rect cultivationStartLabelRect = new Rect(rect.x, autoRealmButton.yMax, rect.width, scheduleBarHieght);
+            Rect cultivationStartSlider = new Rect(rect.x, cultivationStartLabelRect.yMax, rect.width, scheduleBarHieght);
+            Rect cultivationEndLabelRect = new Rect(rect.x, cultivationStartSlider.yMax, rect.width, scheduleBarHieght);
+            Rect cultivationEndSlider = new Rect(rect.x, cultivationEndLabelRect.yMax, rect.width, scheduleBarHieght);
+
+            DrawTimeSlider(cultivatorHediff, cultivationStartLabelRect, cultivationStartSlider, true);
+            DrawTimeSlider(cultivatorHediff, cultivationEndLabelRect, cultivationEndSlider, false);
+
+            Rect cultivationStatsRect = new Rect(cultivationEndSlider.x, cultivationEndSlider.yMax, cultivationEndSlider.width, scheduleButtonHieght);
+            DrawCultivationStats(cultivationStatsRect);
+        }
+
+        private static void DrawAutoTypeLabel(Rect rect, string translationKey)
+        {
+            Text.Anchor = TextAnchor.MiddleLeft;
+            Widgets.Label(rect, translationKey.Translate());
+            Text.Anchor = TextAnchor.UpperLeft;
+        }
+
+        private static void DrawAutoCultivationButton(Rect buttonRect)
+        {
+            string autoCultivatorTypeText;
+            string autoCultivatorTypeDescText;
+
+            switch (CultivatorHediff.autoCultivateType)
+            {
+                case 1:
                     autoCultivatorTypeText = "AS_RealmAuto".Translate();
                     autoCultivatorTypeDescText = "AS_RealmAutoDesc".Translate();
-                }
-                else if (cultivatorHediff.autoCultivateType == 2)
-                {
+                    break;
+                case 2:
                     autoCultivatorTypeText = "AS_RealmOnlyAuto".Translate();
                     autoCultivatorTypeDescText = "AS_RealmOnlyAutoDesc".Translate();
-                }
-                else if (cultivatorHediff.autoCultivateType == 3)
-                {
+                    break;
+                case 3:
                     autoCultivatorTypeText = "AS_QiGatheringAuto".Translate();
                     autoCultivatorTypeDescText = "AS_QiGatheringAutoDesc".Translate();
-                }
-                if (Widgets.ButtonText(autoRealmButton, autoCultivatorTypeText))
-                {
-                    if (cultivatorHediff.autoCultivateType <3)
-                    {
-                        cultivatorHediff.autoCultivateType += 1;
-                    }
-                    else if (cultivatorHediff.autoCultivateType >= 3)
-                    {
-                        cultivatorHediff.autoCultivateType = 1;
-                    }
-                }
-                if (Mouse.IsOver(autoRealmButton))
-                {
-                    Widgets.DrawHighlight(autoRealmButton);
-                    TooltipHandler.TipRegion(autoRealmButton, autoCultivatorTypeDescText);
-                }
-
-                float floatValueStart = cultivatorHediff.startTime;
-                // Convert the float value to hours and minutes
-                int hours = (int)floatValueStart;
-                int minutes = (int)((floatValueStart - hours) * 60);
-
-                // Handle the case where the hour part exceeds 12
-                hours = hours % 12;
-                if (hours == 0)
-                {
-                    hours = 12; // Set it to 12 if it's 0
-                }
-
-                // Create a TimeSpan object
-                TimeSpan time = new TimeSpan(hours, minutes, 0);
-
-                // Determine whether it's AM or PM
-                string period = (floatValueStart >= 24 || floatValueStart <= 0|| floatValueStart < 12) ? "am" : "pm";
-
-                // Format the TimeSpan to the desired string format
-                string formattedTime = time.ToString(@"h\:mm") + period;
-
-
-
-                //auto cultivation times
-                Rect cultivationStartLabelRect = new Rect(rect.x, curY + height + 4f + autoRealmButton.height*2, rect.width, rect.height / 12);
-                Rect cultivationStartSlider = new Rect(rect.x, cultivationStartLabelRect.y+cultivationStartLabelRect.height, rect.width, rect.height / 12);
-                Rect cultivationEndLabelRect = new Rect(rect.x, cultivationStartSlider.y + cultivationStartSlider.height, rect.width, rect.height / 12);
-                Rect cultivationEndSlider = new Rect(rect.x, cultivationEndLabelRect.y + cultivationEndLabelRect.height, rect.width, rect.height / 12);
-                Text.Anchor = TextAnchor.MiddleLeft;
-                Widgets.Label(cultivationStartLabelRect, "AS_AutoCStart".Translate()+ formattedTime);
-                cultivatorHediff.startTime = Widgets.HorizontalSlider(cultivationStartSlider, cultivatorHediff.startTime, 0f, 24f);
-
-
-                float floatValueEnd = cultivatorHediff.endTime;
-                // Convert the float value to hours and minutes
-                hours = (int)floatValueEnd;
-                minutes = (int)((floatValueEnd - hours) * 60);
-
-                // Handle the case where the hour part exceeds 12
-                hours = hours % 12;
-                if (hours == 0)
-                {
-                    hours = 12; // Set it to 12 if it's 0
-                }
-
-                // Create a TimeSpan object
-                time = new TimeSpan(hours, minutes, 0);
-
-                // Determine whether it's AM or PM
-                period = (floatValueEnd < 12 && floatValueEnd >= 1) ? "am" : "pm";
-
-                // Format the TimeSpan to the desired string format
-                formattedTime = time.ToString(@"h\:mm") + period;
-
-                Widgets.Label(cultivationEndLabelRect, "AS_AutoCEnd".Translate() + formattedTime);
-                cultivatorHediff.endTime = Widgets.HorizontalSlider(cultivationEndSlider, cultivatorHediff.endTime, 0f, 24f);
-
+                    break;
+                default:
+                    return;
             }
 
+            if (Widgets.ButtonText(buttonRect, autoCultivatorTypeText))
+            {
+                CultivatorHediff.autoCultivateType = CultivatorHediff.autoCultivateType < 3 ? CultivatorHediff.autoCultivateType + 1 : 1;
+            }
+
+            if (Mouse.IsOver(buttonRect))
+            {
+                Widgets.DrawHighlight(buttonRect);
+                TooltipHandler.TipRegion(buttonRect, autoCultivatorTypeDescText);
+            }
         }
-        private static float DrawCultivationTab(Rect rect, Pawn pawn, float curY)
+
+        private static void DrawTimeSlider(Cultivator_Hediff cultivatorHediff, Rect labelRect, Rect sliderRect, bool isStartTime)
         {
+            float timeValue = isStartTime ? cultivatorHediff.startTime : cultivatorHediff.endTime;
+            string labelKey = isStartTime ? "AS_AutoCStart" : "AS_AutoCEnd";
+
+            string formattedTime = FormatTime(timeValue);
+            Widgets.Label(labelRect, $"{labelKey.Translate()} {formattedTime}");
+            float newTimeValue = Widgets.HorizontalSlider(sliderRect, timeValue, 0f, 24f);
+
+            if (isStartTime)
+            {
+                cultivatorHediff.startTime = newTimeValue;
+            }
+            else
+            {
+                cultivatorHediff.endTime = newTimeValue;
+            }
+        }
+
+        private static string FormatTime(float timeValue)
+        {
+            int hours = (int)timeValue;
+            int minutes = (int)((timeValue - hours) * 60);
+            hours = hours % 12;
+            if (hours == 0) hours = 12;
+
+            TimeSpan time = new TimeSpan(hours, minutes, 0);
+            string period = (timeValue < 12 || timeValue >= 24) ? "am" : "pm";
+            return time.ToString(@"h\:mm") + period;
+        }
+        #endregion
+
+
+        public static readonly HediffDef qiPoolHediffDef = AscensionDefOf.QiPool;
+        public static readonly HediffDef eRealmHediffDef = AscensionDefOf.EssenceRealm;
+        public static readonly HediffDef bRealmHediffDef = AscensionDefOf.BodyRealm;
+        public static readonly HediffDef CultivatorHediffDef = AscensionDefOf.Cultivator;
+
+        public static QiPool_Hediff qiPoolHediff;
+        public static Realm_Hediff eRealmHediff;
+        public static Realm_Hediff bRealmHediff;
+        public static Cultivator_Hediff CultivatorHediff;
+
+        private static float DrawCultivationTab(Rect rect, float curY)
+        {
+            //here we grab the hediffs for use for most of the cultivation tab
+            CultivatorHediff = selectedPawn.health.hediffSet.GetFirstHediffOfDef(CultivatorHediffDef) as Cultivator_Hediff;
+            qiPoolHediff = selectedPawn.health.hediffSet.GetFirstHediffOfDef(qiPoolHediffDef) as QiPool_Hediff;
+            eRealmHediff = selectedPawn.health.hediffSet.GetFirstHediffOfDef(eRealmHediffDef) as Realm_Hediff;
+            bRealmHediff = selectedPawn.health.hediffSet.GetFirstHediffOfDef(bRealmHediffDef) as Realm_Hediff;
+
             Widgets.BeginGroup(rect);
             Rect qiBarRect = new Rect(0f, curY, rect.width, 40f);
-            QiPool_Hediff qiPool = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
-            if (qiPool != null)
+            if (qiPoolHediff != null)
             {
-                DrawPawnQi(pawn, qiBarRect, qiPool);
+                DrawPawnQi(qiBarRect);
             }
             Widgets.DrawLineHorizontal(0f, curY + qiBarRect.height + 35, rect.width, Color.gray);
-            Rect realmsRect = new Rect(rect.x+rect.width, rect.y, (rect.width/3)*2, rect.height);
 
+            float realmsRectWidth = rect.width / 2;
+            Rect realmsRect = new Rect(rect.x + rect.width, rect.y, realmsRectWidth, rect.height);
             //Realms rect should include cultivation stats.
-
-
-
             float underQiHeight = qiBarRect.height + 45f;
-            DrawRealms(pawn, realmsRect, underQiHeight, curY);
+            DrawRealms(realmsRect, underQiHeight, curY);
             GUI.color = Color.white;
             //the schedule manages the times of day to auto cultivate and the realm to cultivate
-            float scheduleRectWidth = rect.width / 3;
             float scheduleRectX = rect.x + realmsRect.width;
             // Create the left side rectangle with the same height as the reference rectangle
-            Rect scheduleRect = new Rect(scheduleRectX, rect.y, scheduleRectWidth, rect.height);
-            DrawSchedule(pawn, scheduleRect, underQiHeight, curY);
-
+            Rect scheduleRect = new Rect(scheduleRectX, rect.y, realmsRectWidth, rect.height);
+            DrawSchedule(scheduleRect, underQiHeight, curY);
             //Widgets.DrawLineHorizontal(0f, (rect2.yMax + rect2.y) / 2f, rect.width);
-
             GUI.color = Color.white;
             Widgets.EndGroup();
             curY += 10f;

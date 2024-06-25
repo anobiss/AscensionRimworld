@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
@@ -84,10 +85,28 @@ namespace Ascension
             base.PostSpawnSetup(respawningAfterLoad);
         }
 
+        public override void PostDestroy(DestroyMode mode, Map previousMap)
+        {
+            base.PostDestroy(mode, previousMap);
+            QiGatherMapComponent qiGatherMapComp = previousMap.GetComponent<QiGatherMapComponent>();
+            if (this != null && qiGatherMapComp.CultivationCauldrons != null)
+            {
+                if (qiGatherMapComp.CultivationCauldrons.Contains(this))
+                {
+                    qiGatherMapComp.CultivationCauldrons.Remove(this);
+                }
+            }
+        }
         public override void PostDeSpawn(Map map)
         {
-            QiGatherMapComponent qiGatherMapComp = parent.MapHeld.GetComponent<QiGatherMapComponent>();
-            qiGatherMapComp.CultivationCauldrons.Remove(this);
+            QiGatherMapComponent qiGatherMapComp = map.GetComponent<QiGatherMapComponent>();
+            if (this != null && qiGatherMapComp.CultivationCauldrons != null)
+            {
+                if (qiGatherMapComp.CultivationCauldrons.Contains(this))
+                {
+                    qiGatherMapComp.CultivationCauldrons.Remove(this);
+                }
+            }
             base.PostDeSpawn(map);
         }
     }

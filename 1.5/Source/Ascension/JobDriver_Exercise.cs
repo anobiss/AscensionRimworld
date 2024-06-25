@@ -52,7 +52,7 @@ namespace Ascension
 
         private void Exercise()
         {
-            int maxBody = 10;//default always given amount
+            long maxBody = 10;//default always given amount
             Realm_Hediff bodyHediff = (Realm_Hediff)pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm);
             if (bodyHediff != null)
             {

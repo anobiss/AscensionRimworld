@@ -13,6 +13,8 @@ namespace Ascension
 {
     public class Cultivator_Hediff : HediffWithComps
     {
+
+
         public float startTime = 10f;
         public float endTime = 12f;
         public int autoCultivateType = 1;
@@ -25,9 +27,13 @@ namespace Ascension
         public float qiRecoverySpeedOffset = 0; // qiRecovery is recalced not saved
 
 
+        //golden core score and if they have one. if they dont its 0. score is set when golden core breakthrough is finished.
+        public int goldenCoreScore = 0;
+        
+
         //inner cauldron/anima conversion. cap is ignored when anima conversion.
-        public int innerCauldronLimit = 1200;
-        public int innerCauldronQi = 0;
+        public long innerCauldronLimit = 1200;
+        public long innerCauldronQi = 0;
 
 
         public ElementEmitMapComponent.Element element = ElementEmitMapComponent.Element.None;
@@ -63,6 +69,7 @@ namespace Ascension
         }
         public override void ExposeData()
         {
+            Scribe_Values.Look(ref goldenCoreScore, "goldenCoreScore");
             Scribe_Values.Look(ref qiRecoverySpeed, "qiRecoverySpeed");
             //Scribe_Values.Look(ref qiRecoverySpeedOffset, "qiRecoverySpeedOffset");
             Scribe_Values.Look(ref element, "element");

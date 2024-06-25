@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Verse.AI;
 using Verse;
+using Verse.AI;
 using RimWorld;
 
 namespace Ascension
 {
-    public class JobDriver_BreakthroughGoldenCore : JobDriver
+    //Golden Core breakthroughs work entirely different from every other.
+    //100 max qi per (hour divided by cultivation speed)
+    //finishes when interrupted or ended by running out of qi
+    //qi recovery is turned off during this breakthrough
+    public class JobDriver_GoldenCoreBreakthrough : JobDriver
     {
         private const int DurationTicks = 17500; // 7 hours
+        private const int QiConsumptionPerCycle = 25;
         public const TargetIndex SpotInd = TargetIndex.B;
 
         //does this part after time calculations not before
@@ -29,28 +31,65 @@ namespace Ascension
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
+            int currentScore = 0;
             int cultivationJobTicks = DurationTicks;
-            //Log.Message("initial cultivationJobTicks" + cultivationJobTicks);
-            Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
-            if (cultivatorHediff != null)
-            {
-                //log important only for testing
-                float cultivationSpeed = AscensionUtilities.UpdateCultivationSpeed(cultivatorHediff);
-                //Log.Message("current cultivation speed is" + cultivationSpeed);
+            int cultivationTicksCounter = 0;
 
-                float cultivationTicks = DurationTicks / AscensionUtilities.UpdateCultivationSpeed(cultivatorHediff);
-                //Log.Message("cultivation ticks float is" + cultivationTicks);
+            QiPool_Hediff qiPool = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
+            Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
+
+            if (cultivatorHediff != null && qiPool != null)
+            {
+                float cultivationSpeed = AscensionUtilities.UpdateCultivationSpeed(cultivatorHediff);
+                float cultivationTicks = DurationTicks / cultivationSpeed;
                 cultivationJobTicks = (int)Math.Floor(cultivationTicks);
-                //Log.Message("ticks now cultivationJobTicks"+ cultivationJobTicks);
+
+                yield return Toils_Goto.GotoCell(TargetIndex.B, PathEndMode.OnCell);
+
+                Toil cultivationToil = new Toil();
+                cultivationToil.initAction = () =>
+                {
+                    cultivationToil.actor.pather.StopDead();
+                };
+                cultivationToil.tickAction = () =>
+                {
+                    if (cultivationTicksCounter >= cultivationJobTicks)
+                    {
+                        cultivationTicksCounter = 0;
+
+                        if (qiPool.amount >= QiConsumptionPerCycle)
+                        {
+                            qiPool.amount -= QiConsumptionPerCycle;
+                            currentScore += QiConsumptionPerCycle;
+                        }
+                        else
+                        {
+                            Breakthrough(currentScore);
+                            this.EndJobWith(JobCondition.Succeeded);
+                        }
+                    }
+
+                    cultivationTicksCounter++;
+                };
+                cultivationToil.defaultCompleteMode = ToilCompleteMode.Never;
+                cultivationToil.AddPreTickAction(() =>
+                {
+                    if (qiPool.amount < QiConsumptionPerCycle)
+                    {
+                        Breakthrough(currentScore);
+                        this.EndJobWith(JobCondition.Succeeded);
+                    }
+                });
+
+                yield return cultivationToil.WithProgressBar(TargetIndex.A, () => (float)cultivationTicksCounter / cultivationJobTicks, true);
+
+                yield return Toils_General.Do(() => Breakthrough(currentScore));
             }
-            yield return Toils_Goto.GotoCell(TargetIndex.B, PathEndMode.OnCell);
-            yield return Toils_General.Wait(cultivationJobTicks).WithProgressBarToilDelay(TargetIndex.A);
-            yield return Toils_General.Do(Breakthrough);
         }
 
-        private void Breakthrough()
+        private void Breakthrough(int score)
         {
-            AscensionUtilities.TierBreakthrough((Realm_Hediff)pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm));
+            AscensionUtilities.GoldenCoreBreakthrough(pawn, score);
             if (job.GetTarget(SpotInd) != pawn)
             {
                 pawn.MapHeld.reservationManager.Release(job.GetTarget(SpotInd), pawn, job);
@@ -58,36 +97,3 @@ namespace Ascension
         }
     }
 }
-
-
-
-
-//        --
-//        float newWarmupTime = ability.def.verbProperties.warmupTime;
-
-//        HediffSet hediffSet = ability.pawn.health.hediffSet;
-//        Hediff hediff;
-
-//            if (hediffSet.HasHediff(AscensionDefOf.PseudoImmortality))
-//            {
-//                hediff = hediffSet.GetFirstHediffOfDef(AscensionDefOf.PseudoImmortality, false);
-//                newWarmupTime += hediff.Severity* 42; // 1 hour per tier
-//            }
-//            else if (hediffSet.HasHediff(AscensionDefOf.AscendantFoundation))
-//            {
-//                hediff = hediffSet.GetFirstHediffOfDef(AscensionDefOf.PseudoImmortality, false);
-//                newWarmupTime += hediff.Severity* 126; // 3 hours per tier
-//            }
-//bool num = base.TryStartCastOn(castTarg, destTarg, surpriseAttack, canHitNonTargetPawns, preventFriendlyFire, nonInterruptingSelfCast);
-//if (num && ability.def.stunTargetWhileCasting && newWarmupTime > 0f && castTarg.Thing is Pawn pawn && pawn != ability.pawn)
-//{
-//    pawn.stances.stunner.StunFor(newWarmupTime.SecondsToTicks(), ability.pawn, addBattleLog: false, showMote: false);
-//    if (!pawn.Awake())
-//    {
-//        RestUtility.WakeUp(pawn);
-//    }
-//}
-//return num;
-
-//--
-

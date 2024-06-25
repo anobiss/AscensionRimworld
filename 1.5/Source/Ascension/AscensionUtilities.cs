@@ -9,11 +9,32 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 using static HarmonyLib.Code;
+using Random = System.Random;
 
 namespace Ascension
 {
     public class AscensionUtilities
     {
+        public static long NextLong(Random random, long minValue, long maxValue)
+        {
+            if (minValue > maxValue) throw new ArgumentOutOfRangeException("minValue", "minValue must be less than or equal to maxValue");
+
+            // Working with positive range
+            ulong range = (ulong)(maxValue - minValue);
+            ulong ulongRand;
+
+            // Generate a random ulong within the range
+            do
+            {
+                byte[] buf = new byte[8];
+                random.NextBytes(buf);
+                ulongRand = (ulong)BitConverter.ToInt64(buf, 0);
+            } while (ulongRand > ulong.MaxValue - (ulong.MaxValue % range + 1) % range);
+
+            return (long)(ulongRand % range) + minValue;
+        }
+
+
         public static bool Can
             
             (Realm_Hediff hediff)
@@ -77,6 +98,17 @@ namespace Ascension
                 }
             }
         }
+
+        public static void GoldenCoreBreakthrough(Pawn pawn, int score)
+        {
+            Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
+            if (cultivatorHediff != null)
+            {
+                cultivatorHediff.goldenCoreScore = score;
+                Log.Message("score" + score);
+            }
+            AscensionUtilities.TierBreakthrough((Realm_Hediff)pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm));
+        }
         public static float UpdateCultivationSpeed(Cultivator_Hediff cultivatorHediff)//we do this before starting jobs to update the cultivation speed, we return a float to make sure we have cultivation speed after update
         {
             float cultivationSpeed = 0;//if cult speed is 0 we know we messed something up. 
@@ -115,14 +147,29 @@ namespace Ascension
 
         public static void UpdateQiMax(QiPool_Hediff hediff)
         {
-            hediff.maxAmount = (int)Math.Floor((hediff.pawn.RaceProps.baseBodySize * 100f) * hediff.maxAmountOffset);
+            //body size times 100, then realm and (if above 0) gc scores are added, then offset is applied, then inner cauldron is added
             Cultivator_Hediff cultivatorHediff = hediff.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
+
+            //make sure the max qi factors display reflects how this works in a understandable way for the player.
+            hediff.maxAmount = (long)Math.Floor((hediff.pawn.RaceProps.baseBodySize * 100f));
+
+            //
+            if (hediff.realmMaxAmountOffset > 0)
+            {
+                hediff.maxAmount += hediff.realmMaxAmountOffset;
+            }
+
             if (cultivatorHediff != null)
             {
+                if (cultivatorHediff.goldenCoreScore > 0)
+                {
+                    hediff.maxAmount += cultivatorHediff.goldenCoreScore;
+                }
+                hediff.maxAmount = (long)Math.Floor(hediff.maxAmount *hediff.maxAmountOffset);
                 hediff.maxAmount += cultivatorHediff.innerCauldronQi;
             }
         }
-        public static void IncreaseQi(Pawn pawn, int amount, bool noExplosion = false)
+        public static void IncreaseQi(Pawn pawn, long amount, bool noExplosion = false)
         {
             HediffSet hediffSet = pawn.health.hediffSet;
             if (!hediffSet.HasHediff(AscensionDefOf.QiPool))
@@ -135,7 +182,7 @@ namespace Ascension
             }
             QiPool_Hediff qiHediff = hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
 
-            int newQiAmount = qiHediff.amount + amount;
+            long newQiAmount = qiHediff.amount + amount;
             if (newQiAmount > qiHediff.maxAmount)//checks if over max then blows them up and sets newqiamount to max amount
             {
                 if (!noExplosion)
@@ -156,7 +203,7 @@ namespace Ascension
         }
 
         //used in tier progress method to make progress not go above 100
-        private static void ProgressTier(Realm_Hediff hediff, int progress)
+        private static void ProgressTier(Realm_Hediff hediff, long progress)
         {
             //if they are at 100% we shouldnt add any severity and let breakthroughs do that.
 
@@ -179,10 +226,20 @@ namespace Ascension
             else
             {
                 hediff.progress = hediff.maxProgress;
-                if (PawnUtility.ShouldSendNotificationAbout(hediff.pawn))
+                if (hediff.def != AscensionDefOf.EssenceRealm)
                 {
-                    Find.LetterStack.ReceiveLetter("AS_CanBreakThrough".Translate(), "AS_CanBreakThroughDesc".Translate(hediff.pawn.NameFullColored.Named("PAWN"), hediff.CurStage.label.Named("REALM")), AscensionDefOf.AS_CultivationBreakthroughMessage, hediff.pawn);
+                    if (PawnUtility.ShouldSendNotificationAbout(hediff.pawn))
+                    {
+                        Find.LetterStack.ReceiveLetter("AS_CanBreakThrough".Translate(), "AS_CanBreakThroughDesc".Translate(hediff.pawn.NameFullColored.Named("PAWN"), hediff.CurStage.label.Named("REALM")), AscensionDefOf.AS_CultivationBreakthroughMessage, hediff.pawn);
+                    }
+                }else if (hediff.Severity < 7)
+                {
+                    if (PawnUtility.ShouldSendNotificationAbout(hediff.pawn))
+                    {
+                        Find.LetterStack.ReceiveLetter("AS_CanBreakThrough".Translate(), "AS_CanBreakThroughDesc".Translate(hediff.pawn.NameFullColored.Named("PAWN"), hediff.CurStage.label.Named("REALM")), AscensionDefOf.AS_CultivationBreakthroughMessage, hediff.pawn);
+                    }
                 }
+
             }
         }
 
@@ -191,7 +248,7 @@ namespace Ascension
 
         //only used in tribulation for essence realms, and exercise in body realms
         //this part checks if they even have the hediff and if not gives it to them since the cultivator hediff should've done so. first stages have no buffs so are fine to give for free
-        public static void TierProgress(Pawn pawn,HediffDef hediffDef, int progress)
+        public static void TierProgress(Pawn pawn,HediffDef hediffDef, long progress)
         {
             //checks if they have the cultivator hediff and if not gives it
             if (!pawn.health.hediffSet.HasHediff(AscensionDefOf.Cultivator))
@@ -214,7 +271,7 @@ namespace Ascension
             ProgressTier(hediff, progress);
         }
 
-        public static void CauldronIncrease(Pawn pawn, int amount)
+        public static void CauldronIncrease(Pawn pawn, long amount)
         {
             //checks if they have the cultivator hediff and if not gives it
             Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator, false) as Cultivator_Hediff;
@@ -227,9 +284,12 @@ namespace Ascension
             {
                 if (essenceHediff.Severity < 3)
                 {
-                    if (cultivatorHediff.innerCauldronQi + amount < cultivatorHediff.innerCauldronLimit)
+                    if ((cultivatorHediff.innerCauldronQi + amount) < cultivatorHediff.innerCauldronLimit)
                     {
                         cultivatorHediff.innerCauldronQi += amount;
+                    }else if ((cultivatorHediff.innerCauldronQi + amount) > cultivatorHediff.innerCauldronLimit)
+                    {
+                        cultivatorHediff.innerCauldronQi = cultivatorHediff.innerCauldronLimit;
                     }
                 }else
                 {
@@ -365,8 +425,52 @@ namespace Ascension
 
         }
 
+        //Golden Core breakthroughs work entirely different from every other.
+        //100 max qi per (hour divided by cultivation speed)
+        //finishes when interupted or ended by running out of qi
+        //qi recovery is turned off during this breakthrough
 
+        public static void GoldenCoreBreakthrough(Realm_Hediff realmHediff)
+        {
+            if (realmHediff != null)
+            {
+                if (realmHediff.progress >= realmHediff.maxProgress)
+                {
+                    int maxSeverityCap = 7;
+                    if (realmHediff.def == AscensionDefOf.EssenceRealm)
+                    {
+                        maxSeverityCap = 7;
+                    }
 
+                    UpdateMaxProg(realmHediff); //always update max prog on breakthroughs and when the hediff is added.
+                    if (realmHediff.Severity < 2)//if they stage one breakthrough to stage two
+                    {
+                        realmHediff.Severity = 2;
+                        realmHediff.progress = 0;
+                        if (PawnUtility.ShouldSendNotificationAbout(realmHediff.pawn))
+                        {
+                            Find.LetterStack.ReceiveLetter(realmHediff.Label + " " + "AS_Breakthrough".Translate(), realmHediff.pawn.NameFullColored + " " + realmHediff.CurStage.extraTooltip, AscensionDefOf.AS_CultivationBreakthroughMessage, realmHediff.pawn);
+                        }
+                    }
+                    else if (realmHediff.Severity < maxSeverityCap) // this is okay right now because both realms have only 5
+                    {
+                        realmHediff.Severity += 1;
+                        realmHediff.progress = 0;
+                        if (PawnUtility.ShouldSendNotificationAbout(realmHediff.pawn))
+                        {
+                            Find.LetterStack.ReceiveLetter(realmHediff.Label + " " + "AS_Breakthrough".Translate(), realmHediff.pawn.NameFullColored + " " + realmHediff.CurStage.extraTooltip, AscensionDefOf.AS_CultivationBreakthroughMessage, realmHediff.pawn);
+                        }
+                    }
+                    else if (realmHediff.Severity >= maxSeverityCap && realmHediff.def == AscensionDefOf.BodyRealm)// if its maxcap and its body we move onto essence realms
+                    {
+                        Pawn pawn = realmHediff.pawn;
+                        pawn.health.AddHediff(AscensionDefOf.EssenceRealm).Severity = 1;
+                        pawn.health.RemoveHediff(realmHediff);
+
+                    }
+                }
+            }
+        }
 
 
         //We use this to breakthrough to the next tier if progression is at 100% of the current tier, psuedo-immortality takes ascension to do this.

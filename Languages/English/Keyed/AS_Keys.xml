@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
+    <!-- display realms in dao tab-->
+  <AS_RealmProgress>{REALM} Realm - {CURRENT} / {MAX}</AS_RealmProgress>
 
+
+    <!-- display for cauldrons -->
   <AS_CultivationCauldronInspect>Base Qi: {BASEQI}, Current Qi: {QI} Max Quality: {QUALITY}</AS_CultivationCauldronInspect>
   <AS_CultivationCauldronBaseQi>Base Qi</AS_CultivationCauldronBaseQi>
   <AS_CultivationCauldronBaseQiDesc>The base amount of qi the cauldron has on its own.</AS_CultivationCauldronBaseQiDesc>
@@ -73,7 +77,13 @@
   <AS_DisplayQi>Display Gather Qi Grid: </AS_DisplayQi>
   <AS_DisplayQiDesc>Display the gather qi values on the map/screen.</AS_DisplayQiDesc>
   
+  <AS_DisplayElement>Display Element Grid: </AS_DisplayElement>
+  <AS_DisplayElementDesc>Display the element values on the map/screen.</AS_DisplayElementDesc>
+  
     <!-- Settings -->
+  <AS_GoldenCoreMax>Max Random Golden Core Score: </AS_GoldenCoreMax>
+  <AS_GoldenCoreMaxDesc>The maximum Golden Core score generated for a random cultivator. This is not the maximum possible from a Golden Core breakthrough and only effects randomly generated cultivators. Powerful random cultivators can have up to 4x this score.</AS_GoldenCoreMaxDesc>
+	
   <AS_AbilityChance>Cultivator Ability Chance: </AS_AbilityChance>
   <AS_AbilityChanceDesc>Determines the probability of a cultivator gaining random scroll arts / abilities when spawned. Slightly below displayed percentage if no useable scrolls are found.</AS_AbilityChanceDesc>
   <AS_PCChance>Powerful Cultivator Chance: </AS_PCChance>
@@ -92,14 +102,31 @@
   <AS_CultivationSpeedDesc>The speed at which cultivators do cultivation jobs like Exercise, Refine Qi, Gather Qi, Breakthroughs, etc.</AS_CultivationSpeedDesc>
   <AS_QiTile>Gather Qi: {QITILE}</AS_QiTile>
   <AS_QiTileDesc>The amount of Qi in the cultivators current position. Increases gather qi yield by the same amount and increases cultivation speed by 1/100th the amount.</AS_QiTileDesc>
-  <AS_CSFactorBaseOffset>Base Speed: {BASE} * Offset: {OFFSET}</AS_CSFactorBaseOffset>
-  <AS_CSFactorMood> * 0.4 + Mood: {MOOD}</AS_CSFactorMood>
-  <AS_CSFactorQiTile> * 1 + Gather Qi Divided by 100: {QITILE}</AS_CSFactorQiTile>
   
-  <AS_CSFactorElement> * 1 + {ELEMENT} Divided by 100: {AMOUNT}</AS_CSFactorElement>
   
+  <AS_GoldenCoreLabel>GC: {SCORE}</AS_GoldenCoreLabel>
+  <AS_GoldenCoreDesc>A golden core which grants the cultivator additional max qi equal to the score. Currently grants +{SCORE} Max Qi.</AS_GoldenCoreDesc>
+  
+  
+
+  
+  
+  <AS_CSFactorLabel>Cultivation Speed Factors:</AS_CSFactorLabel>
+  <AS_CSFactorBaseOffset>( Base Speed: {BASE} * Offset: {OFFSET} )</AS_CSFactorBaseOffset>
+  <AS_CSFactorMood> * ( 0.4 + Mood: {MOOD} )</AS_CSFactorMood>
+  <AS_CSFactorQiTile> * ( 1 + Gather Qi ÷ 100: {QITILE} )</AS_CSFactorQiTile>
+  <AS_CSFactorElement> * ( 1 + {ELEMENT} ÷ 100: {AMOUNT} )</AS_CSFactorElement>
   <AS_CSFactorsDesc>The factors influencing cultivation speed. </AS_CSFactorsDesc>
   
+  
+  <AS_MQFactorLabel>Max Qi Factors:</AS_MQFactorLabel>
+  <AS_MQFactorBodySize>( Body Size: {BS} * 100 )</AS_MQFactorBodySize>
+  <AS_MQFactorGC> + ( Golden Core: {GC} )</AS_MQFactorGC>
+  <AS_MQFactorOffset> * ( Offset: {OFFSET} )</AS_MQFactorOffset>
+  <AS_MQFactorRealm> + ( Realm: {REALM} )</AS_MQFactorRealm>
+  <AS_MQFactorIC> + ( Inner Cauldron: {IC} )</AS_MQFactorIC>
+  <AS_MQFactorAC> + ( Anima Conversion: {AC} )</AS_MQFactorAC>
+  <AS_MQFactorsDesc>The factors influencing max Qi. </AS_MQFactorsDesc>
   
   
   
@@ -141,7 +168,9 @@
   <AS_QiGathering>Qi Gathering</AS_QiGathering>
   <AS_QiGatheringDesc>Meditate for 3 hours divided by cultivation speed to gather natural qi from your surroundings. Generates 1 qi plus the amount of Gather Qi in the cultivators position.</AS_QiGatheringDesc>
   <AS_Breakthrough>Breakthrough</AS_Breakthrough>
-  <AS_BreakthroughEssenceDesc>Meditate for 7 hours divided by cultivation speed to breakthrough to the next realm.</AS_BreakthroughEssenceDesc>
+  <AS_GoldenCoreBreakthrough>Golden Core Breakthrough</AS_GoldenCoreBreakthrough>
+  <AS_GoldenCoreBreakthroughDesc>Try to get as much Qi as possible before attempting. Meditate for 7 hours divided by cultivation speed for each Qi conversion of 25 qi during a Golden Core Breakthrough until less than 25 qi remains. The resulting golden core score is equal to the amount of qi converted. This breakthrough cannot fail, but golden core scores are permanent.</AS_GoldenCoreBreakthroughDesc>
+  <AS_BreakthroughEssenceDesc>Meditate for 7 hours divided by cultivation speed to breakthrough to the next essence realm.</AS_BreakthroughEssenceDesc>
   <AS_BreakthroughBodyDesc>Exercise for 7 hours divided by cultivation speed to breakthrough to the next realm.</AS_BreakthroughBodyDesc>
   
   <AS_GatherQi>Gather Qi</AS_GatherQi>

@@ -2,6 +2,13 @@
 <Defs>
 
   <!--========= Cultivation jobs ============-->
+  
+  <JobDef>
+    <defName>AS_GoldenCoreBreakthrough</defName>
+    <driverClass>Ascension.JobDriver_GoldenCoreBreakthrough</driverClass>
+    <reportString>golden core breakthrough</reportString>
+  </JobDef>
+  
   <JobDef>
     <defName>AS_BreakthroughEssence</defName>
     <driverClass>Ascension.JobDriver_BreakthroughEssence</driverClass>

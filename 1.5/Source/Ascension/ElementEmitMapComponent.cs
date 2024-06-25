@@ -32,31 +32,33 @@ namespace Ascension
         public override void MapComponentOnGUI()
         {
             base.MapComponentOnGUI();
-
-            IntVec3 mouseCell = UI.MouseCell();
-            int cellCount = GenRadial.NumCellsInRadius(8.9f);
-            List<IntVec3> cellsInRadius = GenRadial.RadialCellsAround(mouseCell, 8.9f, true).ToList();
-
-            foreach (IntVec3 cell in cellsInRadius)
+            if (LoadedModManager.GetMod<AscensionMod>().GetSettings<AscensionSettings>().displayElementGrid == true)
             {
-                if (cell.x >= 0 && cell.z >= 0 && cell.x < gridSize && cell.z < gridSize) // Ensure cell is within grid bounds
+                IntVec3 mouseCell = UI.MouseCell();
+                int cellCount = GenRadial.NumCellsInRadius(8.9f);
+                List<IntVec3> cellsInRadius = GenRadial.RadialCellsAround(mouseCell, 8.9f, true).ToList();
+
+                foreach (IntVec3 cell in cellsInRadius)
                 {
-                    IntVec2 intVec2Cell = new IntVec2(cell.x, cell.z);
-                    if (HasElements(intVec2Cell))
+                    if (cell.x >= 0 && cell.z >= 0 && cell.x < gridSize && cell.z < gridSize) // Ensure cell is within grid bounds
                     {
-                        int elementCount = CountElements(intVec2Cell);
-                        float yOffset = -20f;
-
-                        foreach (Element element in Enum.GetValues(typeof(Element)))
+                        IntVec2 intVec2Cell = new IntVec2(cell.x, cell.z);
+                        if (HasElements(intVec2Cell))
                         {
-                            int amount = GetElementAt(intVec2Cell, element);
+                            int elementCount = CountElements(intVec2Cell);
+                            float yOffset = -20f;
 
-                            if (amount > 0)
+                            foreach (Element element in Enum.GetValues(typeof(Element)))
                             {
-                                Color color = GetElementColor(element, amount);
-                                Vector3 labelPos = (Vector3)GenMapUI.LabelDrawPosFor(new IntVec3(intVec2Cell.x, 0, intVec2Cell.z)) + Vector3.up * yOffset;
-                                GenMapUI.DrawThingLabel(labelPos, amount.ToString(), color);
-                                yOffset += 10f; // Adjust vertical position for next element
+                                int amount = GetElementAt(intVec2Cell, element);
+
+                                if (amount > 0)
+                                {
+                                    Color color = GetElementColor(element, amount);
+                                    Vector3 labelPos = (Vector3)GenMapUI.LabelDrawPosFor(new IntVec3(intVec2Cell.x, 0, intVec2Cell.z)) + Vector3.up * yOffset;
+                                    GenMapUI.DrawThingLabel(labelPos, amount.ToString(), color);
+                                    yOffset += 10f; // Adjust vertical position for next element
+                                }
                             }
                         }
                     }
@@ -148,6 +150,9 @@ namespace Ascension
             return count;
         }
 
+
+
+
         private Color GetElementColor(Element element, int amount)
         {
             switch (element)
@@ -166,6 +171,8 @@ namespace Ascension
                     return Color.white;
             }
         }
+
+
         public int CalculateElementValueAt(IntVec2 cell, Element element)
         {
             int baseValue = cellElements[GetIndex(cell, element)];

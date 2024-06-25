@@ -26,7 +26,7 @@ namespace Ascension
         }
         public ITab_Pawn_Dao()
         {
-            size = new Vector2(630f, 430f);
+            size = new Vector2(750f, 480f);
             labelKey = "TabDao";
             tutorTag = "Dao";
         }

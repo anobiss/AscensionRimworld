@@ -14,12 +14,17 @@ namespace Ascension
         /// 
         public bool displayQiGrid = true;
 
+        public bool displayElementGrid = true;
+
         public bool humanoidOnlyBool = false;
         public bool logHealsBool = false;
         public bool opGoldenPillsBool = false;
         public bool machineCultivatorBool = false;
         //psuedo immortality default chance must be way lower than foundation chance, as psuedo immortality and beyond are considered as heavy time and resource investments.
         public float CultivatorChance = 0.1f;
+
+        public float GoldenCoreMax = 250000f;
+
         public float PIChance = 0.01f;
         public float AbilityChance = 0.1f;
         public float PCChance = 0.1f;
@@ -27,11 +32,13 @@ namespace Ascension
         public override void ExposeData()
         {
             Scribe_Values.Look(ref displayQiGrid, "displayQiGrid", true);
+            Scribe_Values.Look(ref displayElementGrid, "displayElementGrid", true);
             Scribe_Values.Look(ref humanoidOnlyBool, "humanoidOnlyBool");
             Scribe_Values.Look(ref machineCultivatorBool, "machineCultivatorBool");
             Scribe_Values.Look(ref opGoldenPillsBool, "opGoldenPillsBool");
             Scribe_Values.Look(ref logHealsBool, "logHealsBool");
             Scribe_Values.Look(ref CultivatorChance, "CultivatorChance", 0.1f);
+            Scribe_Values.Look(ref GoldenCoreMax, "GoldenCoreMax", 250000);
             Scribe_Values.Look(ref EssenceChance, "EssenceChance", 0.1f);
             Scribe_Values.Look(ref PIChance, "PIChance", 0.1f);
             Scribe_Values.Look(ref AbilityChance, "AbilityChance", 0.2f);
@@ -57,12 +64,17 @@ namespace Ascension
             Listing_Standard listingStandard = new Listing_Standard();
             listingStandard.Begin(inRect);
             listingStandard.CheckboxLabeled("AS_DisplayQi".Translate(), ref settings.displayQiGrid, "AS_DisplayQiDesc".Translate());
+            listingStandard.CheckboxLabeled("AS_DisplayElement".Translate(), ref settings.displayElementGrid, "AS_DisplayElementDesc".Translate());
             listingStandard.CheckboxLabeled("AS_HumanoidCultivator".Translate(), ref settings.humanoidOnlyBool, "AS_HumanoidCultivatorDesc".Translate());
             listingStandard.CheckboxLabeled("AS_MachineCultivator".Translate(), ref settings.machineCultivatorBool, "AS_MachineCultivatorDesc".Translate());
             listingStandard.CheckboxLabeled("AS_OPGoldenPills".Translate(), ref settings.opGoldenPillsBool, "AS_OPGoldenPillsDesc".Translate());
             listingStandard.CheckboxLabeled("AS_LogHeals".Translate(), ref settings.logHealsBool, "AS_LogHealsDesc".Translate());
             listingStandard.Label("AS_CultivatorChance".Translate() + Math.Floor(this.settings.CultivatorChance * 1000) / 10 + "%" + "\n"+ "AS_CultivatorChanceDesc".Translate());
             settings.CultivatorChance = listingStandard.Slider(settings.CultivatorChance, 0, 1f);
+
+            listingStandard.Label("AS_GoldenCoreMax".Translate() + this.settings.GoldenCoreMax.ToString("#")+ "\n" + "AS_GoldenCoreMaxDesc".Translate());
+            settings.GoldenCoreMax = listingStandard.Slider(settings.GoldenCoreMax, 1f, 1000000f);
+            
             listingStandard.Label("AS_ERChance".Translate() + Math.Floor(this.settings.EssenceChance * 1000) / 10 + "%" + "\n" + "AS_ERChanceDesc".Translate());
             settings.EssenceChance = listingStandard.Slider(settings.EssenceChance, 0, 1f);
             listingStandard.Label("AS_PIChance".Translate() + Math.Floor(this.settings.PIChance * 1000) / 10 + "%" + "\n"+ "AS_PIChanceDesc".Translate());

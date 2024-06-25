@@ -19,8 +19,7 @@ namespace Ascension
         public static AbilityDef QiResurrection;
         public static AbilityDef ManifestSpiritSword;
         public static ThingDef SpiritSword;
-        public static JobDef AS_BreakthroughEssence;
-        public static JobDef AS_BreakthroughBody;
+
         public static ThingDef CultivationSpot;
 
         public static ThingDef AS_Plant_TreeSpirit;
@@ -29,6 +28,10 @@ namespace Ascension
         public static JobDef AS_RefineQiCauldronJob;
         public static JobDef AS_QiGatheringJob;
         public static JobDef AS_ExerciseJob;
+
+        public static JobDef AS_BreakthroughEssence;
+        public static JobDef AS_BreakthroughBody;
+        public static JobDef AS_GoldenCoreBreakthrough;
 
         public static WorkTypeDef Cultivation;
 

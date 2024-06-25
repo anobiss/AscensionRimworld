@@ -76,48 +76,55 @@ namespace Ascension
                         float chancePC = settings.PCChance;
                         float chancePI = settings.PIChance;
 
+                        int maxGoldenCore = (int)settings.GoldenCoreMax;
+
                         float chanceA = settings.AbilityChance;
-                        HediffDef cultivatorHediff = AscensionDefOf.Cultivator;
+                        Cultivator_Hediff cultivatorHediff;
                         //if the chance number is greater or equal to the rng number it gives the hediff, this makes it so a 0.07 chance would be a 7% chance.
 
                         if (randC <= chanceC)
                         {
+                            cultivatorHediff = HediffMaker.MakeHediff(AscensionDefOf.Cultivator, pawn) as Cultivator_Hediff;
                             int randRealmStage = rnd.Next(1, 4);
                             //if they failed to get psuedo immortality roll for random cultivation realms.
-                            pawn.health.AddHediff(cultivatorHediff);
-                            pawn.health.AddHediff(AscensionDefOf.QiPool);
                             randC = Rand.Range(0, 1f);
                             HediffDef RealmDef = AscensionDefOf.BodyRealm;
                             if (randER <= chanceER)
                             {
                                 RealmDef = AscensionDefOf.EssenceRealm;
+                                if (randRealmStage >= 3)
+                                {
+                                    cultivatorHediff.goldenCoreScore = rnd.Next(1, maxGoldenCore/10);
+                                }
                             }
                             if (randC <= chancePC)
                             {
-                                //upgrade to strong rand realms if powerful
-                                
-                                if (RealmDef == AscensionDefOf.EssenceRealm)
-                                {
-                                    randRealmStage = rnd.Next(3, 6);
-                                }else
-                                {
-                                    randRealmStage = rnd.Next(3, 8);
-                                }
+                                //upgrade to strong rand realms and to essence realm if powerful
+                                randRealmStage = rnd.Next(3, 6);
+                                RealmDef = AscensionDefOf.EssenceRealm;
+
+                                cultivatorHediff.goldenCoreScore = rnd.Next(20000, maxGoldenCore);
                             }
                             else
                             {
                                 randRealmStage = rnd.Next(1, 3);
                             }
-                            Realm_Hediff realmHediff = (Realm_Hediff)pawn.health.AddHediff(RealmDef);
+
+
+                            //if they are essence realm and the severity is three or above we should generate a random golden core.
+                            //higher random golden core score if they are powerful cultivatior
+                            if (RealmDef == AscensionDefOf.EssenceRealm && randRealmStage >= 3)
+                            {
+                                cultivatorHediff.goldenCoreScore = rnd.Next(1, maxGoldenCore/10);
+                            }
+
+
+                            Realm_Hediff realmHediff = HediffMaker.MakeHediff(RealmDef, pawn) as Realm_Hediff;
 
                             if (randpi <= chancePI)
                             {
-                                if (RealmDef == AscensionDefOf.BodyRealm)//if they have body realms replace with essence
-                                {
-                                    pawn.health.RemoveHediff(realmHediff);
-                                    RealmDef = AscensionDefOf.EssenceRealm;
-                                    realmHediff = (Realm_Hediff)pawn.health.AddHediff(RealmDef);
-                                }
+                                realmHediff = HediffMaker.MakeHediff(AscensionDefOf.EssenceRealm, pawn) as Realm_Hediff;
+                                cultivatorHediff.goldenCoreScore = rnd.Next(maxGoldenCore, maxGoldenCore*4);
                                 randpi = Rand.Range(0, 1f);
                                 //0.1f makes it a 10% chance for a high level
                                 if (randpi <= 0.1f)
@@ -134,9 +141,14 @@ namespace Ascension
                             else
                             {
                                 realmHediff.Severity = randRealmStage;
-                            }  
+                            }
+
+
+                            pawn.health.AddHediff(cultivatorHediff);
+                            pawn.health.AddHediff(AscensionDefOf.QiPool);
+                            pawn.health.AddHediff(realmHediff);
                             AscensionUtilities.UpdateMaxProg(realmHediff);
-                            realmHediff.progress = rnd.Next(0, realmHediff.maxProgress + 1);
+                            realmHediff.progress = AscensionUtilities.NextLong(rnd,0, realmHediff.maxProgress + 1);
 
 
                             float randA = Rand.Range(0, 1f);//only need to roll if its a cultivator

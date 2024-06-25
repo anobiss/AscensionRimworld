@@ -36,7 +36,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Ascension">
+    <Reference Include="Ascension, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\1.5\Assemblies\Ascension.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">

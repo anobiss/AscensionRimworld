@@ -10,8 +10,8 @@ namespace Ascension
     //hediffs for body and essence realms.
     public class Realm_Hediff : HediffWithComps
     {
-        public int progress = 0;
-        public int maxProgress = 100;
+        public long progress = 0;
+        public long maxProgress = 100;
 
 
         //would be more efficeint to use ints but would lead to confusion and is very negligable due to how often we check this.

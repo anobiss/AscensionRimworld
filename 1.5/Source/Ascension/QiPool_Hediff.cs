@@ -11,9 +11,10 @@ namespace Ascension
 {
     public class QiPool_Hediff : HediffWithComps
     {
-        public int amount = 0;
-        public int maxAmount;
+        public long amount = 0;
+        public long maxAmount;
         public float maxAmountOffset = 1f;
+        public int realmMaxAmountOffset = 0; 
         public override string SeverityLabel
         {
             get
@@ -26,7 +27,7 @@ namespace Ascension
         public override void PostAdd(DamageInfo? dinfo)
         {
             base.PostAdd(dinfo);
-            maxAmount = (int)Math.Floor((pawn.RaceProps.baseBodySize * 100f) * maxAmountOffset);
+            maxAmount = (long)Math.Floor((pawn.RaceProps.baseBodySize * 100f) * maxAmountOffset);
         }
         public override void ExposeData()
         {

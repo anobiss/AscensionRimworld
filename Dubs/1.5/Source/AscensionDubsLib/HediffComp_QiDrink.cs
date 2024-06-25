@@ -8,6 +8,9 @@ using Verse;
 
 namespace AscensionDubsLib
 {
+    //before each update we need to rebuild this or people with dubs will have broken mod.
+
+
 
     //dao hediff is gained from consuming Dao Energy
 
@@ -23,12 +26,12 @@ namespace AscensionDubsLib
             QiPool_Hediff qiPool = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
             if (qiPool != null)
             {
-                if (qiPool.amount > 100)
+                if (qiPool.amount >= 10000)
                 {
                     if (this.Pawn.needs.food.Starving)
                     {
                         this.Pawn.needs.food.CurLevel = this.Pawn.RaceProps.FoodLevelPercentageWantEat;
-                        qiPool.amount -= 50;
+                        qiPool.amount -= 10000;
                     }
                     if (need_Thirst != null)
                     {
@@ -36,7 +39,7 @@ namespace AscensionDubsLib
                         {
 
                             need_Thirst.CurLevel = 1f;
-                            qiPool.amount -= 50;
+                            qiPool.amount -= 10000;
                         }
                     }
                 }

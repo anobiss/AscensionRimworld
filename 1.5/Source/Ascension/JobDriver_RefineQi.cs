@@ -56,7 +56,7 @@ namespace Ascension
             Realm_Hediff essenceHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
             if (qiPool != null && essenceHediff != null)
             {
-                int qiCost = 2 + (qiPool.maxAmount / 10);// 10% + 2
+                long qiCost = 2 + (qiPool.maxAmount / 10);// 10% + 2
                 if (qiPool.amount >= qiCost)
                 {
                     Log.Message("increasing progression by "+ qiCost);
