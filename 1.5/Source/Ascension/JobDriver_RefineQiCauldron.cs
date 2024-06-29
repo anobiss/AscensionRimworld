@@ -58,7 +58,7 @@ namespace Ascension
             Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
             if (qiPool != null && cultivatorHediff != null)
             {
-                long qiCost = 2 + (qiPool.maxAmount / 50);// 2% + 2
+                float qiCost = 2 + (qiPool.maxAmount / 50);// 2% + 2
                 if (qiPool.amount >= qiCost)
                 {
                     if (cultivatorHediff.innerCauldronQi < cultivatorHediff.innerCauldronLimit) // this is so we dont get the breakthroughpossible message over and over again

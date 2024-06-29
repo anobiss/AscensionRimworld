@@ -18,22 +18,22 @@ namespace Ascension
         public float startTime = 10f;
         public float endTime = 12f;
         public int autoCultivateType = 1;
-        public float cultivationSpeed = 1;//this is what cultivation jobs read.
-        public float cultivationBaseSpeed = 1;//this isnt readonly because we want to allow boosting this later.
-        public float cultivationSpeedOffset = 1;//base is multiplied with this 
+        public float cultivationSpeed = 1f;//this is what cultivation jobs read.
+        public float cultivationBaseSpeed = 1f;//this isnt readonly because we want to allow boosting this later.
+        public float cultivationSpeedOffset = 1f;//base is multiplied with this 
 
-        public int qiRecoveryAmount = 0;
-        public float qiRecoverySpeed = 1;
-        public float qiRecoverySpeedOffset = 0; // qiRecovery is recalced not saved
+        public float qiRecoveryAmount = 0f;
+        public float qiRecoverySpeed = 1f;
+        public float qiRecoverySpeedOffset = 0f; // qiRecovery is recalced not saved
 
 
         //golden core score and if they have one. if they dont its 0. score is set when golden core breakthrough is finished.
-        public int goldenCoreScore = 0;
+        public float goldenCoreScore = 0;
         
 
         //inner cauldron/anima conversion. cap is ignored when anima conversion.
-        public long innerCauldronLimit = 1200;
-        public long innerCauldronQi = 0;
+        public float innerCauldronLimit = 1200;
+        public float innerCauldronQi = 0;
 
 
         public ElementEmitMapComponent.Element element = ElementEmitMapComponent.Element.None;

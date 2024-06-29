@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using Verse;
+﻿using Verse;
 
 namespace Ascension
 {
     public class QiPool_Hediff : HediffWithComps
     {
-        public long amount = 0;
-        public long maxAmount;
+        public float amount = 0;
+        public float maxAmount;
         public float maxAmountOffset = 1f;
-        public int realmMaxAmountOffset = 0; 
+        public float realmMaxAmountOffset = 1f; 
         public override string SeverityLabel
         {
             get
@@ -27,7 +20,7 @@ namespace Ascension
         public override void PostAdd(DamageInfo? dinfo)
         {
             base.PostAdd(dinfo);
-            maxAmount = (long)Math.Floor((pawn.RaceProps.baseBodySize * 100f) * maxAmountOffset);
+            AscensionUtilities.UpdateQiMax(this);
         }
         public override void ExposeData()
         {

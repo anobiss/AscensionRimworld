@@ -191,7 +191,7 @@ namespace Ascension
             float qiRatio = (float)qiPoolHediff.amount / (float)qiPoolHediff.maxAmount;
             GUI.color = Color.white;
             Widgets.FillableBar(barRect.ContractedBy(2f), qiRatio);
-            string qiBarText = "AS_QiPoolBar".Translate(qiPoolHediff.amount.ToString("0.#").Named("QI"), qiPoolHediff.maxAmount.ToString("0.#").Named("MAXQI"));
+            string qiBarText = "AS_QiPoolBar".Translate(qiPoolHediff.amount.ToString("#").Named("QI"), qiPoolHediff.maxAmount.ToString("#").Named("MAXQI"));
             if (CultivatorHediff != null && eRealmHediff != null)
             {
                 if (CultivatorHediff.qiRecoverySpeed != 0)
@@ -519,7 +519,7 @@ namespace Ascension
 
             if (eRealmHediff != null)
             {
-                translatedSpeedFactorText.Append("AS_MQFactorRealm".Translate(qiPoolHediff.realmMaxAmountOffset.ToString().Named("REALM")));
+                translatedSpeedFactorText.Append("AS_MQFactorRealm".Translate(qiPoolHediff.realmMaxAmountOffset.ToString("0.#").Named("REALM")));
             }
 
             if (CultivatorHediff.goldenCoreScore > 0)
@@ -584,7 +584,7 @@ namespace Ascension
 
             if (qiPoolHediff != null)
             {
-                long qiCost = 2 + (qiPoolHediff.maxAmount / 50); // 2% + 2
+                float qiCost = 2 + (qiPoolHediff.maxAmount / 50); // 2% + 2
                 if (qiPoolHediff.amount >= qiCost)
                 {
                     if (Widgets.ButtonText(innerCButtonRect, innerCJob))

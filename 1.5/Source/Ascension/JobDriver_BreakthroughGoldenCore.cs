@@ -12,11 +12,11 @@ namespace Ascension
     //qi recovery is turned off during this breakthrough
     public class JobDriver_GoldenCoreBreakthrough : JobDriver
     {
-        private const int DurationTicks = 17500; // 7 hours
+        private const int BaseDurationTicks = 17500; // 7 hours
         private const int QiConsumptionPerCycle = 25;
         public const TargetIndex SpotInd = TargetIndex.B;
 
-        //does this part after time calculations not before
+        // Reserve the spot after time calculations
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
             if (job.GetTarget(SpotInd) != pawn)
@@ -32,28 +32,24 @@ namespace Ascension
         protected override IEnumerable<Toil> MakeNewToils()
         {
             int currentScore = 0;
-            int cultivationJobTicks = DurationTicks;
             int cultivationTicksCounter = 0;
-
             QiPool_Hediff qiPool = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
-            Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
 
-            if (cultivatorHediff != null && qiPool != null)
+            if (qiPool != null)
             {
-                float cultivationSpeed = AscensionUtilities.UpdateCultivationSpeed(cultivatorHediff);
-                float cultivationTicks = DurationTicks / cultivationSpeed;
-                cultivationJobTicks = (int)Math.Floor(cultivationTicks);
-
                 yield return Toils_Goto.GotoCell(TargetIndex.B, PathEndMode.OnCell);
 
-                Toil cultivationToil = new Toil();
-                cultivationToil.initAction = () =>
+                Toil cWaitToil = new Toil();
+                Toil calculateDurationToil = Toils_Cultivation.CalculateDuration(BaseDurationTicks, cWaitToil);
+                yield return calculateDurationToil;
+
+                cWaitToil.initAction = () =>
                 {
-                    cultivationToil.actor.pather.StopDead();
+                    cWaitToil.actor.pather.StopDead();
                 };
-                cultivationToil.tickAction = () =>
+                cWaitToil.tickAction = () =>
                 {
-                    if (cultivationTicksCounter >= cultivationJobTicks)
+                    if (cultivationTicksCounter >= cWaitToil.defaultDuration)
                     {
                         cultivationTicksCounter = 0;
 
@@ -68,11 +64,10 @@ namespace Ascension
                             this.EndJobWith(JobCondition.Succeeded);
                         }
                     }
-
                     cultivationTicksCounter++;
                 };
-                cultivationToil.defaultCompleteMode = ToilCompleteMode.Never;
-                cultivationToil.AddPreTickAction(() =>
+                cWaitToil.defaultCompleteMode = ToilCompleteMode.Never;
+                cWaitToil.AddPreTickAction(() =>
                 {
                     if (qiPool.amount < QiConsumptionPerCycle)
                     {
@@ -80,9 +75,9 @@ namespace Ascension
                         this.EndJobWith(JobCondition.Succeeded);
                     }
                 });
+                cWaitToil.WithProgressBar(TargetIndex.A, () => (float)cultivationTicksCounter / cWaitToil.defaultDuration, true);
 
-                yield return cultivationToil.WithProgressBar(TargetIndex.A, () => (float)cultivationTicksCounter / cultivationJobTicks, true);
-
+                yield return cWaitToil;
                 yield return Toils_General.Do(() => Breakthrough(currentScore));
             }
         }

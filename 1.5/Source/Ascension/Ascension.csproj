@@ -100,11 +100,13 @@
     <Compile Include="GameCondition_QiBurst.cs" />
     <Compile Include="HediffCompProperties_AddScrollAbility.cs" />
     <Compile Include="HediffCompProperties_AddScrollReq.cs" />
+    <Compile Include="HediffCompProperties_OffsetMaxQi.cs" />
     <Compile Include="HediffCompProperties_QiRecovery.cs" />
     <Compile Include="HediffCompProperties_Realm.cs" />
     <Compile Include="HediffComp_AddScrollAbility.cs" />
     <Compile Include="HediffComp_AddScrollReq.cs" />
     <Compile Include="HediffComp_EssenceRealm.cs" />
+    <Compile Include="HediffComp_OffsetMaxQi.cs" />
     <Compile Include="HediffComp_QiRecovery.cs" />
     <Compile Include="HediffComp_QiShield.cs" />
     <Compile Include="HediffComp_Realm.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="IngestionOutcomeDoer_Exercise.cs" />
     <Compile Include="IngestionOutcomeDoer_GiveBreakthrough.cs" />
     <Compile Include="IngestionOutcomeDoer_RefineQi.cs" />
+    <Compile Include="IngestionOutcomeDoer_SpiritPill.cs" />
     <Compile Include="JobDriver_BreakthroughBody.cs" />
     <Compile Include="JobDriver_BreakthroughGoldenCore.cs" />
     <Compile Include="JobDriver_Exercise.cs" />
@@ -128,6 +131,7 @@
     <Compile Include="QiPool_Hediff.cs" />
     <Compile Include="Scroll_Hediff.cs" />
     <Compile Include="SpiritSword_Hediff.cs" />
+    <Compile Include="Toils_Cultivation.cs" />
     <Compile Include="Tribulation_Hediff.cs" />
     <Compile Include="HediffComp_QiFeed.cs" />
     <Compile Include="HediffComp_PseudoImmortalAgeless.cs" />

@@ -33,7 +33,7 @@ namespace Ascension
         }
         protected override void DoIngestionOutcomeSpecial(Pawn pawn, Thing ingested, int ingestedCount)
         {
-            long num = ((int)Math.Floor((float)amount * GetQualityMultiplier(ingested)));
+            float num = ((int)Math.Floor((float)amount * GetQualityMultiplier(ingested)));
             Realm_Hediff bodyHediff = (Realm_Hediff)pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm);
             if (bodyHediff != null)
             {
@@ -50,7 +50,6 @@ namespace Ascension
                 {
                     yield return statDrawEntry;
                 }
-                IEnumerator<StatDrawEntry> enumerator = null;
             }
             yield break;
         }

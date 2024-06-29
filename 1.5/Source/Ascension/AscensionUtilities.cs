@@ -15,25 +15,13 @@ namespace Ascension
 {
     public class AscensionUtilities
     {
-        public static long NextLong(Random random, long minValue, long maxValue)
+        //essence realm max qi rates
+        public static readonly float[] maxQiRates = { 2f, 10f, 100f, 500f, 1000f, 10000f, 120000f };
+        public static void UpdateRealmMaxQi(int index, QiPool_Hediff qiPool)
         {
-            if (minValue > maxValue) throw new ArgumentOutOfRangeException("minValue", "minValue must be less than or equal to maxValue");
 
-            // Working with positive range
-            ulong range = (ulong)(maxValue - minValue);
-            ulong ulongRand;
-
-            // Generate a random ulong within the range
-            do
-            {
-                byte[] buf = new byte[8];
-                random.NextBytes(buf);
-                ulongRand = (ulong)BitConverter.ToInt64(buf, 0);
-            } while (ulongRand > ulong.MaxValue - (ulong.MaxValue % range + 1) % range);
-
-            return (long)(ulongRand % range) + minValue;
+            qiPool.realmMaxAmountOffset = maxQiRates[index];
         }
-
 
         public static bool Can
             
@@ -109,7 +97,7 @@ namespace Ascension
             }
             AscensionUtilities.TierBreakthrough((Realm_Hediff)pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm));
         }
-        public static float UpdateCultivationSpeed(Cultivator_Hediff cultivatorHediff)//we do this before starting jobs to update the cultivation speed, we return a float to make sure we have cultivation speed after update
+        public static float UpdateCultivationSpeed(Cultivator_Hediff cultivatorHediff)//we do this before starting jobs to update the cultivation speed, we return a float to make sure we have cultivation speed after update, we also take in optional cords if they have a cultivation spot to walk to
         {
             float cultivationSpeed = 0;//if cult speed is 0 we know we messed something up. 
             QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
@@ -156,7 +144,7 @@ namespace Ascension
             //
             if (hediff.realmMaxAmountOffset > 0)
             {
-                hediff.maxAmount += hediff.realmMaxAmountOffset;
+                hediff.maxAmount = hediff.maxAmount * hediff.realmMaxAmountOffset;
             }
 
             if (cultivatorHediff != null)
@@ -165,11 +153,11 @@ namespace Ascension
                 {
                     hediff.maxAmount += cultivatorHediff.goldenCoreScore;
                 }
-                hediff.maxAmount = (long)Math.Floor(hediff.maxAmount *hediff.maxAmountOffset);
+                hediff.maxAmount *= hediff.maxAmountOffset;
                 hediff.maxAmount += cultivatorHediff.innerCauldronQi;
             }
         }
-        public static void IncreaseQi(Pawn pawn, long amount, bool noExplosion = false)
+        public static void IncreaseQi(Pawn pawn, float amount, bool noExplosion = false)
         {
             HediffSet hediffSet = pawn.health.hediffSet;
             if (!hediffSet.HasHediff(AscensionDefOf.QiPool))
@@ -182,7 +170,7 @@ namespace Ascension
             }
             QiPool_Hediff qiHediff = hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
 
-            long newQiAmount = qiHediff.amount + amount;
+            float newQiAmount = qiHediff.amount + amount;
             if (newQiAmount > qiHediff.maxAmount)//checks if over max then blows them up and sets newqiamount to max amount
             {
                 if (!noExplosion)
@@ -203,7 +191,7 @@ namespace Ascension
         }
 
         //used in tier progress method to make progress not go above 100
-        private static void ProgressTier(Realm_Hediff hediff, long progress)
+        private static void ProgressTier(Realm_Hediff hediff, float progress)
         {
             //if they are at 100% we shouldnt add any severity and let breakthroughs do that.
 
@@ -248,7 +236,7 @@ namespace Ascension
 
         //only used in tribulation for essence realms, and exercise in body realms
         //this part checks if they even have the hediff and if not gives it to them since the cultivator hediff should've done so. first stages have no buffs so are fine to give for free
-        public static void TierProgress(Pawn pawn,HediffDef hediffDef, long progress)
+        public static void TierProgress(Pawn pawn,HediffDef hediffDef, float progress)
         {
             //checks if they have the cultivator hediff and if not gives it
             if (!pawn.health.hediffSet.HasHediff(AscensionDefOf.Cultivator))
@@ -271,7 +259,7 @@ namespace Ascension
             ProgressTier(hediff, progress);
         }
 
-        public static void CauldronIncrease(Pawn pawn, long amount)
+        public static void CauldronIncrease(Pawn pawn, float amount)
         {
             //checks if they have the cultivator hediff and if not gives it
             Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator, false) as Cultivator_Hediff;
@@ -396,7 +384,7 @@ namespace Ascension
         //    return hediff_Realm;
         //}
         public static readonly int[] maxProgressionRatesBody = { 100, 200, 420, 500, 700, 1200, 2400}; // max qi offset to set to when advancing. first is tier 2
-        public static readonly int[] maxProgressionRatesEssence = { 100, 1200, 7000, 42000, 12000, 240000, 1000000 }; // max qi offset to set to when advancing. first is tier 2
+        public static readonly int[] maxProgressionRatesEssence = { 7000, 120000, 700000, 7000000, 12000000, 70000000, 120000000 }; // max qi offset to set to when advancing. first is tier 2
         public static void UpdateMaxProg(Realm_Hediff realmHediff)
         {
             int tier = ((int)Math.Floor(realmHediff.Severity));

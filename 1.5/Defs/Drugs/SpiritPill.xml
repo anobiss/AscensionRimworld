@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="DrugPillBase">
+    <defName>SpiritPill</defName>
+    <label>Spirit Pill</label>
+    <description>A pill that permanently grants 10x Qi Recovery and 10x Max Qi, but requires 100,000 Qi to survive the consumption. Beings with less than the required amount of Qi will produce a fairly large explosion when they die after consumption, scaling with body size.</description>
+    <graphicData>
+      <texPath>Things/Item/Drug/SpiritPill</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <statBases>
+      <Mass>0.03</Mass>
+    </statBases>
+    <techLevel>Neolithic</techLevel>
+    <minRewardCount>3</minRewardCount>
+    <ingestible>
+      <drugCategory>Medical</drugCategory>
+      <outcomeDoers>
+        <li Class="Ascension.IngestionOutcomeDoer_SpiritPill">
+        </li>
+      </outcomeDoers>
+    </ingestible>
+	<comps>
+      <li Class="CompProperties_Drug">
+		<isCombatEnhancingDrug>false</isCombatEnhancingDrug>
+        <listOrder>1011</listOrder>
+      </li>
+    </comps>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags><li>RewardStandardLowFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>7</allowedArchonexusCount>
+  </ThingDef>
+</Defs>

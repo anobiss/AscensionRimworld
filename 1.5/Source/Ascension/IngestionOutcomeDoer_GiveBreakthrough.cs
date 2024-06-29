@@ -22,7 +22,6 @@ namespace Ascension
                 {
                     yield return statDrawEntry;
                 }
-                IEnumerator<StatDrawEntry> enumerator = null;
             }
             yield break;
         }

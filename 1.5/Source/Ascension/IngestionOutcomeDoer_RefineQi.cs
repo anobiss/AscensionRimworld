@@ -14,7 +14,7 @@ namespace Ascension
             Realm_Hediff essenceHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm) as Realm_Hediff;
             if (qiPool != null && essenceHediff != null)
             {
-                long qiCost = 2 + (qiPool.maxAmount / 10);// 10% + 2
+                float qiCost = 2 + (qiPool.maxAmount / 10);// 10% + 2
                 if (qiPool.amount >= qiCost)
                 {
                     if (essenceHediff.progress < essenceHediff.maxProgress) // this is so we dont get the breakthroughpossible message over and over again

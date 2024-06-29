@@ -11,7 +11,7 @@ namespace Ascension
 {
     public class JobDriver_BreakthroughEssence : JobDriver
     {
-        private const int DurationTicks = 17500; // 7 hours
+        private const int BaseDurationTicks = 17500; // 7 hours
         public const TargetIndex SpotInd = TargetIndex.B;
 
         //does this part after time calculations not before
@@ -29,22 +29,14 @@ namespace Ascension
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            int cultivationJobTicks = DurationTicks;
-            //Log.Message("initial cultivationJobTicks" + cultivationJobTicks);
-            Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
-            if (cultivatorHediff != null)
-            {
-                //log important only for testing
-                float cultivationSpeed = AscensionUtilities.UpdateCultivationSpeed(cultivatorHediff);
-                //Log.Message("current cultivation speed is" + cultivationSpeed);
-
-                float cultivationTicks = DurationTicks / AscensionUtilities.UpdateCultivationSpeed(cultivatorHediff);
-                //Log.Message("cultivation ticks float is" + cultivationTicks);
-                cultivationJobTicks = (int)Math.Floor(cultivationTicks);
-                //Log.Message("ticks now cultivationJobTicks"+ cultivationJobTicks);
-            }
             yield return Toils_Goto.GotoCell(TargetIndex.B, PathEndMode.OnCell);
-            yield return Toils_General.Wait(cultivationJobTicks).WithProgressBarToilDelay(TargetIndex.A);
+
+            Toil waitToil = Toils_General.Wait(BaseDurationTicks).WithProgressBarToilDelay(TargetIndex.A);
+
+            Toil calculateDurationToil = Toils_Cultivation.CalculateDuration(BaseDurationTicks, waitToil);
+            yield return calculateDurationToil;
+
+            yield return waitToil;
             yield return Toils_General.Do(Breakthrough);
         }
 

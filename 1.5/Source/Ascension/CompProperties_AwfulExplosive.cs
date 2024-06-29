@@ -31,7 +31,6 @@ namespace Ascension
             {
                 yield return text;
             }
-            IEnumerator<string> enumerator = null;
             yield break;
         }
 

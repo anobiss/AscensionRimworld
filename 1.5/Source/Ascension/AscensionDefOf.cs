@@ -10,8 +10,10 @@ namespace Ascension
 
 
         //misc stuffs
-        public static Verse.HediffDef SpiritSwordFusion;
         public static HediffDef QiPool;
+
+        public static Verse.HediffDef SpiritSwordFusion;
+        public static HediffDef SpiritPillHediff;
         public static HediffDef QiFeed;
         public static FleckDef FlashQi;
         public static AbilityDef QiHeal;

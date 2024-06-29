@@ -93,7 +93,7 @@ namespace Ascension
                     if (qiPool != null)
                     {
                         //if they dont have enough qi to tribulate they shouldnt cultivate unless they can breakthrough;
-                        long totalTribulationCost = (5 + (qiPool.maxAmount / 100)) * 10;
+                        float totalTribulationCost = (5 + (qiPool.maxAmount / 100)) * 10;
                         if (qiPool.amount < totalTribulationCost)
                         {
                             if (essenceRealm.progress < essenceRealm.maxProgress)
@@ -146,7 +146,7 @@ namespace Ascension
                         if (pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm))
                         {
                             // Essence Realm cultivation, includes gathering qi for tribulation
-                            long totalQiRefineCost = 2 + (qiPool.maxAmount / 10);
+                            float totalQiRefineCost = 2 + (qiPool.maxAmount / 10);
                             if (essenceRealm.progress >= essenceRealm.maxProgress)//auto attempt breakthrough when possible.
                             {
                                 if (essenceRealm.Severity >= 2 && essenceRealm.Severity < 3)
@@ -162,7 +162,7 @@ namespace Ascension
                                         }
                                     }else
                                     {
-                                        long totalInnerQiRefineCost = 2 + (qiPool.maxAmount / 50);//2 plus 2%
+                                        float totalInnerQiRefineCost = 2 + (qiPool.maxAmount / 50);//2 plus 2%
                                         if (totalInnerQiRefineCost <= qiPool.amount)
                                         {
                                             return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, pawn, FindCultivationSpot(pawn));
@@ -183,7 +183,7 @@ namespace Ascension
                             }
                             if (totalQiRefineCost > qiPool.maxAmount)
                             {
-                                long totalInnerQiRefineCost = 2 + (qiPool.maxAmount / 50);//2 plus 2%
+                                float totalInnerQiRefineCost = 2 + (qiPool.maxAmount / 50);//2 plus 2%
                                 if (totalInnerQiRefineCost <= qiPool.amount)
                                 {
                                     return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, pawn, FindCultivationSpot(pawn));
@@ -209,7 +209,6 @@ namespace Ascension
                             return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, FindCultivationSpot(pawn));
                         }
                         return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, FindCultivationSpot(pawn));
-                        break;
                     case 2:
                         //auto realm but without trib
                         if (pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm))
@@ -232,7 +231,7 @@ namespace Ascension
                                     }
                                     else
                                     {
-                                        long totalInnerQiRefineCost = 2 + (qiPool.maxAmount / 50);//2 plus 2%
+                                        float totalInnerQiRefineCost = 2 + (qiPool.maxAmount / 50);//2 plus 2%
                                         if (totalInnerQiRefineCost <= qiPool.amount)
                                         {
                                             return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, pawn, FindCultivationSpot(pawn));
@@ -263,15 +262,12 @@ namespace Ascension
                             return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, FindCultivationSpot(pawn));
                         }
                         return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, FindCultivationSpot(pawn));
-                        break;
                     case 3:
                         // Qi Gathering only. Just gather Qi instead of cultivating a realm.
                         return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
-                        break;
                     default:
                         Log.Message("Ascension error autoCultivateType beyond normal allowed range.");
                         return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
-                        break;
                 }
             }else
             {

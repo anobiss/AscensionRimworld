@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <HediffDef>
+    <defName>SpiritPillHediff</defName>
+    <label>Spirit Pill Empowerment</label>
+	<description>This being has survived the consumption of a Spirit Pill, granting 10x Qi Recovery and 10x Max Qi.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+	<defaultLabelColor>(0.0, 1.0, 0.0)</defaultLabelColor>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="Ascension.HediffCompProperties_QiRecovery">
+        <offset>10</offset>
+      </li>
+      <li Class="Ascension.HediffCompProperties_OffsetMaxQi">
+        <offset>10</offset>
+      </li>
+    </comps>
+  </HediffDef>
+</Defs>
