@@ -42,7 +42,15 @@ namespace Ascension
 
         private void Breakthrough()
         {
-            AscensionUtilities.TierBreakthrough((Realm_Hediff)pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm));
+            Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
+            if (cultivatorHediff != null)
+            {
+                float breakthroughChance = AscensionUtilities.UpdateBreakthroughChance(cultivatorHediff);
+                if (Rand.Value < breakthroughChance)
+                {
+                    AscensionUtilities.TierBreakthrough((Realm_Hediff)pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm));
+                }
+            }
             if (job.GetTarget(SpotInd) != pawn)
             {
                 pawn.MapHeld.reservationManager.Release(job.GetTarget(SpotInd), pawn, job);

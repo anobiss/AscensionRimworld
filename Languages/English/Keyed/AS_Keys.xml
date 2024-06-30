@@ -144,9 +144,16 @@
   <AS_MQFactorOffset> * ( Offset: {OFFSET} )</AS_MQFactorOffset>
   <AS_MQFactorIC> + ( Inner Cauldron: {IC} )</AS_MQFactorIC>
   <AS_MQFactorAC> + ( Anima Conversion: {AC} )</AS_MQFactorAC>
-  <AS_MQFactorsDesc>The factors influencing max Qi. </AS_MQFactorsDesc>
+  <AS_MQFactorsDesc>The factors influencing max Qi.</AS_MQFactorsDesc>
   
+  <AS_BCFactorLabel>Breakthrough Chance ({CHANCE}%) Factors:</AS_BCFactorLabel>
+  <AS_BCFactorQiTile>( Gather Qi 20% Per 1k: {QI}% )</AS_BCFactorQiTile>
+  <AS_BCFactorElement> + ( {ELEMENT} 10% Per 1k: {AMOUNT}% )</AS_BCFactorElement>
+  <AS_BCFactorMood> * ( Mood * 2: {MOOD}x )</AS_BCFactorMood>
+  <AS_BCFactorOffset> * ( Offset: {OFFSET}x )</AS_BCFactorOffset>
+  <AS_BCFactorsDesc>The factors influencing Breakthrough Chance.</AS_BCFactorsDesc>
   
+  <AS_BreakthroughChanceTooltip> Breakthrough Chance: {CHANCE}%</AS_BreakthroughChanceTooltip>
   
   <AS_InnerC>Inner Cauldron: {ICQI} / {ICMAX}</AS_InnerC>
   <AS_InnerCDesc>The Inner Cauldron increases a cultivators max Qi by the amount of Qi refined into it.</AS_InnerCDesc>

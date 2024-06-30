@@ -13,7 +13,8 @@ namespace Ascension
 {
     public class Cultivator_Hediff : HediffWithComps
     {
-
+        public float breakthroughChance = 0f;
+        public float breakthroughChanceOffset = 0f;
 
         public float startTime = 10f;
         public float endTime = 12f;

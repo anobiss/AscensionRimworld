@@ -41,10 +41,14 @@ namespace Ascension
 
         private static bool onTechniqueTab = false;
 
-        public static Pawn selectedPawn;
+        private static Pawn selectedPawn;
+        private static ElementEmitMapComponent elementEmitMapComp;
+        private static QiGatherMapComponent qiGatherMapComp;
+        private static string elementText;
         public static void DrawPawnDaoCard(Rect outRect, Pawn pawn, Thing thingForMedBills)
         {
             selectedPawn = pawn;
+
             outRect.y += 20f;
             outRect.height -= 20f;
             outRect = outRect.Rounded();
@@ -316,17 +320,17 @@ namespace Ascension
         {
             float barWidth = rect.width - 26f;
             Rect barRect = new Rect(rect.x + 17f, rect.y + rect.height / 2f - 16f, barWidth, 32f);
-            string tooltipKey = realm.def == AscensionDefOf.EssenceRealm ? "AS_BreakthroughEssenceDesc" : "AS_BreakthroughBodyDesc";
+            string tooltipText = realm.def == AscensionDefOf.EssenceRealm ? "AS_BreakthroughEssenceDesc" : "AS_BreakthroughBodyDesc";
+            tooltipText = tooltipText.Translate((AscensionUtilities.UpdateBreakthroughChance(CultivatorHediff) * 100f).ToString("0.#").Named("CHANCE"));
             if (Mouse.IsOver(barRect))
             {
                 Widgets.DrawHighlight(barRect);
             }
-
             Text.Anchor = TextAnchor.MiddleCenter;
             Widgets.Label(barRect, "AS_QiPool".Translate());
             if (realm.def == AscensionDefOf.EssenceRealm && realm.Severity >= 2 && realm.Severity < 3)// golden core breakthrough
             {
-                tooltipKey = "AS_GoldenCoreBreakthroughDesc".Translate();
+                tooltipText = "AS_GoldenCoreBreakthroughDesc".Translate();
                 if (Widgets.ButtonText(barRect, "AS_GoldenCoreBreakthrough".Translate())) // normal breakthrough
                 {
                     Job job = JobMaker.MakeJob(AscensionDefOf.AS_GoldenCoreBreakthrough, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn));
@@ -338,7 +342,11 @@ namespace Ascension
                 Job job = JobMaker.MakeJob(realm.def == AscensionDefOf.EssenceRealm ? AscensionDefOf.AS_BreakthroughEssence : AscensionDefOf.AS_BreakthroughBody, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn));
                 selectedPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
             }
-            TooltipHandler.TipRegionByKey(barRect, tooltipKey);
+            
+            if (Mouse.IsOver(barRect) || DebugViewSettings.drawTooltipEdges)
+            {
+                TooltipHandler.TipRegion(barRect, tooltipText);
+            }
         }
 
         private static void DrawMeditationButton(Rect rect, bool isExercise)
@@ -449,13 +457,49 @@ namespace Ascension
             speedFactorsRect.height = 40f;
 
             Rect maxQiFactorRect = speedFactorsRect;
-            maxQiFactorRect.y += speedFactorsRect.height;
+            maxQiFactorRect.y += 20f;
+
+            Rect bChanceFactorRect = maxQiFactorRect;
+            bChanceFactorRect.y += 60f;
 
             DrawSpeedFactors(speedFactorsRect);
             DrawMaxQiFactors(maxQiFactorRect);
-
+            DrawBreakthroughChanceFactors(bChanceFactorRect);
         }
+        private static void DrawBreakthroughChanceFactors(Rect rect)
+        {
+            rect.height = 50f;
+            rect.y += 40f;
+            if (qiPoolHediff == null) return;
 
+            StringBuilder translatedBCFactorText = new StringBuilder();
+
+            if (qiGatherMapComp != null)
+            {
+                if (eRealmHediff != null)
+                {
+                    float qiBonus = qiTile / 50;
+                    translatedBCFactorText.Append("AS_BCFactorQiTile".Translate((qiBonus).ToString("0.#").Named("QI")));
+                }
+            }
+
+            if (elementEmitMapComp != null)
+            {
+                float elementBonus = elementTile / 100;
+                translatedBCFactorText.Append("AS_BCFactorElement".Translate(elementText.Translate().Named("ELEMENT"), (elementBonus).ToString("0.#").Named("AMOUNT")));
+            }
+            if (selectedPawn.needs.mood != null)
+            {
+                translatedBCFactorText.Append("AS_BCFactorMood".Translate((selectedPawn.needs.mood.CurLevelPercentage * 2).ToString("0.#").Named("MOOD")));
+            }
+            translatedBCFactorText.Append("AS_BCFactorOffset".Translate((CultivatorHediff.breakthroughChanceOffset+1f).ToString("0.#").Named("OFFSET")));
+
+            Widgets.Label(rect, "AS_BCFactorLabel".Translate((AscensionUtilities.UpdateBreakthroughChance(CultivatorHediff) * 100f).ToString("0.#").Named("CHANCE")));
+            rect.y += 20f;
+            rect.height = 35f;
+            Widgets.Label(rect, translatedBCFactorText.ToString());
+            AddHighlightAndTooltip(rect, "AS_BCFactorsDesc", Color.white);
+        }
         private static void DrawCultivationSpeed(Rect rect)
         {
             Widgets.Label(rect, "AS_CultivationSpeed".Translate(
@@ -473,31 +517,25 @@ namespace Ascension
                 translatedSpeedFactorText += "AS_CSFactorMood".Translate(
                     selectedPawn.needs.mood.CurLevelPercentage.ToString("0.#").Named("MOOD"));
             }
-
-            QiGatherMapComponent qiGatherMapComp = CultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
             if (qiGatherMapComp != null)
             {
-                int qiTile = qiGatherMapComp.GetQiGatherAt(selectedPawn.Position.x, selectedPawn.Position.z);
                 if (selectedPawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm))
                 {
                     translatedSpeedFactorText += "AS_CSFactorQiTile".Translate(
                         (qiTile / 100f).ToString("0.#").Named("QITILE"));
                 }
             }
-
-            ElementEmitMapComponent elementEmitMapComp = CultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
-            string elementText = TranslateElement(CultivatorHediff.element);
+            ;
             if (elementEmitMapComp != null)
             {
                 translatedSpeedFactorText += "AS_CSFactorElement".Translate(
                     elementText.Translate().Named("ELEMENT"),
-                    (1 + (elementEmitMapComp.CalculateElementValueAt(
-                        new IntVec2(CultivatorHediff.pawn.Position.x, CultivatorHediff.pawn.Position.z), CultivatorHediff.element) / 100f))
+                    (1 + (elementTile / 100f))
                         .ToString("0.#").Named("AMOUNT"));
             }
             speedFactorsRect.height = 35f;
             Widgets.Label(speedFactorsRect, "AS_CSFactorLabel".Translate());
-            speedFactorsRect.y += 35f;
+            speedFactorsRect.y += 20f;
             speedFactorsRect.height = 35f;
             Widgets.Label(speedFactorsRect, translatedSpeedFactorText);
             AddHighlightAndTooltip(speedFactorsRect, "AS_CSFactorsDesc", Color.white);
@@ -534,8 +572,8 @@ namespace Ascension
                 translatedSpeedFactorText.Append("AS_MQFactorIC".Translate(CultivatorHediff.innerCauldronQi.ToString().Named("IC")));
             }
             Widgets.Label(speedFactorsRect, "AS_MQFactorLabel".Translate());
-            speedFactorsRect.y += 25f;
-            speedFactorsRect.height = 50f;
+            speedFactorsRect.y += 20f;
+            speedFactorsRect.height = 35f;
             Widgets.Label(speedFactorsRect, translatedSpeedFactorText.ToString());
             AddHighlightAndTooltip(speedFactorsRect, "AS_MQFactorsDesc", Color.white);
         }
@@ -543,17 +581,13 @@ namespace Ascension
 
         private static void DrawQiTile(Rect qiTileRect)
         {
-            QiGatherMapComponent qiGatherMapComp = CultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
-            ElementEmitMapComponent elementEmitMapComp = CultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
 
             if (qiGatherMapComp != null && elementEmitMapComp != null)
             {
                 string elementText = TranslateElement(CultivatorHediff.element);
-                int qiTile = qiGatherMapComp.GetQiGatherAt(selectedPawn.Position.x, selectedPawn.Position.z);
                 Widgets.Label(qiTileRect,
                     "AS_CurrentElement".Translate(elementText.Translate().Named("ELEMENT"),
-                    elementEmitMapComp.CalculateElementValueAt(
-                        new IntVec2(selectedPawn.Position.x, selectedPawn.Position.z), CultivatorHediff.element).Named("AMOUNT")) +
+                    elementTile.Named("AMOUNT")) +
                     "AS_QiTile".Translate(qiTile.Named("QITILE")));
             }
         }
@@ -755,6 +789,9 @@ namespace Ascension
         public static Realm_Hediff bRealmHediff;
         public static Cultivator_Hediff CultivatorHediff;
 
+        public static float qiTile;
+        public static float elementTile;
+
         private static float DrawCultivationTab(Rect rect, float curY)
         {
             //here we grab the hediffs for use for most of the cultivation tab
@@ -762,6 +799,13 @@ namespace Ascension
             qiPoolHediff = selectedPawn.health.hediffSet.GetFirstHediffOfDef(qiPoolHediffDef) as QiPool_Hediff;
             eRealmHediff = selectedPawn.health.hediffSet.GetFirstHediffOfDef(eRealmHediffDef) as Realm_Hediff;
             bRealmHediff = selectedPawn.health.hediffSet.GetFirstHediffOfDef(bRealmHediffDef) as Realm_Hediff;
+
+            elementEmitMapComp = CultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
+            qiGatherMapComp = CultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
+            elementText = TranslateElement(CultivatorHediff.element);
+
+            qiTile = qiGatherMapComp.GetQiGatherAt(selectedPawn.Position.x, selectedPawn.Position.z);
+            elementTile = elementEmitMapComp.CalculateElementValueAt(new IntVec2(selectedPawn.Position.x, selectedPawn.Position.z), CultivatorHediff.element);
 
             Widgets.BeginGroup(rect);
             Rect qiBarRect = new Rect(0f, curY, rect.width, 40f);

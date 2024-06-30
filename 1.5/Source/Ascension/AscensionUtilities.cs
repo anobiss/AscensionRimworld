@@ -15,6 +15,41 @@ namespace Ascension
 {
     public class AscensionUtilities
     {
+        public static float UpdateBreakthroughChance(Cultivator_Hediff cultivatorHediff)
+        {
+            float breakthroughChance = 0f;
+            float moodOffset = cultivatorHediff.pawn.needs.mood.CurLevelPercentage * 2f;
+            float breakthroughChanceOffset = cultivatorHediff.breakthroughChanceOffset + 1f;
+            QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
+            ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
+            Realm_Hediff essenceRealmHediff = cultivatorHediff.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
+            if (qiGatherMapComp != null)
+            {
+                if (essenceRealmHediff != null)
+                {
+                    float qiTile = qiGatherMapComp.GetQiGatherAt(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z);
+                    float qiBonus = qiTile / 5000f;//20% per 1k qi on tile
+                    breakthroughChance += qiBonus;
+                }
+                
+            }
+            if (elementEmitMapComp != null)
+            {
+                float elementBonus = elementEmitMapComp.CalculateElementValueAt(new IntVec2(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z), cultivatorHediff.element)/10000f;//10% per 1k element on tile
+                breakthroughChance += elementBonus;
+            }
+            breakthroughChance *= moodOffset;
+            breakthroughChance *= breakthroughChanceOffset;
+
+            cultivatorHediff.breakthroughChance = breakthroughChance;
+            return breakthroughChance;
+            //factors:
+            // (Gather Qi 20% Per 1k: )
+            //+ (Element 10% Per 1k: )
+            //* (Mood * 2: )
+            //* (Offset: )
+
+        }
 
         public static float GetQualityMultiplier(int quality)
         {
@@ -116,7 +151,6 @@ namespace Ascension
             if (cultivatorHediff != null)
             {
                 cultivatorHediff.goldenCoreScore = score;
-                Log.Message("score" + score);
             }
             AscensionUtilities.TierBreakthrough((Realm_Hediff)pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm));
         }
@@ -237,7 +271,6 @@ namespace Ascension
             if (hediff.progress + progress < hediff.maxProgress)
             {
                 hediff.progress += progress;
-                Log.Message("increased realm progress by "+progress);
             }
             else
             {
@@ -298,24 +331,29 @@ namespace Ascension
             Realm_Hediff essenceHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm, false) as Realm_Hediff;
             if (essenceHediff != null)
             {
-                if (essenceHediff.Severity < 3)
+                if (essenceHediff.Severity >= 3)
+                {
+                    cultivatorHediff.innerCauldronQi += amount;
+                }else
                 {
                     if ((cultivatorHediff.innerCauldronQi + amount) < cultivatorHediff.innerCauldronLimit)
                     {
                         cultivatorHediff.innerCauldronQi += amount;
-                    }else if ((cultivatorHediff.innerCauldronQi + amount) > cultivatorHediff.innerCauldronLimit)
+                    }
+                    else if ((cultivatorHediff.innerCauldronQi + amount) >= cultivatorHediff.innerCauldronLimit)
                     {
                         cultivatorHediff.innerCauldronQi = cultivatorHediff.innerCauldronLimit;
                     }
-                }else
-                {
-                    cultivatorHediff.innerCauldronQi += amount;// if the hediff isnt null and isnt less than 3 we know they have a golden core and therefore cap should be removed
                 }
             }else
             {
                 if (cultivatorHediff.innerCauldronQi + amount < cultivatorHediff.innerCauldronLimit)
                 {
                     cultivatorHediff.innerCauldronQi += amount;
+                }
+                else if (cultivatorHediff.innerCauldronQi + amount >= cultivatorHediff.innerCauldronLimit)
+                {
+                    cultivatorHediff.innerCauldronQi = cultivatorHediff.innerCauldronLimit;
                 }
             }
             UpdateQiMax(pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff);
