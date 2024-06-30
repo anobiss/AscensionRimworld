@@ -1,4 +1,5 @@
-﻿using Verse;
+﻿using RimWorld;
+using Verse;
 namespace Ascension
 {
     public class HediffComp_QiRecovery : HediffComp
@@ -7,12 +8,7 @@ namespace Ascension
         public override void CompPostPostAdd(DamageInfo? dinfo)
         {
             base.CompPostPostAdd(dinfo);
-            Cultivator_Hediff cultivatorHediff = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
-            if (cultivatorHediff != null)
-            {
-                cultivatorHediff.cultivationSpeedOffset += Props.cultivationSpeedOffset;
-                cultivatorHediff.qiRecoverySpeedOffset += Props.offset;
-            }
+            AddRecovery();
         }
         public override void CompPostPostRemoved()
         {
@@ -29,7 +25,25 @@ namespace Ascension
                 RemoveRecovery();
             }
         }
-        private void RemoveRecovery()
+        public void AddRecovery() 
+        {
+            Cultivator_Hediff cultivatorHediff = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
+            if (cultivatorHediff != null)
+            {
+                if (Props.spirit == true)
+                {
+                    float severity = parent.Severity;
+                    cultivatorHediff.qiRecoverySpeedOffset += AscensionUtilities.spiritPillOffsetRates[(int)severity - 1];
+                }
+                else
+                {
+                    cultivatorHediff.cultivationSpeedOffset += Props.cultivationSpeedOffset;
+                    cultivatorHediff.qiRecoverySpeedOffset += Props.offset;
+                }
+            }
+        }
+
+        public void RemoveRecovery()//public so we can remove it when we are changing severity
         {
             if (parent != null)
             {
@@ -38,8 +52,16 @@ namespace Ascension
             Cultivator_Hediff cultivatorHediff = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
             if (cultivatorHediff != null)
             {
-                cultivatorHediff.cultivationSpeedOffset -= Props.cultivationSpeedOffset;
-                cultivatorHediff.qiRecoverySpeedOffset -= Props.offset;
+                if (Props.spirit == true)
+                {
+                    float severity = parent.Severity;
+                    cultivatorHediff.qiRecoverySpeedOffset -= AscensionUtilities.spiritPillOffsetRates[(int)severity - 1];
+                }
+                else
+                {
+                    cultivatorHediff.cultivationSpeedOffset -= Props.cultivationSpeedOffset;
+                    cultivatorHediff.qiRecoverySpeedOffset -= Props.offset;
+                }
             }
         }
         public override void CompExposeData()

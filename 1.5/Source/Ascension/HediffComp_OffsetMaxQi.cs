@@ -10,7 +10,16 @@ namespace Ascension
             QiPool_Hediff qiPool = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
             if (qiPool != null)
             {
-                qiPool.maxAmountOffset += Props.offset;
+                if (Props.spirit == true)
+                {
+                    //awful explodes when created and does not give hediff
+                    float severity = parent.Severity;
+                    qiPool.maxAmountOffset += AscensionUtilities.spiritPillOffsetRates[(int)severity - 1];
+                }
+                else
+                {
+                    qiPool.maxAmountOffset += Props.offset;
+                }
                 AscensionUtilities.UpdateQiMax(qiPool);
             }
         }
@@ -20,7 +29,15 @@ namespace Ascension
             QiPool_Hediff qiPool = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
             if (qiPool != null)
             {
-                qiPool.maxAmountOffset -= Props.offset;
+                if (Props.spirit == true)
+                {
+                    float severity = parent.Severity;
+                    qiPool.maxAmountOffset -= AscensionUtilities.spiritPillOffsetRates[(int)severity - 1];
+                }
+                else
+                {
+                    qiPool.maxAmountOffset -= Props.offset;
+                }
                 AscensionUtilities.UpdateQiMax(qiPool);
             }
         }

@@ -77,6 +77,7 @@
     <Compile Include="CompElementEmit.cs" />
     <Compile Include="CompGatherQi.cs" />
     <Compile Include="CompConstantHeatPusher.cs" />
+    <Compile Include="CompGoldenPill.cs" />
     <Compile Include="CompProperties_AbilityBodyMelee.cs" />
     <Compile Include="CompProperties_AbilityHediffToggle.cs" />
     <Compile Include="CompProperties_AbilityQiCost.cs" />
@@ -89,8 +90,10 @@
     <Compile Include="CompProperties_CultivationSpot.cs" />
     <Compile Include="CompProperties_ElementEmit.cs" />
     <Compile Include="CompProperties_GatherQi.cs" />
+    <Compile Include="CompProperties_GoldenPill.cs" />
     <Compile Include="CompProperties_UseEffect_AbilityScroll.cs" />
     <Compile Include="CompProperties_UseEffect_Absorb_SpiritSword.cs" />
+    <Compile Include="CompSpiritPill.cs" />
     <Compile Include="CompUseEffect_AbilityScroll.cs" />
     <Compile Include="CompUseEffect_Absorb_SpiritSword.cs" />
     <Compile Include="CultivationJobUtility.cs" />
@@ -130,6 +133,7 @@
     <Compile Include="JobDriver_BreakthroughEssence.cs" />
     <Compile Include="QiPool_Hediff.cs" />
     <Compile Include="Scroll_Hediff.cs" />
+    <Compile Include="SpiritPill_Hediff.cs" />
     <Compile Include="SpiritSword_Hediff.cs" />
     <Compile Include="Toils_Cultivation.cs" />
     <Compile Include="Tribulation_Hediff.cs" />

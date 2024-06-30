@@ -15,8 +15,31 @@ namespace Ascension
 {
     public class AscensionUtilities
     {
-        //essence realm max qi rates
-        public static readonly float[] maxQiRates = { 2f, 10f, 100f, 500f, 1000f, 10000f, 120000f };
+
+        public static float GetQualityMultiplier(int quality)
+        {
+            if (quality == 0)
+            {
+                return 0.5f;
+            }
+            else if (quality == 1)
+            {
+                return 1f;
+            }
+            else if (quality > 1 && quality < 6)
+            {
+                return quality;
+            }else if (quality == 6)
+            {
+                return 10f;
+            }
+            return 1f;
+        }
+
+        public static readonly float[] spiritPillOffsetRates = {5f, 7f, 10f, 12f, 17f, 20f};
+        public static readonly float[] spiritPillCostRates = { 12000f, 77000f, 100000f, 120000f, 200000f, 1000000f, 12000000f };//how much qi each tier costs	Poor,Normal,Good,Excellent,Masterwork,Legendary
+    //essence realm max qi rates
+    public static readonly float[] maxQiRates = { 2f, 10f, 100f, 500f, 1000f, 10000f, 120000f };
         public static void UpdateRealmMaxQi(int index, QiPool_Hediff qiPool)
         {
 
@@ -155,6 +178,11 @@ namespace Ascension
                 }
                 hediff.maxAmount *= hediff.maxAmountOffset;
                 hediff.maxAmount += cultivatorHediff.innerCauldronQi;
+            }
+
+            if (hediff.amount > hediff.maxAmount)//so that if your max qi is reduced you dont have more than max
+            {
+                hediff.amount = hediff.maxAmount;
             }
         }
         public static void IncreaseQi(Pawn pawn, float amount, bool noExplosion = false)

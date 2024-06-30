@@ -3,8 +3,8 @@
   <HediffDef>
     <defName>SpiritPillHediff</defName>
     <label>Spirit Pill Empowerment</label>
-	<description>This being has survived the consumption of a Spirit Pill, granting 10x Qi Recovery and 10x Max Qi.</description>
-    <hediffClass>HediffWithComps</hediffClass>
+	<description>This being has survived the consumption of a Spirit Pill, granting increased Qi Recovery and Max Qi.</description>
+    <hediffClass>Ascension.SpiritPill_Hediff</hediffClass>
 	<defaultLabelColor>(0.0, 1.0, 0.0)</defaultLabelColor>
     <isBad>false</isBad>
     <comps>
@@ -13,7 +13,40 @@
       </li>
       <li Class="Ascension.HediffCompProperties_OffsetMaxQi">
         <offset>10</offset>
+		<spirit>true</spirit>
       </li>
     </comps>
+	    <stages>
+				  <li>
+        <label>Lesser Spirit Pill Empowerment</label>
+        <minSeverity>1</minSeverity>
+		<extraTooltip>Gives 7x Qi Recovery and 7x Max Qi.</extraTooltip>
+      </li>
+	  <li>
+        <label>Spirit Pill Empowerment</label>
+        <minSeverity>2</minSeverity>
+		<extraTooltip>Gives 10x Qi Recovery and 10x Max Qi.</extraTooltip>
+      </li>
+	  <li>
+        <label>Greater Spirit Pill Empowerment</label>
+        <minSeverity>3</minSeverity>
+		<extraTooltip>Gives 10x Qi Recovery and 10x Max Qi.</extraTooltip>
+      </li>
+	  <li>
+        <label>Profound Spirit Pill Empowerment</label>
+        <minSeverity>4</minSeverity>
+		<extraTooltip>Gives 10x Qi Recovery and 10x Max Qi.</extraTooltip>
+      </li>
+	  <li>
+        <label>Supreme Spirit Pill Empowerment</label>
+        <minSeverity>5</minSeverity>
+		<extraTooltip>Gives 10x Qi Recovery and 10x Max Qi.</extraTooltip>
+      </li>
+	  <li>
+        <label>Divine Spirit Pill Empowerment</label>
+        <minSeverity>6</minSeverity>
+		<extraTooltip>Gives 10x Qi Recovery and 10x Max Qi.</extraTooltip>
+      </li>
+	    </stages>
   </HediffDef>
 </Defs>

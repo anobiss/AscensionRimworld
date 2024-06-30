@@ -4,7 +4,7 @@
   <ThingDef ParentName="DrugPillBase">
     <defName>SpiritPill</defName>
     <label>Spirit Pill</label>
-    <description>A pill that permanently grants 10x Qi Recovery and 10x Max Qi, but requires 100,000 Qi to survive the consumption. Beings with less than the required amount of Qi will produce a fairly large explosion when they die after consumption, scaling with body size.</description>
+    <description>A pill that permanently grants increased Qi Recovery and Max Qi, but requires a large amount of Qi to survive the consumption. Beings with less than the required amount of Qi will produce a fairly large explosion when they die after consumption, scaling with body size. Will explode at awful quality.</description>
     <graphicData>
       <texPath>Things/Item/Drug/SpiritPill</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -23,6 +23,15 @@
       </outcomeDoers>
     </ingestible>
 	<comps>
+      <li Class="Ascension.CompProperties_AwfulExplosive">
+        <explosiveDamageType>Flame</explosiveDamageType>
+      </li>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+      <li>
+        <compClass>Ascension.CompSpiritPill</compClass>
+      </li>
       <li Class="CompProperties_Drug">
 		<isCombatEnhancingDrug>false</isCombatEnhancingDrug>
         <listOrder>1011</listOrder>

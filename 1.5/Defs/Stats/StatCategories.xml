@@ -14,9 +14,21 @@
     <displayOrder>28</displayOrder>
   </StatCategoryDef>
   
-    <StatCategoryDef>
+  <StatCategoryDef>
     <defName>CultivationCauldron</defName>
     <label>Spirit Cauldron</label>
+    <displayOrder>28</displayOrder>
+  </StatCategoryDef>
+  
+  <StatCategoryDef>
+    <defName>SpiritPill</defName>
+    <label>Spirit Pill</label>
+    <displayOrder>28</displayOrder>
+  </StatCategoryDef>
+  
+  <StatCategoryDef>
+    <defName>GoldenPill</defName>
+    <label>GoldenPill</label>
     <displayOrder>28</displayOrder>
   </StatCategoryDef>
 </Defs>

@@ -27,10 +27,8 @@
       <drugCategory>Medical</drugCategory>
       <outcomeDoers>
         <li Class="Ascension.IngestionOutcomeDoer_GoldenPill">
-          <hediffDef>QiPool</hediffDef>
           <amount>10</amount>
-		  <tier>1</tier>
-          <doToGeneratedPawnIfAddicted>true</doToGeneratedPawnIfAddicted>
+		  <noQuality>true</noQuality>
         </li>
 		<li Class="IngestionOutcomeDoer_GiveHediff">
           <hediffDef>QiResonance</hediffDef>
@@ -40,6 +38,10 @@
       </outcomeDoers>
     </ingestible>
 	<comps>
+      <li Class="Ascension.CompProperties_GoldenPill">
+		<amount>10</amount>
+		<noQuality>true</noQuality>
+      </li>
       <li Class="CompProperties_Drug">
 		<isCombatEnhancingDrug>false</isCombatEnhancingDrug>
         <listOrder>1010</listOrder>

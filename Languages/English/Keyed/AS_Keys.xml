@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
+  <AS_QiPoolDisplay>{REALM} Realm - {CURRENT} / {MAX}</AS_QiPoolDisplay>
 
     <!-- display realms in dao tab-->
   <AS_RealmProgress>{REALM} Realm - {CURRENT} / {MAX}</AS_RealmProgress>
@@ -15,6 +16,19 @@
   <AS_CultivationCauldronMaxQuality>Max Quality</AS_CultivationCauldronMaxQuality>
   <AS_CultivationCauldronMaxQualityDesc>The maximum quality of products made in this cauldron. Scales with Current Qi.</AS_CultivationCauldronMaxQualityDesc>
   
+      <!-- display for spirit pill -->
+  <AS_SpiritPillInspect>Qi Cost: {COST}, Multiplier: {OFFSET}x Max Qi and Qi Recovery</AS_SpiritPillInspect>
+  <AS_SpiritPillQiCost>Qi Cost</AS_SpiritPillQiCost>
+  <AS_SpiritPillQiCostDesc>The amount of Qi required to survive consumption.</AS_SpiritPillQiCostDesc>
+  <AS_SpiritPillMultiplier>Multiplier</AS_SpiritPillMultiplier>
+  <AS_SpiritPillMultiplierDesc>The multiplier for Max Qi and Qi Recovery given after consumption if survived.</AS_SpiritPillMultiplierDesc>
+  <AS_SpiritPillMultiplierValue>{OFFSET}x</AS_SpiritPillMultiplierValue>
+  <AS_SpiritPillSeverityLabel>Tier {TIER}</AS_SpiritPillSeverityLabel>
+  
+        <!-- display for golden pill -->
+  <AS_GoldenPillInspect>Qi: {QI}</AS_GoldenPillInspect>
+  <AS_GoldenPillQi>Qi</AS_GoldenPillQi>
+  <AS_GoldenPillQiDesc>The amount of Qi given upon consumption.</AS_GoldenPillQiDesc>
   
   <AS_SpiritTreeConversion>Spirit Tree Conversion</AS_SpiritTreeConversion>
   <AS_SpiritTreeConversionDesc>A sudden surge of Qi has converted a tree into a spirit tree.</AS_SpiritTreeConversionDesc>
@@ -87,8 +101,7 @@
 	
   <AS_AnimaCMax>Max Random Anima Conversion: </AS_AnimaCMax>
   <AS_AnimaCMaxDesc>The maximum Anima Conversion amount generated for a random cultivator. Inner Cauldron random generation is always 0-1200 and turns into Anima Conversion after achieving a Golden Core, removing its previously mentioned limit. Random Immortal cultivators can have no less than between 1x - 4x this amount (excluding the lucky psuedo-immortal Powerful Cultivators) and Powerful Cultivators can have up to 2x this amount.</AS_AnimaCMaxDesc>
-	
-	
+
   <AS_AbilityChance>Cultivator Ability Chance: </AS_AbilityChance>
   <AS_AbilityChanceDesc>Determines the probability of a cultivator gaining random scroll arts / abilities when spawned. Slightly below displayed percentage if no useable scrolls are found.</AS_AbilityChanceDesc>
   <AS_PCChance>Powerful Cultivator Chance: </AS_PCChance>

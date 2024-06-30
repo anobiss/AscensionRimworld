@@ -414,6 +414,47 @@
       </li>
     </ingredients>
   </RecipeDef>
+  
+  <RecipeDef>
+    <defName>MakeSpiritPill</defName>
+    <label>Make spirit pill</label>
+    <description>Make a spirit pill. Spirit pills will explode when made at awful quality.</description>
+	<researchPrerequisite>SpiritPillProduction</researchPrerequisite>
+    <jobString>Creating Spirit Pill.</jobString>
+    <workAmount>7777</workAmount>
+	<workSkill>Crafting</workSkill>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+	<soundWorking>Recipe_Smelt</soundWorking>
+	<skillRequirements>
+      <Crafting>7</Crafting>
+	  <Cooking>7</Cooking>
+    </skillRequirements>
+    <recipeUsers>
+      <li>SpiritCauldron</li>
+    </recipeUsers>
+    <products>
+      <SpiritPill>1</SpiritPill>
+    </products>
+    <ingredients>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>SpiritStone</li>
+          </thingDefs>
+        </filter>
+        <count>120</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>Spiritwood</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+  </RecipeDef>
 
   <RecipeDef>
     <defName>ManifestSpiritSword</defName>

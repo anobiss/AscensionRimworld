@@ -47,7 +47,7 @@
     </verbProperties>
     <comps>
       <li Class="Ascension.CompProperties_AbilityQiCost">
-        <cost>100</cost>
+        <cost>12000</cost>
       </li>
       <li Class="Ascension.CompProperties_AbilityQiHeal">
       </li>
@@ -74,7 +74,7 @@
     </verbProperties>
     <comps>
       <li Class="Ascension.CompProperties_AbilityQiCost">
-        <cost>10</cost>
+        <cost>700</cost>
       </li>
       <li Class="CompProperties_AbilityLaunchProjectile">
         <projectileDef>QiBullet</projectileDef>
@@ -133,7 +133,7 @@
     <comps>
       <li Class="CompProperties_Resurrect" />
       <li Class="Ascension.CompProperties_AbilityQiCost">
-        <cost>100000</cost>
+        <cost>10000000</cost>
       </li>
     </comps>
   </AbilityDef>
@@ -302,7 +302,7 @@
     </verbProperties>
     <comps>
       <li Class="Ascension.CompProperties_AbilityQiCost">
-        <cost>777</cost>
+        <cost>12000</cost>
 		<reqHediffDef>SpiritSwordFusion</reqHediffDef>
       </li>
       <li Class="CompProperties_AbilityLaunchProjectile">
@@ -347,7 +347,7 @@
     </verbProperties>
     <comps>
       <li Class="Ascension.CompProperties_AbilityQiCost">
-        <cost>555</cost>
+        <cost>7000</cost>
 		<reqHediffDef>SpiritSwordFusion</reqHediffDef>
       </li>
       <li Class="CompProperties_AbilityLaunchProjectile">
@@ -392,7 +392,7 @@
     </verbProperties>
     <comps>
       <li Class="Ascension.CompProperties_AbilityQiCost">
-        <cost>555</cost>
+        <cost>7000</cost>
 		<reqHediffDef>SpiritSwordFusion</reqHediffDef>
       </li>
       <li Class="CompProperties_AbilityLaunchProjectile">

@@ -38,6 +38,20 @@
   <researchViewX>3.50</researchViewX>
   <researchViewY>0.20</researchViewY>
   </ResearchProjectDef>
+  
+  <ResearchProjectDef>
+    <defName>SpiritPillProduction</defName>
+    <label>Spirit pill production</label>
+    <description>Produce Spirit Pills.</description>
+    <baseCost>7777</baseCost>
+    <techLevel>Medieval</techLevel>
+	<tab>Ascension</tab>
+    <prerequisites>
+      <li>GoldenPillProduction</li>
+    </prerequisites>
+  <researchViewX>3.50</researchViewX>
+  <researchViewY>1.00</researchViewY>
+  </ResearchProjectDef>
 
   <ResearchProjectDef>
     <defName>EssenceRefinement</defName>

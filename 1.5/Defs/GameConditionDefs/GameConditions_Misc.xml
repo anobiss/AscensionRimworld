@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <GameConditionDef>
+    <defName>QiBurst</defName>
+    <conditionClass>GameCondition_PsychicEmanation</conditionClass>
+    <label>qi burst</label>
+    <description>A burst of Qi is permeating the area, increasing any cultivators Qi Recovery by 7x and occasionaly converting trees into spirit trees.(WIP, currently using placeholder GameCondition_PsychicEmanation)</description>
+    <letterText>A burst of Qi is now permeating the area, increasing any cultivators Qi Recovery by 7x and occasionaly converting trees into spirit trees.(WIP, currently using placeholder GameCondition_PsychicEmanation)</letterText>
+    <defaultDroneLevel>GoodMedium</defaultDroneLevel>
+    <endMessage>The qi burst is ending.</endMessage>
+    <letterDef>PositiveEvent</letterDef>
+    <canBePermanent>true</canBePermanent>
+  </GameConditionDef>
+
+</Defs>

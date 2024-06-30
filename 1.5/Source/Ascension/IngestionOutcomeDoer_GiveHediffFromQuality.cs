@@ -7,35 +7,14 @@ namespace Ascension
 {
     public class IngestionOutcomeDoer_GiveHediffFromQuality : IngestionOutcomeDoer
     {
-        private float GetQualityMultiplier(Thing thing)
-        {
-            QualityCategory qc = new QualityCategory();
-            QualityUtility.TryGetQuality(thing, out qc);
-
-            if (((int)qc) == 0)
-            {
-                return 0.5f;
-            }
-            else if (((int)qc) == 1)
-            {
-                return 1f;
-            }
-            else if ((((int)qc) > 1) && (((int)qc) < 6))
-            {
-                return (int)qc;
-            }
-            else if (((int)qc) == 6)
-            {
-                return 10f;
-            }
-            return 1f;
-        }
         protected override void DoIngestionOutcomeSpecial(Pawn pawn, Thing ingested, int ingestedCount)
         {
             float num;
             if (amount > 0f)
             {
-                num = (amount * GetQualityMultiplier(ingested));
+                QualityCategory qc = new QualityCategory();
+                QualityUtility.TryGetQuality(ingested, out qc);
+                num = (amount * AscensionUtilities.GetQualityMultiplier((int)qc));
                 HediffDef QiPool = AscensionDefOf.QiPool;
 
                 if (this.hediffDef == QiPool)// do qi adding logic here

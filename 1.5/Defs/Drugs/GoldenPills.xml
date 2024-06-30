@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="DrugPillBase">
+    <defName>GoldenPill</defName>
+    <label>Golden pill</label>
+    <description>A golden pill that can be used to gain large amounts of Qi quickly. The amount of Qi granted scales with quality. Grants betweem 50-500 Qi.</description>
+    <graphicData>
+      <texPath>Things/Item/Drug/GoldenPill</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MarketValue>900.9</MarketValue>
+      <Mass>0.03</Mass>
+    </statBases>
+    <techLevel>Ultra</techLevel>
+    <minRewardCount>5</minRewardCount>
+    <ingestible>
+      <drugCategory>Medical</drugCategory>
+      <outcomeDoers>
+        <li Class="Ascension.IngestionOutcomeDoer_GoldenPill">
+          <amount>100</amount>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+	<comps>
+      <li Class="Ascension.CompProperties_GoldenPill">
+		<amount>100</amount>
+      </li>
+      <li Class="CompProperties_Drug">
+		<isCombatEnhancingDrug>false</isCombatEnhancingDrug>
+        <listOrder>1010</listOrder>
+      </li>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+	</comps>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags><li>RewardStandardHighFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>3</allowedArchonexusCount>
+  </ThingDef>
+
+  <ThingDef ParentName="DrugPillBase">
+    <defName>ImperialGoldenPill</defName>
+    <label>imperial golden pill</label>
+    <description>A imperial golden pill that can be used to gain large amounts of Qi quickly. The amount of Qi granted scales with quality. Grants betweem 2.5k-50k Qi.</description>
+    <graphicData>
+      <texPath>Things/Item/Drug/ImperialGoldenPill</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MarketValue>6043.6</MarketValue>
+      <Mass>0.03</Mass>
+    </statBases>
+    <techLevel>Ultra</techLevel>
+    <minRewardCount>5</minRewardCount>
+    <ingestible>
+      <drugCategory>Medical</drugCategory>
+      <outcomeDoers>
+        <li Class="Ascension.IngestionOutcomeDoer_GoldenPill">
+          <amount>5000</amount>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+	<comps>
+      <li Class="Ascension.CompProperties_GoldenPill">
+		<amount>5000</amount>
+      </li>
+      <li Class="CompProperties_Drug">
+		<isCombatEnhancingDrug>false</isCombatEnhancingDrug>
+        <listOrder>1010</listOrder>
+      </li>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+    </comps>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags><li>RewardStandardHighFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>3</allowedArchonexusCount>
+  </ThingDef>
+
+
+  <ThingDef ParentName="DrugPillBase">
+    <defName>HeavenlyGoldenPill</defName>
+    <label>heavenly golden pill</label>
+    <description>A heavenly golden pill that can be used to gain large amounts of Qi quickly. The amount of Qi granted scales with quality. Grants between 10k-200k Qi. Can also be used to heal wounds.</description>
+    <graphicData>
+      <texPath>Things/Item/Drug/HeavenlyGoldenPill</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MarketValue>14713.6</MarketValue>
+      <Mass>0.03</Mass>
+    </statBases>
+    <techLevel>Ultra</techLevel>
+    <minRewardCount>5</minRewardCount>
+    <ingestible>
+      <drugCategory>Medical</drugCategory>
+      <outcomeDoers>
+        <li Class="Ascension.IngestionOutcomeDoer_GoldenPill">
+          <amount>20000</amount>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+	<comps>
+      <li Class="Ascension.CompProperties_GoldenPill">
+		<amount>10000</amount>
+      </li>
+	  <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Use heavenly golden pill to heal</useLabel>
+        <useDuration>600</useDuration>
+      </li>
+      <li Class="CompProperties_UseEffect">
+        <compClass>CompUseEffect_FixWorstHealthCondition</compClass>
+      </li>
+      <li Class="CompProperties_Drug">
+		<isCombatEnhancingDrug>false</isCombatEnhancingDrug>
+        <listOrder>1010</listOrder>
+      </li>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+    </comps>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags><li>RewardStandardLowFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>3</allowedArchonexusCount>
+  </ThingDef>
+
+  <ThingDef ParentName="DrugPillBase">
+    <defName>AscensionPill</defName>
+    <label>Ascension Pill</label>
+    <description>The final pill beyond all golden pills. This pill grants the user ALLOT of Qi. Grants betwen 500k-10 million Qi. Will explode at awful quality. Can also be used to heal wounds.</description>
+    <graphicData>
+      <texPath>Things/Item/Drug/AscensionPill</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MarketValue>14844.5</MarketValue>
+      <Mass>0.03</Mass>
+    </statBases>
+    <techLevel>Ultra</techLevel>
+    <minRewardCount>1</minRewardCount>
+    <ingestible>
+      <drugCategory>Medical</drugCategory>
+      <outcomeDoers>
+        <li Class="Ascension.IngestionOutcomeDoer_GoldenPill">
+          <amount>1000000</amount>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+	<comps>
+      <li Class="Ascension.CompProperties_GoldenPill">
+		<amount>1000000</amount>
+      </li>
+	  <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Use Ascension Pill to Heal</useLabel>
+        <useDuration>77</useDuration>
+      </li>
+      <li Class="CompProperties_UseEffect">
+        <compClass>CompUseEffect_FixWorstHealthCondition</compClass>
+      </li>
+      <li Class="Ascension.CompProperties_AwfulExplosive">
+        <explosiveDamageType>Flame</explosiveDamageType>
+      </li>
+      <li Class="CompProperties_Drug">
+		<isCombatEnhancingDrug>false</isCombatEnhancingDrug>
+        <listOrder>1010</listOrder>
+      </li>
+	  <li Class="CompProperties_Glower">
+	  	<glowRadius>2</glowRadius>
+	  	<glowColor>(255, 255, 255)</glowColor>
+	  </li>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+    </comps>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags><li>RewardStandardLowFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>2</allowedArchonexusCount>
+  </ThingDef>
+  
+</Defs>

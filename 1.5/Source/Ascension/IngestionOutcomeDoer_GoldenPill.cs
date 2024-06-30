@@ -12,38 +12,24 @@ namespace Ascension
         AscensionSettings settings = LoadedModManager.GetMod<AscensionMod>().GetSettings<AscensionSettings>();
         protected override void DoIngestionOutcomeSpecial(Pawn pawn, Thing ingested, int ingestedCount)
         {
-            int num;
-            if (hediffDef == AscensionDefOf.QiPool)
+            float num;
+            if (amount > 0f)
             {
-                AscensionUtilities.IncreaseQi(pawn, amount);
-            }
-            else
-            {
-                num = amount;
-                Hediff hediff = HediffMaker.MakeHediff(this.hediffDef, pawn, null);
-                hediff.Severity = (float)num/100;
-                pawn.health.AddHediff(hediff, null, null, null);
-            }
-        }
-
-        public override IEnumerable<StatDrawEntry> SpecialDisplayStats(ThingDef parentDef)
-        {
-            if (parentDef.IsDrug && this.chance >= 1f)
-            {
-                foreach (StatDrawEntry statDrawEntry in this.hediffDef.SpecialDisplayStats(StatRequest.ForEmpty()))
+                if (noQuality == true)
                 {
-                    yield return statDrawEntry;
+                    AscensionUtilities.IncreaseQi(pawn, amount);
+                }
+                else
+                {
+                    QualityCategory qc = new QualityCategory();
+                    QualityUtility.TryGetQuality(ingested, out qc);
+                    num = (amount * AscensionUtilities.GetQualityMultiplier((int)qc));
+                    HediffDef QiPool = AscensionDefOf.QiPool;
+                    AscensionUtilities.IncreaseQi(pawn, (int)Math.Floor(num));
                 }
             }
-            yield break;
         }
-
-        public HediffDef hediffDef;
-
-        public int amount;
-
-        public int tier = -1;
-
-        public ChemicalDef toleranceChemical;
+        public bool noQuality = false;
+        public float amount;
     }
 }
