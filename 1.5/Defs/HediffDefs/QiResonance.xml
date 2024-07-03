@@ -11,6 +11,7 @@
       <li Class="Ascension.HediffCompProperties_QiRecovery">
         <offset>5</offset>
 		<cultivationSpeedOffset>0.1</cultivationSpeedOffset>
+		<temp>true</temp>
       </li>
     </comps>
   </HediffDef>

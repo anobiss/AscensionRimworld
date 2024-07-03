@@ -8,9 +8,11 @@ namespace Ascension
     public static class AscensionDefOf
     {
 
+        public static IncidentDef SpiritTreeConversion;
 
         //misc stuffs
         public static HediffDef QiPool;
+        public static HediffDef QiResonance;
 
         public static Verse.HediffDef SpiritSwordFusion;
         public static HediffDef SpiritPillHediff;

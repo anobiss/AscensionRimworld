@@ -152,9 +152,7 @@
   <AS_BCFactorMood> * ( Mood * 2: {MOOD}x )</AS_BCFactorMood>
   <AS_BCFactorOffset> * ( Offset: {OFFSET}x )</AS_BCFactorOffset>
   <AS_BCFactorsDesc>The factors influencing Breakthrough Chance.</AS_BCFactorsDesc>
-  
-  <AS_BreakthroughChanceTooltip> Breakthrough Chance: {CHANCE}%</AS_BreakthroughChanceTooltip>
-  
+
   <AS_InnerC>Inner Cauldron: {ICQI} / {ICMAX}</AS_InnerC>
   <AS_InnerCDesc>The Inner Cauldron increases a cultivators max Qi by the amount of Qi refined into it.</AS_InnerCDesc>
   <AS_AnimaC>Anima Conversion: {ICQI}</AS_AnimaC>
@@ -195,8 +193,8 @@
   <AS_Breakthrough>Breakthrough</AS_Breakthrough>
   <AS_GoldenCoreBreakthrough>Golden Core Breakthrough</AS_GoldenCoreBreakthrough>
   <AS_GoldenCoreBreakthroughDesc>Try to get as much Qi as possible before attempting. Meditate for 7 hours divided by cultivation speed for each Qi conversion of 25 qi during a Golden Core Breakthrough until less than 25 qi remains. The resulting golden core score is equal to the amount of qi converted. This breakthrough cannot fail, but golden core scores are permanent.</AS_GoldenCoreBreakthroughDesc>
-  <AS_BreakthroughEssenceDesc>Meditate for 7 hours divided by cultivation speed to breakthrough to the next essence realm.</AS_BreakthroughEssenceDesc>
-  <AS_BreakthroughBodyDesc>Exercise for 7 hours divided by cultivation speed to breakthrough to the next realm.</AS_BreakthroughBodyDesc>
+  <AS_BreakthroughEssenceDesc>Meditate for 7 hours divided by cultivation speed to breakthrough to the next essence realm. Breakthrough Chance: {CHANCE}%</AS_BreakthroughEssenceDesc>
+  <AS_BreakthroughBodyDesc>Exercise for 7 hours divided by cultivation speed to breakthrough to the next realm. Breakthrough Chance: {CHANCE}%</AS_BreakthroughBodyDesc>
   
   <AS_GatherQi>Gather Qi</AS_GatherQi>
   <AS_GatherQiRange>Range</AS_GatherQiRange>

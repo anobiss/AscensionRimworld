@@ -19,11 +19,15 @@ namespace Ascension
         public override void CompPostTick(ref float severityAdjustment)
         {
             base.CompPostTick(ref severityAdjustment);
-            this.ticksToRemove--;
-            if (this.ticksToRemove <= 0)
+            if (Props.temp == true)
             {
-                RemoveRecovery();
+                this.ticksToRemove--;
+                if (this.ticksToRemove <= 0)
+                {
+                    RemoveRecovery();
+                }
             }
+
         }
         public void AddRecovery() 
         {

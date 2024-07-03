@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
   <IncidentDef>
-    <defName>QiBurst</defName>
+    <defName>QiBurstIncident</defName>
     <label>qi burst</label>
-    <category>Misc</category>
     <targetTags>
-      <li>World</li>
+      <li>Map_PlayerHome</li>
     </targetTags>
     <workerClass>Ascension.IncidentWorker_QiBurst</workerClass>
-    <gameCondition>QiBurst</gameCondition>
+    <gameCondition>QiBurstGameCondition</gameCondition>
     <letterLabel>Qi Burst</letterLabel>
     <letterDef>PositiveEvent</letterDef>
+    <category>Special</category>
     <baseChance>1.1</baseChance>
     <minRefireDays>25</minRefireDays>
     <durationDays>0.125~0.35</durationDays>
