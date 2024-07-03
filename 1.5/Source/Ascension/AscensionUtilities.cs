@@ -18,30 +18,38 @@ namespace Ascension
         public static float UpdateBreakthroughChance(Cultivator_Hediff cultivatorHediff)
         {
             float breakthroughChance = 0f;
-            float moodOffset = cultivatorHediff.pawn.needs.mood.CurLevelPercentage * 2f;
-            float breakthroughChanceOffset = cultivatorHediff.breakthroughChanceOffset + 1f;
-            QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
-            ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
-            Realm_Hediff essenceRealmHediff = cultivatorHediff.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
-            if (qiGatherMapComp != null)
+            if (cultivatorHediff != null)
             {
-                if (essenceRealmHediff != null)
-                {
-                    float qiTile = qiGatherMapComp.GetQiGatherAt(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z);
-                    float qiBonus = qiTile / 5000f;//20% per 1k qi on tile
-                    breakthroughChance += qiBonus;
-                }
-                
-            }
-            if (elementEmitMapComp != null)
-            {
-                float elementBonus = elementEmitMapComp.CalculateElementValueAt(new IntVec2(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z), cultivatorHediff.element)/10000f;//10% per 1k element on tile
-                breakthroughChance += elementBonus;
-            }
-            breakthroughChance *= moodOffset;
-            breakthroughChance *= breakthroughChanceOffset;
 
-            cultivatorHediff.breakthroughChance = breakthroughChance;
+
+                float breakthroughChanceOffset = cultivatorHediff.breakthroughChanceOffset + 1f;
+                QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
+                ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
+                Realm_Hediff essenceRealmHediff = cultivatorHediff.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
+                if (qiGatherMapComp != null)
+                {
+                    if (essenceRealmHediff != null)
+                    {
+                        float qiTile = qiGatherMapComp.GetQiGatherAt(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z);
+                        float qiBonus = qiTile / 5000f;//20% per 1k qi on tile
+                        breakthroughChance += qiBonus;
+                    }
+                }
+                if (elementEmitMapComp != null)
+                {
+                    float elementBonus = elementEmitMapComp.CalculateElementValueAt(new IntVec2(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z), cultivatorHediff.element) / 10000f;//10% per 1k element on tile
+                    breakthroughChance += elementBonus;
+                }
+                if (cultivatorHediff.pawn.needs.mood != null)
+                {
+                    float moodOffset = cultivatorHediff.pawn.needs.mood.CurLevelPercentage * 2f;
+                    breakthroughChance *= moodOffset;
+                }
+                breakthroughChance *= breakthroughChanceOffset;
+
+                cultivatorHediff.breakthroughChance = breakthroughChance;
+            }
+
             return breakthroughChance;
             //factors:
             // (Gather Qi 20% Per 1k: )

@@ -11,19 +11,14 @@ using System.Security.Cryptography;
 
 namespace Ascension
 {
-
+    //jobgiver is for animal cultivators. workgiver for humanoids
     public class JobGiver_Cultivate : ThinkNode_JobGiver
     {
         public override float GetPriority(Pawn pawn)
         {
             if (CultivationJobUtility.CanCultivateNow(pawn))
             {
-                float priority = 7.2f;
-                if (pawn.workSettings != null)
-                {
-                    priority = pawn.workSettings.GetPriority(AscensionDefOf.Cultivation);
-                }
-                return priority;
+                return 7.2f;
             }
             return 0f;
         }

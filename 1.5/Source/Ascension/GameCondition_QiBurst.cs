@@ -9,11 +9,11 @@ namespace Ascension
         private const int SpiritTreeConversionInterval = 17500;
         private const float SpiritTreeConversionChance = 0.5f;
         private int ticksTilSpiritTreeConversion = SpiritTreeConversionInterval;
-        public override int TransitionTicks => 180000;
 
         public override void Init()
         {
             base.Init();
+            Duration = Rand.Range(1, 3) * 60000;
             foreach (Map map in this.AffectedMaps)
             {
                 QiGatherMapComponent qiMapComp = map.GetComponent<QiGatherMapComponent>();
@@ -71,12 +71,6 @@ namespace Ascension
                         Log.Message("Spirit tree conversion roll failed");
                     }
                 }
-            }
-
-            // Ensure the condition duration is respected for non-permanent conditions
-            if (!base.Permanent && base.TicksLeft > TransitionTicks)
-            {
-                base.TicksLeft = TransitionTicks;
             }
         }
     }

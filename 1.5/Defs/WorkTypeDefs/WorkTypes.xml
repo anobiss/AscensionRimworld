@@ -4,7 +4,7 @@
   <WorkTypeDef>
     <defName>Cultivation</defName>
     <labelShort>cultivation</labelShort>
-    <pawnLabel>Cultivator</pawnLabel>
+    <pawnLabel>cultivator</pawnLabel>
     <gerundLabel>cultivating</gerundLabel>
     <description>Cultivate the type set in the cultivation tab.</description>
     <verb>Cultivate</verb>

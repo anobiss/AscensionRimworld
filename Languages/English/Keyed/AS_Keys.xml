@@ -96,6 +96,7 @@
   <AS_DisplayElementDesc>Display the element values on the map/screen.</AS_DisplayElementDesc>
   
     <!-- Settings -->
+
   <AS_GoldenCoreMax>Max Random Golden Core Score: </AS_GoldenCoreMax>
   <AS_GoldenCoreMaxDesc>The maximum Golden Core score generated for a random cultivator. This is not the maximum possible from a Golden Core breakthrough and only effects randomly generated cultivators.  Random Immortal cultivators can have no less than between 1x - 4x this score (excluding the lucky psuedo-immortal Powerful Cultivators) and Powerful Cultivators can have up to 2x this score.</AS_GoldenCoreMaxDesc>
 	

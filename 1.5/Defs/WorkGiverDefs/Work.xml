@@ -15,4 +15,16 @@
 			<li>Manipulation</li>
 		</requiredCapacities>
 	</WorkGiverDef>
+	
+  <WorkGiverDef>
+    <defName>DoCultivation</defName>
+    <label>cultivate</label>
+    <giverClass>Ascension.WorkGiver_Cultivate</giverClass>
+    <workType>Cultivation</workType>
+    <priorityInType>40</priorityInType>
+    <verb>cultivate</verb>
+    <scanThings>false</scanThings>
+    <gerund>cultivating</gerund>
+  </WorkGiverDef>
+	
 </Defs>
