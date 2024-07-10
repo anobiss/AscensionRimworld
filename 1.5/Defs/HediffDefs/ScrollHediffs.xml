@@ -40,6 +40,27 @@
     </comps>
   </HediffDef>
   <HediffDef>
+    <defName>HeavenlyQiArts</defName>
+	<label>Heavenly Qi Arts</label>
+	<description>Heavenly Qi Arts, includes the Soul Mending ability. This ability creates charges that resurrects the user instantly upon death if the corpse still exists and can be stacked for more resurrections.</description>
+    <hediffClass>Ascension.Scroll_Hediff</hediffClass>
+	<defaultLabelColor>(1.0, 1.0, 0.2)</defaultLabelColor>
+    <isBad>false</isBad>
+	<comps>
+      <li Class="Ascension.HediffCompProperties_AddScrollAbility">
+		<scrollCompAbilityDefList>
+			<li>SoulMending</li>
+		</scrollCompAbilityDefList>
+		<reqEssence>7</reqEssence>
+      </li>
+	  <li Class="Ascension.HediffCompProperties_AddScrollReq">
+		<reqHediffsList>
+			<li>AdvancedQiArts</li>
+		</reqHediffsList>
+      </li>
+    </comps>
+  </HediffDef>
+  <HediffDef>
     <defName>BasicQiSwordArts</defName>
 	<label>Basic Qi Sword Arts</label>
 	<description>Basic Qi Sword Arts, includes the following spirit sword abilities: qi spirit sword throw, qi spirit sword stab and qi spirit sword slash.</description>

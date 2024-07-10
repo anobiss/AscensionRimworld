@@ -37,12 +37,16 @@ namespace Ascension
                 if (Props.spirit == true)
                 {
                     float severity = parent.Severity;
-                    cultivatorHediff.qiRecoverySpeedOffset += AscensionUtilities.spiritPillOffsetRates[(int)severity - 1];
+                    cultivatorHediff.qiRecoveryAmountOffset += AscensionUtilities.spiritPillOffsetRates[(int)severity - 1];
                 }
                 else
                 {
                     cultivatorHediff.cultivationSpeedOffset += Props.cultivationSpeedOffset;
-                    cultivatorHediff.qiRecoverySpeedOffset += Props.offset;
+                    cultivatorHediff.qiRecoveryAmountBase += Props.amountBaseBonus;
+                    cultivatorHediff.qiRecoveryAmountOffset += Props.amountOffset;
+                    cultivatorHediff.qiRecoverySpeedBase += Props.speedBaseBonus;
+                    cultivatorHediff.qiRecoverySpeedOffset += Props.speedOffset;
+
                 }
             }
         }
@@ -59,12 +63,15 @@ namespace Ascension
                 if (Props.spirit == true)
                 {
                     float severity = parent.Severity;
-                    cultivatorHediff.qiRecoverySpeedOffset -= AscensionUtilities.spiritPillOffsetRates[(int)severity - 1];
+                    cultivatorHediff.qiRecoveryAmountOffset -= AscensionUtilities.spiritPillOffsetRates[(int)severity - 1];
                 }
                 else
                 {
                     cultivatorHediff.cultivationSpeedOffset -= Props.cultivationSpeedOffset;
-                    cultivatorHediff.qiRecoverySpeedOffset -= Props.offset;
+                    cultivatorHediff.qiRecoveryAmountBase -= Props.amountBaseBonus;
+                    cultivatorHediff.qiRecoveryAmountOffset -= Props.amountOffset;
+                    cultivatorHediff.qiRecoverySpeedBase -= Props.speedBaseBonus;
+                    cultivatorHediff.qiRecoverySpeedOffset -= Props.speedOffset;
                 }
             }
         }

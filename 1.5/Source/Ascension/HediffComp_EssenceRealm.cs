@@ -9,14 +9,15 @@ namespace Ascension
 {
     public class HediffComp_EssenceRealm : HediffComp
     {
-        //migrate max and passive logic to utilities. 
         private int ticksToQi;
         public int tickRate = 2500;
         public static readonly float[] maxQiRates = { 2f, 10f, 100f, 500f, 1000f, 10000f, 120000f };
-        public static readonly int[] passiveQiRates = { 1, 10, 100, 500, 1000, 3000, 12000 };
+        public static readonly float[] passiveQiBaseAmounts = { 10f, 100f, 1200f, 7000f, 12000f, 24000f, 77000f };
+        public static readonly float[] passiveQiBaseSpeeds = { 1f, 1.5f, 2.7f, 3f, 4f, 5f, 7f };
         AscensionSettings settings = LoadedModManager.GetMod<AscensionMod>().GetSettings<AscensionSettings>();
         QiPool_Hediff qiPool;
         Cultivator_Hediff cultivatorHediff;
+
         public override void CompPostPostAdd(DamageInfo? dinfo)
         {
             base.CompPostPostAdd(dinfo);
@@ -24,8 +25,19 @@ namespace Ascension
             {
                 cultivatorHediff = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
                 qiPool = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
+                if (cultivatorHediff != null)
+                {
+                    UpdateRealmQiRecovery(true);
+                }
             }
         }
+
+        public override void CompPostPostRemoved()
+        {
+            base.CompPostPostRemoved();
+            UpdateRealmQiRecovery(false);
+        }
+
         public override void CompPostMake()
         {
             base.CompPostMake();
@@ -35,61 +47,61 @@ namespace Ascension
                 qiPool = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
             }
         }
-        public override void CompPostTick(ref float severityAdjustment)
+
+        public void UpdateRealmQiRecovery(bool add)
         {
-            base.CompPostTick(ref severityAdjustment);
-            this.ticksToQi--;
-            if (this.ticksToQi <= 0)
+            if (cultivatorHediff != null)
             {
-                if (cultivatorHediff != null)
+                if (qiPool == null)
                 {
-                    if (qiPool == null)
-                    {
-                        Pawn.health.AddHediff(AscensionDefOf.QiPool);
-                        qiPool = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
-                    }
-                    cultivatorHediff.qiRecoverySpeed = (int)Math.Floor(cultivatorHediff.qiRecoverySpeedOffset + 1f);
-                    tickRate = (int)Math.Floor(2500 / cultivatorHediff.qiRecoverySpeed);
+                    Pawn.health.AddHediff(AscensionDefOf.QiPool);
+                    qiPool = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
+                }
+
+                if (qiPool != null)  // Add null check for qiPool
+                {
                     int tier = ((int)Math.Floor(parent.Severity));
+                    float qiRecAmount = 0;
+                    float qiRecSpeed = 0;
                     if (tier <= 7)
                     {
-                        cultivatorHediff.qiRecoverySpeed = (int)Math.Floor(cultivatorHediff.qiRecoverySpeedOffset + 1f);
-                        tickRate = (int)Math.Floor(2500 / cultivatorHediff.qiRecoverySpeed);
                         if (tier < 1)
                         {
-                            cultivatorHediff.qiRecoveryAmount = passiveQiRates[1];
-                            AscensionUtilities.UpdateRealmMaxQi(1, qiPool);
+                            qiRecAmount = passiveQiBaseAmounts[0];
+                            qiRecSpeed = passiveQiBaseSpeeds[0];
+                            AscensionUtilities.UpdateQiRecoveryAmount(cultivatorHediff);
+                            AscensionUtilities.UpdateRealmMaxQi(0, qiPool);
                         }
                         else
                         {
-                            cultivatorHediff.qiRecoveryAmount = passiveQiRates[tier - 1];
+                            qiRecAmount = passiveQiBaseAmounts[tier - 1];
+                            qiRecSpeed = passiveQiBaseSpeeds[tier - 1];
+                            AscensionUtilities.UpdateQiRecoveryAmount(cultivatorHediff);
                             AscensionUtilities.UpdateRealmMaxQi(tier - 1, qiPool);
                         }
                         AscensionUtilities.UpdateQiMax(qiPool);
-                        AscensionUtilities.IncreaseQi(Pawn, cultivatorHediff.qiRecoveryAmount, true);
                     }
                     else if (tier > 7)
                     {
-                        if (qiPool == null)
-                        {
-                            Pawn.health.AddHediff(AscensionDefOf.QiPool);
-                            qiPool = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
-                        }
+                        qiRecAmount = passiveQiBaseAmounts[6];
+                        qiRecSpeed = passiveQiBaseSpeeds[6];
+                        AscensionUtilities.UpdateQiRecoveryAmount(cultivatorHediff);
                         AscensionUtilities.UpdateRealmMaxQi(6, qiPool);
                         AscensionUtilities.UpdateQiMax(qiPool);
-                        AscensionUtilities.IncreaseQi(Pawn, passiveQiRates[6], true);
+                    }
+
+                    if (add == true)
+                    {
+                        cultivatorHediff.qiRecoveryAmountBase += qiRecAmount;
+                        cultivatorHediff.qiRecoverySpeedBase += qiRecSpeed;
+                    }
+                    else
+                    {
+                        cultivatorHediff.qiRecoveryAmountBase -= qiRecAmount;
+                        cultivatorHediff.qiRecoverySpeedBase -= qiRecSpeed;
                     }
                 }
-                ticksToQi = tickRate;
             }
-        }
-        public override void CompExposeData()
-        {
-            Scribe_Values.Look<int>(ref this.ticksToQi, "ticksToQi", 0, false);
-        }
-        public override string CompDebugString()
-        {
-            return "ticksToQi: " + this.ticksToQi;
         }
     }
 }

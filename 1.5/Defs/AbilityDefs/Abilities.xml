@@ -137,6 +137,46 @@
       </li>
     </comps>
   </AbilityDef>
+  
+  <AbilityDef ParentName="AbilityTouchBase">
+    <defName>SoulMending</defName>
+    <label>soul mending</label>
+    <description>Create a Soul Mending charge that resurrects you instantly upon death. Can be stacked for repeated resurrections.</description>
+    <iconPath>UI/Abilities/SoulMending</iconPath>
+	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <warmupMote>Mote_QiMistStencil</warmupMote>
+    <warmupEffecter>QiMist</warmupEffecter>
+    <warmupStartSound>QiHeal_Cast</warmupStartSound>
+    <category>QiTechnique</category>
+    <displayOrder>600</displayOrder>
+    <hostile>false</hostile>
+    <sendMessageOnCooldownComplete>true</sendMessageOnCooldownComplete>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+	<targetRequired>false</targetRequired>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+	  <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+      <drawAimPie>false</drawAimPie>
+      <range>-1</range>
+      <warmupTime>77</warmupTime>
+      <soundCast>QiHeal_Cast</soundCast>
+	  <ai_IsWeapon>false</ai_IsWeapon>
+      <targetParams>
+		<canTargetSelf>true</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>24000000</cost><!-- 24000000 -->
+      </li>
+      <li Class="Ascension.CompProperties_AbilitySoulMend">
+      </li>
+      <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
  
    <AbilityDef ParentName="AbilityTouchBase">
     <defName>QiFeed</defName>

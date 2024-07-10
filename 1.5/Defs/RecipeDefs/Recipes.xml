@@ -488,12 +488,88 @@
     </ingredients>
   </RecipeDef>
   
+  
+   <!-- Spirit Leaf, Spirit Stones, and Spirit Crystal production.-->
+  
+  <!-- Spirit Crystal -->
+  
+   <RecipeDef>
+    <defName>Make_SpiritCrystalFromSpiritStones</defName>
+    <label>make spirit crystal from spirit stones</label>
+    <description>Make a spirit crystal by extracting and concentrating qi from spirit stones.</description>
+	<researchPrerequisite>AdvancedQiManipulation</researchPrerequisite>
+    <jobString>Manifesting spirit crystal from spirit stones.</jobString>
+    <workAmount>999</workAmount>
+	<workSkill>Crafting</workSkill>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+	<soundWorking>Recipe_Smelt</soundWorking>
+	<skillRequirements>
+      <Crafting>10</Crafting>
+	  <Cooking>10</Cooking>
+    </skillRequirements>
+    <recipeUsers>
+      <li>SpiritCauldron</li>
+    </recipeUsers>
+    <products>
+      <SpiritCrystal>1</SpiritCrystal>
+    </products>
+    <ingredients>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>SpiritStone</li>
+          </thingDefs>
+        </filter>
+        <count>7</count>
+      </li>
+    </ingredients>
+  </RecipeDef>
+  
+  
+  <!-- Spirit Stones -->
+  
   <RecipeDef>
-    <defName>Make_SpiritStonesFromOrganics</defName>
-    <label>make spirit stones from organics</label>
-    <description>Make spirit stones by extracting qi from organic feedstocks.</description>
+    <defName>Make_SpiritStonesFromSpiritLeaf</defName>
+    <label>make spirit stones from spirit leaves</label>
+    <description>Make spirit stones by extracting qi from spirit leaves.</description>
 	<researchPrerequisite>QiManipulation</researchPrerequisite>
-    <jobString>Manifesting spirit stones from organics.</jobString>
+    <jobString>Manifesting spirit stones from spirit leaves.</jobString>
+    <workAmount>999</workAmount>
+	<workSkill>Crafting</workSkill>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+	<soundWorking>Recipe_Smelt</soundWorking>
+	<skillRequirements>
+      <Crafting>10</Crafting>
+	  <Cooking>10</Cooking>
+    </skillRequirements>
+    <recipeUsers>
+      <li>SpiritCauldron</li>
+    </recipeUsers>
+    <products>
+      <SpiritStone>1</SpiritStone>
+    </products>
+    <ingredients>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>AS_Spiritleaf</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+  </RecipeDef>
+  
+  <!-- Spirit Leafs -->
+  
+  <RecipeDef>
+    <defName>Make_SpiritLeafFromOrganics</defName>
+    <label>make spirit leaf from organics</label>
+    <description>Make spirit leaf by extracting qi from organic feedstocks.</description>
+	<researchPrerequisite>AdvancedQiManipulation</researchPrerequisite>
+    <jobString>Manifesting spirit leaf from organics.</jobString>
     <effectWorking>Cremate</effectWorking>
     <soundWorking>Recipe_Cremate</soundWorking>
     <workAmount>5000</workAmount>
@@ -518,7 +594,7 @@
             <li>FoodMeals</li>
           </disallowedCategories>
         </filter>
-        <count>7</count>
+        <count>2</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -542,7 +618,7 @@
       </disallowedCategories>
     </defaultIngredientFilter>
     <products>
-      <SpiritStone>2</SpiritStone>
+      <AS_Spiritleaf>1</AS_Spiritleaf>
     </products>
   </RecipeDef>
   

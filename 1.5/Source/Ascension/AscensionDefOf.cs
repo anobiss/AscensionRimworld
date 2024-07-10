@@ -12,6 +12,7 @@ namespace Ascension
 
         //misc stuffs
         public static HediffDef QiPool;
+        public static HediffDef SoulMend;
         public static HediffDef QiResonance;
 
         public static Verse.HediffDef SpiritSwordFusion;

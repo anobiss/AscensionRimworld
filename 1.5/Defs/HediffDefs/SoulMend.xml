@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <HediffDef>
+    <hediffClass>Ascension.SoulMend_Hediff</hediffClass>
+    <defName>SoulMend</defName>
+    <label>soul mend</label>
+    <description>This being has soul mend, instantly resurrecting it upon death.</description>
+	<defaultLabelColor>(1.0, 1.0, 1.0)</defaultLabelColor>
+    <isBad>false</isBad>
+  </HediffDef>
+</Defs>

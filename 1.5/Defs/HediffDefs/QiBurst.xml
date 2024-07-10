@@ -9,8 +9,9 @@
     <isBad>false</isBad>
     <comps>
       <li Class="Ascension.HediffCompProperties_QiRecovery">
-        <offset>7.5</offset>
+        <speedOffset>7.7</speedOffset>
 		<cultivationSpeedOffset>2</cultivationSpeedOffset>
+		<temp>true</temp>
       </li>
     </comps>
   </HediffDef>

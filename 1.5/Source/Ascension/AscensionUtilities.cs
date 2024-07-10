@@ -15,6 +15,43 @@ namespace Ascension
 {
     public class AscensionUtilities
     {
+        //updateqirecoveryamount
+        public static float UpdateQiRecoverySpeed(Cultivator_Hediff cultivatorHediff)
+        {
+            float speed = 0f;
+            if (cultivatorHediff != null)
+            {
+                ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
+                if (elementEmitMapComp != null)
+                {
+                    float speedBase = cultivatorHediff.qiRecoverySpeedBase;
+                    float elementBonus = elementEmitMapComp.CalculateElementValueAt(new IntVec2(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z), cultivatorHediff.element) / 100;
+                    float speedOffset = cultivatorHediff.qiRecoverySpeedOffset + 1f;//offset is added and removed by hediff comps 
+                    speed = (speedBase + elementBonus) * speedOffset;
+                    cultivatorHediff.qiRecoverySpeed = speed;
+                }
+            }
+            return speed;
+        }
+        public static float UpdateQiRecoveryAmount(Cultivator_Hediff cultivatorHediff)
+        {
+            float amount = 0f;
+            if (cultivatorHediff == null)
+            {
+                return amount;
+            }
+            QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
+            if (qiGatherMapComp != null)
+            {
+                float amountBase = cultivatorHediff.qiRecoveryAmountBase;// amount is added and removed by hediff comps
+                float qiBonus = qiGatherMapComp.GetQiGatherAt(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z) / 100;
+                float amountOffset = cultivatorHediff.qiRecoveryAmountOffset + 1f;//offset is added and removed by hediff comps 
+                amount = (amountBase + qiBonus) * amountOffset;
+                cultivatorHediff.qiRecoveryAmount = amount;
+            }
+            return amount;
+        }
+
         public static float UpdateBreakthroughChance(Cultivator_Hediff cultivatorHediff)
         {
             float breakthroughChance = 0f;

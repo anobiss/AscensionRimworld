@@ -23,9 +23,13 @@ namespace Ascension
         public float cultivationBaseSpeed = 1f;//this isnt readonly because we want to allow boosting this later.
         public float cultivationSpeedOffset = 1f;//base is multiplied with this 
 
-        public float qiRecoveryAmount = 0f;
-        public float qiRecoverySpeed = 1f;
-        public float qiRecoverySpeedOffset = 0f; // qiRecovery is recalced not saved
+        public float qiRecoveryAmountBase = 0f; //used in calc
+        public float qiRecoveryAmount = 0f;//amount after calculated
+        public float qiRecoveryAmountOffset = 0f; // used in calc
+
+        public float qiRecoverySpeedBase = 1f;//used in calc
+        public float qiRecoverySpeed = 0f;//speed after calculated
+        public float qiRecoverySpeedOffset = 0f; // used in calc
 
 
         //golden core score and if they have one. if they dont its 0. score is set when golden core breakthrough is finished.

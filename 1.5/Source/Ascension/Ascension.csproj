@@ -71,6 +71,7 @@
     <Compile Include="CompAbilityEffect_QiHeal.cs" />
     <Compile Include="CompAbilityEffect_HediffGiver.cs" />
     <Compile Include="CompAbilityEffect_ManifestSpiritSword.cs" />
+    <Compile Include="CompAbilityEffect_SoulMend.cs" />
     <Compile Include="CompAwfulExplosive.cs" />
     <Compile Include="CompCultivationCauldron.cs" />
     <Compile Include="CompCultivationSpot.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="CompProperties_AbilityQiHeal.cs" />
     <Compile Include="CompProperties_AbilityHediffGiver.cs" />
     <Compile Include="CompProperties_AbilityManifestSpiritSword.cs" />
+    <Compile Include="CompProperties_AbilitySoulMend.cs" />
     <Compile Include="CompProperties_AwfulExplosive.cs" />
     <Compile Include="CompProperties_ConstantHeatPusher.cs" />
     <Compile Include="CompProperties_CultivationCauldron.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="HediffComp_EssenceRealm.cs" />
     <Compile Include="HediffComp_OffsetMaxQi.cs" />
     <Compile Include="HediffComp_QiRecovery.cs" />
+    <Compile Include="HediffComp_QiRecoveryBase.cs" />
     <Compile Include="HediffComp_QiShield.cs" />
     <Compile Include="HediffComp_Realm.cs" />
     <Compile Include="IncidentWorker_QiBurst.cs" />
@@ -133,6 +136,8 @@
     <Compile Include="JobDriver_BreakthroughEssence.cs" />
     <Compile Include="QiPool_Hediff.cs" />
     <Compile Include="Scroll_Hediff.cs" />
+    <Compile Include="SoulMendMapComponent.cs" />
+    <Compile Include="SoulMend_Hediff.cs" />
     <Compile Include="SpiritPill_Hediff.cs" />
     <Compile Include="SpiritSword_Hediff.cs" />
     <Compile Include="Toils_Cultivation.cs" />

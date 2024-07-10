@@ -2,11 +2,11 @@
 <Defs>
 
   <ThingDef ParentName="ResourceBase">
-    <defName>SpiritStone</defName>
-    <label>spirit stone</label>
-    <description>Qi condensed into its solid form. Once consumed it grants 10 qi and gives the consumer Qi Resonance(gives 0.1 increased cultivation speed offset and 500% increased qi recovery) for 3 days. Used in production of golden pills for vastly more qi.</description>
+    <defName>SpiritCrystal</defName>
+    <label>spirit crystal</label>
+    <description>Qi condensed into its crystaline form. Once consumed it grants 25k qi and gives the consumer Greater Qi Resonance(gives 0.5 increased cultivation speed offset, 7000 base qi recovery and 1000% increased qi recovery) for 3 days. Used in production of golden pills for vastly more qi.</description>
     <graphicData>
-      <texPath>Things/Item/Resource/SpiritStone</texPath>
+      <texPath>Things/Item/Resource/SpiritCrystal</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <useHitPoints>false</useHitPoints>
@@ -27,17 +27,22 @@
       <drugCategory>Medical</drugCategory>
       <outcomeDoers>
         <li Class="Ascension.IngestionOutcomeDoer_GoldenPill">
-          <amount>10</amount>
+          <amount>25000</amount>
 		  <noQuality>true</noQuality>
         </li>
 		<li Class="IngestionOutcomeDoer_GiveHediff">
-          <hediffDef>QiResonance</hediffDef>
+          <hediffDef>GreaterQiResonance</hediffDef>
           <severity>1.00</severity>
           <doToGeneratedPawnIfAddicted>true</doToGeneratedPawnIfAddicted>
         </li>
       </outcomeDoers>
     </ingestible>
 	<comps>
+      <li Class="CompProperties_Glower">
+        <overlightRadius>3.0</overlightRadius>
+        <glowRadius>3</glowRadius>
+        <glowColor>(370,370,370,0)</glowColor>
+      </li>
       <li Class="Ascension.CompProperties_GoldenPill">
 		<amount>10</amount>
 		<noQuality>true</noQuality>
@@ -52,7 +57,7 @@
       </li>
     </comps>
     <statBases>
-      <MarketValue>12</MarketValue>
+      <MarketValue>5</MarketValue>
       <Mass>0.5</Mass>
     </statBases>
     <thingCategories>

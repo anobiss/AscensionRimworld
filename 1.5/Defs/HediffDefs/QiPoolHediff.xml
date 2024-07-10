@@ -7,5 +7,10 @@
     <hediffClass>Ascension.QiPool_Hediff</hediffClass>
 	<defaultLabelColor>(0.0, 1.0, 0.0)</defaultLabelColor>
     <isBad>false</isBad>
+	<comps>
+	  <li>
+		<compClass>Ascension.HediffComp_QiRecoveryBase</compClass>
+	  </li>
+	</comps>
   </HediffDef>
 </Defs>

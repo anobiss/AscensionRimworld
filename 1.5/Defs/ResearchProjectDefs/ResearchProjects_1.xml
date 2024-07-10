@@ -3,7 +3,18 @@
   <ResearchProjectDef>
     <defName>QiManipulation</defName>
     <label>qi manipulation</label>
-    <description>Make spirit stones from organics, qi cushions, and build Soul Cauldrons.</description>
+    <description>Make spirit stones from spirit leaf, qi cushions, and build Spirit Cauldrons.</description>
+    <baseCost>777</baseCost>
+    <techLevel>Neolithic</techLevel>
+	<tab>Ascension</tab>
+    <researchViewX>0.00</researchViewX>
+    <researchViewY>0.20</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AdvancedQiManipulation</defName>
+    <label>advanced qi manipulation</label>
+    <description>Make spirit crystals from spirit stones and make spirit stones from spirit leaves.</description>
     <baseCost>777</baseCost>
     <techLevel>Neolithic</techLevel>
 	<tab>Ascension</tab>
@@ -26,14 +37,42 @@
   </ResearchProjectDef>
 
   <ResearchProjectDef>
-    <defName>AscensionPillProduction</defName>
-    <label>Ascension pill production</label>
-    <description>Produce Ascension Pills.</description>
+    <defName>ImperialGoldenPill</defName>
+    <label>imperial golden pill production</label>
+    <description>Produce Imperial Golden Pills.</description>
     <baseCost>7777</baseCost>
     <techLevel>Medieval</techLevel>
 	<tab>Ascension</tab>
     <prerequisites>
       <li>GoldenPillProduction</li>
+    </prerequisites>
+  <researchViewX>2.50</researchViewX>
+  <researchViewY>0.20</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>HeavenlyGoldenPillProduction</defName>
+    <label>heavenly golden pill production</label>
+    <description>Produce Heavenly Golden Pills.</description>
+    <baseCost>7777</baseCost>
+    <techLevel>Medieval</techLevel>
+	<tab>Ascension</tab>
+    <prerequisites>
+      <li>ImperialGoldenPill</li>
+    </prerequisites>
+  <researchViewX>2.50</researchViewX>
+  <researchViewY>0.20</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AscensionPillProduction</defName>
+    <label>ascension pill production</label>
+    <description>Produce Ascension Pills.</description>
+    <baseCost>7777</baseCost>
+    <techLevel>Medieval</techLevel>
+	<tab>Ascension</tab>
+    <prerequisites>
+      <li>HeavenlyGoldenPillProduction</li>
     </prerequisites>
   <researchViewX>3.50</researchViewX>
   <researchViewY>0.20</researchViewY>
@@ -47,6 +86,7 @@
     <techLevel>Medieval</techLevel>
 	<tab>Ascension</tab>
     <prerequisites>
+		<li>AdvancedQiManipulation</li>
       <li>GoldenPillProduction</li>
     </prerequisites>
   <researchViewX>3.50</researchViewX>

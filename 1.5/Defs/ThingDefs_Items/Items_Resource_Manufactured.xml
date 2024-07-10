@@ -314,8 +314,8 @@
     <label>dragon feces</label>
     <description>It's dragon poop. Disgusting.</description>
     <graphicData>
-      <texPath>Things/Item/Resource/Spiritwood</texPath>
-      <graphicClass>Graphic_StackCount</graphicClass>
+      <texPath>Things/Item/Treasure/DragonFeces</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <soundInteract>Wood_Drop</soundInteract>
     <soundDrop>Wood_Drop</soundDrop>
@@ -430,6 +430,49 @@
 		<element>Earth</element>
       </li>
     </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>AS_Spiritleaf</defName>
+    <label>spirit leaf</label>
+    <description>Spirit leaf from spirit leaf plants. Spirit leaf is used in various cultivation products, has Gather Qi, does not deteriorate, glows slightly and is not flammable.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/Spiritleaf</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Wood_Drop</soundInteract>
+    <soundDrop>Wood_Drop</soundDrop>
+    <statBases>
+      <MarketValue>3</MarketValue>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>0.4</Mass> 
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.0</DeteriorationRate>
+    </statBases>
+    <burnableByRecipe>true</burnableByRecipe>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+	<comps>
+	   <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>3</amount>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>1</glowRadius>
+        <glowColor>(370,370,370,0)</glowColor>
+      </li>
+    </comps>
+	<tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <stackLimit>77</stackLimit>
+	<minRewardCount>3</minRewardCount>
+	<tradeability>All</tradeability>
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>50</allowedArchonexusCount>
   </ThingDef>
 
   <ThingDef ParentName="ResourceBase">
@@ -559,6 +602,48 @@
       </li>
       <li Class="Ascension.CompProperties_UseEffect_AbilityScroll">
 		<scrollHediffDef>AdvancedQiArts</scrollHediffDef>
+      </li>
+    </comps>
+	<allowedArchonexusCount>100</allowedArchonexusCount>
+  </ThingDef>
+  
+  <ThingDef ParentName="ResourceBase">
+    <defName>HeavenlyQiScroll</defName>
+    <label>Heavenly Qi Arts Scroll</label>
+    <description>A heavenly Qi Arts scroll, capable of teaching those with profound immortality the Soul Mending ability. This ability creates charges that resurrects the user instantly upon death and can be stacked for more resurrections.</description>
+    <graphicData>
+      <texPath>Things/Item/Misc/HeavenlyQiScroll</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stackLimit>12</stackLimit>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <statBases>
+      <MaxHitPoints>777</MaxHitPoints>
+      <MarketValue>2222</MarketValue>
+      <Mass>0.8</Mass>
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.0</DeteriorationRate>
+    </statBases>
+    <intricate>true</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags>
+      <li>RewardStandardMidFreq</li>
+    </thingSetMakerTags>
+	<tradeability>None</tradeability>
+	<comps>
+      <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Use {0_label}</useLabel><!-- text_todo -->
+        <useDuration>0</useDuration>
+        <warmupMote>Mote_QiMistStencil</warmupMote>
+      </li>
+      <li Class="Ascension.CompProperties_UseEffect_AbilityScroll">
+		<scrollHediffDef>HeavenlyQiArts</scrollHediffDef>
       </li>
     </comps>
 	<allowedArchonexusCount>100</allowedArchonexusCount>

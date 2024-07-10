@@ -60,6 +60,11 @@
   <AS_Earth>Earth</AS_Earth>
   <AS_None>None</AS_None>
 
+    <!-- qi recovery tooltip stuff -->
+  <AS_QiPoolTooltip>No Qi Recovery</AS_QiPoolTooltip>     <!-- after -->
+  <AS_QiRecoveryAmountFactors>\n\n( (Base: {BASE}) + (Gather Qi ÷ 100: {QITILE}) ) * (Offset: {OFFSET}) = {AMOUNT} Qi</AS_QiRecoveryAmountFactors>
+  <AS_QiRecoverySpeedFactors>\n\n1 hour ÷ ( ( (Base: {BASE}) + ({ELEMENT} ÷ 100: {QITILE}) ) * (Offset: {OFFSET}) ) = {TRANSLATEDSPEED}</AS_QiRecoverySpeedFactors>
+  <AS_NoQiRecovery>No Qi Recovery</AS_NoQiRecovery>
 
     <!-- display for elements -->
   <AS_WaterDisplay>WA: {AMOUNT}</AS_WaterDisplay>
@@ -96,6 +101,9 @@
   <AS_DisplayElementDesc>Display the element values on the map/screen.</AS_DisplayElementDesc>
   
     <!-- Settings -->
+  <AS_SMTickRate>Soul Mend Tick Rate:</AS_SMTickRate>
+  <AS_SMTickRateDesc>The amount of ticks between each check if a pawn using soul mend is dead. Higher values means less lag with high amounts of soul menders but also a longer wait for resurrection.</AS_SMTickRateDesc>
+
 
   <AS_GoldenCoreMax>Max Random Golden Core Score: </AS_GoldenCoreMax>
   <AS_GoldenCoreMaxDesc>The maximum Golden Core score generated for a random cultivator. This is not the maximum possible from a Golden Core breakthrough and only effects randomly generated cultivators.  Random Immortal cultivators can have no less than between 1x - 4x this score (excluding the lucky psuedo-immortal Powerful Cultivators) and Powerful Cultivators can have up to 2x this score.</AS_GoldenCoreMaxDesc>
@@ -127,7 +135,8 @@
   <AS_GoldenCoreDesc>A golden core which grants the cultivator additional max qi equal to the score. Currently grants +{SCORE} Max Qi.</AS_GoldenCoreDesc>
   
   
-
+  <AS_SoulMendSeverity>{SM} Charges Left</AS_SoulMendSeverity>
+  
   
   
   <AS_CSFactorLabel>Cultivation Speed Factors:</AS_CSFactorLabel>

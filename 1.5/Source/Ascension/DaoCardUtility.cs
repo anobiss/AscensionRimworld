@@ -177,6 +177,36 @@ namespace Ascension
 
         //make draw pawn realms that works like this
 
+        private static string TranslatedRecoverySpeed(float recoverySpeed)
+        {
+            string translatedText = "AS_NoQiRecovery".Translate();
+            if (CultivatorHediff.qiRecoverySpeed < 1)
+            {
+                translatedText = "AS_QiPoolBarRecoveryHours".Translate(((2500 / CultivatorHediff.qiRecoverySpeed) / 2500).ToString("0.#").Named("QIRECOVERYSPEED"));
+                //hours logic
+            }
+            else if (2500 / CultivatorHediff.qiRecoverySpeed == 2500)//2500 is hour
+            {
+                translatedText = "AS_QiPoolBarRecoveryHour".Translate();
+                //hour logic
+            }
+            else if (2500 / CultivatorHediff.qiRecoverySpeed < 2500 && 2500 / CultivatorHediff.qiRecoverySpeed > 41.6)
+            {
+                translatedText = "AS_QiPoolBarRecoveryMinutes".Translate(((2500 / CultivatorHediff.qiRecoverySpeed) / 41.6).ToString("0.#").Named("QIRECOVERYSPEED"));
+                //minutes
+            }
+            else if (2500 / CultivatorHediff.qiRecoverySpeed == 41.6)
+            {
+                translatedText = "AS_QiPoolBarRecoveryMinute".Translate();
+                //minute logic
+            }
+            else if (2500 / CultivatorHediff.qiRecoverySpeed < 41.6)//less than a min
+            {
+                translatedText = "AS_QiPoolBarRecoverySeconds".Translate(((2500 / CultivatorHediff.qiRecoverySpeed) / 0.69f).ToString("0.#").Named("QIRECOVERYSPEED"));
+                //seconds logic
+            }
+            return translatedText;
+        }
 
         private static void DrawPawnQi(Rect rect)
         {
@@ -201,31 +231,7 @@ namespace Ascension
                 if (CultivatorHediff.qiRecoverySpeed != 0)
                 {
                     qiBarText += "AS_QiPoolBarRecovery".Translate(CultivatorHediff.qiRecoveryAmount.ToString().Named("QIRECOVERYAMOUNT"));
-                    if (CultivatorHediff.qiRecoverySpeed < 1)
-                    {
-                        qiBarText += "AS_QiPoolBarRecoveryHours".Translate(((2500 / CultivatorHediff.qiRecoverySpeed) / 2500).ToString("0.#").Named("QIRECOVERYSPEED"));
-                        //hours logic
-                    }
-                    else if (2500 / CultivatorHediff.qiRecoverySpeed == 2500)//2500 is hour
-                    {
-                        qiBarText += "AS_QiPoolBarRecoveryHour".Translate();
-                        //hour logic
-                    }
-                    else if (2500 / CultivatorHediff.qiRecoverySpeed < 2500 && 2500 / CultivatorHediff.qiRecoverySpeed > 41.6)
-                    {
-                        qiBarText += "AS_QiPoolBarRecoveryMinutes".Translate(((2500 / CultivatorHediff.qiRecoverySpeed) / 41.6).ToString("0.#").Named("QIRECOVERYSPEED"));
-                        //minutes
-                    }
-                    else if (2500 / CultivatorHediff.qiRecoverySpeed == 41.6)
-                    {
-                        qiBarText += "AS_QiPoolBarRecoveryMinute".Translate();
-                        //minute logic
-                    }
-                    else if (2500 / CultivatorHediff.qiRecoverySpeed < 41.6)//less than a min
-                    {
-                        qiBarText += "AS_QiPoolBarRecoverySeconds".Translate(((2500 / CultivatorHediff.qiRecoverySpeed) / 0.69f).ToString("0.#").Named("QIRECOVERYSPEED"));
-                        //seconds logic
-                    }
+                    TranslatedRecoverySpeed(CultivatorHediff.qiRecoverySpeed);
                 }
             }
             Widgets.Label(barRect, qiBarText);

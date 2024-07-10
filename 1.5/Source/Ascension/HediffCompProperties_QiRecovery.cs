@@ -4,7 +4,10 @@ namespace Ascension
 {
     public class HediffCompProperties_QiRecovery : HediffCompProperties
     {
-        public float offset = 0f;
+        public float amountOffset = 0f;
+        public float amountBaseBonus = 0f;
+        public float speedOffset = 0f;
+        public float speedBaseBonus = 0f;
         public float cultivationSpeedOffset = 0f;
         public bool spirit = false;
         public bool temp = false;

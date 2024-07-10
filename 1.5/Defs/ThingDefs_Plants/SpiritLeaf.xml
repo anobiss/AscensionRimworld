@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="PlantBase" Name="SpiritLeafBase" Abstract="True">
+    <statBases>
+      <MaxHitPoints>77</MaxHitPoints>
+      <Nutrition>0.2</Nutrition>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Plant/SpritLeaf</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+    </graphicData>
+    <selectable>true</selectable>
+    <pathCost>14</pathCost>
+    <ingestible />
+    <plant>
+      <immatureGraphicPath>Things/Plant/SpritLeaf_Immature</immatureGraphicPath>
+      <growDays>24</growDays>
+      <dieIfLeafless>false</dieIfLeafless>
+      <harvestWork>700</harvestWork>
+      <harvestTag>Standard</harvestTag>
+      <harvestedThingDef>AS_Spiritleaf</harvestedThingDef>
+      <harvestYield>1</harvestYield>
+      <topWindExposure>0.1</topWindExposure>
+      <visualSizeRange>0.5~1.0</visualSizeRange>
+      <wildOrder>2</wildOrder>
+      <allowAutoCut>false</allowAutoCut>
+    </plant>
+  </ThingDef>
+
+  <ThingDef ParentName="SpiritLeafBase">
+    <defName>AS_Plant_SpiritLeaf</defName>
+    <label>spirit leaf</label>
+    <description>A very slow-growing plant which yields spirit leaf when harvested. Spirit leaf is used in various cultivation products.</description>
+	<plant>
+      <growDays>24</growDays>
+      <sowWork>1200</sowWork>
+      <sowMinSkill>7</sowMinSkill>
+      <sowTags>
+        <li>Ground</li>
+        <li>Hydroponic</li>
+      </sowTags>
+      <purpose>Misc</purpose>
+    </plant>
+  </ThingDef>
+  
+   <ThingDef ParentName="SpiritLeafBase">
+    <defName>AS_Plant_SpiritLeafWild</defName>
+    <label>wild spirit leaf</label>
+    <description>A very slow-growing plant which yields spirit leaf when harvested. Spirit leaf is used in various cultivation products.\n\nThis wild breed of spirit leaf is hardier and produces more than domesticated spirit leaf, but is too difficult to cultivate.</description>
+    <neverMultiSelect>false</neverMultiSelect>
+    <plant>
+      <harvestYield>3</harvestYield>
+      <wildClusterRadius>2</wildClusterRadius>
+      <wildClusterWeight>80</wildClusterWeight>
+    </plant>
+  </ThingDef>
+
+</Defs>
+
+
+
