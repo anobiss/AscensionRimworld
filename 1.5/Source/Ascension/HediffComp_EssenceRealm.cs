@@ -9,12 +9,9 @@ namespace Ascension
 {
     public class HediffComp_EssenceRealm : HediffComp
     {
-        private int ticksToQi;
-        public int tickRate = 2500;
         public static readonly float[] maxQiRates = { 2f, 10f, 100f, 500f, 1000f, 10000f, 120000f };
         public static readonly float[] passiveQiBaseAmounts = { 10f, 100f, 1200f, 7000f, 12000f, 24000f, 77000f };
         public static readonly float[] passiveQiBaseSpeeds = { 1f, 1.5f, 2.7f, 3f, 4f, 5f, 7f };
-        AscensionSettings settings = LoadedModManager.GetMod<AscensionMod>().GetSettings<AscensionSettings>();
         QiPool_Hediff qiPool;
         Cultivator_Hediff cultivatorHediff;
 
