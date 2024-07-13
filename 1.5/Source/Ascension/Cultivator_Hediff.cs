@@ -23,15 +23,6 @@ namespace Ascension
         public float cultivationBaseSpeed = 1f;//this isnt readonly because we want to allow boosting this later.
         public float cultivationSpeedOffset = 1f;//base is multiplied with this 
 
-        public float qiRecoveryAmountBase = 0f; //used in calc
-        public float qiRecoveryAmount = 0f;//amount after calculated
-        public float qiRecoveryAmountOffset = 0f; // used in calc
-
-        public float qiRecoverySpeedBase = 1f;//used in calc
-        public float qiRecoverySpeed = 0f;//speed after calculated
-        public float qiRecoverySpeedOffset = 0f; // used in calc
-
-
         //golden core score and if they have one. if they dont its 0. score is set when golden core breakthrough is finished.
         public float goldenCoreScore = 0;
         
@@ -74,13 +65,8 @@ namespace Ascension
         }
         public override void ExposeData()
         {
-            Scribe_Values.Look(ref goldenCoreScore, "goldenCoreScore");
-            Scribe_Values.Look(ref qiRecoverySpeed, "qiRecoverySpeed");
-            //Scribe_Values.Look(ref qiRecoverySpeedOffset, "qiRecoverySpeedOffset");
+            Scribe_Values.Look(ref goldenCoreScore, "goldenCoreScore");// this, the cultivators element and inner cauldron should be the only things we NEED to store permanently. 
             Scribe_Values.Look(ref element, "element");
-            Scribe_Values.Look(ref cultivationSpeedOffset, "cultivationSpeedOffset");
-            Scribe_Values.Look(ref cultivationBaseSpeed, "cultivationBaseSpeed");
-            Scribe_Values.Look(ref cultivationSpeed, "cultivationSpeed");
             Scribe_Values.Look(ref startTime, "startTime");
             Scribe_Values.Look(ref endTime, "endTime");
             Scribe_Values.Look(ref autoCultivateType, "autoCultivateType");

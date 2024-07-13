@@ -3,6 +3,7 @@ using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -15,43 +16,257 @@ namespace Ascension
 {
     public class AscensionUtilities
     {
-        //updateqirecoveryamount
-        public static float UpdateQiRecoverySpeed(Cultivator_Hediff cultivatorHediff)
+        #region Realm Bonuses
+        //essence realm max qi rates
+        public static readonly float[] maxQiRates = { 2f, 10f, 100f, 500f, 1000f, 10000f, 120000f };
+        //essence realm qi recovery rates
+        public static readonly float[] passiveQiBaseAmounts = { 10f, 100f, 1200f, 7000f, 12000f, 24000f, 77000f };
+        public static readonly float[] passiveQiBaseSpeeds = { 1f, 1.5f, 2.7f, 3f, 4f, 5f, 7f };
+
+        public static int RealmIndex(Realm_Hediff essenceRealmHediff)
         {
-            float speed = 0f;
+            int index = -1; //so we know when we arent getting a index
+            if (essenceRealmHediff != null)
+            {
+                int tier = ((int)Math.Floor(essenceRealmHediff.Severity));
+
+                if (tier <= 7)
+                {
+                    if (tier < 1)
+                    {
+                        index = 0;
+                    }
+                    else
+                    {
+                        index = tier - 1;
+                    }
+                }
+                else if (tier > 7)
+                {
+                    index = 6;
+                }
+
+            }
+            return index;
+        }
+        #endregion
+
+
+        #region Qi Recovery & Max Qi -- Updates/Calculations
+
+        public static readonly float[] spiritPillOffsetRates = { 5f, 7f, 10f, 12f, 17f, 20f };
+        public static readonly float[] spiritPillCostRates = {77000f, 100000f, 120000f, 200000f, 1000000f, 12000000f };//how much qi each tier costs	Poor,Normal,Good,Excellent,Masterwork,Legendary
+
+        //updateqirecoveryamount
+
+        public static float UpdateQiMaxOffset(QiPool_Hediff qiPool)//returns offset float and updates the offset in the cultivator hediff
+        {
+            Realm_Hediff essenceRealm = qiPool.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
+            float offset = 1;
+            if (essenceRealm != null)
+            {
+                offset += maxQiRates[RealmIndex(essenceRealm)];
+            }
+
+            //logic for adding all offsets and stuff from HediffCompProperties_OffsetMaxQi
+            foreach (Hediff hediff in qiPool.pawn.health.hediffSet.hediffs)
+            {
+                HediffComp_OffsetMaxQi offsetComp = hediff.TryGetComp<HediffComp_OffsetMaxQi>();
+                if (offsetComp != null)
+                {
+                    if (offsetComp.Props.spirit == true)
+                    {
+                        //awful explodes when created and does not give hediff
+                        float severity = offsetComp.parent.Severity;
+                        offset += spiritPillOffsetRates[(int)severity - 1];
+                    }else
+                    {
+                        offset += offsetComp.Props.offset;
+                    }
+                }
+            }
+            qiPool.maxAmountOffset = offset;
+
+            return offset;
+        }
+        public static float UpdateQiMax(QiPool_Hediff hediff)
+        {
+            float maxQi = 0;
+            Cultivator_Hediff cultivatorHediff = hediff.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
+            maxQi = (long)Math.Floor((hediff.pawn.RaceProps.baseBodySize * 100f)); // we use this for max qi as a base instead of a actual base float
+
             if (cultivatorHediff != null)
             {
-                ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
+                if (cultivatorHediff.goldenCoreScore > 0)
+                {
+                    maxQi += cultivatorHediff.goldenCoreScore;
+                }
+                maxQi *= UpdateQiMaxOffset(hediff);
+                maxQi += cultivatorHediff.innerCauldronQi;
+            }
+            if (hediff.amount > maxQi)//so that if your max qi is reduced you dont have more than max
+            {
+                hediff.amount = maxQi;
+            }
+            hediff.maxAmount = maxQi;
+            return maxQi;
+        }
+
+        public static float UpdateQiRecoveryAmountBase(QiPool_Hediff qiPool)//returns offset float and updates the offset in the cultivator hediff
+        {
+            Realm_Hediff essenceRealm = qiPool.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
+            float amountBase = 0f;
+            if (essenceRealm != null)
+            {
+                amountBase += passiveQiBaseAmounts[RealmIndex(essenceRealm)];
+            }
+
+            //logic for adding all offsets and stuff from HediffCompProperties_OffsetMaxQi
+            foreach (Hediff hediff in qiPool.pawn.health.hediffSet.hediffs)
+            {
+                HediffComp_QiRecovery offsetComp = hediff.TryGetComp<HediffComp_QiRecovery>();
+                if (offsetComp != null)
+                {
+                    if (offsetComp.Props.spirit == false)
+                    {
+                        amountBase += offsetComp.Props.amountBaseBonus; //spirit pill only gives base offset
+                    }
+                }
+            }
+            qiPool.qiRecoveryAmountBase = amountBase; //update this value for display of offset to the player
+
+            return amountBase;
+        }
+
+        public static float UpdateQiRecoverySpeedBase(QiPool_Hediff qiPool)//returns offset float and updates the offset in the cultivator hediff
+        {
+            Realm_Hediff essenceRealm = qiPool.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
+            float speedBase = 0f; //start 
+            if (essenceRealm != null)
+            {
+                speedBase += passiveQiBaseSpeeds[RealmIndex(essenceRealm)];
+            }
+
+            //logic for adding all offsets and stuff from HediffCompProperties_OffsetMaxQi
+            foreach (Hediff hediff in qiPool.pawn.health.hediffSet.hediffs)
+            {
+                HediffComp_QiRecovery offsetComp = hediff.TryGetComp<HediffComp_QiRecovery>();
+                if (offsetComp != null)
+                {
+                    if (offsetComp.Props.spirit == false)
+                    {
+                        speedBase += offsetComp.Props.speedBaseBonus;
+                    }
+                }
+            }
+            qiPool.qiRecoverySpeedBase = speedBase; //update this value for display of offset to the player
+
+            return speedBase;
+        }
+
+        public static float UpdateQiRecoveryAmountOffset(QiPool_Hediff qiPool)//returns offset float and updates the offset in the cultivator hediff
+        {
+            Realm_Hediff essenceRealm = qiPool.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
+            float offset = 1;
+
+            //logic for adding all offsets and stuff from HediffCompProperties_OffsetMaxQi
+            foreach (Hediff hediff in qiPool.pawn.health.hediffSet.hediffs)
+            {
+                HediffComp_QiRecovery offsetComp = hediff.TryGetComp<HediffComp_QiRecovery>();
+                if (offsetComp != null)
+                {
+                    if (offsetComp.Props.spirit == true)
+                    {
+                        //awful explodes when created and does not give hediff
+                        float severity = offsetComp.parent.Severity;
+                        offset += spiritPillOffsetRates[(int)severity - 1];
+                    }
+                    else
+                    {
+                        offset += offsetComp.Props.speedOffset;
+                    }
+                }
+            }
+            qiPool.maxAmountOffset = offset; //update this value for display of offset to the player
+
+            return offset;
+        }
+
+        public static float UpdateQiRecoverySpeedOffset(QiPool_Hediff qiPool)//returns offset float and updates the offset in the cultivator hediff
+        {
+            Realm_Hediff essenceRealm = qiPool.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
+            float offset = 1;
+            if (essenceRealm != null)
+            {
+                offset += passiveQiBaseSpeeds[RealmIndex(essenceRealm)];
+            }
+
+            //logic for adding all offsets and stuff from HediffCompProperties_OffsetMaxQi
+            foreach (Hediff hediff in qiPool.pawn.health.hediffSet.hediffs)
+            {
+                HediffComp_QiRecovery offsetComp = hediff.TryGetComp<HediffComp_QiRecovery>();
+                if (offsetComp != null)
+                {
+                    if (offsetComp.Props.spirit == false)
+                    {
+                        offset += offsetComp.Props.speedOffset;
+                    }
+                }
+            }
+            qiPool.maxAmountOffset = offset; //update this value for display of offset to the player
+
+            return offset;
+        }
+
+        //update offsets for speed and amounts neeeded
+        public static float UpdateQiRecoverySpeed(QiPool_Hediff qiPool)
+        {
+            Cultivator_Hediff cultivatorHediff = qiPool.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
+            float speed = 0f;
+            if (qiPool == null)
+            {
+                return speed;
+            }
+            if (qiPool.pawn.Spawned)
+            {
+                ElementEmitMapComponent elementEmitMapComp = qiPool.pawn.Map.GetComponent<ElementEmitMapComponent>();
                 if (elementEmitMapComp != null)
                 {
-                    float speedBase = cultivatorHediff.qiRecoverySpeedBase;
-                    float elementBonus = elementEmitMapComp.CalculateElementValueAt(new IntVec2(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z), cultivatorHediff.element) / 100;
-                    float speedOffset = cultivatorHediff.qiRecoverySpeedOffset + 1f;//offset is added and removed by hediff comps 
+                    float speedBase = UpdateQiRecoverySpeedBase(qiPool);
+                    float elementBonus = elementEmitMapComp.CalculateElementValueAt(new IntVec2(qiPool.pawn.Position.x, qiPool.pawn.Position.z), cultivatorHediff.element) / 100;
+                    float speedOffset = UpdateQiRecoverySpeedOffset(qiPool);
                     speed = (speedBase + elementBonus) * speedOffset;
-                    cultivatorHediff.qiRecoverySpeed = speed;
+                    qiPool.qiRecoverySpeed = speed;
                 }
             }
             return speed;
         }
-        public static float UpdateQiRecoveryAmount(Cultivator_Hediff cultivatorHediff)
+
+        public static float UpdateQiRecoveryAmount(QiPool_Hediff qiPool)
         {
+            Realm_Hediff essenceRealm = qiPool.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
             float amount = 0f;
-            if (cultivatorHediff == null)
+            if (qiPool == null)
             {
                 return amount;
             }
-            QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
-            if (qiGatherMapComp != null)
+            if (qiPool.pawn.Spawned)
             {
-                float amountBase = cultivatorHediff.qiRecoveryAmountBase;// amount is added and removed by hediff comps
-                float qiBonus = qiGatherMapComp.GetQiGatherAt(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z) / 100;
-                float amountOffset = cultivatorHediff.qiRecoveryAmountOffset + 1f;//offset is added and removed by hediff comps 
-                amount = (amountBase + qiBonus) * amountOffset;
-                cultivatorHediff.qiRecoveryAmount = amount;
+                QiGatherMapComponent qiGatherMapComp = qiPool.pawn.Map.GetComponent<QiGatherMapComponent>();
+                if (qiGatherMapComp != null)
+                {
+                    float amountBase = UpdateQiRecoveryAmountBase(qiPool);
+                    float qiBonus = qiGatherMapComp.GetQiGatherAt(qiPool.pawn.Position.x, qiPool.pawn.Position.z) / 100;
+                    float amountOffset = UpdateQiRecoveryAmountOffset(qiPool);
+                    amount = (amountBase + qiBonus) * amountOffset;
+                    qiPool.qiRecoveryAmount = amount;
+                }
             }
+
             return amount;
         }
 
+        #endregion
         public static float UpdateBreakthroughChance(Cultivator_Hediff cultivatorHediff)
         {
             float breakthroughChance = 0f;
@@ -116,15 +331,7 @@ namespace Ascension
             return 1f;
         }
 
-        public static readonly float[] spiritPillOffsetRates = {5f, 7f, 10f, 12f, 17f, 20f};
-        public static readonly float[] spiritPillCostRates = { 12000f, 77000f, 100000f, 120000f, 200000f, 1000000f, 12000000f };//how much qi each tier costs	Poor,Normal,Good,Excellent,Masterwork,Legendary
-    //essence realm max qi rates
-    public static readonly float[] maxQiRates = { 2f, 10f, 100f, 500f, 1000f, 10000f, 120000f };
-        public static void UpdateRealmMaxQi(int index, QiPool_Hediff qiPool)
-        {
 
-            qiPool.realmMaxAmountOffset = maxQiRates[index];
-        }
 
         public static bool Can
             
@@ -233,36 +440,6 @@ namespace Ascension
                 cultivationSpeed = 0.1f;
             }
             return cultivationSpeed;
-        }
-
-        public static void UpdateQiMax(QiPool_Hediff hediff)
-        {
-            //body size times 100, then realm and (if above 0) gc scores are added, then offset is applied, then inner cauldron is added
-            Cultivator_Hediff cultivatorHediff = hediff.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
-
-            //make sure the max qi factors display reflects how this works in a understandable way for the player.
-            hediff.maxAmount = (long)Math.Floor((hediff.pawn.RaceProps.baseBodySize * 100f));
-
-            //
-            if (hediff.realmMaxAmountOffset > 0)
-            {
-                hediff.maxAmount = hediff.maxAmount * hediff.realmMaxAmountOffset;
-            }
-
-            if (cultivatorHediff != null)
-            {
-                if (cultivatorHediff.goldenCoreScore > 0)
-                {
-                    hediff.maxAmount += cultivatorHediff.goldenCoreScore;
-                }
-                hediff.maxAmount *= hediff.maxAmountOffset;
-                hediff.maxAmount += cultivatorHediff.innerCauldronQi;
-            }
-
-            if (hediff.amount > hediff.maxAmount)//so that if your max qi is reduced you dont have more than max
-            {
-                hediff.amount = hediff.maxAmount;
-            }
         }
         public static void IncreaseQi(Pawn pawn, float amount, bool noExplosion = false)
         {

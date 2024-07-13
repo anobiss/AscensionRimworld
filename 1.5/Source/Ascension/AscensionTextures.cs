@@ -18,10 +18,12 @@ namespace Ascension
         public static readonly Texture2D UICultivatorIcon = ContentFinder<Texture2D>.Get("UI/Icons/Cultivator", true);
         public static readonly Texture2D UICultivatorEmptyIcon = ContentFinder<Texture2D>.Get("UI/Icons/CultivatorEmpty", true);
         public static readonly Texture2D UIGoldenCoreIcon = ContentFinder<Texture2D>.Get("UI/Icons/GoldenCoreIcon", true);
-        
+
         public static readonly Texture2D ChangePriority = ContentFinder<Texture2D>.Get("UI/Commands/ChangePriority", true);
         public static readonly Texture2D ChangeRealm = ContentFinder<Texture2D>.Get("UI/Commands/ChangeRealm", true);
         public static readonly Texture2D ChangeElement = ContentFinder<Texture2D>.Get("UI/Commands/ChangeElement", true);
+
+        public static readonly Texture2D ElementFactorsIcon = ContentFinder<Texture2D>.Get("UI/Icons/ElementFactorsIcon", true);
 
     }
 }

@@ -113,7 +113,6 @@
     <Compile Include="HediffComp_EssenceRealm.cs" />
     <Compile Include="HediffComp_OffsetMaxQi.cs" />
     <Compile Include="HediffComp_QiRecovery.cs" />
-    <Compile Include="HediffComp_QiRecoveryBase.cs" />
     <Compile Include="HediffComp_QiShield.cs" />
     <Compile Include="HediffComp_Realm.cs" />
     <Compile Include="IncidentWorker_QiBurst.cs" />

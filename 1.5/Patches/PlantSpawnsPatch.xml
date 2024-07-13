@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
+
+  <!-- Spirit Crystal -->
+
   <Operation Class="PatchOperationInsert">
     <xpath>Defs/BiomeDef[defName="TemperateForest"]/wildPlants/Plant_HealrootWild</xpath>
     <order>Append</order>
     <value>
       <AS_Plant_TreeSpirit>0.0015</AS_Plant_TreeSpirit>
+      <AS_Plant_SpiritLeafWild>0.0015</AS_Plant_SpiritLeafWild>
     </value>
   </Operation>
     <Operation Class="PatchOperationInsert">
@@ -12,6 +16,7 @@
     <order>Append</order>
     <value>
       <AS_Plant_TreeSpirit>0.0015</AS_Plant_TreeSpirit>
+      <AS_Plant_SpiritLeafWild>0.0015</AS_Plant_SpiritLeafWild>
     </value>
   </Operation>
       <Operation Class="PatchOperationInsert">
@@ -19,6 +24,7 @@
     <order>Append</order>
     <value>
       <AS_Plant_TreeSpirit>0.0015</AS_Plant_TreeSpirit>
+      <AS_Plant_SpiritLeafWild>0.0015</AS_Plant_SpiritLeafWild>
     </value>
   </Operation>
       <Operation Class="PatchOperationInsert">
@@ -26,6 +32,7 @@
     <order>Append</order>
     <value>
       <AS_Plant_TreeSpirit>0.0015</AS_Plant_TreeSpirit>
+      <AS_Plant_SpiritLeafWild>0.0015</AS_Plant_SpiritLeafWild>
     </value>
   </Operation>
       <Operation Class="PatchOperationInsert">
@@ -33,6 +40,7 @@
     <order>Append</order>
     <value>
       <AS_Plant_TreeSpirit>0.0015</AS_Plant_TreeSpirit>
+      <AS_Plant_SpiritLeafWild>0.0015</AS_Plant_SpiritLeafWild>
     </value>
   </Operation>
 </Patch>

@@ -7,7 +7,7 @@
       <Nutrition>0.2</Nutrition>
     </statBases>
     <graphicData>
-      <texPath>Things/Plant/SpritLeaf</texPath>
+      <texPath>Things/Plant/SpiritLeaf</texPath>
       <graphicClass>Graphic_Random</graphicClass>
     </graphicData>
     <selectable>true</selectable>

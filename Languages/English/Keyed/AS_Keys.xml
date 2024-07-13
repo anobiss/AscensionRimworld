@@ -60,11 +60,7 @@
   <AS_Earth>Earth</AS_Earth>
   <AS_None>None</AS_None>
 
-    <!-- qi recovery tooltip stuff -->
-  <AS_QiPoolTooltip>No Qi Recovery</AS_QiPoolTooltip>     <!-- after -->
-  <AS_QiRecoveryAmountFactors>\n\n( (Base: {BASE}) + (Gather Qi ÷ 100: {QITILE}) ) * (Offset: {OFFSET}) = {AMOUNT} Qi</AS_QiRecoveryAmountFactors>
-  <AS_QiRecoverySpeedFactors>\n\n1 hour ÷ ( ( (Base: {BASE}) + ({ELEMENT} ÷ 100: {QITILE}) ) * (Offset: {OFFSET}) ) = {TRANSLATEDSPEED}</AS_QiRecoverySpeedFactors>
-  <AS_NoQiRecovery>No Qi Recovery</AS_NoQiRecovery>
+
 
     <!-- display for elements -->
   <AS_WaterDisplay>WA: {AMOUNT}</AS_WaterDisplay>
@@ -85,11 +81,11 @@
   <AS_QiPoolBar>{QI} / {MAXQI} Qi</AS_QiPoolBar>
   
    <!-- its only like this for better translation support -->
-  <AS_QiPoolBarRecovery> + {QIRECOVERYAMOUNT} every</AS_QiPoolBarRecovery>
-  <AS_QiPoolBarRecoveryHours> {QIRECOVERYSPEED} hours.</AS_QiPoolBarRecoveryHours>
-  <AS_QiPoolBarRecoveryHour> hour.</AS_QiPoolBarRecoveryHour>
-  <AS_QiPoolBarRecoveryMinutes> {QIRECOVERYSPEED} minutes.</AS_QiPoolBarRecoveryMinutes>
-  <AS_QiPoolBarRecoveryMinute> minute.</AS_QiPoolBarRecoveryMinute>
+  <AS_QiPoolBarRecovery> + {QIRECOVERYAMOUNT} every {TRANSLATEDRECOVERYSPEED}</AS_QiPoolBarRecovery>
+  <AS_QiPoolBarRecoveryHours>{QIRECOVERYSPEED} hours.</AS_QiPoolBarRecoveryHours>
+  <AS_QiPoolBarRecoveryHour>hour.</AS_QiPoolBarRecoveryHour>
+  <AS_QiPoolBarRecoveryMinutes>{QIRECOVERYSPEED} minutes.</AS_QiPoolBarRecoveryMinutes>
+  <AS_QiPoolBarRecoveryMinute>minute.</AS_QiPoolBarRecoveryMinute>
   <AS_QiPoolBarRecoverySeconds>{QIRECOVERYSPEED} seconds.</AS_QiPoolBarRecoverySeconds>
 
   <AS_Foundation>Foundation</AS_Foundation>
@@ -139,28 +135,43 @@
   
   
   
+      <!-- qi recovery tooltip stuff -->
+  <AS_QiPoolTooltip>The qi pool that stores the cultivators qi for use. \n\n Currently has {CURRENTQI} out of {MAXQI} qi. \n Currently gains {RECOVERYAMOUNT} qi every {TRANSLATEDRECOVERYSPEED}</AS_QiPoolTooltip>     <!-- after -->
+  <AS_QiRecoveryAmountFactorsLabel>Qi Recovery Amount Factors:</AS_QiRecoveryAmountFactorsLabel>
+  <AS_QiRecoveryAmountFactors>( (Base: {BASE}) + (1% Gather Qi: {QITILE}) ) * (Offset: {OFFSET} )\n = {AMOUNT} Qi</AS_QiRecoveryAmountFactors>
+  <AS_QiRecoveryAmountFactorsDesc>The factors influencing qi recovery amount.</AS_QiRecoveryAmountFactorsDesc>
+  <AS_QiRecoverySpeedFactorsLabel>Qi Recovery Speed Factors:</AS_QiRecoverySpeedFactorsLabel>
+  <AS_QiRecoverySpeedFactors>1 hour ÷ ( ( (Base: {BASE}) + (1% {ELEMENT}: {ELEMENTTILE}) ) * (Offset: {OFFSET}) )\n = {SPEED} Qi Recovery Speed / Per {TRANSLATEDRECOVERYSPEED}</AS_QiRecoverySpeedFactors>
+  <AS_QiRecoverySpeedFactorsDesc>The factors influencing qi recovery speed.</AS_QiRecoverySpeedFactorsDesc>
+  <AS_NoQiRecovery>No Qi Recovery</AS_NoQiRecovery>
+  
   <AS_CSFactorLabel>Cultivation Speed Factors:</AS_CSFactorLabel>
   <AS_CSFactorBaseOffset>( Base Speed: {BASE} * Offset: {OFFSET} )</AS_CSFactorBaseOffset>
   <AS_CSFactorMood> * ( 0.4 + Mood: {MOOD} )</AS_CSFactorMood>
-  <AS_CSFactorQiTile> * ( 1 + Gather Qi ÷ 100: {QITILE} )</AS_CSFactorQiTile>
-  <AS_CSFactorElement> * ( 1 + {ELEMENT} ÷ 100: {AMOUNT} )</AS_CSFactorElement>
+  <AS_CSFactorQiTile> * ( 1 + 1% Gather Qi: {QITILE} )</AS_CSFactorQiTile>
+  <AS_CSFactorElement> * ( 1 + 1% {ELEMENT}: {AMOUNT} )</AS_CSFactorElement>
+  <AS_CSFactorResult>\n = {SPEED} Cultivation Speed</AS_CSFactorResult>
   <AS_CSFactorsDesc>The factors influencing cultivation speed. </AS_CSFactorsDesc>
+  
+  <AS_ElementFactorLabel>Element Factors:</AS_ElementFactorLabel>
+  <AS_ElementFactorResult>{ELEMENT}:\n{AMOUNT}</AS_ElementFactorResult>
   
   
   <AS_MQFactorLabel>Max Qi Factors:</AS_MQFactorLabel>
   <AS_MQFactorBodySize>( Body Size: {BS} * 100 )</AS_MQFactorBodySize>
-  <AS_MQFactorRealm> * ( Realm: {REALM} )</AS_MQFactorRealm>
   <AS_MQFactorGC> + ( Golden Core: {GC} )</AS_MQFactorGC>
   <AS_MQFactorOffset> * ( Offset: {OFFSET} )</AS_MQFactorOffset>
   <AS_MQFactorIC> + ( Inner Cauldron: {IC} )</AS_MQFactorIC>
   <AS_MQFactorAC> + ( Anima Conversion: {AC} )</AS_MQFactorAC>
+  <AS_MQFactorResult>\n = {MAXQI} Max Qi</AS_MQFactorResult>
   <AS_MQFactorsDesc>The factors influencing max Qi.</AS_MQFactorsDesc>
   
-  <AS_BCFactorLabel>Breakthrough Chance ({CHANCE}%) Factors:</AS_BCFactorLabel>
+  <AS_BCFactorLabel>Breakthrough Chance  Factors:</AS_BCFactorLabel>
   <AS_BCFactorQiTile>( Gather Qi 20% Per 1k: {QI}% )</AS_BCFactorQiTile>
   <AS_BCFactorElement> + ( {ELEMENT} 10% Per 1k: {AMOUNT}% )</AS_BCFactorElement>
   <AS_BCFactorMood> * ( Mood * 2: {MOOD}x )</AS_BCFactorMood>
   <AS_BCFactorOffset> * ( Offset: {OFFSET}x )</AS_BCFactorOffset>
+  <AS_BCFactorResult>\n = {CHANCE}% Breakthrough Chance</AS_BCFactorResult>
   <AS_BCFactorsDesc>The factors influencing Breakthrough Chance.</AS_BCFactorsDesc>
 
   <AS_InnerC>Inner Cauldron: {ICQI} / {ICMAX}</AS_InnerC>

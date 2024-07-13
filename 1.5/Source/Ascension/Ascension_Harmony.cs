@@ -155,27 +155,10 @@ namespace Ascension
                                 realmHediff.Severity = randRealmStage;
                             }
 
-                            //update max qi before setting random qi amount
-                            if (realmHediff.def == AscensionDefOf.EssenceRealm) // for updating realm max qi
-                            {
-                                int tier = ((int)Math.Floor(realmHediff.Severity));
-                                if (tier <= 7)
-                                {
-                                    if (tier < 1)
-                                    {
-                                        AscensionUtilities.UpdateRealmMaxQi(1, qiPool);
-                                    }
-                                    else
-                                    {
-                                        AscensionUtilities.UpdateRealmMaxQi(tier - 1, qiPool);
-                                    }
-                                }
-                                else if (tier > 7)
-                                {
-                                    AscensionUtilities.UpdateRealmMaxQi(6, qiPool);
-                                }
-                            }
+
                             AscensionUtilities.UpdateQiMax(qiPool);
+                            AscensionUtilities.UpdateQiRecoveryAmount(qiPool);
+                            AscensionUtilities.UpdateQiRecoverySpeed(qiPool);
                             qiPool.amount = ((float)rnd.NextDouble())* qiPool.maxAmount;
 
                             pawn.health.AddHediff(cultivatorHediff);
