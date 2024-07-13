@@ -87,7 +87,11 @@ namespace Ascension
         private void Breakthrough(int score)
         {
             //remove gc breakthrough hediff here
-
+            Hediff GCBreakthrough = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.GCBreakthroughHediff);
+            if (GCBreakthrough != null)
+            {
+                pawn.health.RemoveHediff(GCBreakthrough);
+            }
             AscensionUtilities.GoldenCoreBreakthrough(pawn, score);
             if (job.GetTarget(SpotInd) != pawn)
             {

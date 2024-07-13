@@ -150,7 +150,7 @@ namespace Ascension
                 defaultLabel = "AS_ChangeElement".Translate(),
                 defaultDesc = "AS_ChangeElementDesc".Translate(),
                 Order = 7f,
-                icon = AscensionTextures.ChangeRealm,
+                icon = AscensionTextures.ChangeElement,
             };
             commandE.action = delegate
             {

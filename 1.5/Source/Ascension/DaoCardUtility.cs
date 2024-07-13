@@ -226,10 +226,10 @@ namespace Ascension
 
             if (Mouse.IsOver(barRect))
             {
-                Widgets.DrawHighlight(barRect);
                 string qiAmountText = qiPoolHediff.amount.ToString("#");
                 string qiMaxText = qiMax.ToString("#");
                 string qiRecAmountText = qiRecAmount.ToString("#");
+                Widgets.DrawHighlight(barRect);
                 TooltipHandler.TipRegion(barRect, "AS_QiPoolTooltip".Translate(qiAmountText.Named("CURRENTQI"), qiMaxText.Named("MAXQI"), qiRecAmountText.Named("RECOVERYAMOUNT"), TranslatedRecoverySpeed(qiRecSpeed).Named("TRANSLATEDRECOVERYSPEED")));
             }
 

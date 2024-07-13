@@ -375,6 +375,10 @@ namespace Ascension
                     qiPool.qiRecoverySpeed = speed;
                 }
             }
+            if (speed < 0)
+            {
+                speed = 0;
+            }
             return speed;
         }
 
@@ -398,7 +402,10 @@ namespace Ascension
                     qiPool.qiRecoveryAmount = amount;
                 }
             }
-
+            if (amount < 0)
+            {
+                amount = 0;
+            }
             return amount;
         }
 

@@ -16,7 +16,7 @@ namespace Ascension
         public bool opGoldenPillsBool = false;
         public bool machineCultivatorBool = false;//psuedo immortality default chance must be way lower than foundation chance, as psuedo immortality and beyond are considered as heavy time and resource investments.
         public float CultivatorChance = 0.1f;
-        public float GoldenCoreMax = 25000f;
+        public float GoldenCoreMax = 5000f;
         public float AnimaCMax = 5000f;
         public float PIChance = 0.01f;
         public float AbilityChance = 0.1f;
@@ -32,7 +32,7 @@ namespace Ascension
             Scribe_Values.Look(ref opGoldenPillsBool, "opGoldenPillsBool");
             Scribe_Values.Look(ref logHealsBool, "logHealsBool");
             Scribe_Values.Look(ref CultivatorChance, "CultivatorChance", 0.1f);
-            Scribe_Values.Look(ref GoldenCoreMax, "GoldenCoreMax", 250000);
+            Scribe_Values.Look(ref GoldenCoreMax, "GoldenCoreMax", 5000);
             Scribe_Values.Look(ref AnimaCMax, "AnimaCMax", 5000);
             Scribe_Values.Look(ref EssenceChance, "EssenceChance", 0.1f);
             Scribe_Values.Look(ref PIChance, "PIChance", 0.1f);
