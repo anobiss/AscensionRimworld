@@ -185,9 +185,9 @@
   <AS_AnimaCJobDesc>Meditate for 6 hours divided by cultivation speed to convert 2 + 2% max qi into Anima to grant more max qi equal to the amount converted.</AS_AnimaCJobDesc>
   
     <!-- Scrolls -->
-  <AS_ScrollAReq>Scroll requires art: </AS_ScrollAReq>
-  <AS_ScrollHERReq>Scroll requires higher essence realm: </AS_ScrollHERReq>
-  <AS_ScrollHBRReq>Scroll requires higher body realm: </AS_ScrollHBRReq>
+  <AS_ScrollAReq>Scroll requires art: {REQ}</AS_ScrollAReq>
+  <AS_ScrollHERReq>Scroll requires higher essence realm: {REALM}</AS_ScrollHERReq>
+  <AS_ScrollHBRReq>Scroll requires higher body realm: {REALM}</AS_ScrollHBRReq>
   <AS_ScrollAL>Ability in scroll already learned.</AS_ScrollAL>
   
   

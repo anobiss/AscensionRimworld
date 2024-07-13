@@ -46,6 +46,8 @@ namespace Ascension
                 cWaitToil.initAction = () =>
                 {
                     cWaitToil.actor.pather.StopDead();
+                    //add hediff here
+                    cWaitToil.actor.health.AddHediff(AscensionDefOf.GCBreakthroughHediff);
                 };
                 cWaitToil.tickAction = () =>
                 {
@@ -84,6 +86,8 @@ namespace Ascension
 
         private void Breakthrough(int score)
         {
+            //remove gc breakthrough hediff here
+
             AscensionUtilities.GoldenCoreBreakthrough(pawn, score);
             if (job.GetTarget(SpotInd) != pawn)
             {

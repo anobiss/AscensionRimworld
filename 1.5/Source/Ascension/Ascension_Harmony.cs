@@ -155,16 +155,15 @@ namespace Ascension
                                 realmHediff.Severity = randRealmStage;
                             }
 
-
-                            AscensionUtilities.UpdateQiMax(qiPool);
                             AscensionUtilities.UpdateQiRecoveryAmount(qiPool);
                             AscensionUtilities.UpdateQiRecoverySpeed(qiPool);
-                            qiPool.amount = ((float)rnd.NextDouble())* qiPool.maxAmount;
+                            qiPool.amount = ((float)rnd.NextDouble())* AscensionUtilities.UpdateQiMax(qiPool); ;
 
                             pawn.health.AddHediff(cultivatorHediff);
                             pawn.health.AddHediff(qiPool);
                             pawn.health.AddHediff(realmHediff);
                             AscensionUtilities.UpdateMaxProg(realmHediff);
+
                             realmHediff.progress = ((float)rnd.NextDouble()) * realmHediff.maxProgress;
                             float randA = Rand.Range(0, 1f);//only need to roll if its a cultivator
                             //now do random abilities here
@@ -181,7 +180,7 @@ namespace Ascension
 
                                 HashSet<HediffDef> alreadyAdded = new HashSet<HediffDef>();//this keeps stack of already added stuff.
                                 //use randA again to scale the chance for more with the setting
-                                int scrollAmount = rnd.Next(1, 3);//just do 1-2 for now
+                                int scrollAmount = rnd.Next(1, 4);//just do 1-2 for now
                                 //Log.Message("adding scrolls amount "+scrollAmount);
                                 for (int i = 0; i < scrollAmount; i++)
                                 {
@@ -200,9 +199,6 @@ namespace Ascension
                                         {
                                             //Log.Message("nothing learned yet");
                                         }
-
-
-
                                         //remove scrolls that require higher realms
                                         //null or empty check incase already learned removed everything
                                         if (!randomScrollSet.NullOrEmpty())

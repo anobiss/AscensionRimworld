@@ -25,5 +25,7 @@ namespace Ascension
 
         public static readonly Texture2D ElementFactorsIcon = ContentFinder<Texture2D>.Get("UI/Icons/ElementFactorsIcon", true);
 
+        public static readonly Texture2D AbilityBackground = ContentFinder<Texture2D>.Get("UI/Icons/AbilityBackground", true);
+        public static readonly Texture2D AbilityBackgroundEnabled = ContentFinder<Texture2D>.Get("UI/Icons/AbilityBackgroundEnabled", true);
     }
 }

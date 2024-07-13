@@ -2,7 +2,7 @@
 <Defs>
 
   <ThingDef ParentName="ResourceBase">
-    <defName>SpiritStone</defName>
+    <defName>AS_SpiritStone</defName>
     <label>spirit stone</label>
     <description>Qi condensed into its solid form. Once consumed it grants 10 qi and gives the consumer Qi Resonance(gives 0.1 increased cultivation speed offset and 500% increased qi recovery) for 3 days. Used in production of golden pills for vastly more qi.</description>
     <graphicData>

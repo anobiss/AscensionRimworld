@@ -145,7 +145,7 @@
 	  <li>
         <filter>
           <thingDefs>
-            <li>SpiritStone</li>
+            <li>AS_SpiritStone</li>
           </thingDefs>
         </filter>
         <count>12</count>
@@ -174,7 +174,7 @@
 	  <li>
         <filter>
           <thingDefs>
-            <li>SpiritStone</li>
+            <li>AS_SpiritStone</li>
           </thingDefs>
         </filter>
         <count>22</count>
@@ -203,7 +203,7 @@
 	  <li>
         <filter>
           <thingDefs>
-            <li>SpiritStone</li>
+            <li>AS_SpiritStone</li>
           </thingDefs>
         </filter>
         <count>3</count>
@@ -244,7 +244,7 @@
 	  <li>
         <filter>
           <thingDefs>
-            <li>SpiritStone</li>
+            <li>AS_Spiritleaf</li>
           </thingDefs>
         </filter>
         <count>1</count>
@@ -301,10 +301,10 @@
 	  <li>
         <filter>
           <thingDefs>
-            <li>SpiritStone</li>
+            <li>AS_SpiritStone</li>
           </thingDefs>
         </filter>
-        <count>5</count>
+        <count>7</count>
       </li>
     </ingredients>
   </RecipeDef>
@@ -350,10 +350,10 @@
 	  <li>
         <filter>
           <thingDefs>
-            <li>SpiritStone</li>
+            <li>SpiritCrystal</li>
           </thingDefs>
         </filter>
-        <count>25</count>
+        <count>7</count>
       </li>
 	  <li>
         <filter>
@@ -399,10 +399,10 @@
 	  <li>
         <filter>
           <thingDefs>
-            <li>SpiritStone</li>
+            <li>SpiritCrystal</li>
           </thingDefs>
         </filter>
-        <count>77</count>
+        <count>12</count>
       </li>
 	  <li>
         <filter>
@@ -440,10 +440,10 @@
 	  <li>
         <filter>
           <thingDefs>
-            <li>SpiritStone</li>
+            <li>SpiritCrystal</li>
           </thingDefs>
         </filter>
-        <count>120</count>
+        <count>12</count>
       </li>
 	  <li>
         <filter>
@@ -480,7 +480,7 @@
 	  	  <li>
         <filter>
           <thingDefs>
-            <li>SpiritStone</li>
+            <li>AS_SpiritStone</li>
           </thingDefs>
         </filter>
         <count>250</count>
@@ -518,7 +518,7 @@
 	  <li>
         <filter>
           <thingDefs>
-            <li>SpiritStone</li>
+            <li>AS_SpiritStone</li>
           </thingDefs>
         </filter>
         <count>7</count>
@@ -548,7 +548,7 @@
       <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
-      <SpiritStone>1</SpiritStone>
+      <AS_SpiritStone>1</AS_SpiritStone>
     </products>
     <ingredients>
 	  <li>
@@ -562,64 +562,5 @@
     </ingredients>
   </RecipeDef>
   
-  <!-- Spirit Leafs -->
-  
-  <RecipeDef>
-    <defName>Make_SpiritLeafFromOrganics</defName>
-    <label>make spirit leaf from organics</label>
-    <description>Make spirit leaf by extracting qi from organic feedstocks.</description>
-	<researchPrerequisite>AdvancedQiManipulation</researchPrerequisite>
-    <jobString>Manifesting spirit leaf from organics.</jobString>
-    <effectWorking>Cremate</effectWorking>
-    <soundWorking>Recipe_Cremate</soundWorking>
-    <workAmount>5000</workAmount>
-    <workSpeedStat>SmeltingSpeed</workSpeedStat>
-    <allowMixingIngredients>true</allowMixingIngredients>
-    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
-	<recipeUsers>
-      <li>SpiritCauldron</li>
-    </recipeUsers>
-    <ingredients>
-      <li>
-        <filter>
-          <customSummary>feedstock</customSummary>
-          <categories>
-            <li>Foods</li>
-            <li>PlantMatter</li>
-          </categories>
-          <disallowedThingDefs>
-            <li>Hay</li>
-          </disallowedThingDefs>
-          <disallowedCategories>
-            <li>FoodMeals</li>
-          </disallowedCategories>
-        </filter>
-        <count>2</count>
-      </li>
-    </ingredients>
-    <fixedIngredientFilter>
-      <categories>
-        <li>Foods</li>
-        <li>PlantMatter</li>
-      </categories>
-      <disallowedThingDefs>
-        <li>Hay</li>
-      </disallowedThingDefs>
-      <disallowedCategories>
-        <li>FoodMeals</li>
-      </disallowedCategories>
-    </fixedIngredientFilter>
-    <defaultIngredientFilter>
-      <categories>
-        <li>FoodRaw</li>
-      </categories>
-      <disallowedCategories>
-        <li>AnimalProductRaw</li>
-      </disallowedCategories>
-    </defaultIngredientFilter>
-    <products>
-      <AS_Spiritleaf>1</AS_Spiritleaf>
-    </products>
-  </RecipeDef>
   
 </Defs>

@@ -31,7 +31,7 @@
 		</stuffCategories>
 		<costStuffCount>70</costStuffCount>
 		<costList>
-			<SpiritStone>7</SpiritStone>
+			<AS_SpiritStone>7</AS_SpiritStone>
 		</costList>
 		<drawerType>MapMeshAndRealTime</drawerType>
     	<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>

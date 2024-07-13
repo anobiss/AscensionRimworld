@@ -7,6 +7,7 @@ namespace Ascension
     [DefOf]
     public static class AscensionDefOf
     {
+        public static HediffDef GCBreakthroughHediff;
 
         public static IncidentDef SpiritTreeConversion;
 

@@ -52,12 +52,148 @@ namespace Ascension
         #endregion
 
 
-        #region Qi Recovery & Max Qi -- Updates/Calculations
+        #region Stat Updates
 
         public static readonly float[] spiritPillOffsetRates = { 5f, 7f, 10f, 12f, 17f, 20f };
         public static readonly float[] spiritPillCostRates = {77000f, 100000f, 120000f, 200000f, 1000000f, 12000000f };//how much qi each tier costs	Poor,Normal,Good,Excellent,Masterwork,Legendary
 
         //updateqirecoveryamount
+
+        public static float UpdateBreakthroughChanceOffset(Cultivator_Hediff cultivatorHediff)
+        {
+            float offset = 1f;
+
+            foreach (Hediff hediff in cultivatorHediff.pawn.health.hediffSet.hediffs)
+            {
+                HediffComp_QiRecovery offsetComp = hediff.TryGetComp<HediffComp_QiRecovery>();
+                if (offsetComp != null)
+                {
+                    if (offsetComp.Props.spirit == false)
+                    {
+                        offset += offsetComp.Props.breakthroughChanceOffset;
+                    }
+                }
+            }
+
+            return offset;
+        }
+        public static float UpdateBreakthroughChance(Cultivator_Hediff cultivatorHediff)
+        {
+            float breakthroughChance = 0f;
+            if (cultivatorHediff != null)
+            {
+
+
+                float breakthroughChanceOffset = cultivatorHediff.breakthroughChanceOffset + 1f;
+                QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
+                ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
+                Realm_Hediff essenceRealmHediff = cultivatorHediff.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
+                if (qiGatherMapComp != null)
+                {
+                    if (essenceRealmHediff != null)
+                    {
+                        float qiTile = qiGatherMapComp.GetQiGatherAt(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z);
+                        float qiBonus = qiTile / 5000f;//20% per 1k qi on tile
+                        breakthroughChance += qiBonus;
+                    }
+                }
+                if (elementEmitMapComp != null)
+                {
+                    float elementBonus = elementEmitMapComp.CalculateElementValueAt(new IntVec2(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z), cultivatorHediff.element) / 10000f;//10% per 1k element on tile
+                    breakthroughChance += elementBonus;
+                }
+                if (cultivatorHediff.pawn.needs.mood != null)
+                {
+                    float moodOffset = cultivatorHediff.pawn.needs.mood.CurLevelPercentage * 2f;
+                    breakthroughChance *= moodOffset;
+                }
+                breakthroughChance *= breakthroughChanceOffset;
+
+                cultivatorHediff.breakthroughChance = breakthroughChance;
+            }
+
+            return breakthroughChance;
+            //factors:
+            // (Gather Qi 20% Per 1k: )
+            //+ (Element 10% Per 1k: )
+            //* (Mood * 2: )
+            //* (Offset: )
+
+        }
+
+        public static float UpdateCultivationSpeedBase(Cultivator_Hediff cultivatorHediff)
+        {
+            //only qirecovery comp effect cultivation speed offset
+            float speedOffset = 1;
+
+            foreach (Hediff hediff in cultivatorHediff.pawn.health.hediffSet.hediffs)
+            {
+                HediffComp_QiRecovery offsetComp = hediff.TryGetComp<HediffComp_QiRecovery>();
+                if (offsetComp != null)
+                {
+                    if (offsetComp.Props.spirit == false)
+                    {
+                        speedOffset += offsetComp.Props.cultivationSpeedBaseBonus;
+                    }
+                }
+            }
+            cultivatorHediff.cultivationSpeedOffset = speedOffset;
+            return speedOffset;
+        }
+        public static float UpdateCultivationSpeedOffset(Cultivator_Hediff cultivatorHediff)
+        {
+            //only qirecovery comp effect cultivation speed offset
+            float speedOffset = 1;
+
+            foreach (Hediff hediff in cultivatorHediff.pawn.health.hediffSet.hediffs)
+            {
+                HediffComp_QiRecovery offsetComp = hediff.TryGetComp<HediffComp_QiRecovery>();
+                if (offsetComp != null)
+                {
+                    if (offsetComp.Props.spirit == false)
+                    {
+                        speedOffset += offsetComp.Props.cultivationSpeedOffset; 
+                    }
+                }
+            }
+            cultivatorHediff.cultivationSpeedOffset = speedOffset;
+            return speedOffset;
+        }
+        public static float UpdateCultivationSpeed(Cultivator_Hediff cultivatorHediff)//we do this before starting jobs to update the cultivation speed, we return a float to make sure we have cultivation speed after update, we also take in optional cords if they have a cultivation spot to walk to
+        {
+            float cultivationSpeed = 0;//if cult speed is 0 we know we messed something up. 
+            QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
+            ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
+            if (cultivatorHediff != null)
+            {
+                //we do these speed calcs in all cultivation realms                  here we do the base times the speedoffset 
+                cultivationSpeed = (UpdateCultivationSpeedBase(cultivatorHediff) * UpdateCultivationSpeedOffset(cultivatorHediff));
+                if (cultivatorHediff.pawn.needs.mood != null)
+                {
+                    //then times it by our mood but plus some so they can cultivate when upset
+                    cultivationSpeed *= (0.4f + cultivatorHediff.pawn.needs.mood.CurLevelPercentage);
+                }
+                //check if they are in essence realm, then check for nearby gather qi things.
+                if (cultivatorHediff.pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm) && qiGatherMapComp != null)
+                {
+                    //we increase the speed here by the amount of gather qi in the tile divided by 100
+                    int qiTile = qiGatherMapComp.GetQiGatherAt(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z);
+                    //Log.Message("qi at position is" + qiTile);
+                    cultivationSpeed *= (1 + qiTile / 100);//its 1 plus 1% qitile
+                    //Log.Message("essence realm cultivation speed is" + cultivationSpeed);
+                }
+                if (elementEmitMapComp != null)
+                {
+                    cultivationSpeed *= 1 + (elementEmitMapComp.CalculateElementValueAt(new IntVec2(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z), cultivatorHediff.element) / 100f);
+                }
+                cultivatorHediff.cultivationSpeed = cultivationSpeed;
+            }
+            if (cultivationSpeed < 0.1f)//slowest is 0.1.
+            {
+                cultivationSpeed = 0.1f;
+            }
+            return cultivationSpeed;
+        }
 
         public static float UpdateQiMaxOffset(QiPool_Hediff qiPool)//returns offset float and updates the offset in the cultivator hediff
         {
@@ -267,49 +403,7 @@ namespace Ascension
         }
 
         #endregion
-        public static float UpdateBreakthroughChance(Cultivator_Hediff cultivatorHediff)
-        {
-            float breakthroughChance = 0f;
-            if (cultivatorHediff != null)
-            {
 
-
-                float breakthroughChanceOffset = cultivatorHediff.breakthroughChanceOffset + 1f;
-                QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
-                ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
-                Realm_Hediff essenceRealmHediff = cultivatorHediff.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
-                if (qiGatherMapComp != null)
-                {
-                    if (essenceRealmHediff != null)
-                    {
-                        float qiTile = qiGatherMapComp.GetQiGatherAt(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z);
-                        float qiBonus = qiTile / 5000f;//20% per 1k qi on tile
-                        breakthroughChance += qiBonus;
-                    }
-                }
-                if (elementEmitMapComp != null)
-                {
-                    float elementBonus = elementEmitMapComp.CalculateElementValueAt(new IntVec2(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z), cultivatorHediff.element) / 10000f;//10% per 1k element on tile
-                    breakthroughChance += elementBonus;
-                }
-                if (cultivatorHediff.pawn.needs.mood != null)
-                {
-                    float moodOffset = cultivatorHediff.pawn.needs.mood.CurLevelPercentage * 2f;
-                    breakthroughChance *= moodOffset;
-                }
-                breakthroughChance *= breakthroughChanceOffset;
-
-                cultivatorHediff.breakthroughChance = breakthroughChance;
-            }
-
-            return breakthroughChance;
-            //factors:
-            // (Gather Qi 20% Per 1k: )
-            //+ (Element 10% Per 1k: )
-            //* (Mood * 2: )
-            //* (Offset: )
-
-        }
 
         public static float GetQualityMultiplier(int quality)
         {
@@ -406,41 +500,7 @@ namespace Ascension
             }
             AscensionUtilities.TierBreakthrough((Realm_Hediff)pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm));
         }
-        public static float UpdateCultivationSpeed(Cultivator_Hediff cultivatorHediff)//we do this before starting jobs to update the cultivation speed, we return a float to make sure we have cultivation speed after update, we also take in optional cords if they have a cultivation spot to walk to
-        {
-            float cultivationSpeed = 0;//if cult speed is 0 we know we messed something up. 
-            QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
-            ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
-            if (cultivatorHediff != null)
-            {
-                //we do these speed calcs in all cultivation realms                  here we do the base times the speedoffset 
-                cultivationSpeed = (cultivatorHediff.cultivationBaseSpeed * cultivatorHediff.cultivationSpeedOffset);
-                if (cultivatorHediff.pawn.needs.mood != null)
-                {
-                    //then times it by our mood but plus some so they can cultivate when upset
-                    cultivationSpeed *= (0.4f + cultivatorHediff.pawn.needs.mood.CurLevelPercentage);
-                }
-                //check if they are in essence realm, then check for nearby gather qi things.
-                if (cultivatorHediff.pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm) && qiGatherMapComp != null)
-                {
-                    //we increase the speed here by the amount of gather qi in the tile divided by 100
-                    int qiTile = qiGatherMapComp.GetQiGatherAt(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z);
-                    //Log.Message("qi at position is" + qiTile);
-                    cultivationSpeed *= (1 + qiTile / 100);//its 1 plus 1% qitile
-                    //Log.Message("essence realm cultivation speed is" + cultivationSpeed);
-                }
-                if (elementEmitMapComp != null)
-                {
-                    cultivationSpeed *= 1 + (elementEmitMapComp.CalculateElementValueAt(new IntVec2(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z), cultivatorHediff.element) / 100f);
-                }
-                cultivatorHediff.cultivationSpeed = cultivationSpeed;
-            }
-            if (cultivationSpeed < 0.1f)//slowest is 0.1.
-            {
-                cultivationSpeed = 0.1f;
-            }
-            return cultivationSpeed;
-        }
+
         public static void IncreaseQi(Pawn pawn, float amount, bool noExplosion = false)
         {
             HediffSet hediffSet = pawn.health.hediffSet;

@@ -42,18 +42,6 @@ namespace Ascension
             AscensionUtilities.TierProgress(pawn, AscensionDefOf.BodyRealm, num);
         }
 
-        public override IEnumerable<StatDrawEntry> SpecialDisplayStats(ThingDef parentDef)
-        {
-            if (parentDef.IsDrug && this.chance >= 1f)
-            {
-                foreach (StatDrawEntry statDrawEntry in this.hediffDef.SpecialDisplayStats(StatRequest.ForEmpty()))
-                {
-                    yield return statDrawEntry;
-                }
-            }
-            yield break;
-        }
-
         public HediffDef hediffDef;
 
         public float amount = 10;

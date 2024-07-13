@@ -42,18 +42,15 @@ namespace Ascension
             {
                 if (scrollAbilityComp.Props.reqEssence != 0)
                 {
-                    if (essenceHediff == null)
+                    if (essenceHediff == null || essenceHediff.Severity < scrollAbilityComp.Props.reqEssence)
                     {
-                        return "AS_ScrollHERReq".Translate()+ AscensionDefOf.EssenceRealm.stages[scrollAbilityComp.Props.reqEssence].label;
-                    }else if (essenceHediff.Severity < scrollAbilityComp.Props.reqEssence)
-                    {
-                        return "AS_ScrollHERReq".Translate() + AscensionDefOf.EssenceRealm.stages[scrollAbilityComp.Props.reqEssence].label;
+                        return "AS_ScrollHERReq".Translate(AscensionDefOf.EssenceRealm.stages[scrollAbilityComp.Props.reqEssence-1].label.Named("REALM"));
                     }
                 }else if (scrollAbilityComp.Props.reqBody != 0)
                 {
                     if (bodyHediff == null || bodyHediff.Severity < scrollAbilityComp.Props.reqBody)
                     {
-                        return "AS_ScrollHBRReq".Translate() + AscensionDefOf.BodyRealm.stages[scrollAbilityComp.Props.reqBody].label;
+                        return "AS_ScrollHBRReq".Translate(AscensionDefOf.BodyRealm.stages[scrollAbilityComp.Props.reqBody-1].label.Named("REALM"));
                     }
                 }
                 if (scrollAbilityComp.Props.scrollCompAbilityDefList != null)
@@ -80,7 +77,7 @@ namespace Ascension
                     {
                         if (p.health.hediffSet.GetFirstHediffOfDef(reqHediffDef) == null)
                         {
-                            return "AS_ScrollAReq".Translate() + reqHediffDef.label;
+                            return "AS_ScrollAReq".Translate(reqHediffDef.label.Named("REQ"));
                         }
                     }
                 }

@@ -13,7 +13,7 @@
 	<altitudeLayer>FloorEmplacement</altitudeLayer>
     <uiIconScale>0.80</uiIconScale>
 	<costList>
-      <SpiritStone>25</SpiritStone>
+      <AS_SpiritStone>25</AS_SpiritStone>
     </costList>
     <stuffCategories>
       <li>Fabric</li>

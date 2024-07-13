@@ -56,6 +56,7 @@ namespace Ascension
             Rect rect = new Rect(outRect.x, outRect.y, outRect.width * 1f, outRect.height).Rounded();
             Rect rect2 = new Rect(rect.xMax, outRect.y, outRect.width - rect.width, outRect.height);
             rect.yMin += 11f;
+            
             DrawDaoSummary(rect);
         }
 
@@ -83,7 +84,7 @@ namespace Ascension
             if (onTechniqueTab)
             {
                 PlayerKnowledgeDatabase.KnowledgeDemonstrated(ConceptDefOf.MedicalOperations, KnowledgeAmount.FrameDisplayed);
-                curY = DrawTechniqueTab(rect, curY);
+                curY = DrawTechniqueTab(rect, curY);;
             }
             else
             {
@@ -111,6 +112,7 @@ namespace Ascension
                     Ability ability = scrollHediff.pawn.abilities.GetAbility(abilityDef, true);
                     if (ability == null)
                     {
+                        GUI.DrawTexture(abilityRect, abilityBackground);
                         if (Widgets.ButtonImage(abilityRect, ContentFinder<Texture2D>.Get(abilityDef.iconPath), true, abilityDef.description))
                         {
                             if (CanControl())
@@ -121,6 +123,7 @@ namespace Ascension
                     }
                     else
                     {
+                        GUI.DrawTexture(abilityRect, abilityBackgroundEnabled);
                         GUI.color = Color.grey;
                         if (Widgets.ButtonImage(abilityRect, ContentFinder<Texture2D>.Get(abilityDef.iconPath), true, abilityDef.description))
                         {
@@ -142,12 +145,15 @@ namespace Ascension
         {
             //techniq tab shows a list of learned scrolls and thier abilities with the abilities being buttons that toggle them on or off the pawn
 
+            //add scrollbar scaling with content.
             //curY += 2f;
             Widgets.BeginGroup(rect);
+            Rect viewRect = rect;
+            viewRect.height = 0;
+
+            Widgets.BeginScrollView(rect, ref scrollPosition, viewRect);
             float curTechBarY = 0;// keeps track of current total height for placing new ones.
             float num = rect.x + 17f;
-            Rect outRect = new Rect(0f, 0f, rect.width, rect.height - curTechBarY);
-            Rect viewRect = new Rect(0f, 0f, rect.width - 16f, scrollViewHeight);
 
             if (!selectedPawn.health.hediffSet.hediffs.NullOrEmpty())
             {
@@ -160,23 +166,23 @@ namespace Ascension
                         if (scrollHediff != null)//do the technique bars here
                         {
                             //first we make the rect and the label for the technique art
-                            Rect techLabelRect = new Rect(num, curY + curTechBarY, rect.width / 2f - num, rect.height / 5);//label rect
+                            Rect techLabelRect = new Rect(num, curY + curTechBarY +27f , rect.width / 2f - num, rect.height / 5);//label rect
                             Text.Anchor = TextAnchor.UpperCenter;
                             GUI.color = scrollHediff.LabelColor;
                             Widgets.Label(techLabelRect, scrollHediff.Label);
                             curTechBarY += techLabelRect.height;
-                            DrawTechniqueAbilities(rect, scrollHediff, curTechBarY, curY);//does abilities and the buttons
+                            viewRect.height += techLabelRect.height;
+                            DrawTechniqueAbilities(rect, scrollHediff, curTechBarY+10f, curY);//does abilities and the buttons
                         }
                     }
                 }
             }
+            Widgets.EndScrollView();
             Widgets.EndGroup();
             curY += 10f;
             curY += 6f;
             return curY;//so we know what y the next one is.
         }
-
-        //make draw pawn realms that works like this
 
         private static string TranslatedRecoverySpeed(float recoverySpeed)
         {
@@ -217,25 +223,23 @@ namespace Ascension
             Rect gatherButtonRect = new Rect(barRect.x, barRect.y + barRect.height + 5f, barRect.width, barRect.height);
 
             Widgets.Label(qiLabelRect, "AS_QiPool".Translate());
-            float qiRecSpeed = AscensionUtilities.UpdateQiRecoverySpeed(qiPoolHediff);
-            float qiRecAmount = AscensionUtilities.UpdateQiRecoveryAmount(qiPoolHediff);
 
             if (Mouse.IsOver(barRect))
             {
                 Widgets.DrawHighlight(barRect);
-                string qiAmount = qiPoolHediff.amount.ToString("#");
-                string qiMax = qiPoolHediff.maxAmount.ToString("#");
+                string qiAmountText = qiPoolHediff.amount.ToString("#");
+                string qiMaxText = qiMax.ToString("#");
                 string qiRecAmountText = qiRecAmount.ToString("#");
-                TooltipHandler.TipRegion(barRect, "AS_QiPoolTooltip".Translate(qiAmount.Named("CURRENTQI"), qiMax.Named("MAXQI"), qiRecAmountText.Named("RECOVERYAMOUNT"), TranslatedRecoverySpeed(qiRecSpeed).Named("TRANSLATEDRECOVERYSPEED")));
+                TooltipHandler.TipRegion(barRect, "AS_QiPoolTooltip".Translate(qiAmountText.Named("CURRENTQI"), qiMaxText.Named("MAXQI"), qiRecAmountText.Named("RECOVERYAMOUNT"), TranslatedRecoverySpeed(qiRecSpeed).Named("TRANSLATEDRECOVERYSPEED")));
             }
 
-            float qiRatio = (float)qiPoolHediff.amount / (float)qiPoolHediff.maxAmount;
+            float qiRatio = qiPoolHediff.amount / qiMax;
             GUI.color = Color.white;
             Widgets.FillableBar(barRect.ContractedBy(2f), qiRatio);
-            string qiBarText = "AS_QiPoolBar".Translate(qiPoolHediff.amount.ToString("#").Named("QI"), qiPoolHediff.maxAmount.ToString("#").Named("MAXQI"));
+            string qiBarText = "AS_QiPoolBar".Translate(qiPoolHediff.amount.ToString("#").Named("QI"), qiMax.ToString("#").Named("MAXQI"));
             if (CultivatorHediff != null && eRealmHediff != null)
             {
-                if (qiPoolHediff.qiRecoverySpeed != 0)
+                if (qiRecSpeed != 0)
                 {
                     qiBarText += "AS_QiPoolBarRecovery".Translate(qiRecAmount.ToString().Named("QIRECOVERYAMOUNT"), TranslatedRecoverySpeed(qiRecSpeed).Named("TRANSLATEDRECOVERYSPEED"));
                 }
@@ -263,6 +267,8 @@ namespace Ascension
         private static Texture2D elementFactorsTexture = AscensionTextures.ElementFactorsIcon;
         private static Texture2D cultivatorEmptyTexture = AscensionTextures.UICultivatorEmptyIcon;
         private static Texture2D goldenCoreTexture = AscensionTextures.UIGoldenCoreIcon;
+        private static Texture2D abilityBackground = AscensionTextures.AbilityBackground;
+        private static Texture2D abilityBackgroundEnabled = AscensionTextures.AbilityBackgroundEnabled;
 
         private static void DrawPawnRealm(Rect rect)
         {
@@ -333,7 +339,7 @@ namespace Ascension
             float barWidth = rect.width - 26f;
             Rect barRect = new Rect(rect.x + 17f, rect.y + rect.height / 2f - 16f, barWidth, 32f);
             string tooltipText = realm.def == AscensionDefOf.EssenceRealm ? "AS_BreakthroughEssenceDesc" : "AS_BreakthroughBodyDesc";
-            tooltipText = tooltipText.Translate((AscensionUtilities.UpdateBreakthroughChance(CultivatorHediff) * 100f).ToString("0.#").Named("CHANCE"));
+            tooltipText = tooltipText.Translate((breakthroughChance * 100f).ToString("0.#").Named("CHANCE"));
             if (Mouse.IsOver(barRect))
             {
                 Widgets.DrawHighlight(barRect);
@@ -431,13 +437,6 @@ namespace Ascension
         }
         #endregion
 
-
-
-
-
-
-
-
         #region Cultivation Stats
 
         private static void DrawCultivationStatsBasic(Rect rect)
@@ -457,7 +456,6 @@ namespace Ascension
             DrawHighlightsAndTooltips(rect, qiTileRect, innerCRect);
         }
 
-
         private static void DrawCultivationStats(Rect rect)
         {
             GUI.color = Color.white;
@@ -476,10 +474,10 @@ namespace Ascension
             speedFactorsRect.y += 235f;
 
             Rect maxQiFactorRect = speedFactorsRect;
-            maxQiFactorRect.y += 35f;
+            maxQiFactorRect.y += 30f;
 
             Rect bChanceFactorRect = maxQiFactorRect;
-            bChanceFactorRect.y += 90f;
+            bChanceFactorRect.y += 70f;
 
             Rect qiRecFactorRect = bChanceFactorRect;
             qiRecFactorRect.y += 75f;
@@ -500,7 +498,6 @@ namespace Ascension
             resultRect.height = 35f;
             resultRect.y = rect.center.y - 15f;
 
-
             Rect metalRect = resultRect;// use result rect as center
             metalRect.y -= 90f;
 
@@ -519,8 +516,6 @@ namespace Ascension
             Rect woodRect = resultRect;
             woodRect.y += 85f;
             woodRect.x += 77f;
-
-
 
             rect = rect.ContractedBy(15f);
             GUI.DrawTexture(rect, elementFactorsTexture);
@@ -541,36 +536,29 @@ namespace Ascension
             Text.Anchor = TextAnchor.MiddleLeft;
         }
 
-
         private static void DrawQiRecoveryFactors(Rect rect)
         {
             if (qiPoolHediff == null || CultivatorHediff == null) return;
-            //amount factors
 
+            //amount factors
             rect.height = 50f;
             rect.y += 25f;
-
             Widgets.Label(rect, "AS_QiRecoveryAmountFactorsLabel".Translate());
             rect.y += 35f;
             rect.height = 35f;
             float amountQiTileBonus = qiTile / 100f;
-            float amount = AscensionUtilities.UpdateQiRecoveryAmount(qiPoolHediff);
-            Widgets.Label(rect, "AS_QiRecoveryAmountFactors".Translate(qiPoolHediff.qiRecoveryAmountBase.Named("BASE"), qiPoolHediff.qiRecoveryAmountOffset.Named("OFFSET"), amountQiTileBonus.ToString("0.#").Named("QITILE"), amount.ToString("0.#").Named("AMOUNT")));
+            Widgets.Label(rect, "AS_QiRecoveryAmountFactors".Translate(qiRecAmountBase.Named("BASE"), qiRecAmountOffset.Named("OFFSET"), amountQiTileBonus.ToString("0.#").Named("QITILE"), qiRecAmount.ToString("0.#").Named("AMOUNT")));
             AddHighlightAndTooltip(rect, "AS_QiRecoveryAmountFactorsDesc", Color.white);
 
-
             //speed factors
-
             rect.height = 35f;
             rect.y += 30f;
-
             Widgets.Label(rect, "AS_QiRecoverySpeedFactorsLabel".Translate());
             rect.y += 30f;
             rect.height = 35f;
             float speedElementBonus = elementTile / 100f;
             float speed = AscensionUtilities.UpdateQiRecoverySpeed(qiPoolHediff);
-            float speedHours = 1 / speed;
-            Widgets.Label(rect, "AS_QiRecoverySpeedFactors".Translate(qiPoolHediff.qiRecoverySpeedBase.Named("BASE"), qiPoolHediff.qiRecoverySpeedOffset.Named("OFFSET"), speedElementBonus.ToString("0.#").Named("ELEMENTTILE"), elementText.Translate().Named("ELEMENT"), speed.ToString("0.#").Named("SPEED"), TranslatedRecoverySpeed(qiPoolHediff.qiRecoverySpeed).Named("TRANSLATEDRECOVERYSPEED")));
+            Widgets.Label(rect, "AS_QiRecoverySpeedFactors".Translate(qiRecSpeedBase.Named("BASE"), qiRecSpeedOffset.Named("OFFSET"), speedElementBonus.ToString("0.#").Named("ELEMENTTILE"), elementText.Translate().Named("ELEMENT"), speed.ToString("0.#").Named("SPEED"), TranslatedRecoverySpeed(qiRecSpeed).Named("TRANSLATEDRECOVERYSPEED")));
             AddHighlightAndTooltip(rect, "AS_QiRecoverySpeedFactorsDesc", Color.white);
         }
 
@@ -600,8 +588,8 @@ namespace Ascension
             {
                 translatedBCFactorText.Append("AS_BCFactorMood".Translate((selectedPawn.needs.mood.CurLevelPercentage * 2).ToString("0.#").Named("MOOD")));
             }
-            translatedBCFactorText.Append("AS_BCFactorOffset".Translate((CultivatorHediff.breakthroughChanceOffset+1f).ToString("0.#").Named("OFFSET")));
-            translatedBCFactorText.Append("AS_BCFactorResult".Translate((AscensionUtilities.UpdateBreakthroughChance(CultivatorHediff) * 100f).ToString("0.#").Named("CHANCE")));
+            translatedBCFactorText.Append("AS_BCFactorOffset".Translate(breakthroughChanceOffset.ToString("0.#").Named("OFFSET")));
+            translatedBCFactorText.Append("AS_BCFactorResult".Translate((breakthroughChance * 100f).ToString("0.#").Named("CHANCE")));
             rect.y -= 10f;
             Widgets.Label(rect, "AS_BCFactorLabel".Translate());
             rect.y += 30f;
@@ -609,17 +597,18 @@ namespace Ascension
             Widgets.Label(rect, translatedBCFactorText.ToString());
             AddHighlightAndTooltip(rect, "AS_BCFactorsDesc", Color.white);
         }
+
         private static void DrawCultivationSpeed(Rect rect)
         {
             Widgets.Label(rect, "AS_CultivationSpeed".Translate(
-                AscensionUtilities.UpdateCultivationSpeed(CultivatorHediff).ToString("0.#").Named("SPEED")));
+                cultivationSpeed.ToString("0.#").Named("SPEED")));
         }
 
         private static void DrawSpeedFactors(Rect speedFactorsRect)
         {
             string translatedSpeedFactorText = "AS_CSFactorBaseOffset".Translate(
-                CultivatorHediff.cultivationBaseSpeed.ToString("0.#").Named("BASE"),
-                CultivatorHediff.cultivationSpeedOffset.ToString("0.#").Named("OFFSET"));
+                cultivationSpeedBase.ToString("0.#").Named("BASE"),
+                cultivationSpeedOffset.ToString("0.#").Named("OFFSET"));
 
             if (selectedPawn.needs.mood != null)
             {
@@ -651,7 +640,6 @@ namespace Ascension
             AddHighlightAndTooltip(speedFactorsRect, "AS_CSFactorsDesc", Color.white);
         }
 
-        //prob need to make it so we only grab the hediffs once
         private static void DrawMaxQiFactors(Rect speedFactorsRect)
         {
             speedFactorsRect.height = 50f;
@@ -668,23 +656,22 @@ namespace Ascension
             if (CultivatorHediff.goldenCoreScore > 0)
             {
                 translatedSpeedFactorText.Append("AS_MQFactorGC".Translate(CultivatorHediff.goldenCoreScore.ToString().Named("GC")));
-                translatedSpeedFactorText.Append("AS_MQFactorOffset".Translate(qiPoolHediff.maxAmountOffset.ToString("0.#").Named("OFFSET")));
+                translatedSpeedFactorText.Append("AS_MQFactorOffset".Translate(qiMaxOffset.ToString("0.#").Named("OFFSET")));
                 translatedSpeedFactorText.Append("AS_MQFactorAC".Translate(CultivatorHediff.innerCauldronQi.ToString().Named("AC")));
             }
             else
             {
-                translatedSpeedFactorText.Append("AS_MQFactorOffset".Translate(qiPoolHediff.maxAmountOffset.ToString("0.#").Named("OFFSET")));
+                translatedSpeedFactorText.Append("AS_MQFactorOffset".Translate(qiMaxOffset.ToString("0.#").Named("OFFSET")));
                 translatedSpeedFactorText.Append("AS_MQFactorIC".Translate(CultivatorHediff.innerCauldronQi.ToString().Named("IC")));
             }
-            translatedSpeedFactorText.Append("AS_MQFactorResult".Translate(AscensionUtilities.UpdateQiMax(qiPoolHediff).ToString("#").Named("MAXQI")));
+            translatedSpeedFactorText.Append("AS_MQFactorResult".Translate(qiMax.ToString("#").Named("MAXQI")));
             speedFactorsRect.y -= 10f;
             Widgets.Label(speedFactorsRect, "AS_MQFactorLabel".Translate());
             speedFactorsRect.y += 30f;
-            speedFactorsRect.height = 70f;
+            speedFactorsRect.height = 55f;
             Widgets.Label(speedFactorsRect, translatedSpeedFactorText.ToString());
             AddHighlightAndTooltip(speedFactorsRect, "AS_MQFactorsDesc", Color.white);
         }
-
 
         private static void DrawQiTile(Rect qiTileRect)
         {
@@ -768,6 +755,7 @@ namespace Ascension
 
             GUI.color = Color.white;
         }
+
         private static void AddHighlightAndTooltip(Rect rect, string tooltipKey, Color highlightColor)
         {
             if (Mouse.IsOver(rect))
@@ -911,12 +899,35 @@ namespace Ascension
         public static Realm_Hediff bRealmHediff;
         public static Cultivator_Hediff CultivatorHediff;
 
+
+        //these 
+
+        public static float cultivationSpeed;
+        public static float cultivationSpeedBase;
+        public static float cultivationSpeedOffset;
+
+        public static float qiMax;
+        public static float qiMaxOffset;
+
+        public static float breakthroughChance;
+        public static float breakthroughChanceOffset;
+
+        public static float qiRecSpeed;
+        public static float qiRecSpeedBase;
+        public static float qiRecSpeedOffset;
+
+        public static float qiRecAmount;
+        public static float qiRecAmountBase;
+        public static float qiRecAmountOffset;
+
         public static float qiTile;
         public static float elementTile;
 
         private static float DrawCultivationTab(Rect rect, float curY)
         {
-            //here we grab the hediffs for use for most of the cultivation tab
+            
+            //set values for things commonly used so we dont search over and over again in the same frame
+
             CultivatorHediff = selectedPawn.health.hediffSet.GetFirstHediffOfDef(CultivatorHediffDef) as Cultivator_Hediff;
             qiPoolHediff = selectedPawn.health.hediffSet.GetFirstHediffOfDef(qiPoolHediffDef) as QiPool_Hediff;
             eRealmHediff = selectedPawn.health.hediffSet.GetFirstHediffOfDef(eRealmHediffDef) as Realm_Hediff;
@@ -928,6 +939,26 @@ namespace Ascension
 
             qiTile = qiGatherMapComp.GetQiGatherAt(selectedPawn.Position.x, selectedPawn.Position.z);
             elementTile = elementEmitMapComp.CalculateElementValueAt(new IntVec2(selectedPawn.Position.x, selectedPawn.Position.z), CultivatorHediff.element);
+            
+            //for factors and such \/
+
+            cultivationSpeedBase = AscensionUtilities.UpdateCultivationSpeedBase(CultivatorHediff);
+            cultivationSpeedOffset = AscensionUtilities.UpdateCultivationSpeedOffset(CultivatorHediff);
+            cultivationSpeed = AscensionUtilities.UpdateCultivationSpeed(CultivatorHediff);
+
+            qiMaxOffset = AscensionUtilities.UpdateQiMaxOffset(qiPoolHediff);
+            qiMax = AscensionUtilities.UpdateQiMax(qiPoolHediff);
+
+            breakthroughChanceOffset = AscensionUtilities.UpdateBreakthroughChanceOffset(CultivatorHediff);
+            breakthroughChance = AscensionUtilities.UpdateBreakthroughChance(CultivatorHediff);
+
+            qiRecSpeedBase = AscensionUtilities.UpdateQiRecoverySpeedBase(qiPoolHediff);
+            qiRecSpeedOffset = AscensionUtilities.UpdateQiRecoverySpeedOffset(qiPoolHediff);
+            qiRecSpeed = AscensionUtilities.UpdateQiRecoverySpeed(qiPoolHediff);
+
+            qiRecAmountBase = AscensionUtilities.UpdateQiRecoveryAmountBase(qiPoolHediff);
+            qiRecAmountOffset = AscensionUtilities.UpdateQiRecoveryAmountOffset(qiPoolHediff);
+            qiRecAmount = AscensionUtilities.UpdateQiRecoveryAmount(qiPoolHediff);
 
             Widgets.BeginGroup(rect);
             Rect qiBarRect = new Rect(0f, curY, rect.width, 40f);

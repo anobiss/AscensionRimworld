@@ -9,6 +9,8 @@ namespace Ascension
         public float speedOffset = 0f;
         public float speedBaseBonus = 0f;
         public float cultivationSpeedOffset = 0f;
+        public float cultivationSpeedBaseBonus = 0f;
+        public float breakthroughChanceOffset = 0f;
         public bool spirit = false;
         public bool temp = false;
         public HediffCompProperties_QiRecovery()
