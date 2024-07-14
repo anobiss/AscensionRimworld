@@ -103,6 +103,7 @@
     <Compile Include="CultivationReservationUtility.cs" />
     <Compile Include="DaoCardUtility.cs" />
     <Compile Include="GameCondition_QiBurst.cs" />
+    <Compile Include="GCBreakthrough_Hediff.cs" />
     <Compile Include="HediffCompProperties_AddScrollAbility.cs" />
     <Compile Include="HediffCompProperties_AddScrollReq.cs" />
     <Compile Include="HediffCompProperties_OffsetMaxQi.cs" />
