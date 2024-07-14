@@ -8,7 +8,6 @@ namespace Ascension
 {
     public class IngestionOutcomeDoer_GoldenPill : IngestionOutcomeDoer
     {
-
         AscensionSettings settings = LoadedModManager.GetMod<AscensionMod>().GetSettings<AscensionSettings>();
         protected override void DoIngestionOutcomeSpecial(Pawn pawn, Thing ingested, int ingestedCount)
         {
@@ -21,10 +20,8 @@ namespace Ascension
                 }
                 else
                 {
-                    QualityCategory qc = new QualityCategory();
-                    QualityUtility.TryGetQuality(ingested, out qc);
+                    QualityUtility.TryGetQuality(ingested, out QualityCategory qc);
                     num = (amount * AscensionUtilities.GetQualityMultiplier((int)qc));
-                    HediffDef QiPool = AscensionDefOf.QiPool;
                     AscensionUtilities.IncreaseQi(pawn, (int)Math.Floor(num));
                 }
             }

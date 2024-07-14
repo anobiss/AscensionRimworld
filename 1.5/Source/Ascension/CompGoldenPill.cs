@@ -25,8 +25,7 @@ namespace Ascension
             }
             else
             {
-                QualityCategory qc = new QualityCategory();
-                QualityUtility.TryGetQuality(parent, out qc);
+                QualityUtility.TryGetQuality(parent, out QualityCategory qc);
                 qiAmount = (Props.amount * AscensionUtilities.GetQualityMultiplier((int)qc));
                 goldenPillInspect = "AS_GoldenPillInspect".Translate(qiAmount.ToString().Named("QI"));
             }

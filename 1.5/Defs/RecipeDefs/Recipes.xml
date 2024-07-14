@@ -272,7 +272,7 @@
     <defName>MakeImperialGoldenPill</defName>
     <label>Make imperial golden pill</label>
     <description>Make a imperial golden pill.</description>
-	<researchPrerequisite>GoldenPillProduction</researchPrerequisite>
+	<researchPrerequisite>ImperialGoldenPill</researchPrerequisite>
     <jobString>Creating imperial golden pill.</jobString>
     <workAmount>1777</workAmount>
 	<workSkill>Crafting</workSkill>
@@ -313,7 +313,7 @@
     <defName>MakeHeavenlyGoldenPill</defName>
     <label>Make heavenly golden pill</label>
     <description>Make a heavenly golden pill.</description>
-	<researchPrerequisite>GoldenPillProduction</researchPrerequisite>
+	<researchPrerequisite>HeavenlyGoldenPillProduction</researchPrerequisite>
     <jobString>Creating heavenly golden pill.</jobString>
     <workAmount>5000</workAmount>
 	<workSkill>Crafting</workSkill>

@@ -111,7 +111,7 @@
     </ingestible>
 	<comps>
       <li Class="Ascension.CompProperties_GoldenPill">
-		<amount>10000</amount>
+		<amount>20000</amount>
       </li>
 	  <li Class="CompProperties_Usable">
         <useJob>UseItem</useJob>
