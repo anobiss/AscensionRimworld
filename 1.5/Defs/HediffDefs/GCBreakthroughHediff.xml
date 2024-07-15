@@ -2,7 +2,7 @@
 <Defs>
   <HediffDef>
     <hediffClass>HediffWithComps</hediffClass>
-    <defName>GCBreakthroughHediff</defName>
+    <defName>AS_GCBreakthroughHediff</defName>
     <label>golden core breakthrough</label>
     <description>This being is undergoing a Golden Core breakthrough resulting in 777700% decreased qi recovery speed, practically disabling Qi Recovery. Lasts until the breakthrough has ended.</description>
 	<defaultLabelColor>(1.0, 1.0, 1.0)</defaultLabelColor>

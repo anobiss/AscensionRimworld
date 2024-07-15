@@ -2,7 +2,7 @@
 <Defs>
   <HediffDef>
     <hediffClass>HediffWithComps</hediffClass>
-    <defName>QiBurst</defName>
+    <defName>AS_QiBurst</defName>
     <label>qi burst</label>
     <description>This being has qi resonance resulting in 2 increased cultivation speed offset and 750% increased qi recovery. Lasts 3 days.</description>
 	<defaultLabelColor>(1.0, 1.0, 1.0)</defaultLabelColor>

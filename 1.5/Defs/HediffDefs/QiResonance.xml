@@ -5,7 +5,7 @@
 
   <HediffDef>
     <hediffClass>HediffWithComps</hediffClass>
-    <defName>QiResonance</defName>
+    <defName>AS_QiResonance</defName>
     <label>qi resonance</label>
     <description>This being has qi resonance resulting in 0.1 increased cultivation speed offset and 500% increased qi recovery speed. Lasts 3 days.</description>
 	<defaultLabelColor>(1.0, 1.0, 1.0)</defaultLabelColor>
