@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
   <IncidentDef>
-    <defName>SpiritTreeConversion</defName>
+    <defName>AS_SpiritTreeConversion</defName>
     <label>spirit tree conversion</label>
     <targetTags>
       <li>Map_PlayerHome</li>

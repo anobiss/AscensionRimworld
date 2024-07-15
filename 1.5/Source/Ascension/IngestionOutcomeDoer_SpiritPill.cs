@@ -29,7 +29,7 @@ namespace Ascension
             {
                 if (qiPool.amount >= spiritCost)
                 {
-                    Hediff oldHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.SpiritPillHediff);
+                    Hediff oldHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.AS_SpiritPillHediff);
                     qiPool.amount -= spiritCost;
                     if (oldHediff != null)
                     {
@@ -37,13 +37,13 @@ namespace Ascension
                         {
                             oldHediff.Severity = 0f;//remove old hediff to add new one instead of changing severity
                                                     //why? because we want the correct offsets and this is the lazy way to do it.
-                            Hediff newHediff = HediffMaker.MakeHediff(AscensionDefOf.SpiritPillHediff, pawn, null);
+                            Hediff newHediff = HediffMaker.MakeHediff(AscensionDefOf.AS_SpiritPillHediff, pawn, null);
                             newHediff.Severity = tier;
                             pawn.health.AddHediff(newHediff, null, null, null);
                         }
                     }else
                     {
-                        Hediff newHediff = HediffMaker.MakeHediff(AscensionDefOf.SpiritPillHediff, pawn, null);
+                        Hediff newHediff = HediffMaker.MakeHediff(AscensionDefOf.AS_SpiritPillHediff, pawn, null);
                         newHediff.Severity = tier;
                         pawn.health.AddHediff(newHediff, null, null, null);
                     }
@@ -79,7 +79,7 @@ namespace Ascension
         {
             if (parentDef.IsDrug && this.chance >= 1f)
             {
-                foreach (StatDrawEntry statDrawEntry in AscensionDefOf.SpiritPillHediff.SpecialDisplayStats(StatRequest.ForEmpty()))
+                foreach (StatDrawEntry statDrawEntry in AscensionDefOf.AS_SpiritPillHediff.SpecialDisplayStats(StatRequest.ForEmpty()))
                 {
                     yield return statDrawEntry;
                 }

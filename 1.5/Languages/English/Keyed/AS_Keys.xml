@@ -167,7 +167,8 @@
   <AS_MQFactorsDesc>The factors influencing max Qi.</AS_MQFactorsDesc>
   
   <AS_BCFactorLabel>Breakthrough Chance  Factors:</AS_BCFactorLabel>
-  <AS_BCFactorQiTile>( Gather Qi 20% Per 1k: {QI}% )</AS_BCFactorQiTile>
+  <AS_BCFactorBase>( Base: {BASE}% )</AS_BCFactorBase>
+  <AS_BCFactorQiTile> + ( Gather Qi 20% Per 1k: {QI}% )</AS_BCFactorQiTile>
   <AS_BCFactorElement> + ( {ELEMENT} 10% Per 1k: {AMOUNT}% )</AS_BCFactorElement>
   <AS_BCFactorMood> * ( Mood * 2: {MOOD}x )</AS_BCFactorMood>
   <AS_BCFactorOffset> * ( Offset: {OFFSET}x )</AS_BCFactorOffset>

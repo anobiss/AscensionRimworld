@@ -39,22 +39,35 @@ namespace Ascension
             base.PostMake();
             if (element == ElementEmitMapComponent.Element.None)
             {
-                // Array of possible elements
-                ElementEmitMapComponent.Element[] possibleElements = new ElementEmitMapComponent.Element[]
-                {
+                AssignElement();
+            }
+        }
+
+        public override void PostAdd(DamageInfo? dinfo)
+        {
+            base.PostAdd(dinfo);
+            if (element == ElementEmitMapComponent.Element.None)
+            {
+                AssignElement();
+            }
+        }
+        private void AssignElement()
+        {
+            // Array of possible elements
+            ElementEmitMapComponent.Element[] possibleElements = new ElementEmitMapComponent.Element[]
+            {
             ElementEmitMapComponent.Element.Water,
             ElementEmitMapComponent.Element.Fire,
             ElementEmitMapComponent.Element.Earth,
             ElementEmitMapComponent.Element.Metal,
             ElementEmitMapComponent.Element.Wood
-                };
+            };
 
-                // Create a new random number generator
-                Random random = new Random();
+            // Create a new random number generator
+            Random random = new Random();
 
-                // Assign a random element from the array
-                element = possibleElements[random.Next(possibleElements.Length)];
-            }
+            // Assign a random element from the array
+            element = possibleElements[random.Next(possibleElements.Length)];
         }
         public override bool Visible
         {

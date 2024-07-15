@@ -10,6 +10,7 @@ namespace Ascension
         public float speedBaseBonus = 0f;
         public float cultivationSpeedOffset = 0f;
         public float cultivationSpeedBaseBonus = 0f;
+        public float breakthroughChanceBaseBonus = 0f;
         public float breakthroughChanceOffset = 0f;
         public bool spirit = false;
         public bool temp = false;

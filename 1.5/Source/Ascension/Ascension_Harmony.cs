@@ -155,14 +155,16 @@ namespace Ascension
                                 realmHediff.Severity = randRealmStage;
                             }
 
-                            AscensionUtilities.UpdateQiRecoveryAmount(qiPool);
-                            AscensionUtilities.UpdateQiRecoverySpeed(qiPool);
-                            qiPool.amount = ((float)rnd.NextDouble())* AscensionUtilities.UpdateQiMax(qiPool); ;
+
 
                             pawn.health.AddHediff(cultivatorHediff);
                             pawn.health.AddHediff(qiPool);
                             pawn.health.AddHediff(realmHediff);
                             AscensionUtilities.UpdateMaxProg(realmHediff);
+
+                            AscensionUtilities.UpdateQiRecoveryAmount(qiPool);
+                            AscensionUtilities.UpdateQiRecoverySpeed(qiPool);
+                            qiPool.amount = ((float)rnd.NextDouble()) * AscensionUtilities.UpdateQiMax(qiPool); ;
 
                             realmHediff.progress = ((float)rnd.NextDouble()) * realmHediff.maxProgress;
                             float randA = Rand.Range(0, 1f);//only need to roll if its a cultivator

@@ -41,7 +41,7 @@ namespace Ascension
                     {
                         if (soulMender.Dead)
                         {
-                            Hediff smHediff = soulMender.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.SoulMend);
+                            Hediff smHediff = soulMender.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.AS_SoulMend);
                             if (smHediff != null)//dont need to be greater than 1 because we remove 1 severity and hediff removes soul mender when removed.
                             {
                                 if (logs == true)

@@ -9,22 +9,22 @@ namespace Ascension
     {
         public static HediffDef AS_GCBreakthroughHediff;
 
-        public static IncidentDef SpiritTreeConversion;
+        public static IncidentDef AS_SpiritTreeConversion;
 
         //misc stuffs
         public static HediffDef QiPool;
-        public static HediffDef SoulMend;
-        public static HediffDef QiResonance;
+        public static HediffDef AS_SoulMend;
+        public static HediffDef AS_QiResonance;
 
-        public static Verse.HediffDef SpiritSwordFusion;
-        public static HediffDef SpiritPillHediff;
-        public static HediffDef QiFeed;
+        public static Verse.HediffDef AS_SpiritSwordFusion;
+        public static HediffDef AS_SpiritPillHediff;
+        public static HediffDef AS_QiFeed;
         public static FleckDef FlashQi;
         public static AbilityDef QiHeal;
         public static AbilityDef QiBullet;
         public static AbilityDef QiResurrection;
         public static AbilityDef ManifestSpiritSword;
-        public static ThingDef SpiritSword;
+        public static ThingDef AS_SpiritSword;
 
         public static ThingDef CultivationSpot;
 

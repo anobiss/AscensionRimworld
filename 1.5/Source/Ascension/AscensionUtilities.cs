@@ -59,6 +59,24 @@ namespace Ascension
 
         //updateqirecoveryamount
 
+        public static float UpdateBreakthroughChanceBase(Cultivator_Hediff cultivatorHediff)
+        {
+            float chanceBase = 0.05f;
+
+            foreach (Hediff hediff in cultivatorHediff.pawn.health.hediffSet.hediffs)
+            {
+                HediffComp_QiRecovery offsetComp = hediff.TryGetComp<HediffComp_QiRecovery>();
+                if (offsetComp != null)
+                {
+                    if (offsetComp.Props.spirit == false)
+                    {
+                        chanceBase += offsetComp.Props.breakthroughChanceBaseBonus;
+                    }
+                }
+            }
+
+            return chanceBase;
+        }
         public static float UpdateBreakthroughChanceOffset(Cultivator_Hediff cultivatorHediff)
         {
             float offset = 1f;
@@ -83,11 +101,12 @@ namespace Ascension
             if (cultivatorHediff != null)
             {
 
-
-                float breakthroughChanceOffset = cultivatorHediff.breakthroughChanceOffset + 1f;
+                float breakthroughChanceBase = UpdateBreakthroughChanceBase(cultivatorHediff);
+                float breakthroughChanceOffset = UpdateBreakthroughChanceOffset(cultivatorHediff);
                 QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
                 ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
                 Realm_Hediff essenceRealmHediff = cultivatorHediff.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
+                breakthroughChance += breakthroughChanceBase;
                 if (qiGatherMapComp != null)
                 {
                     if (essenceRealmHediff != null)
@@ -522,7 +541,7 @@ namespace Ascension
             QiPool_Hediff qiHediff = hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
 
             float newQiAmount = qiHediff.amount + amount;
-            if (newQiAmount > qiHediff.maxAmount)//checks if over max then blows them up and sets newqiamount to max amount
+            if (newQiAmount > qiHediff.maxAmount && qiHediff.maxAmount != 0)//checks if over max then blows them up and sets newqiamount to max amount
             {
                 if (!noExplosion)
                 {

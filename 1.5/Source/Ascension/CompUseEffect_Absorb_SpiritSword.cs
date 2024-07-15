@@ -19,7 +19,7 @@ namespace Ascension
 		{
 			//want to add later in case ludeon adds something of importance in it
 			//base.DoEffect(usedBy);
-			usedBy.health.AddHediff(AscensionDefOf.SpiritSwordFusion);
+			usedBy.health.AddHediff(AscensionDefOf.AS_SpiritSwordFusion);
 
 			//do this in the hediff
 			//usedBy.abilities.GainAbility(AscensionDefOf.ManifestSpiritSword);
@@ -37,7 +37,7 @@ namespace Ascension
 
         public override TaggedString ConfirmMessage(Pawn p)
 		{
-			Hediff firstHediffOfDef = p.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.SpiritSwordFusion, false);
+			Hediff firstHediffOfDef = p.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.AS_SpiritSwordFusion, false);
 			if (firstHediffOfDef == null)
 			{
 				return null;

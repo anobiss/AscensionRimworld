@@ -569,7 +569,7 @@ namespace Ascension
             if (qiPoolHediff == null) return;
 
             StringBuilder translatedBCFactorText = new StringBuilder();
-
+            translatedBCFactorText.Append("AS_BCFactorBase".Translate((breakthroughBaseChance * 100f).ToString("0.#").Named("BASE")));
             if (qiGatherMapComp != null)
             {
                 if (eRealmHediff != null)
@@ -909,7 +909,10 @@ namespace Ascension
         public static float qiMax;
         public static float qiMaxOffset;
 
+
+        
         public static float breakthroughChance;
+        public static float breakthroughBaseChance;
         public static float breakthroughChanceOffset;
 
         public static float qiRecSpeed;
@@ -949,6 +952,7 @@ namespace Ascension
             qiMaxOffset = AscensionUtilities.UpdateQiMaxOffset(qiPoolHediff);
             qiMax = AscensionUtilities.UpdateQiMax(qiPoolHediff);
 
+            breakthroughBaseChance = AscensionUtilities.UpdateBreakthroughChanceBase(CultivatorHediff);
             breakthroughChanceOffset = AscensionUtilities.UpdateBreakthroughChanceOffset(CultivatorHediff);
             breakthroughChance = AscensionUtilities.UpdateBreakthroughChance(CultivatorHediff);
 

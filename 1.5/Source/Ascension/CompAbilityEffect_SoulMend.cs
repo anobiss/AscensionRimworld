@@ -15,7 +15,7 @@ namespace Ascension
 
             base.Apply(target, dest);
             Pawn pawn = parent.pawn;
-            SoulMend_Hediff soulMendHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.SoulMend) as SoulMend_Hediff;
+            SoulMend_Hediff soulMendHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.AS_SoulMend) as SoulMend_Hediff;
             if (pawn == null)
             {
                 return;
@@ -23,7 +23,7 @@ namespace Ascension
 
             if  (soulMendHediff == null)
             {
-                soulMendHediff = HediffMaker.MakeHediff(AscensionDefOf.SoulMend, pawn, null) as SoulMend_Hediff;
+                soulMendHediff = HediffMaker.MakeHediff(AscensionDefOf.AS_SoulMend, pawn, null) as SoulMend_Hediff;
                 soulMendHediff.Severity = 1f;
                 pawn.health.AddHediff(soulMendHediff, null, null, null);
             }else

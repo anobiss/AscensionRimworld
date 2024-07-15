@@ -25,7 +25,7 @@ namespace Ascension
                 if (pawn.health != null && pawn.health.hediffSet.HasHediff(AscensionDefOf.Cultivator))
                 {
                     // Add Qi resonance logic here
-                    pawn.health.AddHediff(AscensionDefOf.QiResonance);
+                    pawn.health.AddHediff(AscensionDefOf.AS_QiResonance);
                 }
             }
         }
@@ -57,7 +57,7 @@ namespace Ascension
                     {
                         IncidentParms incidentParms = new IncidentParms();
                         incidentParms.target = map;
-                        if (AscensionDefOf.SpiritTreeConversion.Worker.TryExecute(incidentParms))
+                        if (AscensionDefOf.AS_SpiritTreeConversion.Worker.TryExecute(incidentParms))
                         {
                             Log.Message("Spirit tree conversion succeeded");
                         }
