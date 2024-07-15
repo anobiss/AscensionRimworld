@@ -17,6 +17,7 @@ namespace Ascension
         public int amount = 0;
         public int range = 0;
         public string element = "None";
+        private ElementEmitMapComponent qiGatherMapComp;
         public override IEnumerable<StatDrawEntry> SpecialDisplayStats()
         {
             IEnumerable<StatDrawEntry> enumerable = base.SpecialDisplayStats();
@@ -77,16 +78,32 @@ namespace Ascension
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
-            amount = Props.amount*parent.stackCount;
+            amount = Props.amount * parent.stackCount;
             range = Props.range;
             element = Props.element;
-            ElementEmitMapComponent qiGatherMapComp = parent.Map.GetComponent<ElementEmitMapComponent>();
-            qiGatherMapComp.AddElementAt(new IntVec2 (parent.Position.x, parent.Position.z), range, amount, GetPropsElement(element));
+            qiGatherMapComp = parent.Map.GetComponent<ElementEmitMapComponent>();
+            qiGatherMapComp.AddElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, amount, GetPropsElement(element));
             base.PostSpawnSetup(respawningAfterLoad);
         }
+
+        public override void PreAbsorbStack(Thing otherStack, int count)
+        {
+            base.PreAbsorbStack(otherStack, count);
+            int addedElementAmount = Props.amount * otherStack.stackCount;
+            qiGatherMapComp.AddElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, addedElementAmount, GetPropsElement(element));
+            amount += addedElementAmount;
+        }
+
+        public override void PostSplitOff(Thing piece)
+        {
+            base.PostSplitOff(piece);
+            int removedElementAmount = Props.amount * piece.stackCount;
+            qiGatherMapComp.RemoveElementAt(new IntVec2(parent.Position.x, parent.Position.z), Props.range, removedElementAmount, GetPropsElement(Props.element));
+            amount -= removedElementAmount;
+        }
+
         public override void PostDeSpawn(Map map)
         {
-            ElementEmitMapComponent qiGatherMapComp = map.GetComponent<ElementEmitMapComponent>();
             qiGatherMapComp.RemoveElementAt(new IntVec2 (parent.Position.x, parent.Position.z), Props.range, amount, GetPropsElement(Props.element));
             base.PostDeSpawn(map);
         }
