@@ -24,7 +24,7 @@
         hediff messages
     -->
 	
-  <SpiritSwordFusion.comps.0.message>{0} has fused with a Spirit Sword!</SpiritSwordFusion.comps.0.message>
+  <AS_SpiritSwordFusion.comps.0.message>{0} has fused with a Spirit Sword!</AS_SpiritSwordFusion.comps.0.message>
   <AscensionOfSpeedDemon.comps.0.message>{0} has ascended into a Speed Demon!</AscensionOfSpeedDemon.comps.0.message>
   <AscensionOfKnowledge.comps.0.message>{0} has ascended into a Scholar of Knowledge!</AscensionOfKnowledge.comps.0.message>
   <AscensionOfPower.comps.0.message>{0} has ascended into a Warrior of Power!</AscensionOfPower.comps.0.message>

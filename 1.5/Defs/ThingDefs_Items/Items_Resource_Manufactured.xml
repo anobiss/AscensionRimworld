@@ -413,7 +413,7 @@
     </statBases>
     <building>
       <isResourceRock>true</isResourceRock>
-      <mineableThing>StoneEssence</mineableThing>
+      <mineableThing>AS_StoneEssence</mineableThing>
       <mineableYield>1</mineableYield>
       <mineableScatterCommonality>0.04</mineableScatterCommonality>
       <mineableScatterLumpSizeRange>1~4</mineableScatterLumpSizeRange>

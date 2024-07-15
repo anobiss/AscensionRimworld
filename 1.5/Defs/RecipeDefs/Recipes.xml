@@ -313,7 +313,7 @@
     <defName>AS_MakeHeavenlyGoldenPill</defName>
     <label>Make heavenly golden pill</label>
     <description>Make a heavenly golden pill.</description>
-	<researchPrerequisite>HeavenlyGoldenPillProduction</researchPrerequisite>
+	<researchPrerequisite>AS_HeavenlyGoldenPillProduction</researchPrerequisite>
     <jobString>Creating heavenly golden pill.</jobString>
     <workAmount>5000</workAmount>
 	<workSkill>Crafting</workSkill>

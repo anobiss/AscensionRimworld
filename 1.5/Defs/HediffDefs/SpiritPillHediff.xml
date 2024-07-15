@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
   <HediffDef>
-    <defName>SpiritPillHediff</defName>
+    <defName>AS_SpiritPillHediff</defName>
     <label>Spirit Pill Empowerment</label>
 	<description>This being has survived the consumption of a Spirit Pill, granting increased Qi Recovery Amount and Max Qi.</description>
     <hediffClass>Ascension.SpiritPill_Hediff</hediffClass>
