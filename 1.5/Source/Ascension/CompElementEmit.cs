@@ -77,7 +77,7 @@ namespace Ascension
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
-            amount = Props.amount;
+            amount = Props.amount*parent.stackCount;
             range = Props.range;
             element = Props.element;
             ElementEmitMapComponent qiGatherMapComp = parent.Map.GetComponent<ElementEmitMapComponent>();
@@ -87,7 +87,7 @@ namespace Ascension
         public override void PostDeSpawn(Map map)
         {
             ElementEmitMapComponent qiGatherMapComp = map.GetComponent<ElementEmitMapComponent>();
-            qiGatherMapComp.RemoveElementAt(new IntVec2 (parent.Position.x, parent.Position.z), Props.range, Props.amount, GetPropsElement(Props.element));
+            qiGatherMapComp.RemoveElementAt(new IntVec2 (parent.Position.x, parent.Position.z), Props.range, amount, GetPropsElement(Props.element));
             base.PostDeSpawn(map);
         }
         private static ElementEmitMapComponent.Element GetPropsElement(string elementText)
