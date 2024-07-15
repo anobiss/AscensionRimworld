@@ -2,7 +2,7 @@
 <Defs>
 
   <ThingDef ParentName="DrugPillBase">
-    <defName>GoldenPill</defName>
+    <defName>AS_GoldenPill</defName>
     <label>Golden pill</label>
     <description>A golden pill that can be used to gain large amounts of Qi quickly. The amount of Qi granted scales with quality. Grants betweem 50-500 Qi.</description>
     <graphicData>
@@ -44,7 +44,7 @@
   </ThingDef>
 
   <ThingDef ParentName="DrugPillBase">
-    <defName>ImperialGoldenPill</defName>
+    <defName>AS_ImperialGoldenPill</defName>
     <label>imperial golden pill</label>
     <description>A imperial golden pill that can be used to gain large amounts of Qi quickly. The amount of Qi granted scales with quality. Grants betweem 2.5k-50k Qi.</description>
     <graphicData>
@@ -87,7 +87,7 @@
 
 
   <ThingDef ParentName="DrugPillBase">
-    <defName>HeavenlyGoldenPill</defName>
+    <defName>AS_HeavenlyGoldenPill</defName>
     <label>heavenly golden pill</label>
     <description>A heavenly golden pill that can be used to gain large amounts of Qi quickly. The amount of Qi granted scales with quality. Grants between 10k-200k Qi. Can also be used to heal wounds.</description>
     <graphicData>
@@ -137,7 +137,7 @@
   </ThingDef>
 
   <ThingDef ParentName="DrugPillBase">
-    <defName>AscensionPill</defName>
+    <defName>AS_AscensionPill</defName>
     <label>Ascension Pill</label>
     <description>The final pill beyond all golden pills. This pill grants the user ALLOT of Qi. Grants betwen 500k-10 million Qi. Will explode at awful quality. Can also be used to heal wounds.</description>
     <graphicData>
