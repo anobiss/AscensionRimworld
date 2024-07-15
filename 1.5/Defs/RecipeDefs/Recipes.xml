@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
   <RecipeDef>
-    <defName>RefineIceEssence</defName>
+    <defName>AS_RefineIceEssence</defName>
     <label>smelt ice essence bars from ore</label>
     <description>Use heat and Qi to extract a bar of ice essence from its ore.</description>
     <jobString>Smelting ice essence bars.</jobString>
     <workAmount>400</workAmount>
     <workSpeedStat>SmeltingSpeed</workSpeedStat>
-    <researchPrerequisite>EssenceRefinement</researchPrerequisite>
+    <researchPrerequisite>AS_EssenceRefinement</researchPrerequisite>
     <effectWorking>Smelt</effectWorking>
     <soundWorking>Recipe_Smelt</soundWorking>
 	<recipeUsers>
@@ -17,30 +17,30 @@
       <li>
         <filter>
           <thingDefs>
-            <li>IceEssenceOre</li>
+            <li>AS_IceEssenceOre</li>
           </thingDefs>
         </filter>
         <count>3</count>
       </li>
     </ingredients>
     <products>
-      <IceEssenceBar>1</IceEssenceBar>
+      <AS_IceEssenceBar>1</AS_IceEssenceBar>
     </products>
     <fixedIngredientFilter>
       <thingDefs>
-        <li>IceEssenceOre</li>
+        <li>AS_IceEssenceOre</li>
       </thingDefs>
     </fixedIngredientFilter>
   </RecipeDef>
 
   <RecipeDef>
-    <defName>RefineFireEssence</defName>
+    <defName>AS_RefineFireEssence</defName>
     <label>smelt fire essence bars from ore</label>
     <description>Use heat and Qi to extract a bar of fire essence from its ore.</description>
     <jobString>Smelting fire essence bars.</jobString>
     <workAmount>400</workAmount>
     <workSpeedStat>SmeltingSpeed</workSpeedStat>
-    <researchPrerequisite>EssenceRefinement</researchPrerequisite>
+    <researchPrerequisite>AS_EssenceRefinement</researchPrerequisite>
     <effectWorking>Smelt</effectWorking>
     <soundWorking>Recipe_Smelt</soundWorking>
 	<recipeUsers>
@@ -50,18 +50,18 @@
       <li>
         <filter>
           <thingDefs>
-            <li>FireEssenceOre</li>
+            <li>AS_FireEssenceOre</li>
           </thingDefs>
         </filter>
         <count>3</count>
       </li>
     </ingredients>
     <products>
-      <FireEssenceBar>1</FireEssenceBar>
+      <AS_FireEssenceBar>1</AS_FireEssenceBar>
     </products>
     <fixedIngredientFilter>
       <thingDefs>
-        <li>FireEssenceOre</li>
+        <li>AS_FireEssenceOre</li>
       </thingDefs>
     </fixedIngredientFilter>
   </RecipeDef>
@@ -69,7 +69,7 @@
 
 
     <RecipeDef>
-    <defName>AdministerHeavenlyGoldenPill</defName>
+    <defName>AS_AdministerHeavenlyGoldenPill</defName>
     <label>administer heavenly golden pill</label>
     <description>Administer a heavenly golden pill as a healer.</description>
     <workerClass>Recipe_AdministerUsableItem</workerClass>
@@ -83,7 +83,7 @@
       <li>
         <filter>
           <thingDefs>
-            <li>HeavenlyGoldenPill</li>
+            <li>AS_HeavenlyGoldenPill</li>
           </thingDefs>
         </filter>
         <count>1</count>
@@ -91,13 +91,13 @@
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
-        <li>HeavenlyGoldenPill</li>
+        <li>AS_HeavenlyGoldenPill</li>
       </thingDefs>
     </fixedIngredientFilter>
   </RecipeDef>
   
     <RecipeDef>
-    <defName>AdministerAscensionPill</defName>
+    <defName>AS_AdministerAscensionPill</defName>
     <label>administer ascension pill</label>
     <description>Administer a Ascension Pill to as a healer.</description>
     <workerClass>Recipe_AdministerUsableItem</workerClass>
@@ -111,7 +111,7 @@
       <li>
         <filter>
           <thingDefs>
-            <li>AscensionPill</li>
+            <li>AS_AscensionPill</li>
           </thingDefs>
         </filter>
         <count>1</count>
@@ -119,16 +119,16 @@
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
-        <li>AscensionPill</li>
+        <li>AS_AscensionPill</li>
       </thingDefs>
     </fixedIngredientFilter>
   </RecipeDef>
   
   <RecipeDef>
-    <defName>MakeQiRefinementPill</defName>
+    <defName>AS_MakeQiRefinementPill</defName>
     <label>Make qi refinement pill</label>
     <description>Make a qi refinement pill.</description>
-    <researchPrerequisite>BasicPillProduction</researchPrerequisite>
+    <researchPrerequisite>AS_BasicPillProduction</researchPrerequisite>
     <jobString>Creating Tribulation Pill.</jobString>
     <workAmount>777</workAmount>
 	<workSkill>Crafting</workSkill>
@@ -139,7 +139,7 @@
       <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
-      <QiRefinementPill>1</QiRefinementPill>
+      <AS_QiRefinementPill>1</AS_QiRefinementPill>
     </products>
     <ingredients>
 	  <li>
@@ -154,10 +154,10 @@
   </RecipeDef>
   
   <RecipeDef>
-    <defName>MakeBreakthroughPill</defName>
+    <defName>AS_MakeBreakthroughPill</defName>
     <label>Make Breakthrough Pill</label>
     <description>Make a breakthrough pill.</description>
-    <researchPrerequisite>BasicPillProduction</researchPrerequisite>
+    <researchPrerequisite>AS_BasicPillProduction</researchPrerequisite>
     <jobString>Creating Breakthrough Pill.</jobString>
     <workAmount>777</workAmount>
 	<workSkill>Crafting</workSkill>
@@ -168,7 +168,7 @@
       <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
-      <BreakthroughPill>1</BreakthroughPill>
+      <AS_BreakthroughPill>1</AS_BreakthroughPill>
     </products>
     <ingredients>
 	  <li>
@@ -183,10 +183,10 @@
   </RecipeDef>
   
     <RecipeDef>
-    <defName>MakeExercisePill</defName>
+    <defName>AS_MakeExercisePill</defName>
     <label>Make exercise pill</label>
     <description>Make a exercise pill.</description>
-    <researchPrerequisite>BasicPillProduction</researchPrerequisite>
+    <researchPrerequisite>AS_BasicPillProduction</researchPrerequisite>
     <jobString>Creating exercise pill.</jobString>
     <workAmount>777</workAmount>
 	<workSkill>Crafting</workSkill>
@@ -197,7 +197,7 @@
       <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
-      <ExercisePill>1</ExercisePill>
+      <AS_ExercisePill>1</AS_ExercisePill>
     </products>
     <ingredients>
 	  <li>
@@ -220,10 +220,10 @@
   </RecipeDef>
   
   <RecipeDef>
-    <defName>MakeGoldenPill</defName>
+    <defName>AS_MakeGoldenPill</defName>
     <label>Make golden pill</label>
     <description>Make a golden pill.</description>
-	<researchPrerequisite>GoldenPillProduction</researchPrerequisite>
+	<researchPrerequisite>AS_GoldenPillProduction</researchPrerequisite>
     <jobString>Creating golden pill.</jobString>
     <workAmount>999</workAmount>
 	<workSkill>Crafting</workSkill>
@@ -238,7 +238,7 @@
       <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
-      <GoldenPill>1</GoldenPill>
+      <AS_GoldenPill>1</AS_GoldenPill>
     </products>
     <ingredients>
 	  <li>
@@ -269,10 +269,10 @@
   </RecipeDef>
  
   <RecipeDef>
-    <defName>MakeImperialGoldenPill</defName>
+    <defName>AS_MakeImperialGoldenPill</defName>
     <label>Make imperial golden pill</label>
     <description>Make a imperial golden pill.</description>
-	<researchPrerequisite>ImperialGoldenPill</researchPrerequisite>
+	<researchPrerequisite>AS_ImperialGoldenPill</researchPrerequisite>
     <jobString>Creating imperial golden pill.</jobString>
     <workAmount>1777</workAmount>
 	<workSkill>Crafting</workSkill>
@@ -287,7 +287,7 @@
       <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
-      <ImperialGoldenPill>1</ImperialGoldenPill>
+      <AS_ImperialGoldenPill>1</AS_ImperialGoldenPill>
     </products>
     <ingredients>
 	  <li>
@@ -310,7 +310,7 @@
   </RecipeDef>
   
   <RecipeDef>
-    <defName>MakeHeavenlyGoldenPill</defName>
+    <defName>AS_MakeHeavenlyGoldenPill</defName>
     <label>Make heavenly golden pill</label>
     <description>Make a heavenly golden pill.</description>
 	<researchPrerequisite>HeavenlyGoldenPillProduction</researchPrerequisite>
@@ -328,13 +328,13 @@
       <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
-      <HeavenlyGoldenPill>1</HeavenlyGoldenPill>
+      <AS_HeavenlyGoldenPill>1</AS_HeavenlyGoldenPill>
     </products>
     <ingredients>
 	  <li>
         <filter>
           <thingDefs>
-            <li>ImperialGoldenPill</li>
+            <li>AS_ImperialGoldenPill</li>
           </thingDefs>
         </filter>
         <count>1</count>
@@ -350,7 +350,7 @@
 	  <li>
         <filter>
           <thingDefs>
-            <li>SpiritCrystal</li>
+            <li>AS_SpiritCrystal</li>
           </thingDefs>
         </filter>
         <count>7</count>
@@ -367,10 +367,10 @@
   </RecipeDef>
   
   <RecipeDef>
-    <defName>MakeAscensionPill</defName>
+    <defName>AS_MakeAscensionPill</defName>
     <label>Make ascension pill</label>
     <description>Make a ascension pill. Ascension pills will explode when made at awful quality.</description>
-	<researchPrerequisite>AscensionPillProduction</researchPrerequisite>
+	<researchPrerequisite>AS_AscensionPillProduction</researchPrerequisite>
     <jobString>Creating Ascension Pill.</jobString>
     <workAmount>7777</workAmount>
 	<workSkill>Crafting</workSkill>
@@ -391,7 +391,7 @@
 	  <li>
         <filter>
           <thingDefs>
-            <li>HeavenlyGoldenPill</li>
+            <li>AS_HeavenlyGoldenPill</li>
           </thingDefs>
         </filter>
         <count>1</count>
@@ -399,7 +399,7 @@
 	  <li>
         <filter>
           <thingDefs>
-            <li>SpiritCrystal</li>
+            <li>AS_SpiritCrystal</li>
           </thingDefs>
         </filter>
         <count>12</count>
@@ -407,7 +407,7 @@
 	  <li>
         <filter>
           <thingDefs>
-            <li>Spiritwood</li>
+            <li>AS_Spiritwood</li>
           </thingDefs>
         </filter>
         <count>1</count>
@@ -416,10 +416,10 @@
   </RecipeDef>
   
   <RecipeDef>
-    <defName>MakeSpiritPill</defName>
+    <defName>AS_MakeSpiritPill</defName>
     <label>Make spirit pill</label>
     <description>Make a spirit pill. Spirit pills will explode when made at awful quality.</description>
-	<researchPrerequisite>SpiritPillProduction</researchPrerequisite>
+	<researchPrerequisite>AS_SpiritPillProduction</researchPrerequisite>
     <jobString>Creating Spirit Pill.</jobString>
     <workAmount>7777</workAmount>
 	<workSkill>Crafting</workSkill>
@@ -434,13 +434,13 @@
       <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
-      <SpiritPill>1</SpiritPill>
+      <AS_SpiritPill>1</AS_SpiritPill>
     </products>
     <ingredients>
 	  <li>
         <filter>
           <thingDefs>
-            <li>SpiritCrystal</li>
+            <li>AS_SpiritCrystal</li>
           </thingDefs>
         </filter>
         <count>12</count>
@@ -448,7 +448,7 @@
 	  <li>
         <filter>
           <thingDefs>
-            <li>Spiritwood</li>
+            <li>AS_Spiritwood</li>
           </thingDefs>
         </filter>
         <count>1</count>
@@ -457,10 +457,10 @@
   </RecipeDef>
 
   <RecipeDef>
-    <defName>ManifestSpiritSword</defName>
+    <defName>AS_ManifestSpiritSword</defName>
     <label>Manifest spirit sword</label>
     <description>Manifest a Spirit Sword into this realm using Qi from a large amount of spirit stones. It takes a large amount of skill and intelligence to create a Spirit Sword.</description>
-	<researchPrerequisite>SpiritSwordManifestation</researchPrerequisite>
+	<researchPrerequisite>AS_SpiritSwordManifestation</researchPrerequisite>
     <jobString>Manifesting spirit sword</jobString>
     <workAmount>7777</workAmount>
     <workSpeedStat>ResearchSpeed</workSpeedStat>
@@ -474,7 +474,7 @@
       <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
-      <SpiritSword>1</SpiritSword>
+      <AS_SpiritSword>1</AS_SpiritSword>
     </products>
     <ingredients>
 	  	  <li>
@@ -494,10 +494,10 @@
   <!-- Spirit Crystal -->
   
    <RecipeDef>
-    <defName>Make_SpiritCrystalFromSpiritStones</defName>
+    <defName>AS_Make_SpiritCrystalFromSpiritStones</defName>
     <label>make spirit crystal from spirit stones</label>
     <description>Make a spirit crystal by extracting and concentrating qi from spirit stones.</description>
-	<researchPrerequisite>AdvancedQiManipulation</researchPrerequisite>
+	<researchPrerequisite>AS_AdvancedQiManipulation</researchPrerequisite>
     <jobString>Manifesting spirit crystal from spirit stones.</jobString>
     <workAmount>999</workAmount>
 	<workSkill>Crafting</workSkill>
@@ -512,7 +512,7 @@
       <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
-      <SpiritCrystal>1</SpiritCrystal>
+      <AS_SpiritCrystal>1</AS_SpiritCrystal>
     </products>
     <ingredients>
 	  <li>
@@ -530,10 +530,10 @@
   <!-- Spirit Stones -->
   
   <RecipeDef>
-    <defName>Make_SpiritStonesFromSpiritLeaf</defName>
+    <defName>AS_Make_SpiritStonesFromSpiritLeaf</defName>
     <label>make spirit stones from spirit leaves</label>
     <description>Make spirit stones by extracting qi from spirit leaves.</description>
-	<researchPrerequisite>QiManipulation</researchPrerequisite>
+	<researchPrerequisite>AS_QiManipulation</researchPrerequisite>
     <jobString>Manifesting spirit stones from spirit leaves.</jobString>
     <workAmount>999</workAmount>
 	<workSkill>Crafting</workSkill>

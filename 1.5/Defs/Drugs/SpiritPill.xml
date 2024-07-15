@@ -2,7 +2,7 @@
 <Defs>
 
   <ThingDef ParentName="DrugPillBase">
-    <defName>SpiritPill</defName>
+    <defName>AS_SpiritPill</defName>
     <label>Spirit Pill</label>
     <description>A pill that permanently grants increased Qi Recovery and Max Qi, but requires a large amount of Qi to survive the consumption. Beings with less than the required amount of Qi will produce a fairly large explosion when they die after consumption, scaling with body size. Will explode at awful quality.</description>
     <graphicData>

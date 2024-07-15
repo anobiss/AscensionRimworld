@@ -208,7 +208,7 @@
     </verbProperties>
     <comps>
       <li Class="Ascension.CompProperties_AbilityHediffToggle">
-        <hediffDef>QiFeed</hediffDef>
+        <hediffDef>AS_QiFeed</hediffDef>
       </li>
     </comps>
   </AbilityDef>
@@ -343,7 +343,7 @@
     <comps>
       <li Class="Ascension.CompProperties_AbilityQiCost">
         <cost>12000</cost>
-		<reqHediffDef>SpiritSwordFusion</reqHediffDef>
+		<reqHediffDef>AS_SpiritSwordFusion</reqHediffDef>
       </li>
       <li Class="CompProperties_AbilityLaunchProjectile">
         <projectileDef>ThrownQiSpiritSword</projectileDef>
@@ -388,7 +388,7 @@
     <comps>
       <li Class="Ascension.CompProperties_AbilityQiCost">
         <cost>7000</cost>
-		<reqHediffDef>SpiritSwordFusion</reqHediffDef>
+		<reqHediffDef>AS_SpiritSwordFusion</reqHediffDef>
       </li>
       <li Class="CompProperties_AbilityLaunchProjectile">
         <projectileDef>StabbingQiSpiritSword</projectileDef>
@@ -433,7 +433,7 @@
     <comps>
       <li Class="Ascension.CompProperties_AbilityQiCost">
         <cost>7000</cost>
-		<reqHediffDef>SpiritSwordFusion</reqHediffDef>
+		<reqHediffDef>AS_SpiritSwordFusion</reqHediffDef>
       </li>
       <li Class="CompProperties_AbilityLaunchProjectile">
         <projectileDef>SlashingQiSpiritSword</projectileDef>

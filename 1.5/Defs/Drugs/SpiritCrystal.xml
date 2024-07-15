@@ -2,7 +2,7 @@
 <Defs>
 
   <ThingDef ParentName="ResourceBase">
-    <defName>SpiritCrystal</defName>
+    <defName>AS_SpiritCrystal</defName>
     <label>spirit crystal</label>
     <description>Qi condensed into its crystaline form. Once consumed it grants 25k qi and gives the consumer Greater Qi Resonance(gives 0.5 increased cultivation speed offset, 7000 base qi recovery and 1000% increased qi recovery) for 3 days. Used in production of golden pills for vastly more qi.</description>
     <graphicData>
@@ -31,7 +31,7 @@
 		  <noQuality>true</noQuality>
         </li>
 		<li Class="IngestionOutcomeDoer_GiveHediff">
-          <hediffDef>GreaterQiResonance</hediffDef>
+          <hediffDef>AS_GreaterQiResonance</hediffDef>
           <severity>1.00</severity>
           <doToGeneratedPawnIfAddicted>true</doToGeneratedPawnIfAddicted>
         </li>

@@ -47,7 +47,7 @@ namespace Ascension
                 {
                     cWaitToil.actor.pather.StopDead();
                     //add hediff here
-                    cWaitToil.actor.health.AddHediff(AscensionDefOf.GCBreakthroughHediff);
+                    cWaitToil.actor.health.AddHediff(AscensionDefOf.AS_GCBreakthroughHediff);
                 };
                 cWaitToil.tickAction = () =>
                 {
@@ -87,7 +87,7 @@ namespace Ascension
         private void Breakthrough(int score)
         {
             //remove gc breakthrough hediff here
-            Hediff GCBreakthrough = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.GCBreakthroughHediff);
+            Hediff GCBreakthrough = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.AS_GCBreakthroughHediff);
             if (GCBreakthrough != null)
             {
                 pawn.health.RemoveHediff(GCBreakthrough);

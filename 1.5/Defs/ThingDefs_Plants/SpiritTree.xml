@@ -28,7 +28,7 @@
     </statBases>
     <plant>
       <growDays>120</growDays>
-	  <harvestedThingDef>Spiritwood</harvestedThingDef>
+	  <harvestedThingDef>AS_Spiritwood</harvestedThingDef>
       <leaflessGraphicPath>Things/Plant/SpiritTree_Leafless</leaflessGraphicPath>
       <immatureGraphicPath>Things/Plant/SpiritTree_Immature</immatureGraphicPath>
       <harvestWork>1800</harvestWork>
