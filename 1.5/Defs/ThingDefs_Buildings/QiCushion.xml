@@ -44,7 +44,7 @@
 		</li>
 	</comps>
 	<researchPrerequisites>
-      <li>QiManipulation</li>
+      <li>AS_QiManipulation</li>
     </researchPrerequisites>
   </ThingDef>
 </Defs>

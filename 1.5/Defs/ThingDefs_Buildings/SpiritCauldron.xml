@@ -47,7 +47,7 @@
 			<li>PlaceWorker_PreventInteractionSpotOverlap</li>
 		</placeWorkers>
 		<researchPrerequisites>
-			<li>QiManipulation</li>
+			<li>AS_QiManipulation</li>
 		</researchPrerequisites>
 		<comps>
 			<li Class="Ascension.CompProperties_CultivationCauldron">

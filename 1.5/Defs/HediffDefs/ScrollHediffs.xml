@@ -80,7 +80,7 @@
 	  <li Class="Ascension.HediffCompProperties_AddScrollReq">
 		<reqHediffsList>
 			<li>BasicQiArts</li>
-			<li>SpiritSwordFusion</li>
+			<li>AS_SpiritSwordFusion</li>
 		</reqHediffsList>
       </li>
     </comps>

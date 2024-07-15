@@ -293,7 +293,7 @@
 	  <li>
         <filter>
           <thingDefs>
-            <li>GoldenPill</li>
+            <li>AS_GoldenPill</li>
           </thingDefs>
         </filter>
         <count>1</count>
@@ -385,7 +385,7 @@
       <li>SpiritCauldron</li>
     </recipeUsers>
     <products>
-      <AscensionPill>1</AscensionPill>
+      <AS_AscensionPill>1</AS_AscensionPill>
     </products>
     <ingredients>
 	  <li>

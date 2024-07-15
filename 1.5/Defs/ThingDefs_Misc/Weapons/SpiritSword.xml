@@ -2,7 +2,7 @@
 <Defs>
 
     <ThingDef ParentName="BaseWeapon" >
-        <defName>SpiritSword</defName>
+        <defName>AS_SpiritSword</defName>
         <label>Spirit Sword</label>
         <description>A living Spirit Sword. It can be bonded and absorbed into another living being, or used physically in melee combat.</description>
         <soundInteract>Interact_PlasmaSword</soundInteract>
