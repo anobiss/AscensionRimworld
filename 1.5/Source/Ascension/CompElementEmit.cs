@@ -97,9 +97,12 @@ namespace Ascension
         public override void PostSplitOff(Thing piece)
         {
             base.PostSplitOff(piece);
-            int removedElementAmount = Props.amount * piece.stackCount;
-            qiGatherMapComp.RemoveElementAt(new IntVec2(parent.Position.x, parent.Position.z), Props.range, removedElementAmount, GetPropsElement(Props.element));
-            amount -= removedElementAmount;
+            if (piece != null && qiGatherMapComp != null)
+            {
+                int removedElementAmount = Props.amount * piece.stackCount;
+                qiGatherMapComp.RemoveElementAt(new IntVec2(parent.Position.x, parent.Position.z), Props.range, removedElementAmount, GetPropsElement(Props.element));
+                amount -= removedElementAmount;
+            }
         }
 
         public override void PostDeSpawn(Map map)

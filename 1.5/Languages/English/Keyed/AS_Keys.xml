@@ -73,7 +73,7 @@
   <AS_ElementEmit>Element Emit</AS_ElementEmit>
   <AS_ElementEmitRange>Range</AS_ElementEmitRange>
   <AS_ElementEmitRangeDesc>How far the object with Element Emit permeates its surroundings with its element.</AS_ElementEmitRangeDesc>
-  <AS_ElementEmitAmount>Qi Amount</AS_ElementEmitAmount>
+  <AS_ElementEmitAmount>Element Amount</AS_ElementEmitAmount>
   <AS_ElementEmitAmountDesc>The amount of the element emitted that the object with Element Emit grants to its surroundings </AS_ElementEmitAmountDesc>
   <AS_ElementEmitElement>Element</AS_ElementEmitElement>
   <AS_ElementEmitElementDesc>The element emitted with by the object.</AS_ElementEmitElementDesc>

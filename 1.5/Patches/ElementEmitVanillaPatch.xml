@@ -66,7 +66,7 @@
 	<comps>
 	  <li Class="Ascension.CompProperties_ElementEmit">
 		<range>0</range>
-        <amount>2</amount>
+        <amount>1</amount>
 		<element>Metal</element>
       </li>
     </comps>
@@ -80,7 +80,7 @@
 	<comps>
 	  <li Class="Ascension.CompProperties_ElementEmit">
 		<range>0</range>
-        <amount>3</amount>
+        <amount>2</amount>
 		<element>Metal</element>
       </li>
     </comps>
@@ -124,7 +124,7 @@
     <value>
 	<comps>
 	  <li Class="Ascension.CompProperties_ElementEmit">
-		<range>1</range>
+		<range>0</range>
         <amount>3</amount>
 		<element>Earth</element>
       </li>
