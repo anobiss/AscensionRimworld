@@ -49,6 +49,46 @@ namespace Ascension
         public static readonly float[] spiritPillCostRates = {77000f, 100000f, 120000f, 200000f, 1000000f, 12000000f };//how much qi each tier costs	Poor,Normal,Good,Excellent,Masterwork,Legendary
 
         //updateqirecoveryamount
+        public static string TranslateSpeedHour(float speed, bool isTicks = false)
+        {
+            const float ticksPerHour = 2500f;
+            const float ticksPerMinute = 41.6f;
+            const float ticksPerSecond = 0.69f;
+            float speedTicks;
+            string translatedText = "AS_TranslatedSpeedNone".Translate();
+
+            if (!isTicks)
+            {
+                speedTicks = ticksPerHour / speed;
+            }
+            else
+            {
+                speedTicks = speed;
+            }
+
+            if (speedTicks > ticksPerHour)
+            {
+                translatedText = "AS_TranslatedSpeedHours".Translate((speedTicks / ticksPerHour).ToString("0.#").Named("SPEED"));
+            }
+            else if (speedTicks == ticksPerHour)
+            {
+                translatedText = "AS_TranslatedSpeedHour".Translate();
+            }
+            else if (speedTicks > ticksPerMinute)
+            {
+                translatedText = "AS_TranslatedSpeedMinutes".Translate((speedTicks / ticksPerMinute).ToString("0.#").Named("SPEED"));
+            }
+            else if (speedTicks == ticksPerMinute)
+            {
+                translatedText = "AS_TranslatedSpeedMinute".Translate();
+            }
+            else
+            {
+                translatedText = "AS_TranslatedSpeedSeconds".Translate((speedTicks / ticksPerSecond).ToString("0.#").Named("SPEED"));
+            }
+
+            return translatedText;
+        }
 
         public static float UpdateTribulationQiOffset(HeavenlyTribulation_Hediff tribulationHediff)
         {
@@ -904,6 +944,10 @@ namespace Ascension
                         pawn.health.AddHediff(AscensionDefOf.EssenceRealm).Severity = 1;
                         pawn.health.RemoveHediff(realmHediff);
                         
+                    }
+                    if (Rand.Range(0, 1f) >= 0.75f)//25% chance
+                    {
+                        realmHediff.pawn.health.AddHediff(AscensionDefOf.AS_HeavenlyTribulation);
                     }
                 }
             }

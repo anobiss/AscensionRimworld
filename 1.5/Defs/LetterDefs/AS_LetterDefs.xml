@@ -7,4 +7,11 @@
     <flashInterval>90</flashInterval>
     <arriveSound>LetterArrive_Good</arriveSound>
   </LetterDef>
+  <LetterDef>
+    <defName>AS_HeavenlyTribulationMessage</defName>
+    <color>(255, 246, 150)</color>
+    <flashColor>(255, 255, 255)</flashColor>
+    <flashInterval>40</flashInterval>
+    <arriveSound>LetterArrive_BadUrgentSmall</arriveSound>
+  </LetterDef>
 </Defs>

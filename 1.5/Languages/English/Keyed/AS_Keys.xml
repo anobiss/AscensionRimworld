@@ -50,7 +50,7 @@
   <AS_CSEssenceRealm>Essence</AS_CSEssenceRealm>
   <AS_CSBodyRealm>Body</AS_CSBodyRealm>
   
-  <AS_HeavenlyTribulationStats> Stats are determined when the tribulation is created based on the following factors: Base of {QIOFFSET} * Max Qi = Qi: {QI}, Base of {STRENGTHOFFSET} * Qi Recovery Amount =Strength: {STRENGTH}, Base of {SPEEDOFFSET} * Cultivation Speed = Speed: 1 hour divided by {SPEED} = {TRANSLATEDSPEED}</AS_HeavenlyTribulationStats>
+  <AS_HeavenlyTribulationStats> Stats are determined when the tribulation is created based on the following factors: \nBase of {QIOFFSET} * Max Qi = Qi: {QI}, \nBase of {STRENGTHOFFSET} * 5% of Qi * (Qi Recovery Speed + 1 ) = Strength: {STRENGTH}, \nBase of {SPEEDOFFSET} * Cultivation Speed = Speed: 1 hour divided by {SPEED} = {TRANSLATEDSPEED}\n\n{TRANSLATEDTIMELEFT} until Tribulation.</AS_HeavenlyTribulationStats>
   
   <AS_CurrentElement>Current Element - {ELEMENT}: {AMOUNT} </AS_CurrentElement>
 
@@ -84,11 +84,13 @@
   
    <!-- its only like this for better translation support -->
   <AS_QiPoolBarRecovery> + {QIRECOVERYAMOUNT} every {TRANSLATEDRECOVERYSPEED}</AS_QiPoolBarRecovery>
-  <AS_QiPoolBarRecoveryHours>{QIRECOVERYSPEED} hours.</AS_QiPoolBarRecoveryHours>
-  <AS_QiPoolBarRecoveryHour>hour.</AS_QiPoolBarRecoveryHour>
-  <AS_QiPoolBarRecoveryMinutes>{QIRECOVERYSPEED} minutes.</AS_QiPoolBarRecoveryMinutes>
-  <AS_QiPoolBarRecoveryMinute>minute.</AS_QiPoolBarRecoveryMinute>
-  <AS_QiPoolBarRecoverySeconds>{QIRECOVERYSPEED} seconds.</AS_QiPoolBarRecoverySeconds>
+  
+  <AS_TranslatedSpeedNone>0 seconds</AS_TranslatedSpeedNone>
+  <AS_TranslatedSpeedHours>{SPEED} hours</AS_TranslatedSpeedHours>
+  <AS_TranslatedSpeedHour>hour</AS_TranslatedSpeedHour>
+  <AS_TranslatedSpeedMinutes>{SPEED} minutes</AS_TranslatedSpeedMinutes>
+  <AS_TranslatedSpeedMinute>minute</AS_TranslatedSpeedMinute>
+  <AS_TranslatedSpeedSeconds>{SPEED} seconds</AS_TranslatedSpeedSeconds>
 
   <AS_Foundation>Foundation</AS_Foundation>
   
@@ -228,6 +230,9 @@
   
   <AS_CanBreakThrough>Breakthrough Possible</AS_CanBreakThrough>
   <AS_CanBreakThroughDesc>{PAWN} can now breakthrough past {REALM}.</AS_CanBreakThroughDesc>
+  
+  <AS_HTLetter>Heavenly Tribulation</AS_HTLetter>
+  <AS_HTLetterDesc>{PAWN} will undergo Heavenly Tribulation in 3 days.</AS_HTLetterDesc>
   
   <AS_Qi>Qi</AS_Qi>
   <AS_QiPool>Qi Pool</AS_QiPool>

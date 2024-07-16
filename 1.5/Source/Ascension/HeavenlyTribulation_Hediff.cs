@@ -13,6 +13,7 @@ namespace Ascension
         private float qiOffset;
         private float strengthOffset;
         private float speedOffset;
+        private float convertedQi = 0f;//used only for the cultivation reward.
         private float Qi;
         private float Strength;
         private float Speed;
@@ -24,7 +25,7 @@ namespace Ascension
             get
             {
                 return "AS_HeavenlyTribulationStats".Translate(qiOffset.ToString("0.#").Named("QIOFFSET"), strengthOffset.ToString("0.#").Named("STRENGTHOFFSET"), 
-                    speedOffset.ToString("0.#").Named("SPEEDOFFSET"), Qi.ToString("0.#").Named("QI"), Strength.ToString("0.#").Named("STRENGTH"), Speed.ToString("0.#").Named("SPEED"));
+                    speedOffset.ToString("0.#").Named("SPEEDOFFSET"), Qi.ToString("0.#").Named("QI"), Strength.ToString("0.#").Named("STRENGTH"), Speed.ToString("0.#").Named("SPEED"), AscensionUtilities.TranslateSpeedHour(Speed).Named("TRANSLATEDSPEED"), AscensionUtilities.TranslateSpeedHour(ticksTilStart, true).Named("TRANSLATEDTIMELEFT"));
             }
         }
         public override void PostTick()
@@ -48,11 +49,16 @@ namespace Ascension
                                 pawn.Map.weatherManager.eventHandler.AddEvent(new WeatherEvent_FakeLightningStrike(map, pawn.Position));
                                 if (Strength > Qi)
                                 {
+                                    RollDivineBreath();
+                                    
                                     qiPool.amount -= Strength;
+                                    convertedQi += Strength;
+                                    CultivationReward(convertedQi);
                                     Severity = 0;
                                 }else
                                 {
                                     qiPool.amount -= Strength;
+                                    convertedQi += Strength;
                                     Qi -= Strength;
                                 }
                             }
@@ -76,19 +82,53 @@ namespace Ascension
             }
         }
 
+        private void CultivationReward(float amount)
+        {
+            Realm_Hediff essenceRealm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
+            Realm_Hediff bodyRealm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm) as Realm_Hediff;
+            if (essenceRealm != null)
+            {
+                if (amount > essenceRealm.maxProgress)
+                {
+                    essenceRealm.progress = essenceRealm.maxProgress;
+                }else
+                {
+                    essenceRealm.progress += amount;
+                }
+
+            }else if (bodyRealm != null)
+            {
+                if (amount > bodyRealm.maxProgress)
+                {
+                    bodyRealm.progress = bodyRealm.maxProgress;
+                }
+                else
+                {
+                    bodyRealm.progress += amount;
+                }
+            }
+            convertedQi = 0f;
+        }
         private void RollDivineBreath()
         {
+            //10% chance to drop divine breath when defeated.
 
         }
         public override void PostAdd(DamageInfo? dinfo)
         {
             base.PostAdd(dinfo);
+            qiPool = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
+            cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
             qiOffset = AscensionUtilities.UpdateTribulationQiOffset(this);
             strengthOffset = AscensionUtilities.UpdateTribulationStrengthOffset(this);
             speedOffset = AscensionUtilities.UpdateTribulationSpeedOffset(this);
             Qi = qiOffset * AscensionUtilities.UpdateQiMax(qiPool);
-            Strength = strengthOffset * AscensionUtilities.UpdateQiRecoveryAmount(qiPool);
+            Strength = strengthOffset * (Qi * 0.05f) * (AscensionUtilities.UpdateQiRecoverySpeed(qiPool)+1);
             Speed = speedOffset * AscensionUtilities.UpdateCultivationSpeed(cultivatorHediff);
+            if (PawnUtility.ShouldSendNotificationAbout(pawn))
+            {
+                Find.LetterStack.ReceiveLetter("AS_HTLetter".Translate(), "AS_HTLetterDesc".Translate(pawn.NameFullColored.Named("PAWN")), AscensionDefOf.AS_HeavenlyTribulationMessage, pawn);
+            }
         }
         private int ResetStrikeTicks()
         {

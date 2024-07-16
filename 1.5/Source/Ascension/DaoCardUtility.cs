@@ -184,37 +184,6 @@ namespace Ascension
             return curY;//so we know what y the next one is.
         }
 
-        private static string TranslatedRecoverySpeed(float recoverySpeed)
-        {
-            string translatedText = "AS_NoQiRecovery".Translate();
-            if (qiPoolHediff.qiRecoverySpeed < 1)
-            {
-                translatedText = "AS_QiPoolBarRecoveryHours".Translate(((2500 / qiPoolHediff.qiRecoverySpeed) / 2500).ToString("0.#").Named("QIRECOVERYSPEED"));
-                //hours logic
-            }
-            else if (2500 / qiPoolHediff.qiRecoverySpeed == 2500)//2500 is hour
-            {
-                translatedText = "AS_QiPoolBarRecoveryHour".Translate();
-                //hour logic
-            }
-            else if (2500 / qiPoolHediff.qiRecoverySpeed < 2500 && 2500 / qiPoolHediff.qiRecoverySpeed > 41.6)
-            {
-                translatedText = "AS_QiPoolBarRecoveryMinutes".Translate(((2500 / qiPoolHediff.qiRecoverySpeed) / 41.6).ToString("0.#").Named("QIRECOVERYSPEED"));
-                //minutes
-            }
-            else if (2500 / qiPoolHediff.qiRecoverySpeed == 41.6)
-            {
-                translatedText = "AS_QiPoolBarRecoveryMinute".Translate();
-                //minute logic
-            }
-            else if (2500 / qiPoolHediff.qiRecoverySpeed < 41.6)//less than a min
-            {
-                translatedText = "AS_QiPoolBarRecoverySeconds".Translate(((2500 / qiPoolHediff.qiRecoverySpeed) / 0.69f).ToString("0.#").Named("QIRECOVERYSPEED"));
-                //seconds logic
-            }
-            return translatedText;
-        }
-
         private static void DrawPawnQi(Rect rect)
         {
             float labelWidth = rect.width / 2f - 17f;
@@ -230,7 +199,7 @@ namespace Ascension
                 string qiMaxText = qiMax.ToString("#");
                 string qiRecAmountText = qiRecAmount.ToString("#");
                 Widgets.DrawHighlight(barRect);
-                TooltipHandler.TipRegion(barRect, "AS_QiPoolTooltip".Translate(qiAmountText.Named("CURRENTQI"), qiMaxText.Named("MAXQI"), qiRecAmountText.Named("RECOVERYAMOUNT"), TranslatedRecoverySpeed(qiRecSpeed).Named("TRANSLATEDRECOVERYSPEED")));
+                TooltipHandler.TipRegion(barRect, "AS_QiPoolTooltip".Translate(qiAmountText.Named("CURRENTQI"), qiMaxText.Named("MAXQI"), qiRecAmountText.Named("RECOVERYAMOUNT"), AscensionUtilities.TranslateSpeedHour(qiRecSpeed).Named("TRANSLATEDRECOVERYSPEED")));
             }
 
             float qiRatio = qiPoolHediff.amount / qiMax;
@@ -241,7 +210,7 @@ namespace Ascension
             {
                 if (qiRecSpeed != 0)
                 {
-                    qiBarText += "AS_QiPoolBarRecovery".Translate(qiRecAmount.ToString().Named("QIRECOVERYAMOUNT"), TranslatedRecoverySpeed(qiRecSpeed).Named("TRANSLATEDRECOVERYSPEED"));
+                    qiBarText += "AS_QiPoolBarRecovery".Translate(qiRecAmount.ToString().Named("QIRECOVERYAMOUNT"), AscensionUtilities.TranslateSpeedHour(qiRecSpeed).Named("TRANSLATEDRECOVERYSPEED"));
                 }
             }
             Widgets.Label(barRect, qiBarText);
@@ -558,7 +527,7 @@ namespace Ascension
             rect.height = 35f;
             float speedElementBonus = elementTile / 100f;
             float speed = AscensionUtilities.UpdateQiRecoverySpeed(qiPoolHediff);
-            Widgets.Label(rect, "AS_QiRecoverySpeedFactors".Translate(qiRecSpeedBase.Named("BASE"), qiRecSpeedOffset.Named("OFFSET"), speedElementBonus.ToString("0.#").Named("ELEMENTTILE"), elementText.Translate().Named("ELEMENT"), speed.ToString("0.#").Named("SPEED"), TranslatedRecoverySpeed(qiRecSpeed).Named("TRANSLATEDRECOVERYSPEED")));
+            Widgets.Label(rect, "AS_QiRecoverySpeedFactors".Translate(qiRecSpeedBase.Named("BASE"), qiRecSpeedOffset.Named("OFFSET"), speedElementBonus.ToString("0.#").Named("ELEMENTTILE"), elementText.Translate().Named("ELEMENT"), speed.ToString("0.#").Named("SPEED"), AscensionUtilities.TranslateSpeedHour(qiRecSpeed).Named("TRANSLATEDRECOVERYSPEED")));
             AddHighlightAndTooltip(rect, "AS_QiRecoverySpeedFactorsDesc", Color.white);
         }
 
