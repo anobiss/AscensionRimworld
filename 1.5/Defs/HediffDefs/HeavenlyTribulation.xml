@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <HediffDef>
+    <hediffClass>Ascension.HeavenlyTribulation_Hediff</hediffClass>
+    <defName>AS_HeavenlyTribulation</defName>
+    <label>heavenly tribulation</label>
+    <description>This being is undergoing Heavenly Tribulation. Lightning will strike the cultivator (frequency determined by Speed) draining their Qi (amount determined by Strength) until the tribulation is defeated by using up all its Qi. If a cultivator cant afford the Qi amount drained by the tribulation before the tribulation is defeated, they will be struck by normal damaging lightning at 1/4th the strike cost(1/4th of its Strength) until the tribulation is over. Tribulations have a 10% chance to drop Heaven's Breath when they are defeated (if the cultivator doesn't die).</description>
+	<defaultLabelColor>(1.0, 1.0, 1.0)</defaultLabelColor>
+    <isBad>false</isBad>
+  </HediffDef>
+</Defs>

@@ -50,6 +50,8 @@
   <AS_CSEssenceRealm>Essence</AS_CSEssenceRealm>
   <AS_CSBodyRealm>Body</AS_CSBodyRealm>
   
+  <AS_HeavenlyTribulationStats> Stats are determined when the tribulation is created based on the following factors: Base of {QIOFFSET} * Max Qi = Qi: {QI}, Base of {STRENGTHOFFSET} * Qi Recovery Amount =Strength: {STRENGTH}, Base of {SPEEDOFFSET} * Cultivation Speed = Speed: 1 hour divided by {SPEED} = {TRANSLATEDSPEED}</AS_HeavenlyTribulationStats>
+  
   <AS_CurrentElement>Current Element - {ELEMENT}: {AMOUNT} </AS_CurrentElement>
 
     <!-- element names -->

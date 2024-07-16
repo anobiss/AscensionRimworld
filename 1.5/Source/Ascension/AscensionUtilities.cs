@@ -1,16 +1,7 @@
-﻿using HarmonyLib;
-using RimWorld;
+﻿using RimWorld;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 using Verse;
-using Verse.AI;
-using static HarmonyLib.Code;
-using Random = System.Random;
 
 namespace Ascension
 {
@@ -58,6 +49,48 @@ namespace Ascension
         public static readonly float[] spiritPillCostRates = {77000f, 100000f, 120000f, 200000f, 1000000f, 12000000f };//how much qi each tier costs	Poor,Normal,Good,Excellent,Masterwork,Legendary
 
         //updateqirecoveryamount
+
+        public static float UpdateTribulationQiOffset(HeavenlyTribulation_Hediff tribulationHediff)
+        {
+            float offset = 1f;
+            HediffComp_TribulationOffset offsetComp = tribulationHediff.TryGetComp<HediffComp_TribulationOffset>();
+            if (tribulationHediff != null)
+            {
+                if (offsetComp != null && offsetComp.Props.qiOffset > 0f)
+                {
+                    offset += offsetComp.Props.qiOffset;
+                }
+            }
+            return offset;
+        }
+
+        public static float UpdateTribulationStrengthOffset(HeavenlyTribulation_Hediff tribulationHediff)
+        {
+            float offset = 1f;
+            HediffComp_TribulationOffset offsetComp = tribulationHediff.TryGetComp<HediffComp_TribulationOffset>();
+            if (tribulationHediff != null)
+            {
+                if (offsetComp != null && offsetComp.Props.qiOffset > 0f)
+                {
+                    offset += offsetComp.Props.strengthOffset;
+                }
+            }
+            return offset;
+        }
+
+        public static float UpdateTribulationSpeedOffset(HeavenlyTribulation_Hediff tribulationHediff)
+        {
+            float offset = 1f;
+            HediffComp_TribulationOffset offsetComp = tribulationHediff.TryGetComp<HediffComp_TribulationOffset>();
+            if (tribulationHediff != null)
+            {
+                if (offsetComp != null && offsetComp.Props.qiOffset > 0f)
+                {
+                    offset += offsetComp.Props.speedOffset;
+                }
+            }
+            return offset;
+        }
 
         public static float UpdateBreakthroughChanceBase(Cultivator_Hediff cultivatorHediff)
         {
