@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  <KeyBindingCategoryDef>
+    <defName>AscensionKeyBind</defName>
+    <label>Ascension</label>
+    <description>Ascension keybinds like toggles for displaying gather qi or element emit values on the map.</description>
+    <isGameUniversal>true</isGameUniversal>
+    <checkForConflicts>
+      <li>Development</li>
+      <li>GameMapCamera</li>
+      <li>SelectionMisc</li>
+      <li>MainTabs</li>
+    </checkForConflicts>
+  </KeyBindingCategoryDef>
+</Defs>

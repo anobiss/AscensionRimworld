@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  
+ <!-- Ascension Keybinds -->
+
+  <KeyBindingDef Name="AscensionKeyBinding" Abstract="true">
+    <category>AscensionKeyBind</category>
+  </KeyBindingDef>
+
+  <KeyBindingDef ParentName="AscensionKeyBinding">
+    <defName>ToggleQiDisplay</defName>
+    <label>toggle qi display</label>
+    <defaultKeyCodeA>7</defaultKeyCodeA>
+  </KeyBindingDef>
+  
+  <KeyBindingDef ParentName="AscensionKeyBinding">
+    <defName>ToggleElementDisplay</defName>
+    <label>toggle element display</label>
+    <defaultKeyCodeA>8</defaultKeyCodeA>
+  </KeyBindingDef>
+
+</Defs>

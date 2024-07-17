@@ -50,14 +50,14 @@ namespace Ascension
                 if (tickCount < ticks)
                 {
                     tickCount++;
-                    Log.Message(toil.actor.Name + " tickCount ticks is " + tickCount.ToString("#"));
+                    //Log.Message(toil.actor.Name + " tickCount ticks is " + tickCount.ToString("#"));
                     Cultivator_Hediff cultivatorHediff = toil.actor.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
                     if (cultivatorHediff != null)
                     {
                         if (cultivatioJob == AscensionDefOf.AS_QiGatheringJob)
                         {
                             cultivatorHediff.qiGatheringJobProg += 1; // we add to it incase they dont finish multiple jobs
-                            Log.Message(toil.actor.Name + " prog is " + cultivatorHediff.qiGatheringJobProg.ToString("#"));
+                            //Log.Message(toil.actor.Name + " prog is " + cultivatorHediff.qiGatheringJobProg.ToString("#"));
                         }
                         if (cultivatioJob == AscensionDefOf.AS_RefineQiJob)
                         {
@@ -81,14 +81,13 @@ namespace Ascension
                         }
                     }else
                     {
-                        Log.Message(toil.actor.Name + " cultivator hediff null");
+                        //Log.Message(toil.actor.Name + " cultivator hediff null");
                     }
                 }
 
             };
             return toil;
         }
-
         public static Toil CalculateDuration(int baseDurationTicks, Toil waitToil, JobDef cultivationJob)
         {
             Toil calculateDurationToil = new Toil();
@@ -103,40 +102,34 @@ namespace Ascension
 
                     if (cultivationJob == qiGatherDef && cultivatorHediff.qiGatheringJobProg > 0)
                     {
-                        Log.Message(calculateDurationToil.actor.Name + " continueing job progress " + cultivatorHediff.qiGatheringJobProg);
-                        Log.Message(calculateDurationToil.actor.Name + "precalc ticks: " + calculatedDurationTicks);
+                        //Log.Message(calculateDurationToil.actor.Name + " continueing job progress " + cultivatorHediff.qiGatheringJobProg);
+                        //Log.Message(calculateDurationToil.actor.Name + "precalc ticks: " + calculatedDurationTicks);
                         calculatedDurationTicks -= cultivatorHediff.qiGatheringJobProg;
-                        Log.Message(calculateDurationToil.actor.Name + "postcalc ticks: " + calculatedDurationTicks);
-                        Log.Message(calculateDurationToil.actor.Name + " qiGatheringJobProg job progress " + cultivatorHediff.qiGatheringJobProg);
+                        //Log.Message(calculateDurationToil.actor.Name + "postcalc ticks: " + calculatedDurationTicks);
+                        //Log.Message(calculateDurationToil.actor.Name + " qiGatheringJobProg job progress " + cultivatorHediff.qiGatheringJobProg);
 
                     }
                     if (cultivationJob == qiRefineDef && cultivatorHediff.refineQiJobProg > 0)
                     {
-                        Log.Message(calculateDurationToil.actor.Name + " continueing job progress " + cultivatorHediff.refineQiJobProg);
                         calculatedDurationTicks -= cultivatorHediff.refineQiJobProg;
                     }
                     if (cultivationJob == exerciseDef && cultivatorHediff.exerciseJobProg > 0)
                     {
-                        Log.Message(calculateDurationToil.actor.Name + " continueing job progress " + cultivatorHediff.exerciseJobProg);
                         calculatedDurationTicks -= cultivatorHediff.exerciseJobProg;
                     }
                     if (cultivationJob == icRefineDef && cultivatorHediff.refineICJobProg > 0)
                     {
-                        Log.Message(calculateDurationToil.actor.Name + " continueing job progress " + cultivatorHediff.refineICJobProg);
                         calculatedDurationTicks -= cultivatorHediff.refineICJobProg;
                     }
                     if (cultivationJob == bBreakDef && cultivatorHediff.bodyBreakthrouchJobProg > 0)
                     {
-                        Log.Message(calculateDurationToil.actor.Name + " continueing job progress " + cultivatorHediff.bodyBreakthrouchJobProg);
                         calculatedDurationTicks -= cultivatorHediff.bodyBreakthrouchJobProg;
                     }
                     if (cultivationJob == eBreakDef && cultivatorHediff.essenceBreakthrouchJobProg > 0)
                     {
-                        Log.Message(calculateDurationToil.actor.Name + " continueing job progress " + cultivatorHediff.essenceBreakthrouchJobProg);
                         calculatedDurationTicks -= cultivatorHediff.essenceBreakthrouchJobProg;
                     }
                 }
-
 
                 waitToil.defaultDuration = calculatedDurationTicks;
             };

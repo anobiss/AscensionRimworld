@@ -7,6 +7,9 @@ namespace Ascension
     [DefOf]
     public static class AscensionDefOf
     {
+        public static KeyBindingDef ToggleQiDisplay;
+        public static KeyBindingDef ToggleElementDisplay;
+
         public static HediffDef AS_GCBreakthroughHediff;
 
         public static IncidentDef AS_SpiritTreeConversion;

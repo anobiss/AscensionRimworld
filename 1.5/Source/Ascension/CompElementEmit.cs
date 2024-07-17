@@ -82,9 +82,12 @@ namespace Ascension
         public override void PreAbsorbStack(Thing otherStack, int count)
         {
             base.PreAbsorbStack(otherStack, count);
-            int addedElementAmount = Props.amount * otherStack.stackCount;
-            qiGatherMapComp.AddElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, addedElementAmount, GetPropsElement(element));
-            amount += addedElementAmount;
+            if (otherStack != null && qiGatherMapComp != null)
+            {
+                int addedElementAmount = Props.amount * otherStack.stackCount;
+                qiGatherMapComp.AddElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, addedElementAmount, GetPropsElement(element));
+                amount += addedElementAmount;
+            }
         }
 
         public override void PostSplitOff(Thing piece)
