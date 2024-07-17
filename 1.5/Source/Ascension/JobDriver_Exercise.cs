@@ -35,7 +35,7 @@ namespace Ascension
 
             Toil waitToil = Toils_Cultivation.Wait(BaseDurationTicks, AscensionDefOf.AS_ExerciseJob).WithProgressBarToilDelay(TargetIndex.A);
 
-            Toil calculateDurationToil = Toils_Cultivation.CalculateDuration(BaseDurationTicks, waitToil);
+            Toil calculateDurationToil = Toils_Cultivation.CalculateDuration(BaseDurationTicks, waitToil, AscensionDefOf.AS_ExerciseJob);
             yield return calculateDurationToil;
 
             yield return waitToil;

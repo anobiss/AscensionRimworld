@@ -29,7 +29,7 @@ namespace Ascension
 
             Toil waitToil = Toils_Cultivation.Wait(BaseDurationTicks, AscensionDefOf.AS_RefineQiCauldronJob).WithProgressBarToilDelay(TargetIndex.A);
 
-            Toil calculateDurationToil = Toils_Cultivation.CalculateDuration(BaseDurationTicks, waitToil);
+            Toil calculateDurationToil = Toils_Cultivation.CalculateDuration(BaseDurationTicks, waitToil, AscensionDefOf.AS_RefineQiCauldronJob);
             yield return calculateDurationToil;
 
             yield return waitToil;

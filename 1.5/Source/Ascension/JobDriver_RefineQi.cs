@@ -30,7 +30,7 @@ namespace Ascension
             Toil waitToil = Toils_Cultivation.Wait(BaseDurationTicks, AscensionDefOf.AS_RefineQiJob).WithProgressBarToilDelay(TargetIndex.A);
             //when wait Toil fails we want to save progress for future attempts and reset saved progress when we the Toil sucseeds/ is not inturupted
 
-            Toil calculateDurationToil = Toils_Cultivation.CalculateDuration(BaseDurationTicks, waitToil);
+            Toil calculateDurationToil = Toils_Cultivation.CalculateDuration(BaseDurationTicks, waitToil, AscensionDefOf.AS_RefineQiJob);
             yield return calculateDurationToil;
 
             yield return waitToil;

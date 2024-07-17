@@ -40,7 +40,7 @@ namespace Ascension
                 yield return Toils_Goto.GotoCell(TargetIndex.B, PathEndMode.OnCell);
 
                 Toil cWaitToil = new Toil();
-                Toil calculateDurationToil = Toils_Cultivation.CalculateDuration(BaseDurationTicks, cWaitToil);
+                Toil calculateDurationToil = Toils_Cultivation.CalculateDuration(BaseDurationTicks, cWaitToil, AscensionDefOf.AS_GoldenCoreBreakthrough);
                 yield return calculateDurationToil;
 
                 cWaitToil.initAction = () =>
