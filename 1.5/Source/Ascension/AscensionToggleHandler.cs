@@ -14,21 +14,22 @@ namespace Ascension
 
         public bool Active => active;
 
-        public void GatherQiOnGUI()
-        {
-            if (KeyBindingDefOf.ToggleScreenshotMode.KeyDownEvent)
-            {
-                active = !active;
-                Event.current.Use();
-            }
-        }
-        public void ElementEmitOnGUI()
-        {
-            if (KeyBindingDefOf.ToggleScreenshotMode.KeyDownEvent)
-            {
-                active = !active;
-                Event.current.Use();
-            }
-        }
+        //public static bool GatherQiOnGUI()
+        //{
+        //    if (AscensionDefOf.ToggleQiDisplay.KeyDownEvent)
+        //    {
+        //        active = !active;
+        //        Event.current.Use();
+        //    }
+        //    return false;
+        //}
+        //public static bool ElementEmitOnGUI()
+        //{
+        //    if (KeyBindingDefOf.ToggleElementDisplay.KeyDownEvent)
+        //    {
+        //        active = !active;
+        //        Event.current.Use();
+        //    }
+        //}
     }
 }

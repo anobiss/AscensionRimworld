@@ -90,7 +90,7 @@ namespace Ascension
                             qiPool = HediffMaker.MakeHediff(AscensionDefOf.QiPool, pawn) as QiPool_Hediff;
 
                             //generate randon cauldron from 0-1200 at the start, 
-                            cultivatorHediff.innerCauldronQi = rnd.Next(1, 1200);
+                            cultivatorHediff.innerCauldronQi = rnd.Next(1, Math.Max(1, 1200));//use math max in all randoms to prevent exceptions
 
                             int randRealmStage = rnd.Next(1, 4);
                             //if they failed to get psuedo immortality roll for random cultivation realms.
@@ -102,8 +102,8 @@ namespace Ascension
                                 if (randRealmStage >= 3)
                                 {
                                     //we can use int rng for this because the setting number cant go to high.
-                                    cultivatorHediff.goldenCoreScore = rnd.Next(1, maxGoldenCore);
-                                    cultivatorHediff.innerCauldronQi = rnd.Next(1, maxAnimaC);
+                                    cultivatorHediff.goldenCoreScore = rnd.Next(1, Math.Max(1, maxGoldenCore));
+                                    cultivatorHediff.innerCauldronQi = rnd.Next(1, Math.Max(1, maxAnimaC));
                                 }
                             }
                             if (randC <= chancePC)
@@ -112,8 +112,8 @@ namespace Ascension
                                 randRealmStage = rnd.Next(3, 6);
                                 RealmDef = AscensionDefOf.EssenceRealm;
 
-                                cultivatorHediff.goldenCoreScore = rnd.Next(20000, maxGoldenCore*2);
-                                cultivatorHediff.innerCauldronQi = rnd.Next(1, maxAnimaC*2);
+                                cultivatorHediff.goldenCoreScore = rnd.Next(maxGoldenCore, Math.Max(maxGoldenCore, maxGoldenCore * 2));
+                                cultivatorHediff.innerCauldronQi = rnd.Next(1, Math.Max(1, maxAnimaC*2));
                             }
                             else
                             {
@@ -125,8 +125,8 @@ namespace Ascension
                             //higher random golden core score if they are powerful cultivatior
                             if (RealmDef == AscensionDefOf.EssenceRealm && randRealmStage >= 3)
                             {
-                                cultivatorHediff.innerCauldronQi = rnd.Next(1, maxAnimaC);
-                                cultivatorHediff.goldenCoreScore = rnd.Next(1, maxGoldenCore);
+                                cultivatorHediff.innerCauldronQi = rnd.Next(1, Math.Max(1, maxAnimaC));
+                                cultivatorHediff.goldenCoreScore = rnd.Next(1, Math.Max(1, maxGoldenCore));
                             }
 
 
@@ -135,8 +135,8 @@ namespace Ascension
                             if (randpi <= chancePI)
                             {
                                 realmHediff = HediffMaker.MakeHediff(AscensionDefOf.EssenceRealm, pawn) as Realm_Hediff;
-                                cultivatorHediff.goldenCoreScore = rnd.Next(maxGoldenCore, maxGoldenCore*4);
-                                cultivatorHediff.innerCauldronQi = rnd.Next(maxAnimaC, maxAnimaC*4);
+                                cultivatorHediff.goldenCoreScore = rnd.Next(maxGoldenCore, Math.Max(maxGoldenCore, maxGoldenCore * 4));
+                                cultivatorHediff.innerCauldronQi = rnd.Next(maxAnimaC, Math.Max(maxAnimaC, maxAnimaC * 4));
                                 randpi = Rand.Range(0, 1f);
                                 //0.1f makes it a 10% chance for a high level
                                 if (randpi <= 0.1f)
