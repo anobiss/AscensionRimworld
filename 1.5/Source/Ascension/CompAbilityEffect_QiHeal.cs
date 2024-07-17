@@ -24,6 +24,7 @@ namespace Ascension
             AscensionUtilities.PreHeal(pawn);
             HealthUtility.FixWorstHealthCondition(pawn);
             FleckMaker.AttachedOverlay(pawn, AscensionDefOf.FlashQi, Vector3.zero, 1.5f, -1f);
+            MoteMaker.MakeAttachedOverlay(pawn, AscensionDefOf.Mote_QiMistA, Vector3.zero, 1.5f, -1f);
         }
         public override bool Valid(LocalTargetInfo target, bool throwMessages = false)
         {

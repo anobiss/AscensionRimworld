@@ -17,6 +17,7 @@ namespace Ascension
         //does this part after time calculations not before
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
+
             if (job.GetTarget(SpotInd) != pawn)
             {
                 return pawn.MapHeld.reservationManager.Reserve(pawn, job, job.GetTarget(SpotInd), 1, -1, null, errorOnFailed);
@@ -31,7 +32,7 @@ namespace Ascension
         {
             yield return Toils_Goto.GotoCell(TargetIndex.B, PathEndMode.OnCell);
 
-            Toil waitToil = Toils_General.Wait(BaseDurationTicks).WithProgressBarToilDelay(TargetIndex.A);
+            Toil waitToil = Toils_Cultivation.Wait(BaseDurationTicks, AscensionDefOf.AS_BreakthroughEssence).WithProgressBarToilDelay(TargetIndex.A);
 
             Toil calculateDurationToil = Toils_Cultivation.CalculateDuration(BaseDurationTicks, waitToil);
             yield return calculateDurationToil;
@@ -45,6 +46,7 @@ namespace Ascension
             Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
             if (cultivatorHediff != null)
             {
+                cultivatorHediff.essenceBreakthrouchJobProg = 0;
                 float breakthroughChance = AscensionUtilities.UpdateBreakthroughChance(cultivatorHediff);
                 if (Rand.Value < breakthroughChance)
                 {

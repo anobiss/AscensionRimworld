@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
+    <!--  Torches  -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[@Name="TorchBase"]</xpath>
+    <order>Append</order>
+    <value>
+	<comps>
+	  <li Class="Ascension.CompProperties_TorchFireEmit">
+		<range>2</range>
+        <amount>1</amount>
+      </li>
+    </comps>
+    </value>
+  </Operation>
+
     <!--  Trees  -->
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[@Name="TreeBase"]</xpath>

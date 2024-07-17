@@ -11,6 +11,10 @@ namespace Ascension
 
         public static IncidentDef AS_SpiritTreeConversion;
 
+        public static EffecterDef QiMist;
+        public static ThingDef Mote_QiMistA;
+        public static ThingDef Mote_QiMistB;
+
         //misc stuffs
         public static HediffDef QiPool;
         public static HediffDef AS_SoulMend;

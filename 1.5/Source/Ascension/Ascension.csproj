@@ -93,9 +93,11 @@
     <Compile Include="CompProperties_ElementEmit.cs" />
     <Compile Include="CompProperties_GatherQi.cs" />
     <Compile Include="CompProperties_GoldenPill.cs" />
+    <Compile Include="CompProperties_TorchFireEmit.cs" />
     <Compile Include="CompProperties_UseEffect_AbilityScroll.cs" />
     <Compile Include="CompProperties_UseEffect_Absorb_SpiritSword.cs" />
     <Compile Include="CompSpiritPill.cs" />
+    <Compile Include="CompTorchFireEmit.cs" />
     <Compile Include="CompUseEffect_AbilityScroll.cs" />
     <Compile Include="CompUseEffect_Absorb_SpiritSword.cs" />
     <Compile Include="CultivationJobUtility.cs" />

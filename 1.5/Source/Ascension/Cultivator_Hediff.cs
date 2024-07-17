@@ -32,6 +32,15 @@ namespace Ascension
         public float innerCauldronQi = 0;
 
 
+        //we only minus the ticks by these to only really give back the progress they put in
+        public int qiGatheringJobProg = 0; //0.99 is 99% done
+        public int refineQiJobProg = 0;
+        public int refineICJobProg = 0;
+        public int exerciseJobProg = 0;
+        public int bodyBreakthrouchJobProg = 0;
+        public int essenceBreakthrouchJobProg = 0;
+
+
         public ElementEmitMapComponent.Element element = ElementEmitMapComponent.Element.None;
 
         public override void PostMake()
@@ -78,6 +87,12 @@ namespace Ascension
         }
         public override void ExposeData()
         {
+            Scribe_Values.Look(ref qiGatheringJobProg, "qiGatheringJobProg");
+            Scribe_Values.Look(ref exerciseJobProg, "exerciseJobProg");
+            Scribe_Values.Look(ref bodyBreakthrouchJobProg, "bodyBreakthrouchJobProg");
+            Scribe_Values.Look(ref essenceBreakthrouchJobProg, "essenceBreakthrouchJobProg");
+            Scribe_Values.Look(ref refineQiJobProg, "refineQiJobProg");
+            Scribe_Values.Look(ref refineICJobProg, "refineICJobProg");
             Scribe_Values.Look(ref goldenCoreScore, "goldenCoreScore");// this, the cultivators element and inner cauldron should be the only things we NEED to store permanently. 
             Scribe_Values.Look(ref element, "element");
             Scribe_Values.Look(ref startTime, "startTime");

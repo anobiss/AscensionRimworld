@@ -33,7 +33,7 @@ namespace Ascension
         {
             yield return Toils_Goto.GotoCell(TargetIndex.B, PathEndMode.OnCell);
 
-            Toil waitToil = Toils_General.Wait(BaseDurationTicks).WithProgressBarToilDelay(TargetIndex.A);
+            Toil waitToil = Toils_Cultivation.Wait(BaseDurationTicks, AscensionDefOf.AS_ExerciseJob).WithProgressBarToilDelay(TargetIndex.A);
 
             Toil calculateDurationToil = Toils_Cultivation.CalculateDuration(BaseDurationTicks, waitToil);
             yield return calculateDurationToil;
@@ -44,6 +44,11 @@ namespace Ascension
 
         private void Exercise()
         {
+            Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
+            if (cultivatorHediff != null)
+            {
+                cultivatorHediff.exerciseJobProg = 0;
+            }
             float maxBody = 10;//default always given amount
             Realm_Hediff bodyHediff = (Realm_Hediff)pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm);
             if (bodyHediff != null)

@@ -31,7 +31,7 @@ namespace Ascension
         {
             yield return Toils_Goto.GotoCell(TargetIndex.B, PathEndMode.OnCell);
 
-            Toil waitToil = Toils_General.Wait(BaseDurationTicks).WithProgressBarToilDelay(TargetIndex.A);
+            Toil waitToil = Toils_Cultivation.Wait(BaseDurationTicks, AscensionDefOf.AS_BreakthroughBody).WithProgressBarToilDelay(TargetIndex.A);
 
             Toil calculateDurationToil = Toils_Cultivation.CalculateDuration(BaseDurationTicks, waitToil);
             yield return calculateDurationToil;
@@ -44,6 +44,7 @@ namespace Ascension
             Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
             if (cultivatorHediff != null)
             {
+                cultivatorHediff.bodyBreakthrouchJobProg = 0;
                 float breakthroughChance = AscensionUtilities.UpdateBreakthroughChance(cultivatorHediff);
                 if (Rand.Value < breakthroughChance)
                 {

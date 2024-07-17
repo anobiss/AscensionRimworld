@@ -61,6 +61,10 @@
   <AS_Metal>Metal</AS_Metal>
   <AS_Earth>Earth</AS_Earth>
   <AS_None>None</AS_None>
+  
+  
+
+  
 
 
 
@@ -79,6 +83,8 @@
   <AS_ElementEmitAmountDesc>The amount of the element emitted that the object with Element Emit grants to its surroundings, this is multiplied by stack count for the actual element amount.</AS_ElementEmitAmountDesc>
   <AS_ElementEmitElement>Element</AS_ElementEmitElement>
   <AS_ElementEmitElementDesc>The element emitted with by the object.</AS_ElementEmitElementDesc>
+  
+      <AS_ElementEmitAmountTorchDesc>The amount of the element emitted that the object with Element Emit grants to its surroundings, this is always 0 if the torch is unlit.</AS_ElementEmitAmountTorchDesc>
   
   <AS_QiPoolBar>{QI} / {MAXQI} Qi</AS_QiPoolBar>
   

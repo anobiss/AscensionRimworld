@@ -33,7 +33,7 @@ namespace Ascension
         {
             yield return Toils_Goto.GotoCell(TargetIndex.B, PathEndMode.OnCell);
 
-            Toil waitToil = Toils_General.Wait(BaseDurationTicks).WithProgressBarToilDelay(TargetIndex.A);
+            Toil waitToil = Toils_Cultivation.Wait(BaseDurationTicks, AscensionDefOf.AS_QiGatheringJob).WithProgressBarToilDelay(TargetIndex.A);
 
             Toil calculateDurationToil = Toils_Cultivation.CalculateDuration(BaseDurationTicks, waitToil);
             yield return calculateDurationToil;
@@ -44,8 +44,11 @@ namespace Ascension
 
         private void QiGather()
         {
-            QiPool_Hediff qiPool = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
-
+            Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
+            if (cultivatorHediff != null)
+            {
+                cultivatorHediff.qiGatheringJobProg = 0;
+            }
             QiGatherMapComponent qiGatherMapComp = pawn.Map.GetComponent<QiGatherMapComponent>();
             int qiAmount = qiGatherMapComp.GetQiGatherAt(pawn.Position.x, pawn.Position.z)+1;
             AscensionUtilities.IncreaseQi(pawn, qiAmount, true);

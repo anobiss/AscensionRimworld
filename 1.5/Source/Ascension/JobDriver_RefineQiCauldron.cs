@@ -27,7 +27,7 @@ namespace Ascension
         {
             yield return Toils_Goto.GotoCell(TargetIndex.B, PathEndMode.OnCell);
 
-            Toil waitToil = Toils_General.Wait(BaseDurationTicks).WithProgressBarToilDelay(TargetIndex.A);
+            Toil waitToil = Toils_Cultivation.Wait(BaseDurationTicks, AscensionDefOf.AS_RefineQiCauldronJob).WithProgressBarToilDelay(TargetIndex.A);
 
             Toil calculateDurationToil = Toils_Cultivation.CalculateDuration(BaseDurationTicks, waitToil);
             yield return calculateDurationToil;
@@ -42,6 +42,7 @@ namespace Ascension
             Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
             if (qiPool != null && cultivatorHediff != null)
             {
+                cultivatorHediff.refineICJobProg = 0;
                 float qiCost = 2f + (qiPool.maxAmount / 50f);// 2% + 2
                 if (qiPool.amount >= qiCost)
                 {

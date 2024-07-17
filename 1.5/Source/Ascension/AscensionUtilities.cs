@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Verse;
 
 namespace Ascension
@@ -602,6 +603,7 @@ namespace Ascension
 
         public static void IncreaseQi(Pawn pawn, float amount, bool noExplosion = false)
         {
+            
             HediffSet hediffSet = pawn.health.hediffSet;
             if (!hediffSet.HasHediff(AscensionDefOf.QiPool))
             { //gives hediffs that r missing.
@@ -629,8 +631,8 @@ namespace Ascension
             }else
             {
                 qiHediff.amount = newQiAmount;
+                
             }
-
         }
 
         //used in tier progress method to make progress not go above 100
@@ -949,6 +951,8 @@ namespace Ascension
                     {
                         realmHediff.pawn.health.AddHediff(AscensionDefOf.AS_HeavenlyTribulation);
                     }
+                    FleckMaker.AttachedOverlay(realmHediff.pawn, AscensionDefOf.FlashQi, Vector3.zero, 1.5f, -1f);
+
                 }
             }
         }
