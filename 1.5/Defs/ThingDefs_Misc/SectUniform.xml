@@ -3,12 +3,12 @@
   <ThingDef ParentName="ApparelMakeableBase">
     <defName>AS_Apparel_SectUniform</defName>
     <label>sect uniform</label>
-    <description>A sect uniform used by cultivators. Provides 2x Cultivation Speed and 2x Qi Recovery Speed to cultivators.</description>
+    <description>A sect uniform used by cultivators. Provides 0.5-2x Cultivation Speed and 0.5-2x Qi Recovery Speed to cultivators depending on quality.</description>
     <graphicData>
       <texPath>Things/Pawn/Humanlike/Apparel/SectUniform/SectUniform</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <costStuffCount>80</costStuffCount>
+    <costStuffCount>70</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>

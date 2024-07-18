@@ -250,14 +250,17 @@ namespace Ascension
             float offset = 0f;
             if (pawn != null)
             {
-                if (pawn.apparel.WornApparel != null)
+                if (pawn.apparel != null)
                 {
-                    foreach (Apparel apparel in pawn.apparel.WornApparel)
+                    if (!pawn.apparel.WornApparel.NullOrEmpty())
                     {
-                        CompCultivationUniform offsetComp = apparel.TryGetComp<CompCultivationUniform>();
-                        if (offsetComp != null)
+                        foreach (Apparel apparel in pawn.apparel.WornApparel)
                         {
-                            offset += (offsetComp.Props.qiRecSpeedOffset * GetApparelQualityMultiplier(apparel));
+                            CompCultivationUniform offsetComp = apparel.TryGetComp<CompCultivationUniform>();
+                            if (offsetComp != null)
+                            {
+                                offset += (offsetComp.Props.qiRecSpeedOffset * GetApparelQualityMultiplier(apparel));
+                            }
                         }
                     }
                 }
@@ -269,14 +272,17 @@ namespace Ascension
             float offset = 0f;
             if (pawn != null)
             {
-                if (pawn.apparel.WornApparel != null)
+                if (pawn.apparel != null)
                 {
-                    foreach (Apparel apparel in pawn.apparel.WornApparel)
+                    if (!pawn.apparel.WornApparel.NullOrEmpty())
                     {
-                        CompCultivationUniform offsetComp = apparel.TryGetComp<CompCultivationUniform>();
-                        if (offsetComp != null)
+                        foreach (Apparel apparel in pawn.apparel.WornApparel)
                         {
-                            offset += (offsetComp.Props.cultSpeedOffset * GetApparelQualityMultiplier(apparel));
+                            CompCultivationUniform offsetComp = apparel.TryGetComp<CompCultivationUniform>();
+                            if (offsetComp != null)
+                            {
+                                offset += (offsetComp.Props.cultSpeedOffset * GetApparelQualityMultiplier(apparel));
+                            }
                         }
                     }
                 }

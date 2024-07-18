@@ -12,7 +12,7 @@ namespace Ascension
         //display bonuses
         public override string CompInspectStringExtra()
         {
-            return "AS_CultivationUniformInspect".Translate((Props.cultSpeedOffset * AscensionUtilities.GetApparelQualityMultiplier(parent as Apparel)).ToString().Named("CSO"), (Props.qiRecSpeedOffset * AscensionUtilities.GetApparelQualityMultiplier(parent as Apparel)).ToString().Named("QRSO"));
+            return "AS_CultivationUniformInspect".Translate((Props.cultSpeedOffset * AscensionUtilities.GetApparelQualityMultiplier(parent as Apparel)).ToString("0.#").Named("CSO"), (Props.qiRecSpeedOffset * AscensionUtilities.GetApparelQualityMultiplier(parent as Apparel)).ToString("0.#").Named("QRSO"));
         }
         public override IEnumerable<StatDrawEntry> SpecialDisplayStats()
         {
@@ -26,13 +26,13 @@ namespace Ascension
             }
             yield return new StatDrawEntry(
                 category: AscensionDefOf.CultivationUniform,
-                label: "AS_CultivationUniformCS".Translate(), valueString: "AS_CultivationUniformMultiplierSymbol".Translate((Props.cultSpeedOffset*AscensionUtilities.GetApparelQualityMultiplier(parent as Apparel)).Named("OFFSET")),
+                label: "AS_CultivationUniformCS".Translate(), valueString: "AS_CultivationUniformMultiplierSymbol".Translate((Props.cultSpeedOffset * AscensionUtilities.GetApparelQualityMultiplier(parent as Apparel)).ToString("0.#").Named("OFFSET")),
                 reportText: "AS_CultivationUniformCSDesc".Translate(),
                 displayPriorityWithinCategory: 200
             );
             yield return new StatDrawEntry(
                 category: AscensionDefOf.CultivationUniform,
-                label: "AS_CultivationUniformQRS".Translate(), valueString: "AS_CultivationUniformMultiplierSymbol".Translate((Props.qiRecSpeedOffset * AscensionUtilities.GetApparelQualityMultiplier(parent as Apparel)).Named("OFFSET")),
+                label: "AS_CultivationUniformQRS".Translate(), valueString: "AS_CultivationUniformMultiplierSymbol".Translate((Props.qiRecSpeedOffset * AscensionUtilities.GetApparelQualityMultiplier(parent as Apparel)).ToString("0.#").Named("OFFSET")),
                 reportText: "AS_CultivationUniformQRSDesc".Translate(),
                 displayPriorityWithinCategory: 200
             );
