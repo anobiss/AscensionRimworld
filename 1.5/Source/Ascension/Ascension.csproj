@@ -76,6 +76,7 @@
     <Compile Include="CompAwfulExplosive.cs" />
     <Compile Include="CompCultivationCauldron.cs" />
     <Compile Include="CompCultivationSpot.cs" />
+    <Compile Include="CompCultivationUniform.cs" />
     <Compile Include="CompElementEmit.cs" />
     <Compile Include="CompGatherQi.cs" />
     <Compile Include="CompConstantHeatPusher.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="CompProperties_ConstantHeatPusher.cs" />
     <Compile Include="CompProperties_CultivationCauldron.cs" />
     <Compile Include="CompProperties_CultivationSpot.cs" />
+    <Compile Include="CompProperties_CultivationUniform.cs" />
     <Compile Include="CompProperties_ElementEmit.cs" />
     <Compile Include="CompProperties_GatherQi.cs" />
     <Compile Include="CompProperties_GoldenPill.cs" />

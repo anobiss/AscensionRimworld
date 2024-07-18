@@ -10,6 +10,8 @@ namespace Ascension
         public static KeyBindingDef ToggleQiDisplay;
         public static KeyBindingDef ToggleElementDisplay;
 
+        public static ThingDef AS_Apparel_SectUniform;
+
         public static HediffDef AS_GCBreakthroughHediff;
 
         public static IncidentDef AS_SpiritTreeConversion;
@@ -57,6 +59,7 @@ namespace Ascension
         public static StatCategoryDef CultivationCauldron;
         public static StatCategoryDef SpiritPill;
         public static StatCategoryDef GoldenPill;
+        public static StatCategoryDef CultivationUniform;
 
         //realm hediffs
         public static HediffDef EssenceRealm;

@@ -16,6 +16,14 @@
   <AS_CultivationCauldronMaxQuality>Max Quality</AS_CultivationCauldronMaxQuality>
   <AS_CultivationCauldronMaxQualityDesc>The maximum quality of products made in this cauldron. Scales with Current Qi.</AS_CultivationCauldronMaxQualityDesc>
   
+    <!-- display for uniforms -->
+  <AS_CultivationUniformInspect>Cultivation Speed Offset: {CSO}x, Qi Recovery Speed Offset: {QRSO}x</AS_CultivationUniformInspect>
+  <AS_CultivationUniformCS>Cultivation Speed Offset</AS_CultivationUniformCS>
+  <AS_CultivationUniformCSDesc>The amount of Cultivation Speed granted to its wearer.</AS_CultivationUniformCSDesc>
+  <AS_CultivationUniformQRS>Qi Recovery Speed Offset</AS_CultivationUniformQRS>
+  <AS_CultivationUniformQRSDesc>The amount of Cultivation Speed granted to its wearer.</AS_CultivationUniformQRSDesc>
+  <AS_CultivationUniformMultiplierSymbol>{OFFSET}x</AS_CultivationUniformMultiplierSymbol>
+  
       <!-- display for spirit pill -->
   <AS_SpiritPillInspect>Qi Cost: {COST}, Multiplier: {OFFSET}x Max Qi and Qi Recovery</AS_SpiritPillInspect>
   <AS_SpiritPillQiCost>Qi Cost</AS_SpiritPillQiCost>

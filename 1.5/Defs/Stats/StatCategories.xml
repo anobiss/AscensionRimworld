@@ -28,7 +28,13 @@
   
   <StatCategoryDef>
     <defName>GoldenPill</defName>
-    <label>GoldenPill</label>
+    <label>Golden Pill</label>
+    <displayOrder>28</displayOrder>
+  </StatCategoryDef>
+  
+  <StatCategoryDef>
+    <defName>CultivationUniform</defName>
+    <label>Cultivation Uniform</label>
     <displayOrder>28</displayOrder>
   </StatCategoryDef>
 </Defs>

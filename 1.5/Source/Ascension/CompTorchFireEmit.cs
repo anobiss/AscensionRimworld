@@ -50,24 +50,27 @@ namespace Ascension
         private static readonly int tickRate = 700;
         public override void CompTick()
         {
-            ticks--;
-            if (ticks <= 0)
+            if (torchFuelComp != null)
             {
-                ticks = tickRate;
-                if (addedFire == false)
+                ticks--;
+                if (ticks <= 0)
                 {
-                    if (torchFuelComp.HasFuel)
+                    ticks = tickRate;
+                    if (addedFire == false)
                     {
-                        qiGatherMapComp.AddElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, amount, element);
-                        addedFire = true;
+                        if (torchFuelComp.HasFuel)
+                        {
+                            qiGatherMapComp.AddElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, amount, element);
+                            addedFire = true;
+                        }
                     }
-                }
-                else
-                {
-                    if (!torchFuelComp.HasFuel)
+                    else
                     {
-                        qiGatherMapComp.RemoveElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, amount, element);
-                        addedFire = false;
+                        if (!torchFuelComp.HasFuel)
+                        {
+                            qiGatherMapComp.RemoveElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, amount, element);
+                            addedFire = false;
+                        }
                     }
                 }
             }

@@ -136,7 +136,6 @@ namespace Ascension
         public static float UpdateBreakthroughChanceBase(Cultivator_Hediff cultivatorHediff)
         {
             float chanceBase = 0.05f;
-
             foreach (Hediff hediff in cultivatorHediff.pawn.health.hediffSet.hediffs)
             {
                 HediffComp_QiRecovery offsetComp = hediff.TryGetComp<HediffComp_QiRecovery>();
@@ -214,6 +213,79 @@ namespace Ascension
 
         }
 
+
+        public static float GetApparelQualityMultiplier(Apparel apparel)// 0.5f - 2f
+        {
+            float qualMult = 0.5f;//awful quality
+            QualityUtility.TryGetQuality(apparel, out QualityCategory qc);
+            if ((int)qc == 1)//poor
+            {
+                qualMult = 0.7f;
+            }
+            if ((int)qc == 2)//normal
+            {
+                qualMult = 1f;
+            }
+            if ((int)qc == 3)//good
+            {
+                qualMult = 1.3f;
+            }
+            if ((int)qc == 4)//Excellent
+            {
+                qualMult = 1.5f;
+            }
+            if ((int)qc == 5)//Masterwork
+            {
+                qualMult = 1.7f;
+            }
+            if ((int)qc == 6)//Legendary
+            {
+                qualMult = 2f;
+            }
+            return qualMult;
+        }
+
+        public static float UniformQiRecSpeedOffset(Pawn pawn)//the offset granted to various offsets from cultivation clothes
+        {
+            float offset = 0f;
+            if (pawn != null)
+            {
+                if (pawn.apparel.WornApparel != null)
+                {
+                    foreach (Apparel apparel in pawn.apparel.WornApparel)
+                    {
+                        CompCultivationUniform offsetComp = apparel.TryGetComp<CompCultivationUniform>();
+                        if (offsetComp != null)
+                        {
+                            offset += (offsetComp.Props.qiRecSpeedOffset * GetApparelQualityMultiplier(apparel));
+                        }
+                    }
+                }
+            }
+            return offset;
+        }
+        public static float UniformCultSpeedOffset(Pawn pawn)//the offset granted to various offsets from cultivation clothes
+        {
+            float offset = 0f;
+            if (pawn != null)
+            {
+                if (pawn.apparel.WornApparel != null)
+                {
+                    foreach (Apparel apparel in pawn.apparel.WornApparel)
+                    {
+                        CompCultivationUniform offsetComp = apparel.TryGetComp<CompCultivationUniform>();
+                        if (offsetComp != null)
+                        {
+                            offset += (offsetComp.Props.cultSpeedOffset * GetApparelQualityMultiplier(apparel));
+                        }
+                    }
+                }
+            }
+            return offset;
+        }
+
+
+
         public static float UpdateCultivationSpeedBase(Cultivator_Hediff cultivatorHediff)
         {
             //only qirecovery comp effect cultivation speed offset
@@ -238,6 +310,9 @@ namespace Ascension
             //only qirecovery comp effect cultivation speed offset
             float speedOffset = 1;
 
+            //always check for sect uniform and its quality.
+            speedOffset+=UniformCultSpeedOffset(cultivatorHediff.pawn);
+
             foreach (Hediff hediff in cultivatorHediff.pawn.health.hediffSet.hediffs)
             {
                 HediffComp_QiRecovery offsetComp = hediff.TryGetComp<HediffComp_QiRecovery>();
@@ -254,6 +329,7 @@ namespace Ascension
         }
         public static float UpdateCultivationSpeed(Cultivator_Hediff cultivatorHediff)//we do this before starting jobs to update the cultivation speed, we return a float to make sure we have cultivation speed after update, we also take in optional cords if they have a cultivation spot to walk to
         {
+
             float cultivationSpeed = 0;//if cult speed is 0 we know we messed something up. 
             QiGatherMapComponent qiGatherMapComp = cultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
             ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
@@ -425,6 +501,8 @@ namespace Ascension
         {
             Realm_Hediff essenceRealm = qiPool.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
             float offset = 1;
+            //adds apparel offsets
+            offset += UniformQiRecSpeedOffset(qiPool.pawn);
             if (essenceRealm != null)
             {
                 offset += passiveQiBaseSpeeds[RealmIndex(essenceRealm)];
