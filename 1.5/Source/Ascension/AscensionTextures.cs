@@ -11,6 +11,9 @@ namespace Ascension
     [StaticConstructorOnStartup]
     public static class AscensionTextures
     {
+        public static readonly Texture2D ToggleQi = ContentFinder<Texture2D>.Get("UI/Icons/ToggleQi", true);
+        public static readonly Texture2D ToggleElement = ContentFinder<Texture2D>.Get("UI/Icons/ToggleElement", true);
+
         public static readonly Texture2D UIBreakthrough = ContentFinder<Texture2D>.Get("UI/Abilities/Breakthrough", true);
 
         public static readonly Texture2D UIQiIcon = ContentFinder<Texture2D>.Get("UI/Icons/QiIcon", true);

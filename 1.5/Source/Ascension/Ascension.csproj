@@ -65,6 +65,7 @@
     <Compile Include="AscensionToggleHandler.cs" />
     <Compile Include="AscensionUtilities.cs" />
     <Compile Include="Ascension_Harmony.cs" />
+    <Compile Include="Ascension_PlaySettings_DoPlaySettingsGlobalControls_Patch.cs" />
     <Compile Include="Ascension_PostHarmony.cs" />
     <Compile Include="CompAbilityEffect_AbilityQiCost.cs" />
     <Compile Include="CompAbilityEffect_BodyMelee.cs" />

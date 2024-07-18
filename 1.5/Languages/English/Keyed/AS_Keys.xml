@@ -16,6 +16,11 @@
   <AS_CultivationCauldronMaxQuality>Max Quality</AS_CultivationCauldronMaxQuality>
   <AS_CultivationCauldronMaxQualityDesc>The maximum quality of products made in this cauldron. Scales with Current Qi.</AS_CultivationCauldronMaxQualityDesc>
   
+    <!-- display for qi and element playsettings -->
+  
+  <AS_ShowQiToggleButton>Toggle the Qi display.\n\nDisplay the Qi of the world as would be present where the cursor is pointing.</AS_ShowQiToggleButton>
+  <AS_ShowElementToggleButton>Toggle the Element display.\n\nDisplay the Element of the world as would be present where the cursor is pointing.</AS_ShowElementToggleButton>
+	
     <!-- display for uniforms -->
   <AS_CultivationUniformInspect>Cultivation Speed Offset: {CSO}x, Qi Recovery Speed Offset: {QRSO}x</AS_CultivationUniformInspect>
   <AS_CultivationUniformCS>Cultivation Speed Offset</AS_CultivationUniformCS>
