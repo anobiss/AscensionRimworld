@@ -16,15 +16,51 @@ namespace Ascension
         public CompProperties_CultivationSpot Props => (CompProperties_CultivationSpot)props;
         public int priority;
         public string realmType;
-        public string elementType;
+        public ElementEmitMapComponent.Element elementType;
+        public int jobType;
         //display current priority, realm and element type here
+
+        private static string TranslateJobType(int jobType)
+        {
+            string translatedJob = "AS_Any";
+
+            switch (jobType)
+            {
+                //0 is Any, 1 is exercise, 2 qi gathering, 3 is qi refining, 4 is body breaktrough, 5 is essence breakthrough, 6 is gc breakthrough, 7 is inner cauldron refinement
+                case 0:
+                    translatedJob = "AS_Any";
+                    break;
+                case 1:
+                    translatedJob = "AS_Exercise";
+                    break;
+                case 2:
+                    translatedJob = "AS_QiGathering";
+                    break;
+                case 3:
+                    translatedJob = "AS_RefineQi";
+                    break;
+                case 4:
+                    translatedJob = "AS_BBreakthrough";
+                    break;
+                case 5:
+                    translatedJob = "AS_EBreakthrough";
+                    break;
+                case 6:
+                    translatedJob = "AS_GoldenCoreBreakthrough";
+                    break;
+                case 7:
+                    translatedJob = "AS_InnerCJob";
+                    break;
+            }
+            return translatedJob;
+        }
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             if (!respawningAfterLoad)
             {
                 priority = Props.priority;
                 realmType = Props.realmType;
-                elementType = Props.elementType;
+                elementType = Props.elementType;//none is any
             }
             CultivationMapComponent cultivationMapComp = parent.MapHeld.GetComponent<CultivationMapComponent>();
             cultivationMapComp.CultivationSpots.Add(this);
@@ -52,26 +88,26 @@ namespace Ascension
             string elementText = "AS_Any";
             switch (elementType)
             {
-                case "Wood":
+                case ElementEmitMapComponent.Element.Wood:
                     elementText = "AS_Wood";
                     break;
-                case "Fire":
+                case ElementEmitMapComponent.Element.Fire:
                     elementText = "AS_Fire";
                     break;
-                case "Earth":
+                case ElementEmitMapComponent.Element.Earth:
                     elementText = "AS_Earth";
                     break;
-                case "Metal":
+                case ElementEmitMapComponent.Element.Metal:
                     elementText = "AS_Metal";
                     break;
-                case "Water":
+                case ElementEmitMapComponent.Element.Water:
                     elementText = "AS_Water";
                     break;
-                case "None":
-                    elementText = "AS_None";
+                case ElementEmitMapComponent.Element.None:
+                    elementText = "AS_Any";
                     break;
             }
-            return "AS_CultivationSpotInspect".Translate(priority.ToString().Named("PRIORITY"), realmTypeText.Translate().Named("REALM"), elementText.Translate().Named("ELEMENT"));
+            return "AS_CultivationSpotInspect".Translate(priority.ToString().Named("PRIORITY"), realmTypeText.Translate().Named("REALM"), elementText.Translate().Named("ELEMENT"), TranslateJobType(jobType).Translate().Named("JOBTRANSLATED"));
         }
 
         private void changePriority()
@@ -97,23 +133,55 @@ namespace Ascension
         {
             switch (elementType)
             {
-                case "Any":
-                    elementType = "Earth";
+                case ElementEmitMapComponent.Element.None:
+                    elementType = ElementEmitMapComponent.Element.Earth;
                     break;
-                case "Earth":
-                    elementType = "Metal";
+                case ElementEmitMapComponent.Element.Earth:
+                    elementType = ElementEmitMapComponent.Element.Metal;
                     break;
-                case "Metal":
-                    elementType = "Water";
+                case ElementEmitMapComponent.Element.Metal:
+                    elementType = ElementEmitMapComponent.Element.Water;
                     break;
-                case "Water":
-                    elementType = "Wood";
+                case ElementEmitMapComponent.Element.Water:
+                    elementType = ElementEmitMapComponent.Element.Wood;
                     break;
-                case "Wood":
-                    elementType = "Fire";
+                case ElementEmitMapComponent.Element.Wood:
+                    elementType = ElementEmitMapComponent.Element.Fire;
                     break;
-                case "Fire":
-                    elementType = "Any";
+                case ElementEmitMapComponent.Element.Fire:
+                    elementType = ElementEmitMapComponent.Element.None;
+                    break;
+            }
+        }
+
+        private void changeJobType()
+        {
+            switch (jobType)
+            {
+                //0 is Any, 1 is exercise, 2 qi gathering, 3 is qi refining, 4 is body breaktrough, 5 is essence breakthrough, 6 is gc breakthrough, 7 is inner cauldron refinement
+                case 0:
+                    jobType = 1;
+                    break;
+                case 1:
+                    jobType = 2;
+                    break;
+                case 2:
+                    jobType = 3;
+                    break;
+                case 3:
+                    jobType = 4;
+                    break;
+                case 4:
+                    jobType = 5;
+                    break;
+                case 5:
+                    jobType = 6;
+                    break;
+                case 6:
+                    jobType = 7;
+                    break;
+                case 7:
+                    jobType = 0;
                     break;
             }
         }
@@ -157,6 +225,19 @@ namespace Ascension
                 changeElementType();
             };
             yield return commandE;
+
+            Command_Action commandJ = new Command_Action()
+            {
+                defaultLabel = "AS_ChangeJob".Translate(),
+                defaultDesc = "AS_ChangeJobDesc".Translate(),
+                Order = 6f,
+                icon = AscensionTextures.ChangeRealm,
+            };
+            commandJ.action = delegate
+            {
+                changeJobType();
+            };
+            yield return commandJ;
         }
 
         public override void PostExposeData()
@@ -164,7 +245,7 @@ namespace Ascension
             base.PostExposeData();
             Scribe_Values.Look<int>(ref priority, "priority", Props.priority, false);
             Scribe_Values.Look<string>(ref realmType, "realmType", Props.realmType, false);
-            Scribe_Values.Look<string>(ref elementType, "elementType", Props.elementType, false);
+            Scribe_Values.Look<ElementEmitMapComponent.Element>(ref elementType, "elementType", Props.elementType, false);
         }
     }
 }

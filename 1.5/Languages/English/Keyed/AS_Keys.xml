@@ -8,7 +8,7 @@
 
 
     <!-- display for cauldrons -->
-  <AS_CultivationCauldronInspect>Base Qi: {BASEQI}, Current Qi: {QI} Max Quality: {QUALITY}</AS_CultivationCauldronInspect>
+  <AS_CultivationCauldronInspect>Base Qi: {BASEQI}\nCurrent Qi: {QI}\nMax Quality: {QUALITY}</AS_CultivationCauldronInspect>
   <AS_CultivationCauldronBaseQi>Base Qi</AS_CultivationCauldronBaseQi>
   <AS_CultivationCauldronBaseQiDesc>The base amount of qi the cauldron has on its own.</AS_CultivationCauldronBaseQiDesc>
   <AS_CultivationCauldronCurrentQi>Current Qi</AS_CultivationCauldronCurrentQi>
@@ -22,7 +22,7 @@
   <AS_ShowElementToggleButton>Toggle the Element display.\n\nDisplay the Element of the world as would be present where the cursor is pointing.</AS_ShowElementToggleButton>
 	
     <!-- display for uniforms -->
-  <AS_CultivationUniformInspect>Cultivation Speed Offset: {CSO}x, Qi Recovery Speed Offset: {QRSO}x</AS_CultivationUniformInspect>
+  <AS_CultivationUniformInspect>Cultivation Speed Offset: {CSO}x\nQi Recovery Speed Offset: {QRSO}x</AS_CultivationUniformInspect>
   <AS_CultivationUniformCS>Cultivation Speed Offset</AS_CultivationUniformCS>
   <AS_CultivationUniformCSDesc>The amount of Cultivation Speed granted to its wearer.</AS_CultivationUniformCSDesc>
   <AS_CultivationUniformQRS>Qi Recovery Speed Offset</AS_CultivationUniformQRS>
@@ -30,7 +30,7 @@
   <AS_CultivationUniformMultiplierSymbol>{OFFSET}x</AS_CultivationUniformMultiplierSymbol>
   
       <!-- display for spirit pill -->
-  <AS_SpiritPillInspect>Qi Cost: {COST}, Multiplier: {OFFSET}x Max Qi and Qi Recovery</AS_SpiritPillInspect>
+  <AS_SpiritPillInspect>Qi Cost: {COST}\nMultiplier: {OFFSET}x Max Qi and Qi Recovery</AS_SpiritPillInspect>
   <AS_SpiritPillQiCost>Qi Cost</AS_SpiritPillQiCost>
   <AS_SpiritPillQiCostDesc>The amount of Qi required to survive consumption.</AS_SpiritPillQiCostDesc>
   <AS_SpiritPillMultiplier>Multiplier</AS_SpiritPillMultiplier>
@@ -56,8 +56,12 @@
 
   <AS_ChangeElement>Change Element</AS_ChangeElement>
   <AS_ChangeElementDesc>Change the target element of the cultivation spot.</AS_ChangeElementDesc>
+  
+    <AS_ChangeJob>Change Job</AS_ChangeJob>
+  <AS_ChangeJobDesc>Change the specific cultivation job of the cultivation spot.</AS_ChangeJobDesc>
+  
 
-  <AS_CultivationSpotInspect>Priority: {PRIORITY}, Realm Type: {REALM}, Element Type: {ELEMENT}</AS_CultivationSpotInspect>
+  <AS_CultivationSpotInspect>Priority: {PRIORITY}\nRealm Type: {REALM}\nElement Type: {ELEMENT}\nJob Type: {JOBTRANSLATED}</AS_CultivationSpotInspect>
   
   <AS_Any>Any</AS_Any>
   <AS_CSEssenceRealm>Essence</AS_CSEssenceRealm>
@@ -236,6 +240,8 @@
   <AS_QiGathering>Qi Gathering</AS_QiGathering>
   <AS_QiGatheringDesc>Meditate for 3 hours divided by cultivation speed to gather natural qi from your surroundings. Generates 1 qi plus the amount of Gather Qi in the cultivators position.</AS_QiGatheringDesc>
   <AS_Breakthrough>Breakthrough</AS_Breakthrough>
+  <AS_BBreakthrough>Body Breakthrough</AS_BBreakthrough>
+  <AS_EBreakthrough>Essence Breakthrough</AS_EBreakthrough>
   <AS_GoldenCoreBreakthrough>Golden Core Breakthrough</AS_GoldenCoreBreakthrough>
   <AS_GoldenCoreBreakthroughDesc>Try to get as much Qi as possible before attempting. Meditate for 1 hour divided by cultivation speed for each Qi conversion of 100 qi during a Golden Core Breakthrough until less than 100 qi remains. The resulting golden core score is equal to the amount of qi converted. This breakthrough cannot fail, but golden core scores are permanent.</AS_GoldenCoreBreakthroughDesc>
   <AS_BreakthroughEssenceDesc>Meditate for 7 hours divided by cultivation speed to breakthrough to the next essence realm. Breakthrough Chance: {CHANCE}%</AS_BreakthroughEssenceDesc>

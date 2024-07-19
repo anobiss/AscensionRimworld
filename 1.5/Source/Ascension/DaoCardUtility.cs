@@ -14,8 +14,6 @@ namespace Ascension
     [StaticConstructorOnStartup]
     public static class DaoCardUtility
     {
-
-
         private static bool CanControl()
         {
             if (selectedPawn.Downed || selectedPawn.InMentalState)
@@ -38,7 +36,6 @@ namespace Ascension
         }
 
         private static float scrollViewHeight = 0f;
-
 
         private static bool onTechniqueTab = false;
 
@@ -218,7 +215,7 @@ namespace Ascension
             {
                 if (Widgets.ButtonText(gatherButtonRect, "AS_QiGathering".Translate()))
                 {
-                    Job job = JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn));
+                    Job job = JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn, AscensionDefOf.AS_QiGatheringJob));
                     SoundDefOf.Tick_Low.PlayOneShotOnCamera();
                     selectedPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
                 }
@@ -320,13 +317,13 @@ namespace Ascension
                 tooltipText = "AS_GoldenCoreBreakthroughDesc".Translate();
                 if (Widgets.ButtonText(barRect, "AS_GoldenCoreBreakthrough".Translate())) // normal breakthrough
                 {
-                    Job job = JobMaker.MakeJob(AscensionDefOf.AS_GoldenCoreBreakthrough, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn));
+                    Job job = JobMaker.MakeJob(AscensionDefOf.AS_GoldenCoreBreakthrough, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn, AscensionDefOf.AS_GoldenCoreBreakthrough));
                     selectedPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
                 }
             }
             else if (Widgets.ButtonText(barRect, "AS_Breakthrough".Translate())) // normal breakthrough
             {
-                Job job = JobMaker.MakeJob(realm.def == AscensionDefOf.EssenceRealm ? AscensionDefOf.AS_BreakthroughEssence : AscensionDefOf.AS_BreakthroughBody, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn));
+                Job job = JobMaker.MakeJob(realm.def == AscensionDefOf.EssenceRealm ? AscensionDefOf.AS_BreakthroughEssence : AscensionDefOf.AS_BreakthroughBody, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn, realm.def == AscensionDefOf.EssenceRealm ? AscensionDefOf.AS_BreakthroughEssence : AscensionDefOf.AS_BreakthroughBody));
                 selectedPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
             }
             
@@ -344,7 +341,7 @@ namespace Ascension
             {
                 if (Widgets.ButtonText(rect, "AS_Exercise".Translate()))
                 {
-                    Job job = JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn));
+                    Job job = JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn, AscensionDefOf.AS_ExerciseJob));
                     selectedPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
                 }
                 if (Mouse.IsOver(rect))
@@ -357,7 +354,7 @@ namespace Ascension
             {
                 if (Widgets.ButtonText(rect, "AS_RefineQi".Translate()))
                 {
-                    Job job = JobMaker.MakeJob(AscensionDefOf.AS_RefineQiJob, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn));
+                    Job job = JobMaker.MakeJob(AscensionDefOf.AS_RefineQiJob, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn, AscensionDefOf.AS_RefineQiJob));
                     selectedPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
                 }
                 if (Mouse.IsOver(rect))
@@ -686,7 +683,7 @@ namespace Ascension
                 {
                     if (Widgets.ButtonText(innerCButtonRect, innerCJob))
                     {
-                        Job job = JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn));
+                        Job job = JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn, AscensionDefOf.AS_RefineQiCauldronJob));
                         SoundDefOf.Tick_Low.PlayOneShotOnCamera();
                         selectedPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
                     }

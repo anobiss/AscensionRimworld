@@ -11,7 +11,7 @@ namespace Ascension
 {
     public class CultivationJobUtility
     {
-        public static Thing FindCultivationSpot(Pawn pawn)
+        public static Thing FindCultivationSpot(Pawn pawn, JobDef cultivationJob)
         {
             bool isEssenceRealm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) != null;
             CultivationMapComponent qiGatherMapComp = pawn.Map.GetComponent<CultivationMapComponent>();
@@ -25,7 +25,7 @@ namespace Ascension
             Thing cultivationSpotThing = pawn;
             int lastCultSpotPriority = 0;
 
-            foreach (CompCultivationSpot cultivationSpot in qiGatherMapComp.CultivationSpots)
+            foreach (CompCultivationSpot cultivationSpot in qiGatherMapComp.CultivationSpots)//checks all cultivation spots
             {
                 if (pawn.MapHeld.reservationManager.IsReserved(cultivationSpot.parent) ||
                     !pawn.CanReach(cultivationSpot.parent.Position, PathEndMode.OnCell, Danger.None))
@@ -41,10 +41,45 @@ namespace Ascension
                         case "Body" when !isEssenceRealm:
                         case "Essence" when isEssenceRealm:
                         case "Any":
-                            if (cultivationSpot.elementType == "Any" ||
-                                cultivationSpot.elementType == cultivatorHediff.element.ToString())
+                            if (cultivationSpot.elementType == ElementEmitMapComponent.Element.None ||
+                                cultivationSpot.elementType == cultivatorHediff.element)
                             {
-                                validSpot = true;
+                                if (cultivationSpot.jobType == 1)//0 is Any, 1 is exercise, 2 qi gathering, 3 is qi refining, 4 is body breaktrough, 5 is essence breakthrough, 6 is gc breakthrough, 7 is inner cauldron refinement
+                                {
+                                    validSpot = true;
+                                }
+                                else
+                                {
+                                    if (cultivationSpot.jobType == 1 && cultivationJob == AscensionDefOf.AS_ExerciseJob)
+                                    {
+                                        validSpot = true;
+                                    }
+                                    if (cultivationSpot.jobType == 2 && cultivationJob == AscensionDefOf.AS_QiGatheringJob)
+                                    {
+                                        validSpot = true;
+                                    }
+                                    if (cultivationSpot.jobType == 3 && cultivationJob == AscensionDefOf.AS_RefineQiJob)
+                                    {
+                                        validSpot = true;
+                                    }
+                                    if (cultivationSpot.jobType == 4 && cultivationJob == AscensionDefOf.AS_BreakthroughBody)
+                                    {
+                                        validSpot = true;
+                                    }
+                                    if (cultivationSpot.jobType == 5 && cultivationJob == AscensionDefOf.AS_BreakthroughEssence)
+                                    {
+                                        validSpot = true;
+                                    }
+                                    if (cultivationSpot.jobType == 6 && cultivationJob == AscensionDefOf.AS_GoldenCoreBreakthrough)
+                                    {
+                                        validSpot = true;
+                                    }
+                                    if (cultivationSpot.jobType == 7 && cultivationJob == AscensionDefOf.AS_RefineQiCauldronJob)
+                                    {
+                                        validSpot = true;
+                                    }
+                                }
+                                
                             }
                             break;
                     }
@@ -52,7 +87,7 @@ namespace Ascension
 
                 if (validSpot)
                 {
-                    lastCultSpotPriority = cultivationSpot.priority;
+                    lastCultSpotPriority = cultivationSpot.priority;//so if we get one with higher priority we try to use that new one instead
                     cultivationSpotThing = cultivationSpot.parent;
                 }
             }
@@ -155,30 +190,30 @@ namespace Ascension
                                     {
                                         if (qiPool.amount >= qiPool.maxAmount)
                                         {
-                                            return JobMaker.MakeJob(AscensionDefOf.AS_GoldenCoreBreakthrough, pawn, FindCultivationSpot(pawn));
+                                            return JobMaker.MakeJob(AscensionDefOf.AS_GoldenCoreBreakthrough, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_GoldenCoreBreakthrough));
                                         }else
                                         {
-                                            return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                                            return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_QiGatheringJob));
                                         }
                                     }else
                                     {
                                         float totalInnerQiRefineCost = 2 + (qiPool.maxAmount / 50);//2 plus 2%
                                         if (totalInnerQiRefineCost <= qiPool.amount)
                                         {
-                                            return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, pawn, FindCultivationSpot(pawn));
+                                            return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_RefineQiCauldronJob));
                                         }
                                         else
                                         {
-                                            return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                                            return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_QiGatheringJob));
                                         }
                                     }
                                 }
                                 else if (essenceRealm.Severity < 7)
                                 {
-                                    return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughEssence, pawn, FindCultivationSpot(pawn));
+                                    return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughEssence, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_BreakthroughEssence));
                                 }else
                                 {
-                                    return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                                    return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_QiGatheringJob));
                                 }
                             }
                             if (totalQiRefineCost > qiPool.maxAmount)
@@ -186,29 +221,29 @@ namespace Ascension
                                 float totalInnerQiRefineCost = 2 + (qiPool.maxAmount / 50);//2 plus 2%
                                 if (totalInnerQiRefineCost <= qiPool.amount)
                                 {
-                                    return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, pawn, FindCultivationSpot(pawn));
+                                    return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_RefineQiCauldronJob));
                                 }else
                                 {
-                                    return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                                    return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_QiGatheringJob));
                                 }
                             }else if (totalQiRefineCost <= qiPool.amount)
                             {
-                                return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiJob, pawn, FindCultivationSpot(pawn));
+                                return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_RefineQiJob));
                             }
                             else
                             {
-                                return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                                return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_QiGatheringJob));
                             }
                         }else if (pawn.health.hediffSet.HasHediff(AscensionDefOf.BodyRealm))
                         {
                             // Body Realm cultivation. 
                             if (bodyRealm.progress >= bodyRealm.maxProgress)//auto attempt breakthrough when possible.
                             {
-                                return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughBody, pawn, FindCultivationSpot(pawn));
+                                return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughBody, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_BreakthroughBody));
                             }
-                            return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, FindCultivationSpot(pawn));
+                            return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_ExerciseJob));
                         }
-                        return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, FindCultivationSpot(pawn));
+                        return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_ExerciseJob));
                     case 2:
                         //auto realm but without trib
                         if (pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm))
@@ -222,11 +257,11 @@ namespace Ascension
                                     {
                                         if (qiPool.amount >= qiPool.maxAmount)
                                         {
-                                            return JobMaker.MakeJob(AscensionDefOf.AS_GoldenCoreBreakthrough, pawn, FindCultivationSpot(pawn));
+                                            return JobMaker.MakeJob(AscensionDefOf.AS_GoldenCoreBreakthrough, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_GoldenCoreBreakthrough));
                                         }
                                         else
                                         {
-                                            return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                                            return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_QiGatheringJob));
                                         }
                                     }
                                     else
@@ -234,21 +269,21 @@ namespace Ascension
                                         float totalInnerQiRefineCost = 2 + (qiPool.maxAmount / 50);//2 plus 2%
                                         if (totalInnerQiRefineCost <= qiPool.amount)
                                         {
-                                            return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, pawn, FindCultivationSpot(pawn));
+                                            return JobMaker.MakeJob(AscensionDefOf.AS_RefineQiCauldronJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_RefineQiCauldronJob));
                                         }
                                         else
                                         {
-                                            return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                                            return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_QiGatheringJob));
                                         }
                                     }
                                 }
                                 else if (essenceRealm.Severity < 7)
                                 {
-                                    return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughEssence, pawn, FindCultivationSpot(pawn));
+                                    return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughEssence, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_BreakthroughEssence));
                                 }
                                 else
                                 {
-                                    return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                                    return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_QiGatheringJob));
                                 }
                             }
                         }
@@ -257,17 +292,17 @@ namespace Ascension
                             // Body Realm cultivation. 
                             if (bodyRealm.progress >= bodyRealm.maxProgress)//auto attempt breakthrough when possible.
                             {
-                                return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughBody, pawn, FindCultivationSpot(pawn));
+                                return JobMaker.MakeJob(AscensionDefOf.AS_BreakthroughBody, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_BreakthroughBody));
                             }
-                            return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, FindCultivationSpot(pawn));
+                            return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_ExerciseJob));
                         }
-                        return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, FindCultivationSpot(pawn));
+                        return JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_ExerciseJob));
                     case 3:
                         // Qi Gathering only. Just gather Qi instead of cultivating a realm.
-                        return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                        return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_QiGatheringJob));
                     default:
                         Log.Message("Ascension error autoCultivateType beyond normal allowed range.");
-                        return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn));
+                        return JobMaker.MakeJob(AscensionDefOf.AS_QiGatheringJob, pawn, FindCultivationSpot(pawn, AscensionDefOf.AS_QiGatheringJob));
                 }
             }else
             {

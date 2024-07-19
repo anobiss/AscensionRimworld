@@ -62,7 +62,6 @@
     <Compile Include="AscensionSettings.cs" />
     <Compile Include="AscensionStaticStartUtils.cs" />
     <Compile Include="AscensionTextures.cs" />
-    <Compile Include="AscensionToggleHandler.cs" />
     <Compile Include="AscensionUtilities.cs" />
     <Compile Include="Ascension_Harmony.cs" />
     <Compile Include="Ascension_PlaySettings_DoPlaySettingsGlobalControls_Patch.cs" />
