@@ -44,18 +44,26 @@ namespace Ascension
 
         private void Exercise()
         {
+            float progressBody = 1;//default always given amount
             Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
+            Realm_Hediff bodyHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm) as Realm_Hediff;
+            ElementEmitMapComponent elementEmitMapComp = pawn.Map.GetComponent<ElementEmitMapComponent>();
+
             if (cultivatorHediff != null)
             {
                 cultivatorHediff.exerciseJobProg = 0;
+                if (bodyHediff != null)
+                {
+                    if (elementEmitMapComp != null)
+                    {
+                        progressBody += (elementEmitMapComp.CalculateElementValueAt(new IntVec2(pawn.Position.x, pawn.Position.z), cultivatorHediff.element)/10);
+                    }
+                    progressBody += bodyHediff.maxProgress / 100;//for adding 1 percent body to amount
+                }
             }
-            float maxBody = 10;//default always given amount
-            Realm_Hediff bodyHediff = (Realm_Hediff)pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm);
-            if (bodyHediff != null)
-            {
-                maxBody += bodyHediff.maxProgress / 100;//for adding 1 percent body to amount
-            }
-            AscensionUtilities.TierProgress(pawn, AscensionDefOf.BodyRealm, maxBody);
+
+
+            AscensionUtilities.TierProgress(pawn, AscensionDefOf.BodyRealm, progressBody);
             if (job.GetTarget(SpotInd) != pawn)
             {
                 pawn.MapHeld.reservationManager.Release(job.GetTarget(SpotInd), pawn, job);

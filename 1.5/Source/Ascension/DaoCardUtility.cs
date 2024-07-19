@@ -288,7 +288,7 @@ namespace Ascension
                     GUI.DrawTexture(goldenCoreTextureRect, goldenCoreTexture);
 
                     Rect goldenCoreLabelRect = new Rect(realmTextureRect.x, goldenCoreTextureRect.y, rect.width, 35f);
-                    GUI.color = new Color (0.91f, 0.67f, 0.01f);
+                    GUI.color = new Color(1f, 0.5f, 1.0f);
                     Widgets.Label(goldenCoreLabelRect, "AS_GoldenCoreLabel".Translate(CultivatorHediff.goldenCoreScore.Named("SCORE")));
                     GUI.color = Color.white;
                     if (Mouse.IsOver(goldenCoreTextureRect))
@@ -350,7 +350,7 @@ namespace Ascension
                 if (Mouse.IsOver(rect))
                 {
                     Widgets.DrawHighlight(rect);
-                    TooltipHandler.TipRegion(rect, "AS_ExerciseDesc".Translate());
+                    TooltipHandler.TipRegion(rect, "AS_ExerciseDesc".Translate(elementText.Translate().Named("ELEMENT"), (elementTile/10).ToString("#").Named("ELEMENTAMOUNT")));
                 }
             }
             else if (qiPool != null && qiPool.amount >= 2 + qiPool.maxAmount / 10)

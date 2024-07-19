@@ -704,10 +704,22 @@ namespace Ascension
             {
                 if (!noExplosion)
                 {
-                    float explosionRadius = (newQiAmount - qiHediff.maxAmount) / 200;
-                    if (explosionRadius > 56.4)//true max is 56.4
+
+                    float qiOverflow = newQiAmount - qiHediff.maxAmount;
+                    float maxRadius = 56.4f;
+                    float radiusAt100x = maxRadius / 3.0f;
+                    float maxQiAmount = qiHediff.maxAmount;
+
+                    // calculate the scaling factor to ensure the desired radius at 100 times max qi overflow
+                    float scalingFactor = radiusAt100x / Mathf.Log(100 * maxQiAmount + 1);
+
+                    // calculate the explosion radius using the logarithm function and the scaling factor
+                    float explosionRadius = scalingFactor * Mathf.Log(qiOverflow + 1);
+
+                    // ensure the radius does not exceed the maximum allowed value
+                    if (explosionRadius > maxRadius)
                     {
-                        explosionRadius = 56.4f;
+                        explosionRadius = maxRadius;
                     }
                     GenExplosion.DoExplosion(pawn.PositionHeld, pawn.MapHeld, explosionRadius, DamageDefOf.Bomb, pawn, -1, -1, null, null, null, null, null, 0, 0, null, false, null, 0, 0, 0, false, null, null, null, true, 1, 0f, true, null, 1f);
                 }

@@ -12,8 +12,8 @@ namespace Ascension
     //qi recovery is turned off during this breakthrough
     public class JobDriver_GoldenCoreBreakthrough : JobDriver
     {
-        private const int BaseDurationTicks = 17500; // 7 hours
-        private const int QiConsumptionPerCycle = 25;
+        private const int BaseDurationTicks = 2500; // 1 hour
+        private const int QiConsumptionPerCycle = 100;
         public const TargetIndex SpotInd = TargetIndex.B;
 
         // Reserve the spot after time calculations

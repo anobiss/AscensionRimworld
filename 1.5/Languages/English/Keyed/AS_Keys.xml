@@ -232,12 +232,12 @@
   <AS_RefineQi>Refine Qi</AS_RefineQi>
   <AS_RefineQiDesc>Meditate for 2 hours divided by cultivation speed to Refine Qi into progress on essence realms. 10% max qi plus 2 qi is used in each refinement, progressing by the same amount of qi used.</AS_RefineQiDesc>
   <AS_Exercise>Exercise</AS_Exercise>
-  <AS_ExerciseDesc>Exercise for 4 hours divided by cultivation speed to progress  10 + (1% max progress) in the current body realm.</AS_ExerciseDesc>
+  <AS_ExerciseDesc>Exercise for 4 hours divided by cultivation speed to progress  1 + (10% {ELEMENT}: {ELEMENTAMOUNT}) + (1% max progress) in the current body realm.</AS_ExerciseDesc>
   <AS_QiGathering>Qi Gathering</AS_QiGathering>
   <AS_QiGatheringDesc>Meditate for 3 hours divided by cultivation speed to gather natural qi from your surroundings. Generates 1 qi plus the amount of Gather Qi in the cultivators position.</AS_QiGatheringDesc>
   <AS_Breakthrough>Breakthrough</AS_Breakthrough>
   <AS_GoldenCoreBreakthrough>Golden Core Breakthrough</AS_GoldenCoreBreakthrough>
-  <AS_GoldenCoreBreakthroughDesc>Try to get as much Qi as possible before attempting. Meditate for 7 hours divided by cultivation speed for each Qi conversion of 25 qi during a Golden Core Breakthrough until less than 25 qi remains. The resulting golden core score is equal to the amount of qi converted. This breakthrough cannot fail, but golden core scores are permanent.</AS_GoldenCoreBreakthroughDesc>
+  <AS_GoldenCoreBreakthroughDesc>Try to get as much Qi as possible before attempting. Meditate for 1 hour divided by cultivation speed for each Qi conversion of 100 qi during a Golden Core Breakthrough until less than 100 qi remains. The resulting golden core score is equal to the amount of qi converted. This breakthrough cannot fail, but golden core scores are permanent.</AS_GoldenCoreBreakthroughDesc>
   <AS_BreakthroughEssenceDesc>Meditate for 7 hours divided by cultivation speed to breakthrough to the next essence realm. Breakthrough Chance: {CHANCE}%</AS_BreakthroughEssenceDesc>
   <AS_BreakthroughBodyDesc>Exercise for 7 hours divided by cultivation speed to breakthrough to the next realm. Breakthrough Chance: {CHANCE}%</AS_BreakthroughBodyDesc>
   

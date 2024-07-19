@@ -44,7 +44,7 @@
         <glowColor>(370,370,370,0)</glowColor>
       </li>
       <li Class="Ascension.CompProperties_GoldenPill">
-		<amount>10</amount>
+		<amount>25000</amount>
 		<noQuality>true</noQuality>
       </li>
       <li Class="CompProperties_Drug">
