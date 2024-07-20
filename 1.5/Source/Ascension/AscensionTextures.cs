@@ -26,6 +26,9 @@ namespace Ascension
         public static readonly Texture2D ChangeRealm = ContentFinder<Texture2D>.Get("UI/Commands/ChangeRealm", true);
         public static readonly Texture2D ChangeElement = ContentFinder<Texture2D>.Get("UI/Commands/ChangeElement", true);
 
+        public static readonly Texture2D ChangeJob = ContentFinder<Texture2D>.Get("UI/Commands/ChangeJob", true);
+        public static readonly Texture2D TogglePublic = ContentFinder<Texture2D>.Get("UI/Commands/TogglePublic", true);
+
         public static readonly Texture2D ElementFactorsIcon = ContentFinder<Texture2D>.Get("UI/Icons/ElementFactorsIcon", true);
 
         public static readonly Texture2D AbilityBackground = ContentFinder<Texture2D>.Get("UI/Icons/AbilityBackground", true);

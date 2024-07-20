@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <TraderKindDef>
+    <defName>Orbital_Ascension</defName>
+    <label>cultivation trader</label>
+    <orbital>true</orbital>
+    <stockGenerators>
+      
+      <!-- Resources -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_Spiritleaf</thingDef>
+        <countRange>50~200</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_SpiritStone</thingDef>
+        <countRange>25~100</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_SpiritCrystal</thingDef>
+        <countRange>7~12</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_Spiritwood</thingDef>
+        <countRange>3~24</countRange>
+      </li>
+	  
+	  
+	  <!-- Pills -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_GoldenPill</thingDef>
+        <countRange>7~24</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_ImperialGoldenPill</thingDef>
+        <countRange>3~12</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_HeavenlyGoldenPill</thingDef>
+        <countRange>-1~7</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_AscensionPill</thingDef>
+        <countRange>-2~3</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_SpiritPill</thingDef>
+        <countRange>-2~3</countRange>
+      </li>
+	  
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_ExercisePill</thingDef>
+        <countRange>-1~7</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_QiRefinementPill</thingDef>
+        <countRange>-1~7</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_BreakthroughPill</thingDef>
+        <countRange>-1~7</countRange>
+      </li>
+	  
+      <!-- Weapons -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_SpiritSword</thingDef>
+        <countRange>-3~12</countRange>
+      </li>
+	  
+      <!-- Apparel -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_Apparel_SectUniform</thingDef>
+        <countRange>-1~7</countRange>
+      </li>
+	  
+      <!-- Buildings -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>QiCushion</thingDef>
+        <countRange>-2~3</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>SpiritCauldron</thingDef>
+        <countRange>-1~2</countRange>
+      </li>
+      
+      <!-- Buying -->
+      <li Class="StockGenerator_BuyExpensiveSimple" />
+	  <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>ImplantEmpireCommon</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>ImplantEmpireRoyal</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>PsylinkNeuroformer</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
+      
+    </stockGenerators>
+  </TraderKindDef>
+
+
+</Defs>

@@ -247,7 +247,7 @@ namespace Ascension
                 defaultLabel = "AS_ChangeJob".Translate(),
                 defaultDesc = "AS_ChangeJobDesc".Translate(),
                 Order = 8f,
-                icon = AscensionTextures.ChangeRealm,
+                icon = AscensionTextures.ChangeJob,
             };
             commandJ.action = delegate
             {
@@ -260,7 +260,7 @@ namespace Ascension
                 defaultLabel = "AS_TogglePublic".Translate(),
                 defaultDesc = "AS_TogglePublicDesc".Translate(),
                 Order = 9f,
-                icon = AscensionTextures.ChangePriority,
+                icon = AscensionTextures.TogglePublic,
             };
             commandPU.action = delegate
             {
