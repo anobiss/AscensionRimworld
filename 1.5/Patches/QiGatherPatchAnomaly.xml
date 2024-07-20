@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
   <Operation Class="PatchOperationInsert">
-    <xpath>Defs/ThingDef[defName="GoldenCube"]/comps/li[@Class="CompProperties_Forbiddable"]</xpath>
+    <xpath>Defs/ThingDef[defName="GoldenCube"]/comps</xpath>
     <order>Append</order>
     <value>
       <li Class="Ascension.CompProperties_GatherQi">
@@ -11,7 +11,7 @@
     </value>
   </Operation>
   <Operation Class="PatchOperationInsert">
-    <xpath>Defs/ThingDef[defName="MonolithFragment"]/comps/li[@Class="CompProperties_Studiable"]</xpath>
+    <xpath>Defs/ThingDef[defName="MonolithFragment"]/comps</xpath>
     <order>Append</order>
     <value>
       <li Class="Ascension.CompProperties_GatherQi">

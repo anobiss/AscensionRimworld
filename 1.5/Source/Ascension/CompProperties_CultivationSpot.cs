@@ -13,6 +13,8 @@ namespace Ascension
     {
         public bool occupied = false;
 
+        public bool publicUse = true;
+
         public Pawn spotUser;//this is assigned to whoever is occupying it
 
         public int priority = 1;

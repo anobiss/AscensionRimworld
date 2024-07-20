@@ -16,6 +16,10 @@
 		<li Class="Ascension.CompProperties_CultivationSpot">
 			<priority>1</priority>
 		</li>
+		<li Class="CompProperties_AssignableToPawn">
+			<drawUnownedAssignmentOverlay>false</drawUnownedAssignmentOverlay>
+			<compClass>Ascension.CompAssignableToPawn_CultivationSpot</compClass>
+        </li>
 	</comps>
     <rotatable>false</rotatable>
     <scatterableOnMapGen>false</scatterableOnMapGen>

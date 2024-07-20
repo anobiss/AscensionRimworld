@@ -18,6 +18,7 @@ namespace Ascension
         public string realmType;
         public ElementEmitMapComponent.Element elementType;
         public int jobType;
+        public bool publicUse;
         //display current priority, realm and element type here
 
         private static string TranslateJobType(int jobType)
@@ -61,6 +62,7 @@ namespace Ascension
                 priority = Props.priority;
                 realmType = Props.realmType;
                 elementType = Props.elementType;//none is any
+                publicUse = Props.publicUse;
             }
             CultivationMapComponent cultivationMapComp = parent.MapHeld.GetComponent<CultivationMapComponent>();
             cultivationMapComp.CultivationSpots.Add(this);
@@ -107,7 +109,7 @@ namespace Ascension
                     elementText = "AS_Any";
                     break;
             }
-            return "AS_CultivationSpotInspect".Translate(priority.ToString().Named("PRIORITY"), realmTypeText.Translate().Named("REALM"), elementText.Translate().Named("ELEMENT"), TranslateJobType(jobType).Translate().Named("JOBTRANSLATED"));
+            return "AS_CultivationSpotInspect".Translate(priority.ToString().Named("PRIORITY"), realmTypeText.Translate().Named("REALM"), elementText.Translate().Named("ELEMENT"), TranslateJobType(jobType).Translate().Named("JOBTRANSLATED"), publicUse.ToString().Named("PUBLIC"));
         }
 
         private void changePriority()
@@ -185,6 +187,20 @@ namespace Ascension
                     break;
             }
         }
+        private void TogglePublic()
+        {
+            switch (publicUse)
+            {
+                //0 is Any, 1 is exercise, 2 qi gathering, 3 is qi refining, 4 is body breaktrough, 5 is essence breakthrough, 6 is gc breakthrough, 7 is inner cauldron refinement
+                case false:
+                    publicUse = true;
+                    break;
+                case true:
+                    publicUse = false;
+                    break;
+            }
+        }
+
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
             Command_Action commandP = new Command_Action()
@@ -230,7 +246,7 @@ namespace Ascension
             {
                 defaultLabel = "AS_ChangeJob".Translate(),
                 defaultDesc = "AS_ChangeJobDesc".Translate(),
-                Order = 6f,
+                Order = 8f,
                 icon = AscensionTextures.ChangeRealm,
             };
             commandJ.action = delegate
@@ -238,6 +254,19 @@ namespace Ascension
                 changeJobType();
             };
             yield return commandJ;
+
+            Command_Action commandPU = new Command_Action()
+            {
+                defaultLabel = "AS_TogglePublic".Translate(),
+                defaultDesc = "AS_TogglePublicDesc".Translate(),
+                Order = 9f,
+                icon = AscensionTextures.ChangePriority,
+            };
+            commandPU.action = delegate
+            {
+                TogglePublic();
+            };
+            yield return commandPU;
         }
 
         public override void PostExposeData()

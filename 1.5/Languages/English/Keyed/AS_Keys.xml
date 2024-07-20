@@ -46,6 +46,8 @@
   <AS_SpiritTreeConversion>Spirit Tree Conversion</AS_SpiritTreeConversion>
   <AS_SpiritTreeConversionDesc>A sudden surge of Qi has converted a tree into a spirit tree.</AS_SpiritTreeConversionDesc>
 
+  <AS_CommandCultivationSpotSetOwnerDesc>Assign this cultivation spot to be owned by a specific colonist.</AS_CommandCultivationSpotSetOwnerDesc>
+
 
 
   <AS_ChangePriority>Change Priority</AS_ChangePriority>
@@ -57,11 +59,13 @@
   <AS_ChangeElement>Change Element</AS_ChangeElement>
   <AS_ChangeElementDesc>Change the target element of the cultivation spot.</AS_ChangeElementDesc>
   
-    <AS_ChangeJob>Change Job</AS_ChangeJob>
+  <AS_ChangeJob>Change Job</AS_ChangeJob>
   <AS_ChangeJobDesc>Change the specific cultivation job of the cultivation spot.</AS_ChangeJobDesc>
   
+  <AS_TogglePublic>Toggle Public</AS_TogglePublic>
+  <AS_TogglePublicDesc>Toggle on/off public use. Ownership is ignored while public.</AS_TogglePublicDesc>
 
-  <AS_CultivationSpotInspect>Priority: {PRIORITY}\nRealm Type: {REALM}\nElement Type: {ELEMENT}\nJob Type: {JOBTRANSLATED}</AS_CultivationSpotInspect>
+  <AS_CultivationSpotInspect>Priority: {PRIORITY}\nRealm Type: {REALM}\nElement Type: {ELEMENT}\nJob Type: {JOBTRANSLATED}\nPublic: {PUBLIC}</AS_CultivationSpotInspect>
   
   <AS_Any>Any</AS_Any>
   <AS_CSEssenceRealm>Essence</AS_CSEssenceRealm>

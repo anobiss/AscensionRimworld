@@ -73,6 +73,7 @@
     <Compile Include="CompAbilityEffect_HediffGiver.cs" />
     <Compile Include="CompAbilityEffect_ManifestSpiritSword.cs" />
     <Compile Include="CompAbilityEffect_SoulMend.cs" />
+    <Compile Include="CompAssignableToPawn_CultivationSpot.cs" />
     <Compile Include="CompAwfulExplosive.cs" />
     <Compile Include="CompCultivationCauldron.cs" />
     <Compile Include="CompCultivationSpot.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="CompUseEffect_Absorb_SpiritSword.cs" />
     <Compile Include="CultivationJobUtility.cs" />
     <Compile Include="CultivationMapComponent.cs" />
+    <Compile Include="CultivationOwnershipMapComponent.cs" />
     <Compile Include="CultivationReservationUtility.cs" />
     <Compile Include="DaoCardUtility.cs" />
     <Compile Include="GameCondition_QiBurst.cs" />

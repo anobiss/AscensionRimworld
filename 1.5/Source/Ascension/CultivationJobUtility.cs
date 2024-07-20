@@ -16,8 +16,8 @@ namespace Ascension
             bool isEssenceRealm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) != null;
             CultivationMapComponent qiGatherMapComp = pawn.Map.GetComponent<CultivationMapComponent>();
             Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
-
-            if (qiGatherMapComp == null || cultivatorHediff == null || pawn.Faction != Faction.OfPlayer)
+            CultivationOwnershipMapComponent ownershipMapComp = pawn.Map.GetComponent<CultivationOwnershipMapComponent>();
+            if (ownershipMapComp == null || qiGatherMapComp == null || cultivatorHediff == null || pawn.Faction != Faction.OfPlayer)
             {
                 return pawn;
             }
@@ -25,7 +25,39 @@ namespace Ascension
             Thing cultivationSpotThing = pawn;
             int lastCultSpotPriority = 0;
 
-            foreach (CompCultivationSpot cultivationSpot in qiGatherMapComp.CultivationSpots)//checks all cultivation spots
+            bool IsValidSpot(CompCultivationSpot cultivationSpot)
+            {
+                switch (cultivationSpot.realmType)
+                {
+                    case "Body" when !isEssenceRealm:
+                    case "Essence" when isEssenceRealm:
+                    case "Any":
+                        if (cultivationSpot.elementType == ElementEmitMapComponent.Element.None ||
+                            cultivationSpot.elementType == cultivatorHediff.element)
+                        {
+                            if (cultivationSpot.jobType == 0) // 0 is Any
+                            {
+                                return true;
+                            }
+                            return cultivationSpot.jobType switch
+                            {
+                                1 when cultivationJob == AscensionDefOf.AS_ExerciseJob => true,
+                                2 when cultivationJob == AscensionDefOf.AS_QiGatheringJob => true,
+                                3 when cultivationJob == AscensionDefOf.AS_RefineQiJob => true,
+                                4 when cultivationJob == AscensionDefOf.AS_BreakthroughBody => true,
+                                5 when cultivationJob == AscensionDefOf.AS_BreakthroughEssence => true,
+                                6 when cultivationJob == AscensionDefOf.AS_GoldenCoreBreakthrough => true,
+                                7 when cultivationJob == AscensionDefOf.AS_RefineQiCauldronJob => true,
+                                _ => false
+                            };
+                        }
+                        break;
+                }
+                return false;
+            }
+
+            // first pass: Check owned spots
+            foreach (CompCultivationSpot cultivationSpot in qiGatherMapComp.CultivationSpots) // checks all cultivation spots
             {
                 if (pawn.MapHeld.reservationManager.IsReserved(cultivationSpot.parent) ||
                     !pawn.CanReach(cultivationSpot.parent.Position, PathEndMode.OnCell, Danger.None))
@@ -33,68 +65,44 @@ namespace Ascension
                     continue;
                 }
 
-                bool validSpot = false;
-                if (cultivationSpot.priority > lastCultSpotPriority)
+                bool isOwnedByPawn = ownershipMapComp.GetBuildingAssignedToPawn(pawn) == (Building)cultivationSpot.parent;
+
+                if (isOwnedByPawn && cultivationSpot.priority > lastCultSpotPriority)
                 {
-                    switch (cultivationSpot.realmType)
+                    if (IsValidSpot(cultivationSpot))
                     {
-                        case "Body" when !isEssenceRealm:
-                        case "Essence" when isEssenceRealm:
-                        case "Any":
-                            if (cultivationSpot.elementType == ElementEmitMapComponent.Element.None ||
-                                cultivationSpot.elementType == cultivatorHediff.element)
-                            {
-                                if (cultivationSpot.jobType == 1)//0 is Any, 1 is exercise, 2 qi gathering, 3 is qi refining, 4 is body breaktrough, 5 is essence breakthrough, 6 is gc breakthrough, 7 is inner cauldron refinement
-                                {
-                                    validSpot = true;
-                                }
-                                else
-                                {
-                                    if (cultivationSpot.jobType == 1 && cultivationJob == AscensionDefOf.AS_ExerciseJob)
-                                    {
-                                        validSpot = true;
-                                    }
-                                    if (cultivationSpot.jobType == 2 && cultivationJob == AscensionDefOf.AS_QiGatheringJob)
-                                    {
-                                        validSpot = true;
-                                    }
-                                    if (cultivationSpot.jobType == 3 && cultivationJob == AscensionDefOf.AS_RefineQiJob)
-                                    {
-                                        validSpot = true;
-                                    }
-                                    if (cultivationSpot.jobType == 4 && cultivationJob == AscensionDefOf.AS_BreakthroughBody)
-                                    {
-                                        validSpot = true;
-                                    }
-                                    if (cultivationSpot.jobType == 5 && cultivationJob == AscensionDefOf.AS_BreakthroughEssence)
-                                    {
-                                        validSpot = true;
-                                    }
-                                    if (cultivationSpot.jobType == 6 && cultivationJob == AscensionDefOf.AS_GoldenCoreBreakthrough)
-                                    {
-                                        validSpot = true;
-                                    }
-                                    if (cultivationSpot.jobType == 7 && cultivationJob == AscensionDefOf.AS_RefineQiCauldronJob)
-                                    {
-                                        validSpot = true;
-                                    }
-                                }
-                                
-                            }
-                            break;
+                        lastCultSpotPriority = cultivationSpot.priority;
+                        cultivationSpotThing = cultivationSpot.parent;
                     }
                 }
+            }
 
-                if (validSpot)
+            // second pass: Check public spots if no valid owned spots were found
+            if (cultivationSpotThing == pawn)
+            {
+                foreach (CompCultivationSpot cultivationSpot in qiGatherMapComp.CultivationSpots) // checks all cultivation spots
                 {
-                    lastCultSpotPriority = cultivationSpot.priority;//so if we get one with higher priority we try to use that new one instead
-                    cultivationSpotThing = cultivationSpot.parent;
+                    if (pawn.MapHeld.reservationManager.IsReserved(cultivationSpot.parent) ||
+                        !pawn.CanReach(cultivationSpot.parent.Position, PathEndMode.OnCell, Danger.None))
+                    {
+                        continue;
+                    }
+
+                    bool isPublic = cultivationSpot.publicUse;
+
+                    if (isPublic && cultivationSpot.priority > lastCultSpotPriority)
+                    {
+                        if (IsValidSpot(cultivationSpot))
+                        {
+                            lastCultSpotPriority = cultivationSpot.priority;
+                            cultivationSpotThing = cultivationSpot.parent;
+                        }
+                    }
                 }
             }
 
             return cultivationSpotThing;
         }
-
         public static bool CanCultivateNow(Pawn pawn)
         {
             if (pawn.Faction.HostileTo(Faction.OfPlayer))//dont want hostiles cultivating
@@ -161,9 +169,6 @@ namespace Ascension
             }
             return false;
         }
-
-
-
         public static Job GetCultivationJob(Pawn pawn)
         {
             Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;

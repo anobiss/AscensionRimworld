@@ -42,6 +42,10 @@
 		<li Class="Ascension.CompProperties_CultivationSpot">
 			<priority>2</priority>
 		</li>
+		<li Class="CompProperties_AssignableToPawn">
+			<drawUnownedAssignmentOverlay>false</drawUnownedAssignmentOverlay>
+			<compClass>Ascension.CompAssignableToPawn_CultivationSpot</compClass>
+        </li>
 	</comps>
 	<researchPrerequisites>
       <li>AS_QiManipulation</li>
