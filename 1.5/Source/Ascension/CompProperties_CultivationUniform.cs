@@ -6,6 +6,7 @@ namespace Ascension
     {
         public float qiRecSpeedOffset = 0f;
         public float cultSpeedOffset = 0f;
+        public float maxQiOffset = 0f;
 
         public CompProperties_CultivationUniform()
         {

@@ -21,12 +21,17 @@
   <AS_ShowQiToggleButton>Toggle the Qi display.\n\nDisplay the Qi of the world as would be present where the cursor is pointing.</AS_ShowQiToggleButton>
   <AS_ShowElementToggleButton>Toggle the Element display.\n\nDisplay the Element of the world as would be present where the cursor is pointing.</AS_ShowElementToggleButton>
 	
-    <!-- display for uniforms -->
-  <AS_CultivationUniformInspect>Cultivation Speed Offset: {CSO}x\nQi Recovery Speed Offset: {QRSO}x</AS_CultivationUniformInspect>
+    <!-- display for uniforms, unused inspect elements will be blank -->
+  <AS_CultivationUniformInspect>{CS}{QRS}{MQ}</AS_CultivationUniformInspect>
+  <AS_CultivationUniformCSInspect>Cultivation Speed Offset: {CSO}x</AS_CultivationUniformCSInspect>
+  <AS_CultivationUniformQRSInspect>\nQi Recovery Speed Offset: {QRSO}x</AS_CultivationUniformQRSInspect>
+  <AS_CultivationUniformMQInspect>\nMax Qi Offset: {MQO}x</AS_CultivationUniformMQInspect>
   <AS_CultivationUniformCS>Cultivation Speed Offset</AS_CultivationUniformCS>
-  <AS_CultivationUniformCSDesc>The amount of Cultivation Speed granted to its wearer.</AS_CultivationUniformCSDesc>
+  <AS_CultivationUniformCSDesc>The amount of offset to Cultivation Speed granted to its wearer.</AS_CultivationUniformCSDesc>
   <AS_CultivationUniformQRS>Qi Recovery Speed Offset</AS_CultivationUniformQRS>
-  <AS_CultivationUniformQRSDesc>The amount of Cultivation Speed granted to its wearer.</AS_CultivationUniformQRSDesc>
+  <AS_CultivationUniformQRSDesc>The amount of offset to Cultivation Speed granted to its wearer.</AS_CultivationUniformQRSDesc>
+  <AS_CultivationUniformMQ>Max Qi Offset</AS_CultivationUniformMQ>
+  <AS_CultivationUniformMQDesc>The amount of offset to Max Qi granted to its wearer.</AS_CultivationUniformMQDesc>
   <AS_CultivationUniformMultiplierSymbol>{OFFSET}x</AS_CultivationUniformMultiplierSymbol>
   
       <!-- display for spirit pill -->

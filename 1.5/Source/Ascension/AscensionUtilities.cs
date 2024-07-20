@@ -289,7 +289,28 @@ namespace Ascension
             }
             return offset;
         }
-
+        public static float UniformMaxQiOffset(Pawn pawn)//the offset granted to various offsets from cultivation clothes
+        {
+            float offset = 0f;
+            if (pawn != null)
+            {
+                if (pawn.apparel != null)
+                {
+                    if (!pawn.apparel.WornApparel.NullOrEmpty())
+                    {
+                        foreach (Apparel apparel in pawn.apparel.WornApparel)
+                        {
+                            CompCultivationUniform offsetComp = apparel.TryGetComp<CompCultivationUniform>();
+                            if (offsetComp != null)
+                            {
+                                offset += (offsetComp.Props.maxQiOffset * GetApparelQualityMultiplier(apparel));
+                            }
+                        }
+                    }
+                }
+            }
+            return offset;
+        }
 
 
         public static float UpdateCultivationSpeedBase(Cultivator_Hediff cultivatorHediff)
@@ -374,6 +395,7 @@ namespace Ascension
         {
             Realm_Hediff essenceRealm = qiPool.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
             float offset = 1;
+            offset += UniformMaxQiOffset(qiPool.pawn);
             if (essenceRealm != null)
             {
                 offset += maxQiRates[RealmIndex(essenceRealm)];

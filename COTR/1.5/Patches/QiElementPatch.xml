@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+<!-- Qi Only-->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_SpiritStone"]/comps</xpath>
+    <order>Append</order>
+    <value>
+      <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>2</amount>
+      </li>
+    </value>
+  </Operation>
+  
+  <!-- Fire-->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_FireStone"]/comps</xpath>
+    <order>Append</order>
+    <value>
+      <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>10</amount>
+		<element>Fire</element>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_FireStone_Infused"]/comps</xpath>
+    <order>Append</order>
+    <value>
+      <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>2</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>10</amount>
+		<element>Fire</element>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_FireFlower"]/comps</xpath>
+    <order>Append</order>
+    <value>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>10</amount>
+		<element>Fire</element>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_FireFlower_Infused"]/comps</xpath>
+    <order>Append</order>
+    <value>
+	  <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>2</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>10</amount>
+		<element>Fire</element>
+      </li>
+    </value>
+  </Operation>
+  
+    <!-- Earth-->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_EarthFruit"]/comps</xpath>
+    <order>Append</order>
+    <value>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>10</amount>
+		<element>Earth</element>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_EarthFruit_Infused"]/comps</xpath>
+    <order>Append</order>
+    <value>
+	  <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>2</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>10</amount>
+		<element>Earth</element>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_EarthTree"]/comps</xpath>
+    <order>Append</order>
+    <value>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>2</range>
+        <amount>25</amount>
+		<element>Earth</element>
+      </li>
+    </value>
+  </Operation>
+	
+    <!-- Water-->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_WaterFruit"]/comps</xpath>
+    <order>Append</order>
+    <value>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>10</amount>
+		<element>Water</element>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_WaterFruit_Infused"]/comps</xpath>
+    <order>Append</order>
+    <value>
+	  <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>2</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>10</amount>
+		<element>Water</element>
+      </li>
+    </value>
+  </Operation>
+    <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_WinterLeaf"]/comps</xpath>
+    <order>Append</order>
+    <value>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>2</range>
+        <amount>25</amount>
+		<element>Water</element>
+      </li>
+    </value>
+  </Operation>
+  
+    <!-- Metal-->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_MetalSteleFragment"]/comps</xpath>
+    <order>Append</order>
+    <value>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>10</amount>
+		<element>Metal</element>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_MetalSteleFragment_Infused"]/comps</xpath>
+    <order>Append</order>
+    <value>
+	  <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>2</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>10</amount>
+		<element>Metal</element>
+      </li>
+    </value>
+  </Operation>
+    <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_MetalStele"]/comps</xpath>
+    <order>Append</order>
+    <value>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>2</range>
+        <amount>25</amount>
+		<element>Metal</element>
+      </li>
+    </value>
+  </Operation>
+  
+    <!-- Wood-->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_WoodFruit"]/comps</xpath>
+    <order>Append</order>
+    <value>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>10</amount>
+		<element>Wood</element>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_WoodFruit_Infused"]/comps</xpath>
+    <order>Append</order>
+    <value>
+	  <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>2</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>10</amount>
+		<element>Wood</element>
+      </li>
+    </value>
+  </Operation>
+    <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CTR_WoodLeaf"]/comps</xpath>
+    <order>Append</order>
+    <value>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>2</range>
+        <amount>25</amount>
+		<element>Wood</element>
+      </li>
+    </value>
+  </Operation>
+</Patch>

@@ -6,7 +6,27 @@
     <label>cultivation trader</label>
     <orbital>true</orbital>
     <stockGenerators>
-      
+	
+      <!-- Treasures -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_LuminaCore</thingDef>
+        <countRange>-7~2</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_FireEssenceBar</thingDef>
+        <countRange>-7~3</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_IceEssenceBar</thingDef>
+        <countRange>-7~3</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_StoneEssence</thingDef>
+        <countRange>-5~3</countRange>
+      </li>
+	  
+	  
+	  
       <!-- Resources -->
       <li Class="StockGenerator_SingleDef">
         <thingDef>AS_Spiritleaf</thingDef>
@@ -70,7 +90,11 @@
       <!-- Apparel -->
       <li Class="StockGenerator_SingleDef">
         <thingDef>AS_Apparel_SectUniform</thingDef>
-        <countRange>-1~7</countRange>
+        <countRange>-1~4</countRange>
+      </li>
+	  <li Class="StockGenerator_SingleDef">
+        <thingDef>AS_Apparel_QiSectUniform</thingDef>
+        <countRange>-2~2</countRange>
       </li>
 	  
       <!-- Buildings -->

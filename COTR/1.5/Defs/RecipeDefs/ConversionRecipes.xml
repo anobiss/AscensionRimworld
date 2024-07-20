@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+   <!-- Spirit Leaf, Spirit Stones, and Spirit Crystal production.-->
+  
+  <!-- Spirit Crystal -->
+  
+   <RecipeDef>
+    <defName>AS_Make_SpiritLeafFromSpiritLeaves</defName>
+    <label>make spirit crystal from spirit stones</label>
+    <description>Make spirit leaf from other variations of spirit leaf.</description>
+	<researchPrerequisite>AS_QiManipulation</researchPrerequisite>
+    <jobString>Manifesting spirit crystal from spirit stones.</jobString>
+    <workAmount>999</workAmount>
+	<workSkill>Crafting</workSkill>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+	<soundWorking>Recipe_Smelt</soundWorking>
+	<skillRequirements>
+      <Crafting>10</Crafting>
+	  <Cooking>10</Cooking>
+    </skillRequirements>
+    <recipeUsers>
+      <li>SpiritCauldron</li>
+    </recipeUsers>
+    <products>
+      <AS_Spiritleaf>1</AS_Spiritleaf>
+    </products>
+    <ingredients>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>CTR_SpiritGrass</li>
+          </thingDefs>
+        </filter>
+        <count>12</count>
+      </li>
+    </ingredients>
+  </RecipeDef>
+  
+  
+  <!-- Spirit Stones -->
+  
+  <RecipeDef>
+    <defName>AS_Make_SpiritStonesFromSpiritStones</defName>
+    <label>make spirit stones from spirit leaves</label>
+    <description>Make spirit stones by extracting qi from other variations of spirit stone.</description>
+	<researchPrerequisite>AS_QiManipulation</researchPrerequisite>
+    <jobString>Manifesting spirit stones from spirit leaves.</jobString>
+    <workAmount>999</workAmount>
+	<workSkill>Crafting</workSkill>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+	<soundWorking>Recipe_Smelt</soundWorking>
+	<skillRequirements>
+      <Crafting>10</Crafting>
+	  <Cooking>10</Cooking>
+    </skillRequirements>
+    <recipeUsers>
+      <li>SpiritCauldron</li>
+    </recipeUsers>
+    <products>
+      <AS_SpiritStone>1</AS_SpiritStone>
+    </products>
+    <ingredients>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>CTR_SpiritStone</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+  </RecipeDef>
+  
+  
+    <RecipeDef>
+    <defName>AS_Make_SpiritWoodFromAncientBranch</defName>
+    <label>make spirit wood from infused ancient branches</label>
+    <description>Make spirit wood by channeling the qi of infused ancient branches.</description>
+	<researchPrerequisite>AS_QiManipulation</researchPrerequisite>
+    <jobString>Manifesting spirit stones from spirit leaves.</jobString>
+    <workAmount>999</workAmount>
+	<workSkill>Crafting</workSkill>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+	<soundWorking>Recipe_Smelt</soundWorking>
+	<skillRequirements>
+      <Crafting>10</Crafting>
+	  <Cooking>10</Cooking>
+    </skillRequirements>
+    <recipeUsers>
+      <li>SpiritCauldron</li>
+    </recipeUsers>
+    <products>
+      <AS_Spiritwood>1</AS_Spiritwood>
+    </products>
+    <ingredients>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>CTR_WoodFruit_Infused</li>
+          </thingDefs>
+        </filter>
+        <count>7</count>
+      </li>
+    </ingredients>
+  </RecipeDef>
+  
+</Defs>

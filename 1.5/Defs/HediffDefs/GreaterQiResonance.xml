@@ -4,7 +4,7 @@
     <hediffClass>HediffWithComps</hediffClass>
     <defName>AS_GreaterQiResonance</defName>
     <label>greater qi resonance</label>
-    <description>This being has greater qi resonance resulting in 0.2 increased cultivation speed offset and 700% increased qi recovery speed. Lasts 3 days.</description>
+    <description>This being has greater qi resonance resulting in 0.2 increased cultivation speed offset and 7x increased qi recovery speed offset. Lasts 3 days.</description>
 	<defaultLabelColor>(1.0, 1.0, 1.0)</defaultLabelColor>
     <isBad>false</isBad>
     <comps>

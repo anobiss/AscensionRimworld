@@ -14,8 +14,8 @@
   <ResearchProjectDef>
     <defName>AS_AdvancedQiManipulation</defName>
     <label>advanced qi manipulation</label>
-    <description>Make spirit crystals from spirit stones and make spirit stones from spirit leaves.</description>
-    <baseCost>777</baseCost>
+    <description>Make spirit crystals from spirit stones, make spirit stones from spirit leaves, and make qi infused sect uniforms.</description>
+    <baseCost>12000</baseCost>
     <techLevel>Neolithic</techLevel>
 	<tab>Ascension</tab>
 	<prerequisites>

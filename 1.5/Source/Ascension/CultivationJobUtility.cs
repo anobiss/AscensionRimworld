@@ -55,7 +55,6 @@ namespace Ascension
                 }
                 return false;
             }
-
             // first pass: Check owned spots
             foreach (CompCultivationSpot cultivationSpot in qiGatherMapComp.CultivationSpots) // checks all cultivation spots
             {

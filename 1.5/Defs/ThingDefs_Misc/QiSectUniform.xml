@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <ThingDef ParentName="ApparelMakeableBase">
+    <defName>AS_Apparel_QiSectUniform</defName>
+    <label>qi infused sect uniform</label>
+    <description>A sect uniform used by cultivators that is infused with a large amount of Qi. Provides 1-4x Cultivation Speed, 1-4x Qi Recovery Speed, and 0.5-2x Max Qi to cultivators depending on quality.</description>
+    <graphicData>
+      <texPath>Things/Pawn/Humanlike/Apparel/QiSectUniform/QiSectUniform</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>70</costStuffCount>
+	<costList>
+	  <AS_SpiritCrystal>7</AS_SpiritCrystal>
+	</costList>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToMake>12000</WorkToMake>
+      <Mass>0.75</Mass>
+      <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.4</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.4</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>1.5</EquipDelay>
+    </statBases>
+    <thingCategories>
+      <li>ApparelMisc</li>
+    </thingCategories>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Shoulders</li>
+        <li>Arms</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Pawn/Humanlike/Apparel/QiSectUniform/QiSectUniform</wornGraphicPath>
+      <layers>
+        <li>Shell</li>
+      </layers>
+      <defaultOutfitTags>
+        <li>Worker</li>
+      </defaultOutfitTags>
+      <canBeGeneratedToSatisfyWarmth>false</canBeGeneratedToSatisfyWarmth>
+      <canBeGeneratedToSatisfyToxicEnvironmentResistance>false</canBeGeneratedToSatisfyToxicEnvironmentResistance>
+      <tags>
+        <li>Robe</li>
+      </tags>
+    </apparel>
+    <colorGenerator Class="ColorGenerator_StandardApparel" />
+    <possessionCount>1</possessionCount>
+    <tradeTags>
+      <li>BasicClothing</li>
+    </tradeTags>
+    <recipeMaker>
+	  <researchPrerequisite>AS_AdvancedQiManipulation</researchPrerequisite>
+	  <recipeUsers>
+         <li>SpiritCauldron</li>
+      </recipeUsers>
+      <displayPriority>240</displayPriority>
+    </recipeMaker>
+	<comps>
+	  <li Class="Ascension.CompProperties_CultivationUniform">
+		<qiRecSpeedOffset>2</qiRecSpeedOffset>
+        <cultSpeedOffset>2</cultSpeedOffset>
+		<maxQiOffset>1</maxQiOffset>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

@@ -24,6 +24,7 @@ namespace Ascension
         public static HediffDef QiPool;
         public static HediffDef AS_SoulMend;
         public static HediffDef AS_QiResonance;
+        public static HediffDef AS_GreaterQiResonance;
         public static HediffDef AS_HeavenlyTribulation;
 
         public static Verse.HediffDef AS_SpiritSwordFusion;
