@@ -47,8 +47,8 @@
         <listOrder>1010</listOrder>
       </li>
 	   <li Class="Ascension.CompProperties_GatherQi">
-		<range>3</range>
-        <amount>7</amount>
+		<range>1</range>
+        <amount>1</amount>
       </li>
     </comps>
     <statBases>

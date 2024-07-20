@@ -260,7 +260,7 @@
   <AS_GatherQiRange>Range</AS_GatherQiRange>
   <AS_GatherQiRangeDesc>How far the object with Gather Qi permeates its surroundings.</AS_GatherQiRangeDesc>
   <AS_GatherQiAmount>Qi Amount</AS_GatherQiAmount>
-  <AS_GatherQiAmountDesc>The amount of Qi that the object with Gather Qi grants to its surroundings </AS_GatherQiAmountDesc>
+  <AS_GatherQiAmountDesc>The amount of Qi that the object with Gather Qi grants to its surroundings. This is multiplied by stack count for the actual qi amount.</AS_GatherQiAmountDesc>
   
   <AS_CanBreakThrough>Breakthrough Possible</AS_CanBreakThrough>
   <AS_CanBreakThroughDesc>{PAWN} can now breakthrough past {REALM}.</AS_CanBreakThroughDesc>

@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-      <!--
-      Ores
-      -->
-  
-  
+      <!-- Ores-->
   <ThingDef ParentName="ResourceBase">
     <defName>AS_FireEssenceOre</defName>
     <label>fire essence ore</label>
@@ -30,12 +26,12 @@
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
 	<comps>
 	   <li Class="Ascension.CompProperties_GatherQi">
-		<range>1</range>
-        <amount>3</amount>
+		<range>0</range>
+        <amount>1</amount>
       </li>
 	  <li Class="Ascension.CompProperties_ElementEmit">
-		<range>1</range>
-        <amount>3</amount>
+		<range>0</range>
+        <amount>1</amount>
 		<element>Fire</element>
       </li>
     </comps>
@@ -110,12 +106,12 @@
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
 	<comps>
 	   <li Class="Ascension.CompProperties_GatherQi">
-		<range>1</range>
-        <amount>7</amount>
+		<range>0</range>
+        <amount>1</amount>
       </li>
 	  <li Class="Ascension.CompProperties_ElementEmit">
-		<range>1</range>
-        <amount>3</amount>
+		<range>0</range>
+        <amount>1</amount>
 		<element>Water</element>
       </li>
     </comps>
@@ -165,9 +161,7 @@
     </comps>
   </ThingDef>
   
-    <!--
-      Treassures
-      -->
+    <!-- Treassures -->
 	  
   <ThingDef ParentName="ResourceBase">
     <defName>AS_LuminaCore</defName>
@@ -198,8 +192,8 @@
         <amount>35</amount>
       </li>
 	  <li Class="Ascension.CompProperties_ElementEmit">
-		<range>4</range>
-        <amount>12</amount>
+		<range>1</range>
+        <amount>30</amount>
 		<element>Metal</element>
       </li>
     </comps>
@@ -247,7 +241,7 @@
       </li>
 	  <li Class="Ascension.CompProperties_ElementEmit">
 		<range>3</range>
-        <amount>12</amount>
+        <amount>20</amount>
 		<element>Fire</element>
       </li>
     </comps>
@@ -295,7 +289,7 @@
       </li>
 	  <li Class="Ascension.CompProperties_ElementEmit">
 		<range>3</range>
-        <amount>12</amount>
+        <amount>20</amount>
 		<element>Water</element>
       </li>
     </comps>
@@ -339,7 +333,7 @@
       </li>
 	  <li Class="Ascension.CompProperties_ElementEmit">
 		<range>2</range>
-        <amount>3</amount>
+        <amount>30</amount>
 		<element>Earth</element>
       </li>
     </comps>
@@ -432,6 +426,94 @@
     </comps>
   </ThingDef>
 
+    <!-- Resources -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>AS_SpiritBeastBlood</defName>
+    <label>spirit beast blood</label>
+    <description>Blood from a spirit beast. Emits allot of heat, qi and fire element. Best kept outside to prevent fires.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/BeastBlood</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Stone_Drop</soundInteract>
+    <soundDrop>Stone_Drop</soundDrop>
+    <statBases>
+      <MarketValue>250</MarketValue>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>0.4</Mass> 
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.0</DeteriorationRate>
+    </statBases>
+    <burnableByRecipe>true</burnableByRecipe>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+	<comps>
+	  <li Class="Ascension.CompProperties_ConstantHeatPusher">
+        <heat>75</heat>
+      </li>
+	   <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>15</amount>
+      </li>
+	  <li Class="Ascension.CompProperties_ElementEmit">
+		<range>1</range>
+        <amount>25</amount>
+		<element>Fire</element>
+      </li>
+    </comps>
+	<tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <stackLimit>3</stackLimit>
+	<minRewardCount>3</minRewardCount>
+	<tradeability>All</tradeability>
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>50</allowedArchonexusCount>
+  </ThingDef>
+  
+    <ThingDef ParentName="ResourceBase">
+    <defName>AS_HeavensBreath</defName>
+    <label>heaven's breath</label>
+    <description>Breath of a heavenly tribulation stolen after its defeat. 10% chance to drop on tribulation defeat.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/HeavensBreath</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Stone_Drop</soundInteract>
+    <soundDrop>Stone_Drop</soundDrop>
+    <statBases>
+      <MarketValue>250</MarketValue>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>0.4</Mass> 
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.0</DeteriorationRate>
+    </statBases>
+    <burnableByRecipe>true</burnableByRecipe>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+	<comps>
+	  <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>10</amount>
+      </li>
+    </comps>
+	<tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <stackLimit>3</stackLimit>
+	<minRewardCount>3</minRewardCount>
+	<tradeability>All</tradeability>
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>50</allowedArchonexusCount>
+  </ThingDef>
+	
+	
   <ThingDef ParentName="ResourceBase">
     <defName>AS_Spiritleaf</defName>
     <label>spirit leaf</label>
@@ -501,7 +583,7 @@
 	<comps>
 	   <li Class="Ascension.CompProperties_GatherQi">
 		<range>4</range>
-        <amount>20</amount>
+        <amount>10</amount>
       </li>
 	  <li Class="Ascension.CompProperties_ElementEmit">
 		<range>3</range>

@@ -20,6 +20,8 @@ namespace Ascension
         public static ThingDef Mote_QiMistA;
         public static ThingDef Mote_QiMistB;
 
+        public static ThingDef AS_HeavensBreath;
+
         //misc stuffs
         public static HediffDef QiPool;
         public static HediffDef AS_SoulMend;

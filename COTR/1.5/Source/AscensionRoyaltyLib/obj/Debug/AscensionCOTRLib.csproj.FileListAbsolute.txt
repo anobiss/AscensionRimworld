@@ -1,0 +1,6 @@
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Ascension\COTR\1.5\Assemblies\AscensionCOTRLib.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Ascension\COTR\1.5\Assemblies\AscensionCOTRLib.pdb
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Ascension\COTR\1.5\Source\AscensionRoyaltyLib\obj\Debug\AscensionCOTRLib.csproj.AssemblyReference.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Ascension\COTR\1.5\Source\AscensionRoyaltyLib\obj\Debug\AscensionCOTRLib.csproj.CoreCompileInputs.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Ascension\COTR\1.5\Source\AscensionRoyaltyLib\obj\Debug\AscensionCOTRLib.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Ascension\COTR\1.5\Source\AscensionRoyaltyLib\obj\Debug\AscensionCOTRLib.pdb

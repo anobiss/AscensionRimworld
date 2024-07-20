@@ -11,6 +11,7 @@
     <costStuffCount>70</costStuffCount>
 	<costList>
 	  <AS_SpiritCrystal>7</AS_SpiritCrystal>
+	  <AS_HeavensBreath>1</AS_HeavensBreath>
 	</costList>
     <stuffCategories>
       <li>Fabric</li>

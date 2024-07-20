@@ -754,20 +754,21 @@ namespace Ascension
         }
 
         //used in tier progress method to make progress not go above 100
-        private static void ProgressTier(Realm_Hediff hediff, float progress)
+        private static void ProgressTier(Realm_Hediff hediff, float progress, bool percent = false)
         {
             //if they are at 100% we shouldnt add any severity and let breakthroughs do that.
-
             //calculate the percentage after progress for maths
             //since we give ascendant foundations from the parent method, we should use it to make it start at 1 severity. that way we can avoid complicated maths
-
-            
             //if its less than one we need to correct it
 
             if (hediff.Severity < 1)
             {
                 hediff.Severity = (1);
 
+            }
+            if (percent)//corrects progress amount if is percentage
+            {
+                progress *= hediff.maxProgress;
             }
             if (hediff.progress + progress < hediff.maxProgress)
             {
@@ -789,16 +790,14 @@ namespace Ascension
                         Find.LetterStack.ReceiveLetter("AS_CanBreakThrough".Translate(), "AS_CanBreakThroughDesc".Translate(hediff.pawn.NameFullColored.Named("PAWN"), hediff.CurStage.label.Named("REALM")), AscensionDefOf.AS_CultivationBreakthroughMessage, hediff.pawn);
                     }
                 }
-
             }
         }
 
         //We use this to increase tiers to prevent them from advancing a tier without a breakthrough.
-
-
+        
         //only used in tribulation for essence realms, and exercise in body realms
         //this part checks if they even have the hediff and if not gives it to them since the cultivator hediff should've done so. first stages have no buffs so are fine to give for free
-        public static void TierProgress(Pawn pawn,HediffDef hediffDef, float progress)
+        public static void TierProgress(Pawn pawn,HediffDef hediffDef, float progress, bool percent = false)
         {
             //checks if they have the cultivator hediff and if not gives it
             if (!pawn.health.hediffSet.HasHediff(AscensionDefOf.Cultivator))
@@ -818,7 +817,16 @@ namespace Ascension
                 }
             }
             Realm_Hediff hediff = (Realm_Hediff)pawn.health.hediffSet.GetFirstHediffOfDef(hediffDef, false);
-            ProgressTier(hediff, progress);
+
+            if (percent == true)
+            {
+                ProgressTier(hediff, progress, true);
+            }
+            else
+            {
+                ProgressTier(hediff, progress);
+            }
+            
         }
 
         public static void CauldronIncrease(Pawn pawn, float amount)

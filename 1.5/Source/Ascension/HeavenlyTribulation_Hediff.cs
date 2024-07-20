@@ -84,6 +84,7 @@ namespace Ascension
 
         private void CultivationReward(float amount)
         {
+            RollDivineBreath();
             Realm_Hediff essenceRealm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
             Realm_Hediff bodyRealm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm) as Realm_Hediff;
             if (essenceRealm != null)
@@ -111,7 +112,12 @@ namespace Ascension
         }
         private void RollDivineBreath()
         {
+            Random rnd = new Random();
             //10% chance to drop divine breath when defeated.
+            if ((float)rnd.NextDouble() > 0.9f)
+            {
+                GenPlace.TryPlaceThing(ThingMaker.MakeThing(AscensionDefOf.AS_HeavensBreath), pawn.Position, pawn.Map, ThingPlaceMode.Near );
+            }
 
         }
         public override void PostAdd(DamageInfo? dinfo)
