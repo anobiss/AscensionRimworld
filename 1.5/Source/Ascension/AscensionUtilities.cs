@@ -811,20 +811,27 @@ namespace Ascension
                 {
                     if (PawnUtility.ShouldSendNotificationAbout(hediff.pawn))
                     {
-                        Find.LetterStack.ReceiveLetter("AS_CanBreakThrough".Translate(), "AS_CanBreakThroughDesc".Translate(hediff.pawn.NameFullColored.Named("PAWN"), hediff.CurStage.label.Named("REALM")), AscensionDefOf.AS_CultivationBreakthroughMessage, hediff.pawn);
+                        if (!modSettings.disableProgressLetters)
+                        {
+                            Find.LetterStack.ReceiveLetter("AS_CanBreakThrough".Translate(), "AS_CanBreakThroughDesc".Translate(hediff.pawn.NameFullColored.Named("PAWN"), hediff.CurStage.label.Named("REALM")), AscensionDefOf.AS_CultivationBreakthroughMessage, hediff.pawn);
+                        }
                     }
                 }else if (hediff.Severity < 7)
                 {
                     if (PawnUtility.ShouldSendNotificationAbout(hediff.pawn))
                     {
-                        Find.LetterStack.ReceiveLetter("AS_CanBreakThrough".Translate(), "AS_CanBreakThroughDesc".Translate(hediff.pawn.NameFullColored.Named("PAWN"), hediff.CurStage.label.Named("REALM")), AscensionDefOf.AS_CultivationBreakthroughMessage, hediff.pawn);
+                        if (!modSettings.disableProgressLetters)
+                        {
+                            Find.LetterStack.ReceiveLetter("AS_CanBreakThrough".Translate(), "AS_CanBreakThroughDesc".Translate(hediff.pawn.NameFullColored.Named("PAWN"), hediff.CurStage.label.Named("REALM")), AscensionDefOf.AS_CultivationBreakthroughMessage, hediff.pawn);
+                        }
                     }
                 }
             }
         }
 
+        private static AscensionSettings modSettings = LoadedModManager.GetMod<AscensionMod>().GetSettings<AscensionSettings>();
         //We use this to increase tiers to prevent them from advancing a tier without a breakthrough.
-        
+
         //only used in tribulation for essence realms, and exercise in body realms
         //this part checks if they even have the hediff and if not gives it to them since the cultivator hediff should've done so. first stages have no buffs so are fine to give for free
         public static void TierProgress(Pawn pawn,HediffDef hediffDef, float progress, bool percent = false)
@@ -1042,7 +1049,10 @@ namespace Ascension
                         realmHediff.progress = 0;
                         if (PawnUtility.ShouldSendNotificationAbout(realmHediff.pawn))
                         {
-                            Find.LetterStack.ReceiveLetter(realmHediff.Label + " " + "AS_Breakthrough".Translate(), realmHediff.pawn.NameFullColored + " " + realmHediff.CurStage.extraTooltip, AscensionDefOf.AS_CultivationBreakthroughMessage, realmHediff.pawn);
+                            if (!modSettings.disableProgressLetters)
+                            {
+                                Find.LetterStack.ReceiveLetter(realmHediff.Label + " " + "AS_Breakthrough".Translate(), realmHediff.pawn.NameFullColored + " " + realmHediff.CurStage.extraTooltip, AscensionDefOf.AS_CultivationBreakthroughMessage, realmHediff.pawn);
+                            }
                         }
                     }
                     else if (realmHediff.Severity < maxSeverityCap) // this is okay right now because both realms have only 5
@@ -1051,7 +1061,10 @@ namespace Ascension
                         realmHediff.progress = 0;
                         if (PawnUtility.ShouldSendNotificationAbout(realmHediff.pawn))
                         {
-                            Find.LetterStack.ReceiveLetter(realmHediff.Label + " " + "AS_Breakthrough".Translate(), realmHediff.pawn.NameFullColored + " " + realmHediff.CurStage.extraTooltip, AscensionDefOf.AS_CultivationBreakthroughMessage, realmHediff.pawn);
+                            if (!modSettings.disableProgressLetters)
+                            {
+                                Find.LetterStack.ReceiveLetter(realmHediff.Label + " " + "AS_Breakthrough".Translate(), realmHediff.pawn.NameFullColored + " " + realmHediff.CurStage.extraTooltip, AscensionDefOf.AS_CultivationBreakthroughMessage, realmHediff.pawn);
+                            }
                         }
                     }
                     else if (realmHediff.Severity >= maxSeverityCap && realmHediff.def == AscensionDefOf.BodyRealm)// if its maxcap and its body we move onto essence realms
@@ -1086,7 +1099,11 @@ namespace Ascension
                         realmHediff.progress = 0;
                         if (PawnUtility.ShouldSendNotificationAbout(realmHediff.pawn))
                         {
-                            Find.LetterStack.ReceiveLetter(realmHediff.Label+" "+"AS_Breakthrough".Translate(), realmHediff.pawn.NameFullColored+" "+realmHediff.CurStage.extraTooltip, AscensionDefOf.AS_CultivationBreakthroughMessage, realmHediff.pawn);
+                            if (!modSettings.disableProgressLetters)
+                            {
+                                Find.LetterStack.ReceiveLetter(realmHediff.Label + " " + "AS_Breakthrough".Translate(), realmHediff.pawn.NameFullColored + " " + realmHediff.CurStage.extraTooltip, AscensionDefOf.AS_CultivationBreakthroughMessage, realmHediff.pawn);
+                            }
+
                         }
                     } else if (realmHediff.Severity < maxSeverityCap) // this is okay right now because both realms have only 5
                     {
@@ -1094,7 +1111,10 @@ namespace Ascension
                         realmHediff.progress = 0;
                         if (PawnUtility.ShouldSendNotificationAbout(realmHediff.pawn))
                         {
-                            Find.LetterStack.ReceiveLetter(realmHediff.Label + " " + "AS_Breakthrough".Translate(), realmHediff.pawn.NameFullColored +" "+ realmHediff.CurStage.extraTooltip, AscensionDefOf.AS_CultivationBreakthroughMessage, realmHediff.pawn);
+                            if (!modSettings.disableProgressLetters)
+                            {
+                                Find.LetterStack.ReceiveLetter(realmHediff.Label + " " + "AS_Breakthrough".Translate(), realmHediff.pawn.NameFullColored + " " + realmHediff.CurStage.extraTooltip, AscensionDefOf.AS_CultivationBreakthroughMessage, realmHediff.pawn);
+                            }
                         }
                     }else if (realmHediff.Severity >= maxSeverityCap && realmHediff.def == AscensionDefOf.BodyRealm)// if its maxcap and its body we move onto essence realms
                     {

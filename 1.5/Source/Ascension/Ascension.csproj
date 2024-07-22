@@ -69,11 +69,16 @@
     <Compile Include="AS_CompAbilityEffect_AddFuel.cs" />
     <Compile Include="AS_CompAbilityEffect_ChargeBattery.cs" />
     <Compile Include="AS_CompAbilityEffect_Explosion.cs" />
+    <Compile Include="AS_CompAbilityEffect_ShootThing.cs" />
     <Compile Include="AS_CompAbilityEffect_StrikeLightning.cs" />
+    <Compile Include="AS_CompAbilityEffect_ThingCircle.cs" />
+    <Compile Include="AS_CompAbilityEffect_ThingWall.cs" />
     <Compile Include="AS_CompProperties_AbilityExplosion.cs" />
     <Compile Include="AS_CompProperties_AbilityStrikeLightning.cs" />
+    <Compile Include="AS_CompProperties_AbilityThingCircle.cs" />
     <Compile Include="AS_CompProperties_AddFuel.cs" />
     <Compile Include="AS_CompProperties_ChargeBattery.cs" />
+    <Compile Include="AS_CompProperties_ThingWall.cs" />
     <Compile Include="CompAbilityEffect_AbilityQiCost.cs" />
     <Compile Include="CompAbilityEffect_BodyMelee.cs" />
     <Compile Include="CompAbilityEffect_HediffToggle.cs" />

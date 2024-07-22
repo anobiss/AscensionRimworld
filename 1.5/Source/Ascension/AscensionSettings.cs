@@ -22,9 +22,13 @@ namespace Ascension
         public float AbilityChance = 0.1f;
         public float PCChance = 0.1f;
         public float EssenceChance = 0.1f;
+        public bool disableProgressLetters = true;
+        public bool disableHTLetters = false;
 
         public override void ExposeData()
         {
+            Scribe_Values.Look(ref disableHTLetters, "disableHTLetters", false);
+            Scribe_Values.Look(ref disableProgressLetters, "disableProgressLetters", true);
             Scribe_Values.Look(ref displayQiGrid, "displayQiGrid", true);
             Scribe_Values.Look(ref displayElementGrid, "displayElementGrid", true);
             Scribe_Values.Look(ref humanoidOnlyBool, "humanoidOnlyBool");
@@ -62,6 +66,8 @@ namespace Ascension
             Widgets.BeginScrollView(outRect, ref scrollPosition, viewRect);
             listingStandard.Begin(viewRect);
 
+            listingStandard.CheckboxLabeled("AS_DisableHTLetters".Translate(), ref settings.disableHTLetters, "AS_DisableHTLettersDesc".Translate());
+            listingStandard.CheckboxLabeled("AS_DisablePLetters".Translate(), ref settings.disableProgressLetters, "AS_DisablePLettersDesc".Translate());
             listingStandard.CheckboxLabeled("AS_DisplayQi".Translate(), ref settings.displayQiGrid, "AS_DisplayQiDesc".Translate());
             listingStandard.CheckboxLabeled("AS_DisplayElement".Translate(), ref settings.displayElementGrid, "AS_DisplayElementDesc".Translate());
             listingStandard.CheckboxLabeled("AS_HumanoidCultivator".Translate(), ref settings.humanoidOnlyBool, "AS_HumanoidCultivatorDesc".Translate());

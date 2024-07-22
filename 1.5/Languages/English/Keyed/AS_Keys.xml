@@ -128,13 +128,19 @@
 
   <AS_Foundation>Foundation</AS_Foundation>
   
+  
+      <!-- Settings -->
+  
+  <AS_DisablePLetters>Disable Progress Letters/Notifications: </AS_DisablePLetters>
+  <AS_DisablePLettersDesc>Disable progress letters such as breakthrough possible. True by default due to these letters being a remanent of before the mod had auto-cultivation.</AS_DisablePLettersDesc>
+  
   <AS_DisplayQi>Display Gather Qi Grid: </AS_DisplayQi>
   <AS_DisplayQiDesc>Display the gather qi values on the map/screen.</AS_DisplayQiDesc>
   
   <AS_DisplayElement>Display Element Grid: </AS_DisplayElement>
   <AS_DisplayElementDesc>Display the element values on the map/screen.</AS_DisplayElementDesc>
   
-    <!-- Settings -->
+
   <AS_SMTickRate>Soul Mend Tick Rate:</AS_SMTickRate>
   <AS_SMTickRateDesc>The amount of ticks between each check if a pawn using soul mend is dead. Higher values means less lag with high amounts of soul menders but also a longer wait for resurrection.</AS_SMTickRateDesc>
 

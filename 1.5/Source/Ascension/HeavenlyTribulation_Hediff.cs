@@ -116,10 +116,11 @@ namespace Ascension
             //10% chance to drop divine breath when defeated.
             if ((float)rnd.NextDouble() > 0.9f)
             {
-                GenPlace.TryPlaceThing(ThingMaker.MakeThing(AscensionDefOf.AS_HeavensBreath), pawn.Position, pawn.Map, ThingPlaceMode.Near );
+                GenPlace.TryPlaceThing(ThingMaker.MakeThing(AscensionDefOf.AS_HeavensBreath), pawn.Position, pawn.Map, ThingPlaceMode.Near);
             }
 
         }
+        private static AscensionSettings settings = LoadedModManager.GetMod<AscensionMod>().GetSettings<AscensionSettings>();
         public override void PostAdd(DamageInfo? dinfo)
         {
             base.PostAdd(dinfo);
@@ -133,7 +134,10 @@ namespace Ascension
             Speed = speedOffset * AscensionUtilities.UpdateCultivationSpeed(cultivatorHediff);
             if (PawnUtility.ShouldSendNotificationAbout(pawn))
             {
-                Find.LetterStack.ReceiveLetter("AS_HTLetter".Translate(), "AS_HTLetterDesc".Translate(pawn.NameFullColored.Named("PAWN")), AscensionDefOf.AS_HeavenlyTribulationMessage, pawn);
+                if (!settings.disableHTLetters)
+                {
+                    Find.LetterStack.ReceiveLetter("AS_HTLetter".Translate(), "AS_HTLetterDesc".Translate(pawn.NameFullColored.Named("PAWN")), AscensionDefOf.AS_HeavenlyTribulationMessage, pawn);
+                }
             }
         }
         private int ResetStrikeTicks()
