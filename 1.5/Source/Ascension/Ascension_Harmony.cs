@@ -155,7 +155,7 @@ namespace Ascension
                                 realmHediff.Severity = randRealmStage;
                             }
 
-
+                            cultivatorHediff.element = AscensionUtilities.AssignElement();//assign for checking in scroll art reqs later
 
                             pawn.health.AddHediff(cultivatorHediff);
                             pawn.health.AddHediff(qiPool);
@@ -212,29 +212,43 @@ namespace Ascension
                                                 HediffComp_AddScrollAbility scrollAbilityComp = randomScrollHediff.TryGetComp<HediffComp_AddScrollAbility>();
                                                 if (scrollAbilityComp != null)
                                                 {
-                                                    //checks if pawn has required realms
-                                                    if (scrollAbilityComp.Props.reqEssence > 0)
+                                                    bool alreadyRemoved = false;
+                                                    //checks element requirement
+                                                    if (scrollAbilityComp.Props.reqElement != ElementEmitMapComponent.Element.None)
                                                     {
-                                                        if (RealmDef == AscensionDefOf.BodyRealm)
+                                                        if (cultivatorHediff.element != scrollAbilityComp.Props.reqElement)
                                                         {
                                                             randomScrollSetReqList.RemoveAt(reqi);
-                                                        }else if ((int)Math.Floor(realmHediff.Severity) < scrollAbilityComp.Props.reqEssence)
-                                                        {
-                                                            randomScrollSetReqList.RemoveAt(reqi);
+                                                            alreadyRemoved = true;
                                                         }
-                                                    }else if (scrollAbilityComp.Props.reqBody > 0)
+                                                    }
+                                                    if (!alreadyRemoved)
                                                     {
-                                                        if (RealmDef != AscensionDefOf.EssenceRealm)
+                                                        if (scrollAbilityComp.Props.reqEssence > 0)//checks if pawn has required realms
                                                         {
-                                                            if ((int)Math.Floor(realmHediff.Severity) < scrollAbilityComp.Props.reqBody)
+                                                            if (RealmDef == AscensionDefOf.BodyRealm)
+                                                            {
+                                                                randomScrollSetReqList.RemoveAt(reqi);
+                                                            }
+                                                            else if ((int)Math.Floor(realmHediff.Severity) < scrollAbilityComp.Props.reqEssence)
                                                             {
                                                                 randomScrollSetReqList.RemoveAt(reqi);
                                                             }
                                                         }
+                                                        else if (scrollAbilityComp.Props.reqBody > 0)
+                                                        {
+                                                            if (RealmDef != AscensionDefOf.EssenceRealm)
+                                                            {
+                                                                if ((int)Math.Floor(realmHediff.Severity) < scrollAbilityComp.Props.reqBody)
+                                                                {
+                                                                    randomScrollSetReqList.RemoveAt(reqi);
+                                                                }
+                                                            }
+                                                        }
                                                     }
                                                 }
-
                                             }
+
                                             //sets scrollset to new one after removing all ones with too high realm reqs
                                             randomScrollSet = new HashSet<HediffDef>(randomScrollSetReqList);//maybe this is returning null?
                                         }

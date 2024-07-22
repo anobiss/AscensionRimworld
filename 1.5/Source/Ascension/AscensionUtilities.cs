@@ -3,11 +3,41 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
+using Random = System.Random;
 
 namespace Ascension
 {
     public class AscensionUtilities
     {
+
+        public static string TranslateElement(ElementEmitMapComponent.Element element)
+        {
+            return element switch
+            {
+                ElementEmitMapComponent.Element.Earth => "AS_Earth",
+                ElementEmitMapComponent.Element.Metal => "AS_Metal",
+                ElementEmitMapComponent.Element.Water => "AS_Water",
+                ElementEmitMapComponent.Element.Fire => "AS_Fire",
+                ElementEmitMapComponent.Element.Wood => "AS_Wood",
+                _ => "AS_None"
+            };
+        }
+        public static ElementEmitMapComponent.Element AssignElement()
+        {
+            ElementEmitMapComponent.Element[] possibleElements = new ElementEmitMapComponent.Element[]
+            {
+            ElementEmitMapComponent.Element.Water,
+            ElementEmitMapComponent.Element.Fire,
+            ElementEmitMapComponent.Element.Earth,
+            ElementEmitMapComponent.Element.Metal,
+            ElementEmitMapComponent.Element.Wood
+            };
+            Random random = new();
+            return possibleElements[random.Next(possibleElements.Length)];
+        }
+
+
+
         #region Realm Bonuses
         //essence realm max qi rates
         public static readonly float[] maxQiRates = { 2f, 10f, 100f, 500f, 1000f, 10000f, 120000f };

@@ -66,6 +66,14 @@
     <Compile Include="Ascension_Harmony.cs" />
     <Compile Include="Ascension_PlaySettings_DoPlaySettingsGlobalControls_Patch.cs" />
     <Compile Include="Ascension_PostHarmony.cs" />
+    <Compile Include="AS_CompAbilityEffect_AddFuel.cs" />
+    <Compile Include="AS_CompAbilityEffect_ChargeBattery.cs" />
+    <Compile Include="AS_CompAbilityEffect_Explosion.cs" />
+    <Compile Include="AS_CompAbilityEffect_StrikeLightning.cs" />
+    <Compile Include="AS_CompProperties_AbilityExplosion.cs" />
+    <Compile Include="AS_CompProperties_AbilityStrikeLightning.cs" />
+    <Compile Include="AS_CompProperties_AddFuel.cs" />
+    <Compile Include="AS_CompProperties_ChargeBattery.cs" />
     <Compile Include="CompAbilityEffect_AbilityQiCost.cs" />
     <Compile Include="CompAbilityEffect_BodyMelee.cs" />
     <Compile Include="CompAbilityEffect_HediffToggle.cs" />

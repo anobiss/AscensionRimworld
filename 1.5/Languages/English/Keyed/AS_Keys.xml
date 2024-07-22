@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
+
+
   <AS_QiPoolDisplay>{REALM} Realm - {CURRENT} / {MAX}</AS_QiPoolDisplay>
 
     <!-- display realms in dao tab-->
@@ -222,6 +224,7 @@
   <AS_AnimaCJobDesc>Meditate for 6 hours divided by cultivation speed to convert 2 + 2% max qi into Anima to grant more max qi equal to the amount converted.</AS_AnimaCJobDesc>
   
     <!-- Scrolls -->
+  <AS_ScrollEReq>Scroll requires cultivator element: {ELEMENT}</AS_ScrollEReq>
   <AS_ScrollAReq>Scroll requires art: {REQ}</AS_ScrollAReq>
   <AS_ScrollHERReq>Scroll requires higher essence realm: {REALM}</AS_ScrollHERReq>
   <AS_ScrollHBRReq>Scroll requires higher body realm: {REALM}</AS_ScrollHBRReq>

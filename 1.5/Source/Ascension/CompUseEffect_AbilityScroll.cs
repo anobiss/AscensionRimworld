@@ -33,6 +33,7 @@ namespace Ascension
 
         public override AcceptanceReport CanBeUsedBy(Pawn p)
         {
+            Cultivator_Hediff cultivatorHediff = p.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
             Scroll_Hediff scrollHediff = HediffMaker.MakeHediff(Props.scrollHediffDef, p) as Scroll_Hediff;
             Hediff essenceHediff = p.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm);
             Hediff bodyHediff = p.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm);
@@ -40,6 +41,13 @@ namespace Ascension
             HediffComp_AddScrollReq scrollReqComp = scrollHediff.TryGetComp<HediffComp_AddScrollReq>();
             if (scrollAbilityComp != null)
             {
+                if (scrollAbilityComp.Props.reqElement != ElementEmitMapComponent.Element.None)
+                {
+                    if (cultivatorHediff == null || cultivatorHediff.element != scrollAbilityComp.Props.reqElement)
+                    {
+                        return "AS_ScrollEReq".Translate(AscensionUtilities.TranslateElement(scrollAbilityComp.Props.reqElement).Translate().Named("ELEMENT"));
+                    }
+                }
                 if (scrollAbilityComp.Props.reqEssence != 0)
                 {
                     if (essenceHediff == null || essenceHediff.Severity < scrollAbilityComp.Props.reqEssence)

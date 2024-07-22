@@ -213,74 +213,163 @@
     </comps>
   </AbilityDef>
   
-        <!--
-      Body Art Abilities
-	  
-	  
-  <AbilityCategoryDef>
-    <defName>BodyTechnique</defName>
-    <displayOrder>1001</displayOrder>
-  </AbilityCategoryDef>
   
-  <AbilityDef ParentName="AbilityTouchBase">
-    <defName>SharpenedChop</defName>
-    <label>sharpened chop</label>
-    <description>Use a sharpened chop on the target. Damage scales with manipulation.</description>
-    <iconPath>UI/Icons/Genes/Gene_Bloodfeeder</iconPath>
-    <category>BodyTechnique</category>
-    <displayOrder>100</displayOrder>
-    <warmupEffecter>Bloodfeed_Warmup</warmupEffecter>
-    <warmupStartSound>Bloodfeed_Cast</warmupStartSound>
-    <hostile>false</hostile>
-    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+      <!-- Lightning Bolt: strikes lightning at a specific location at the cost of qi-->
+    <AbilityDef>
+    <defName>AS_LightningBolt</defName>
+    <label>lightning bolt</label>
+    <description>Manifest electricity with qi to create a bolt of lightning that summons a lightning strike upon its target.</description>
+    <iconPath>UI/Abilities/LightningBolt</iconPath>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <aiCanUse>true</aiCanUse>
     <verbProperties>
-      <verbClass>Verb_CastAbilityTouch</verbClass>
-      <drawAimPie>false</drawAimPie>
-      <range>-1</range>
-      <warmupTime>2</warmupTime>
-      <targetParams>
-        <canTargetSelf>false</canTargetSelf>
-      </targetParams>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>14</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>QiBullet</soundCast>
     </verbProperties>
     <comps>
-      <li Class="CompProperties_AbilityFleckOnTarget">
-        <fleckDef>BloodSplash</fleckDef>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>1200</cost>
+      </li>
+      <li Class="CompProperties_AbilityLaunchProjectile">
+        <projectileDef>AS_LightningBoltBullet</projectileDef>
+      </li>
+	  <li Class="Ascension.AS_CompProperties_AbilityStrikeLightning">
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>AS_LightningBoltBullet</defName>
+    <label>lightning bolt</label>
+    <graphicData>
+      <texPath>Things/Projectile/QiBullet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>EMP</damageDef>
+      <damageAmountBase>5</damageAmountBase>
+      <armorPenetrationBase>1</armorPenetrationBase>
+      <stoppingPower>1</stoppingPower>
+      <speed>250</speed>
+    </projectile>
+  </ThingDef>
+  
+        <!-- Lightning Charge: charge any battery at the cost of qi-->
+    <AbilityDef>
+    <defName>AS_LightningCharge</defName>
+    <label>lightning charge</label>
+    <description>Manifest electricity with Qi to charge batteries with 700wd of power.</description>
+    <iconPath>UI/Abilities/LightningCharge</iconPath>
+    <cooldownTicksRange>2500</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <aiCanUse>false</aiCanUse>
+	<hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <verbProperties>
+	  <ai_IsWeapon>false</ai_IsWeapon>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>14</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>QiBullet</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>7000</cost>
+      </li>
+      <li Class="CompProperties_AbilityLaunchProjectile">
+        <projectileDef>AS_LightningChargeBullet</projectileDef>
+      </li>
+	  <li Class="Ascension.AS_CompProperties_ChargeBattery">
+        <charge>700</charge>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>AS_LightningChargeBullet</defName>
+    <label>lightning charge</label>
+    <graphicData>
+      <texPath>Things/Projectile/QiBullet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>EMP</damageDef>
+      <damageAmountBase>0</damageAmountBase>
+      <armorPenetrationBase>0</armorPenetrationBase>
+      <stoppingPower>0</stoppingPower>
+      <speed>250</speed>
+    </projectile>
+  </ThingDef>
+  
+  
+      <!-- Qi Explosion: creates an explosion at a specific location at the cost of qi-->
+    <AbilityDef>
+    <defName>AS_QiExplosion</defName>
+    <label>qi explosion</label>
+    <description>Manifest an explosion at the target using qi.</description>
+    <iconPath>UI/Abilities/QiExplosion</iconPath>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <aiCanUse>true</aiCanUse>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>14</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>QiBullet</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>1200</cost>
+      </li>
+	  <li Class="Ascension.AS_CompProperties_AbilityExplosion">
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
       </li>
     </comps>
   </AbilityDef>
   
-  <AbilityDef ParentName="AbilityTouchBase">
-    <defName>HardenedPunch</defName>
-    <label>hardened punch</label>
-    <description>Use a hardened punch on the target. Damage scales with manipulation.</description>
-    <iconPath>UI/Icons/Genes/Gene_Bloodfeeder</iconPath>
-    <category>BodyTechnique</category>
-    <displayOrder>100</displayOrder>
-    <warmupEffecter>Bloodfeed_Warmup</warmupEffecter>
-    <warmupStartSound>Bloodfeed_Cast</warmupStartSound>
-    <hostile>false</hostile>
+        <!-- Controlled Combustion: Fuel any combustion powered device via many small precisely controlled explosions within the engine itself.-->
+    <AbilityDef>
+    <defName>AS_ControlledCombustion</defName>
+    <label>controlled combustion</label>
+    <description>Fuel any combustion powered device via many small precisely controlled qi explosions within the engine itself.</description>
+    <iconPath>UI/Abilities/ControlledCombustion</iconPath>
+    <cooldownTicksRange>2500</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <aiCanUse>false</aiCanUse>
+	<hostile>false</hostile>
     <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
     <verbProperties>
-      <verbClass>Verb_CastAbilityTouch</verbClass>
-      <drawAimPie>false</drawAimPie>
-      <range>-1</range>
-      <warmupTime>2</warmupTime>
-      <targetParams>
-        <canTargetSelf>false</canTargetSelf>
-      </targetParams>
+	  <ai_IsWeapon>false</ai_IsWeapon>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>14</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>QiBullet</soundCast>
     </verbProperties>
     <comps>
-      <li Class="CompProperties_AbilityFleckOnTarget">
-        <fleckDef>BloodSplash</fleckDef>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>7000</cost>
+      </li>
+	  <li Class="Ascension.AS_CompProperties_AddFuel">
+        <fuel>70</fuel>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
       </li>
     </comps>
   </AbilityDef>
-	  
-	  
-	  
-	  
-      -->
-  
   
   
       <!--

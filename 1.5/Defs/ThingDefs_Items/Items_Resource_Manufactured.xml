@@ -772,4 +772,89 @@
     </comps>
 	<allowedArchonexusCount>100</allowedArchonexusCount>
   </ThingDef>
+  
+    <ThingDef ParentName="ResourceBase">
+    <defName>BasicLightningScroll</defName>
+    <label>Basic Lightning Arts Scroll</label>
+    <description>A basic Lightning Arts scroll, capable of teaching those with the foundation establisment essence realm or higher: Lightning Bolt and Lightning Charge abilities.</description>
+    <graphicData>
+      <texPath>Things/Item/Misc/BasicLightningScroll</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stackLimit>12</stackLimit>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <statBases>
+      <MaxHitPoints>12</MaxHitPoints>
+      <MarketValue>555</MarketValue>
+      <Mass>0.8</Mass>
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.0</DeteriorationRate>
+    </statBases>
+    <intricate>true</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags>
+      <li>RewardStandardHighFreq</li>
+    </thingSetMakerTags>
+	<tradeability>None</tradeability>
+	<comps>
+      <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Use {0_label}</useLabel><!-- text_todo -->
+        <useDuration>0</useDuration>
+        <warmupMote>Mote_QiMistStencil</warmupMote>
+      </li>
+      <li Class="Ascension.CompProperties_UseEffect_AbilityScroll"><!-- abilities are defined in the hediff comps -->
+		<scrollHediffDef>AS_BasicLightningArts</scrollHediffDef>
+      </li>
+    </comps>
+	<allowedArchonexusCount>100</allowedArchonexusCount>
+  </ThingDef>
+  
+      <ThingDef ParentName="ResourceBase">
+    <defName>BasicExplosionScroll</defName>
+    <label>Basic Explosion Arts Scroll</label>
+    <description>A basic Explosion Arts scroll, capable of teaching those with the foundation establisment essence realm or higher: Qi Explosion and Controlled Combustion abilities.</description>
+    <graphicData>
+      <texPath>Things/Item/Misc/BasicExplosionScroll</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stackLimit>12</stackLimit>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <statBases>
+      <MaxHitPoints>12</MaxHitPoints>
+      <MarketValue>555</MarketValue>
+      <Mass>0.8</Mass>
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.0</DeteriorationRate>
+    </statBases>
+    <intricate>true</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags>
+      <li>RewardStandardHighFreq</li>
+    </thingSetMakerTags>
+	<tradeability>None</tradeability>
+	<comps>
+      <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Use {0_label}</useLabel><!-- text_todo -->
+        <useDuration>0</useDuration>
+        <warmupMote>Mote_QiMistStencil</warmupMote>
+      </li>
+      <li Class="Ascension.CompProperties_UseEffect_AbilityScroll"><!-- abilities are defined in the hediff comps -->
+		<scrollHediffDef>AS_BasicExplosionArts</scrollHediffDef>
+      </li>
+    </comps>
+	<allowedArchonexusCount>100</allowedArchonexusCount>
+  </ThingDef>
+  
 </Defs>

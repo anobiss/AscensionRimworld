@@ -148,6 +148,22 @@ namespace Ascension
             Rect viewRect = rect;
             viewRect.height = 0;
 
+
+            if (!selectedPawn.health.hediffSet.hediffs.NullOrEmpty())
+            {
+                foreach (Hediff hediff in selectedPawn.health.hediffSet.hediffs)
+                {
+                    HediffDef hediffDef = hediff.def;
+                    if (AscensionStaticStartUtils.ScrollHediffList.Contains(hediffDef))
+                    {
+                        Scroll_Hediff scrollHediff = hediff as Scroll_Hediff;
+                        if (scrollHediff != null)//do the technique bars here
+                        {
+                            viewRect.height += 100f;
+                        }
+                    }
+                }
+            }
             Widgets.BeginScrollView(rect, ref scrollPosition, viewRect);
             float curTechBarY = 0;// keeps track of current total height for placing new ones.
             float num = rect.x + 17f;
@@ -168,7 +184,7 @@ namespace Ascension
                             GUI.color = scrollHediff.LabelColor;
                             Widgets.Label(techLabelRect, scrollHediff.Label);
                             curTechBarY += techLabelRect.height;
-                            viewRect.height += techLabelRect.height;
+                            viewRect.height += techLabelRect.height+ 50f;
                             DrawTechniqueAbilities(rect, scrollHediff, curTechBarY+10f, curY);//does abilities and the buttons
                         }
                     }
@@ -644,7 +660,7 @@ namespace Ascension
 
             if (qiGatherMapComp != null && elementEmitMapComp != null)
             {
-                string elementText = TranslateElement(CultivatorHediff.element);
+                string elementText = AscensionUtilities.TranslateElement(CultivatorHediff.element);
                 Widgets.Label(qiTileRect,
                     "AS_CurrentElement".Translate(elementText.Translate().Named("ELEMENT"),
                     elementTile.Named("AMOUNT")) +
@@ -695,19 +711,6 @@ namespace Ascension
                     }
                 }
             }
-        }
-
-        private static string TranslateElement(ElementEmitMapComponent.Element element)
-        {
-            return element switch
-            {
-                ElementEmitMapComponent.Element.Earth => "AS_Earth",
-                ElementEmitMapComponent.Element.Metal => "AS_Metal",
-                ElementEmitMapComponent.Element.Water => "AS_Water",
-                ElementEmitMapComponent.Element.Fire => "AS_Fire",
-                ElementEmitMapComponent.Element.Wood => "AS_Wood",
-                _ => "AS_None"
-            };
         }
 
         private static void DrawHighlightsAndTooltips(Rect rect, Rect qiTileRect, Rect innerCRect)
@@ -904,7 +907,7 @@ namespace Ascension
 
             elementEmitMapComp = CultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
             qiGatherMapComp = CultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
-            elementText = TranslateElement(CultivatorHediff.element);
+            elementText = AscensionUtilities.TranslateElement(CultivatorHediff.element);
 
             qiTile = qiGatherMapComp.GetQiGatherAt(selectedPawn.Position.x, selectedPawn.Position.z);
             elementTile = elementEmitMapComp.CalculateElementValueAt(new IntVec2(selectedPawn.Position.x, selectedPawn.Position.z), CultivatorHediff.element);

@@ -48,7 +48,7 @@ namespace Ascension
             base.PostMake();
             if (element == ElementEmitMapComponent.Element.None)
             {
-                AssignElement();
+                element = AscensionUtilities.AssignElement();
             }
         }
 
@@ -57,26 +57,8 @@ namespace Ascension
             base.PostAdd(dinfo);
             if (element == ElementEmitMapComponent.Element.None)
             {
-                AssignElement();
+                element = AscensionUtilities.AssignElement();
             }
-        }
-        private void AssignElement()
-        {
-            // Array of possible elements
-            ElementEmitMapComponent.Element[] possibleElements = new ElementEmitMapComponent.Element[]
-            {
-            ElementEmitMapComponent.Element.Water,
-            ElementEmitMapComponent.Element.Fire,
-            ElementEmitMapComponent.Element.Earth,
-            ElementEmitMapComponent.Element.Metal,
-            ElementEmitMapComponent.Element.Wood
-            };
-
-            // Create a new random number generator
-            Random random = new Random();
-
-            // Assign a random element from the array
-            element = possibleElements[random.Next(possibleElements.Length)];
         }
         public override bool Visible
         {

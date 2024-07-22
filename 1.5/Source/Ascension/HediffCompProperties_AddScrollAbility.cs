@@ -10,6 +10,7 @@ namespace Ascension
         public List<AbilityDef> scrollCompAbilityDefList = new List<AbilityDef>(); // stores abilities given from scroll comps
         public int reqEssence = 0;
         public int reqBody = 0;
+        public ElementEmitMapComponent.Element reqElement = ElementEmitMapComponent.Element.None;//none
         public HediffCompProperties_AddScrollAbility()
         {
             compClass = typeof(HediffComp_AddScrollAbility);
