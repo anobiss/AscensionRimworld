@@ -35,10 +35,13 @@ namespace Ascension
         }
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
-            amount = Props.amount * parent.stackCount;
+            amount = QiAmount(parent.stackCount);
             range = Props.range;
             qiGatherMapComp = parent.Map.GetComponent<QiGatherMapComponent>();
-            qiGatherMapComp.AddQiGatherAt(parent.Position.x, parent.Position.z, Props.range, amount);//use calced amount
+            if (parent != null && qiGatherMapComp != null)
+            {
+                qiGatherMapComp.AddQiGatherAt(parent.Position.x, parent.Position.z, range, QiAmount(parent.stackCount));
+            }
             base.PostSpawnSetup(respawningAfterLoad);
         }
         public override void PreAbsorbStack(Thing otherStack, int count)
@@ -46,28 +49,32 @@ namespace Ascension
             base.PreAbsorbStack(otherStack, count);
             if (otherStack != null && qiGatherMapComp != null)
             {
-                int addedQiAmount = Props.amount * otherStack.stackCount;
-                qiGatherMapComp.AddQiGatherAt(parent.Position.x, parent.Position.z, range, addedQiAmount);
-                amount += addedQiAmount;
+                qiGatherMapComp.AddQiGatherAt(parent.Position.x, parent.Position.z, range, QiAmount(otherStack.stackCount));
             }
         }
-        public override void PostSplitOff(Thing piece)
+        public override void PostSplitOff(Thing piece)//done for each piece?
         {
             base.PostSplitOff(piece);
-            if (piece != null && qiGatherMapComp != null)
+            if (piece != null && parent.Spawned && qiGatherMapComp != null)
             {
-                int removedQiAmount = Props.amount * piece.stackCount;
-                qiGatherMapComp.RemoveQiGatherAt(parent.Position.x, parent.Position.z, Props.range, removedQiAmount);
-                amount -= removedQiAmount;
-
+                qiGatherMapComp.RemoveQiGatherAt(parent.Position.x, parent.Position.z, range, QiAmount(piece.stackCount));
+                //Log.Message("PostSplitOff removed qi amount is" + QiAmount(piece.stackCount));
             }
+        }
+        public int QiAmount(int stackCount)
+        {
+            return Props.amount * stackCount;
         }
         public override void PostDeSpawn(Map map)
         {
             if (map != null)
             {
                 qiGatherMapComp = map.GetComponent<QiGatherMapComponent>();
-                qiGatherMapComp.RemoveQiGatherAt(parent.Position.x, parent.Position.z, Props.range, amount);//why we store amount is to keep track of proper amount to remove when despawned.
+                if (parent != null && qiGatherMapComp != null)
+                {
+                    qiGatherMapComp.RemoveQiGatherAt(parent.Position.x, parent.Position.z, range, QiAmount(parent.stackCount));
+                    //Log.Message("PostDeSpawn removed qi amount is" +  QiAmount(parent.stackCount));
+                }
             }
             base.PostDeSpawn(map);
         }

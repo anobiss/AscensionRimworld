@@ -71,39 +71,54 @@ namespace Ascension
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
-            amount = Props.amount * parent.stackCount;
+            amount = ElementAmount(parent.stackCount);
             range = Props.range;
             element = Props.element;
             qiGatherMapComp = parent.Map.GetComponent<ElementEmitMapComponent>();
-            qiGatherMapComp.AddElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, amount, GetPropsElement(element));
+            if (parent != null && qiGatherMapComp != null)
+            {
+                qiGatherMapComp.AddElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, ElementAmount(parent.stackCount), GetPropsElement(element));
+            }
+            
             base.PostSpawnSetup(respawningAfterLoad);
         }
 
         public override void PreAbsorbStack(Thing otherStack, int count)
         {
+
             base.PreAbsorbStack(otherStack, count);
             if (otherStack != null && qiGatherMapComp != null)
             {
-                int addedElementAmount = Props.amount * otherStack.stackCount;
-                qiGatherMapComp.AddElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, addedElementAmount, GetPropsElement(element));
-                amount += addedElementAmount;
+                qiGatherMapComp.AddElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, ElementAmount(otherStack.stackCount), GetPropsElement(element));
             }
         }
 
         public override void PostSplitOff(Thing piece)
         {
             base.PostSplitOff(piece);
-            if (piece != null && qiGatherMapComp != null)
+            if (piece != null && parent.Spawned && qiGatherMapComp != null)
             {
-                int removedElementAmount = Props.amount * piece.stackCount;
-                qiGatherMapComp.RemoveElementAt(new IntVec2(parent.Position.x, parent.Position.z), Props.range, removedElementAmount, GetPropsElement(Props.element));
-                amount -= removedElementAmount;
+                qiGatherMapComp.RemoveElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, ElementAmount(piece.stackCount), GetPropsElement(Props.element));
+                //Log.Message("PostSplitOff removed element amount is" + ElementAmount(piece.stackCount));
             }
+        }
+        public int ElementAmount(int stackCount)
+        {
+            return Props.amount * stackCount;
         }
 
         public override void PostDeSpawn(Map map)
         {
-            qiGatherMapComp.RemoveElementAt(new IntVec2 (parent.Position.x, parent.Position.z), Props.range, amount, GetPropsElement(Props.element));
+            if (map != null)
+            {
+                qiGatherMapComp = map.GetComponent<ElementEmitMapComponent>();
+                if (parent != null && qiGatherMapComp != null)
+                {
+                    qiGatherMapComp.RemoveElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, ElementAmount(parent.stackCount), GetPropsElement(Props.element));
+                    //Log.Message("PostDeSpawn removed element amount is" + ElementAmount(parent.stackCount));
+                }
+            }
+            
             base.PostDeSpawn(map);
         }
         private static ElementEmitMapComponent.Element GetPropsElement(string elementText)
@@ -141,3 +156,5 @@ namespace Ascension
         //}
     }
 }
+
+
