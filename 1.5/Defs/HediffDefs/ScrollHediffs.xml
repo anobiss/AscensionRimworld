@@ -135,6 +135,91 @@
     </comps>
   </HediffDef>
   
+    <HediffDef>
+    <defName>AS_BasicStoneArts</defName>
+	<label>Basic Stone Arts</label>
+	<description>Basic Stone Arts, includes the following abilities: Stone Shot, Stone Wall and Stone Circle.</description>
+    <hediffClass>Ascension.Scroll_Hediff</hediffClass>
+	<defaultLabelColor>(1.0, 1.0, 0.2)</defaultLabelColor>
+    <isBad>false</isBad>
+	<comps>
+      <li Class="Ascension.HediffCompProperties_AddScrollAbility">
+		<scrollCompAbilityDefList>
+			<li>AS_StoneShot</li>
+			<li>AS_StoneWall</li>
+			<li>AS_StoneCircle</li>
+		</scrollCompAbilityDefList>
+		<reqEssence>4</reqEssence>
+		<reqElement>Earth</reqElement>
+      </li>
+	  <li Class="Ascension.HediffCompProperties_AddScrollReq">
+		<reqHediffsList>
+			<li>BasicQiArts</li>
+		</reqHediffsList>
+      </li>
+    </comps>
+  </HediffDef>
+  
+    <HediffDef>
+    <defName>AS_BasicIceArts</defName>
+	<label>Basic Ice Arts</label>
+	<description>Basic Ice Arts, includes the following abilities: Ice Shot, Ice Wall and Ice Circle.</description>
+    <hediffClass>Ascension.Scroll_Hediff</hediffClass>
+	<defaultLabelColor>(1.0, 1.0, 0.2)</defaultLabelColor>
+    <isBad>false</isBad>
+	<comps>
+      <li Class="Ascension.HediffCompProperties_AddScrollAbility">
+		<scrollCompAbilityDefList>
+			<li>AS_IceShot</li>
+			<li>AS_IceWall</li>
+			<li>AS_IceCircle</li>
+		</scrollCompAbilityDefList>
+		<reqEssence>4</reqEssence>
+		<reqElement>Water</reqElement>
+      </li>
+	  <li Class="Ascension.HediffCompProperties_AddScrollReq">
+		<reqHediffsList>
+			<li>BasicQiArts</li>
+		</reqHediffsList>
+      </li>
+    </comps>
+  </HediffDef>
+  
+  <!-- WIP Herbal Arts
+  
+     <HediffDef>
+    <defName>AS_BasicHerbalArts</defName>
+	<label>Basic Herbal Arts</label>
+	<description>Basic Herbal Arts, includes the following abilities: Stun Seed, Growth Skip.</description>
+    <hediffClass>Ascension.Scroll_Hediff</hediffClass>
+	<defaultLabelColor>(1.0, 1.0, 0.2)</defaultLabelColor>
+    <isBad>false</isBad>
+	<comps>
+      <li Class="Ascension.HediffCompProperties_AddScrollAbility">
+		<scrollCompAbilityDefList>
+			<li>AS_StunSeed</li>
+			<li>AS_GrowthSkip</li>
+		</scrollCompAbilityDefList>
+		<reqEssence>4</reqEssence>
+		<reqElement>Wood</reqElement>
+      </li>
+	  <li Class="Ascension.HediffCompProperties_AddScrollReq">
+		<reqHediffsList>
+			<li>BasicQiArts</li>
+		</reqHediffsList>
+      </li>
+    </comps>
+  </HediffDef>
+  
+  -->
+
+  
+  
+  
+  
+  
+  
+  
         <!--
       WIP Scrolls
 	  

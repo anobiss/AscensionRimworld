@@ -78,6 +78,8 @@
     <Compile Include="AS_CompProperties_AbilityThingCircle.cs" />
     <Compile Include="AS_CompProperties_AddFuel.cs" />
     <Compile Include="AS_CompProperties_ChargeBattery.cs" />
+    <Compile Include="AS_CompProperties_ShootThing.cs" />
+    <Compile Include="AS_CompProperties_ThingCircle.cs" />
     <Compile Include="AS_CompProperties_ThingWall.cs" />
     <Compile Include="CompAbilityEffect_AbilityQiCost.cs" />
     <Compile Include="CompAbilityEffect_BodyMelee.cs" />

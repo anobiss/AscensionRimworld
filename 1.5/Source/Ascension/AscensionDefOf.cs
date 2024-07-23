@@ -7,6 +7,7 @@ namespace Ascension
     [DefOf]
     public static class AscensionDefOf
     {
+        public static ThingDef Slate;
         public static KeyBindingDef ToggleQiDisplay;
         public static KeyBindingDef ToggleElementDisplay;
 

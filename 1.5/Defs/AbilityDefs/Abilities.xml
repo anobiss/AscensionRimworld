@@ -214,6 +214,8 @@
   </AbilityDef>
   
   
+          <!-- Lightning arts-->
+  
       <!-- Lightning Bolt: strikes lightning at a specific location at the cost of qi-->
     <AbilityDef>
     <defName>AS_LightningBolt</defName>
@@ -266,6 +268,8 @@
     <label>lightning charge</label>
     <description>Manifest electricity with Qi to charge batteries with 700wd of power.</description>
     <iconPath>UI/Abilities/LightningCharge</iconPath>
+	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
     <cooldownTicksRange>2500</cooldownTicksRange>
     <category>QiTechnique</category>
     <displayOrder>200</displayOrder>
@@ -311,6 +315,8 @@
   </ThingDef>
   
   
+        <!-- explosion arts-->
+  
       <!-- Qi Explosion: creates an explosion at a specific location at the cost of qi-->
     <AbilityDef>
     <defName>AS_QiExplosion</defName>
@@ -345,6 +351,8 @@
     <label>controlled combustion</label>
     <description>Fuel any combustion powered device via many small precisely controlled qi explosions within the engine itself.</description>
     <iconPath>UI/Abilities/ControlledCombustion</iconPath>
+	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
     <cooldownTicksRange>2500</cooldownTicksRange>
     <category>QiTechnique</category>
     <displayOrder>200</displayOrder>
@@ -372,6 +380,334 @@
   </AbilityDef>
   
   
+		<!-- stone arts-->
+  
+  		<!-- Stone Shot: Shoot slate at the target-->
+    <AbilityDef>
+    <defName>AS_StoneShot</defName>
+    <label>stone shot</label>
+    <description>Manifest stone with qi to shoot stone at the target.</description>
+    <iconPath>UI/Abilities/StoneShot</iconPath>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <aiCanUse>true</aiCanUse>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>14</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>QiBullet</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>1200</cost>
+      </li>
+      <li Class="CompProperties_AbilityLaunchProjectile">
+        <projectileDef>AS_StoneShotBullet</projectileDef>
+      </li>
+	  <li Class="Ascension.AS_CompProperties_ShootThing">
+        <shotThing>Slate</shotThing>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>AS_StoneShotBullet</defName>
+    <label>stone bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/StoneShot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>5</damageAmountBase>
+      <armorPenetrationBase>1</armorPenetrationBase>
+      <stoppingPower>1</stoppingPower>
+      <speed>90</speed>
+    </projectile>
+  </ThingDef>
+  
+    		<!-- Stone Circle: Encircle the target in stone.-->
+    <AbilityDef>
+    <defName>AS_StoneCircle</defName>
+    <label>stone circle</label>
+    <description>Encircle the target in stone manifested by qi.</description>
+    <iconPath>UI/Abilities/StoneCircle</iconPath>
+	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <aiCanUse>false</aiCanUse>
+	<hostile>false</hostile>
+    <verbProperties>
+	  <ai_IsWeapon>false</ai_IsWeapon>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>14</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>QiBullet</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>1200</cost>
+      </li>
+	  <li Class="Ascension.AS_CompProperties_ThingCircle">
+        <circleThing>Slate</circleThing>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+  
+  
+  
+    		<!-- Stone Wall: Manifest a stone wall at the target using qi.-->
+    <AbilityDef>
+    <defName>AS_StoneWall</defName>
+    <label>stone wall</label>
+    <description>Manifest a stone wall at the target using qi.</description>
+    <iconPath>UI/Abilities/StoneWall</iconPath>
+	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <aiCanUse>false</aiCanUse>
+	<hostile>false</hostile>
+    <verbProperties>
+	  <ai_IsWeapon>false</ai_IsWeapon>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>14</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>QiBullet</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>1200</cost>
+      </li>
+	  <li Class="Ascension.AS_CompProperties_ThingWall">
+        <wallThing>Slate</wallThing>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+  
+  
+  
+  		<!-- ice arts-->
+  
+  		<!-- Ice Shot: Shoot ice at the target-->
+    <AbilityDef>
+    <defName>AS_IceShot</defName>
+    <label>ice shot</label>
+    <description>Manifest ice with qi to shoot stone at the target.</description>
+    <iconPath>UI/Abilities/IceShot</iconPath>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <aiCanUse>true</aiCanUse>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>14</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>QiBullet</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>1200</cost>
+      </li>
+      <li Class="CompProperties_AbilityLaunchProjectile">
+        <projectileDef>AS_IceShotBullet</projectileDef>
+      </li>
+	  <li Class="Ascension.AS_CompProperties_ShootThing">
+        <shotThing>AS_Ice</shotThing>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>AS_IceShotBullet</defName>
+    <label>ice bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/IceShot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>5</damageAmountBase>
+      <armorPenetrationBase>1</armorPenetrationBase>
+      <stoppingPower>1</stoppingPower>
+      <speed>90</speed>
+    </projectile>
+  </ThingDef>
+  
+  
+      		<!-- Ice Circle: Encircle the target in stone.-->
+    <AbilityDef>
+    <defName>AS_IceCircle</defName>
+    <label>ice circle</label>
+    <description>Encircle the target in ice manifested by qi.</description>
+    <iconPath>UI/Abilities/IceCircle</iconPath>
+	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <aiCanUse>false</aiCanUse>
+	<hostile>false</hostile>
+    <verbProperties>
+	  <ai_IsWeapon>false</ai_IsWeapon>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>14</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>QiBullet</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>1200</cost>
+      </li>
+	  <li Class="Ascension.AS_CompProperties_ThingCircle">
+        <circleThing>AS_Ice</circleThing>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+		
+		
+    		<!-- Stone Wall: Manifest a stone wall at the target using qi.-->
+    <AbilityDef>
+    <defName>AS_IceWall</defName>
+    <label>ice wall</label>
+    <description>Manifest a ice wall at the target using qi.</description>
+    <iconPath>UI/Abilities/IceWall</iconPath>
+	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <aiCanUse>false</aiCanUse>
+	<hostile>false</hostile>
+    <verbProperties>
+	  <ai_IsWeapon>false</ai_IsWeapon>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>14</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>QiBullet</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>1200</cost>
+      </li>
+	  <li Class="Ascension.AS_CompProperties_ThingWall">
+        <wallThing>AS_Ice</wallThing>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+		
+		
+		
+		<!-- Basic Herbal Arts: has stun seed and growth skip-->
+		
+		
+		
+		  		<!-- Stun Seed: Shoot a seed into any living target. this seed grows for a while then stuns its host for a short period and dies.-->
+    <AbilityDef>
+    <defName>AS_StunSeed</defName>
+    <label>stun seed</label>
+    <description>Manifest ice with qi to shoot stone at the target.</description>
+    <iconPath>UI/Abilities/IceShot</iconPath>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <aiCanUse>true</aiCanUse>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>14</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>QiBullet</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>1200</cost>
+      </li>
+      <li Class="CompProperties_AbilityLaunchProjectile">
+        <projectileDef>AS_IceShotBullet</projectileDef>
+      </li>
+	  <li Class="Ascension.AS_CompProperties_ShootThing">
+        <shotThing>AS_Ice</shotThing>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>AS_StunSeedBullet</defName>
+    <label>ice bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/IceShot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>5</damageAmountBase>
+      <armorPenetrationBase>1</armorPenetrationBase>
+      <stoppingPower>1</stoppingPower>
+      <speed>90</speed>
+    </projectile>
+  </ThingDef>
+  
+  
+      		<!-- Growth Skip: Skip ahead in plant growth using qi-->
+    <AbilityDef>
+    <defName>AS_GrowthSkip</defName>
+    <label>ice circle</label>
+    <description>Encircle the target in ice manifested by qi.</description>
+    <iconPath>UI/Abilities/IceCircle</iconPath>
+	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <aiCanUse>false</aiCanUse>
+	<hostile>false</hostile>
+    <verbProperties>
+	  <ai_IsWeapon>false</ai_IsWeapon>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>14</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>QiBullet</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>1200</cost>
+      </li>
+	  <li Class="Ascension.AS_CompProperties_ThingCircle">
+        <circleThing>AS_Ice</circleThing>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+		
       <!--
       Weapon Abilities
       -->

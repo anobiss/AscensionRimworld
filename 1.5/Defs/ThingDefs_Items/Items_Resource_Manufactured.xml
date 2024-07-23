@@ -1,5 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
+
+      <!-- ice-->
+
+
+
+  <ThingDef Name="TempSolidBase" ParentName="RockBase" Abstract="True">
+    <statBases>
+      <Flammability>0</Flammability>
+      <Beauty>0</Beauty>
+    </statBases>
+    <building>
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+      <isNaturalRock>false</isNaturalRock>
+      <mineableYieldWasteable>false</mineableYieldWasteable>
+    </building>
+	<saveCompressible>false</saveCompressible>
+  </ThingDef>
+
+
+  <ThingDef ParentName="TempSolidBase">
+    <defName>AS_Ice</defName>
+    <label>Ice</label>
+    <description>Ice manifested by a water cultivator.</description>
+    <graphicData>
+      <color>(222,255,252)</color>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+    </statBases>
+  </ThingDef>
+
       <!-- Ores-->
   <ThingDef ParentName="ResourceBase">
     <defName>AS_FireEssenceOre</defName>
@@ -856,5 +887,92 @@
     </comps>
 	<allowedArchonexusCount>100</allowedArchonexusCount>
   </ThingDef>
+  
+  <ThingDef ParentName="ResourceBase">
+    <defName>BasicIceScroll</defName>
+    <label>Basic Ice Arts Scroll</label>
+    <description>A basic Ice Arts scroll, capable of teaching those with the foundation establisment essence realm or higher: Ice Shot, Ice Wall and Ice Circle.</description>
+    <graphicData>
+      <texPath>Things/Item/Misc/BasicIceScroll</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stackLimit>12</stackLimit>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <statBases>
+      <MaxHitPoints>12</MaxHitPoints>
+      <MarketValue>555</MarketValue>
+      <Mass>0.8</Mass>
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.0</DeteriorationRate>
+    </statBases>
+    <intricate>true</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags>
+      <li>RewardStandardHighFreq</li>
+    </thingSetMakerTags>
+	<tradeability>None</tradeability>
+	<comps>
+      <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Use {0_label}</useLabel><!-- text_todo -->
+        <useDuration>0</useDuration>
+        <warmupMote>Mote_QiMistStencil</warmupMote>
+      </li>
+      <li Class="Ascension.CompProperties_UseEffect_AbilityScroll"><!-- abilities are defined in the hediff comps -->
+		<scrollHediffDef>AS_BasicIceArts</scrollHediffDef>
+      </li>
+    </comps>
+	<allowedArchonexusCount>100</allowedArchonexusCount>
+  </ThingDef>
+  
+  
+    <ThingDef ParentName="ResourceBase">
+    <defName>BasicStoneScroll</defName>
+    <label>Basic Stone Arts Scroll</label>
+    <description>A basic Stone Arts scroll, capable of teaching those with the foundation establisment essence realm or higher: Stone Shot, Stone Wall and Stone Circle.</description>
+    <graphicData>
+      <texPath>Things/Item/Misc/BasicStoneScroll</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stackLimit>12</stackLimit>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <statBases>
+      <MaxHitPoints>12</MaxHitPoints>
+      <MarketValue>555</MarketValue>
+      <Mass>0.8</Mass>
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.0</DeteriorationRate>
+    </statBases>
+    <intricate>true</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags>
+      <li>RewardStandardHighFreq</li>
+    </thingSetMakerTags>
+	<tradeability>None</tradeability>
+	<comps>
+      <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Use {0_label}</useLabel><!-- text_todo -->
+        <useDuration>0</useDuration>
+        <warmupMote>Mote_QiMistStencil</warmupMote>
+      </li>
+      <li Class="Ascension.CompProperties_UseEffect_AbilityScroll"><!-- abilities are defined in the hediff comps -->
+		<scrollHediffDef>AS_BasicStoneArts</scrollHediffDef>
+      </li>
+    </comps>
+	<allowedArchonexusCount>100</allowedArchonexusCount>
+  </ThingDef>
+  
+  
   
 </Defs>
