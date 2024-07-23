@@ -93,5 +93,11 @@ namespace Ascension
                 //Log.Message("removed soul mender" + soulMender.Name);
             }
         }
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Values.Look(ref tickCount, "level", 0);
+            Scribe_Collections.Look(ref SoulMenders, "SoulMenders", LookMode.Reference);
+        }
     }
 }
