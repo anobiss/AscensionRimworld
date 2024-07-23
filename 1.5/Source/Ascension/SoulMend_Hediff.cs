@@ -14,7 +14,7 @@ namespace Ascension
         public override void PostAdd(DamageInfo? dinfo)
         {
             base.PostAdd(dinfo);
-            SoulMendMapComponent smMapComp = pawn.Map.GetComponent<SoulMendMapComponent>();
+            SoulMendGameComponent smMapComp = Current.Game.GetComponent<SoulMendGameComponent>(); 
             if (smMapComp != null)
             {
                 smMapComp.AddSoulMender(pawn);
@@ -24,7 +24,7 @@ namespace Ascension
         public override void PostRemoved()
         {
             base.PostRemoved();
-            SoulMendMapComponent smMapComp = pawn.Map.GetComponent<SoulMendMapComponent>();
+            SoulMendGameComponent smMapComp = Current.Game.GetComponent<SoulMendGameComponent>();
             if (smMapComp != null)
             {
                 smMapComp.RemoveSoulMender(pawn);

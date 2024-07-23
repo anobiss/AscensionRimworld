@@ -70,6 +70,7 @@ namespace Ascension
                         float randpi = Rand.Range(0, 1f);
                         float randC = Rand.Range(0, 1f);
                         float randER = Rand.Range(0, 1f);
+                        float randSM = Rand.Range(0, 1f);
 
                         float chanceC = settings.CultivatorChance;
                         float chanceER = settings.EssenceChance;
@@ -78,6 +79,7 @@ namespace Ascension
 
                         int maxGoldenCore = (int)settings.GoldenCoreMax;
                         int maxAnimaC = (int)settings.AnimaCMax;
+                        int maxSMStacks = (int)Math.Floor(settings.SMRandStacks);
 
                         float chanceA = settings.AbilityChance;
                         Cultivator_Hediff cultivatorHediff;
@@ -262,6 +264,19 @@ namespace Ascension
                                             //we minus scrollhedifflist by the already learned to make a hashset to send to random ability scroll
                                             //random ability scroll gets a random ability from it
                                             HediffDef ScrollDef = randomScrollSet.RandomElement();//gets random loaded scrollhediff def that isnt already learned
+
+                                            //checks if heavenly scroll, if so rng a chance for random soul mend stacks.
+                                            if (ScrollDef == AscensionDefOf.HeavenlyQiArts)
+                                            {
+                                                if (randSM > 0.5f)
+                                                {
+                                                    Hediff soulMendHediff = HediffMaker.MakeHediff(AscensionDefOf.AS_SoulMend, pawn, null);
+                                                    soulMendHediff.Severity = (float)rnd.Next(1, Math.Max(1, maxSMStacks+1));
+                                                    pawn.health.AddHediff(soulMendHediff, null, null, null);
+                                                }
+                                            }
+
+
                                             //Log.Message("chose " + ScrollDef.label);
                                             alreadyAdded.Add(ScrollDef);//adds it to already added list to not roll it again.
                                             Scroll_Hediff scrollHediff = HediffMaker.MakeHediff(ScrollDef, pawn) as Scroll_Hediff;//makes it into hediff for further refrencing for abilities

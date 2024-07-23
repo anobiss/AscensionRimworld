@@ -26,12 +26,15 @@ namespace AscensionDubsLib
             QiPool_Hediff qiPool = Pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
             if (qiPool != null)
             {
-                if (qiPool.amount >= 10000)
+                if (qiPool.amount >= 10000f)
                 {
-                    if (this.Pawn.needs.food.Starving)
+                    if (needs.food != null)
                     {
-                        this.Pawn.needs.food.CurLevel = this.Pawn.RaceProps.FoodLevelPercentageWantEat;
-                        qiPool.amount -= 10000;
+                        if (this.Pawn.needs.food.CurCategory == HungerCategory.Hungry)
+                        {
+                            needs.food.CurLevel = 1f;
+                            qiPool.amount -= 10000f;
+                        }
                     }
                     if (need_Thirst != null)
                     {
@@ -39,7 +42,7 @@ namespace AscensionDubsLib
                         {
 
                             need_Thirst.CurLevel = 1f;
-                            qiPool.amount -= 10000;
+                            qiPool.amount -= 10000f;
                         }
                     }
                 }

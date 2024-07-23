@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RimWorld;
+using Verse;
 
 namespace Ascension
 {
-    internal class AS_CompProperties_ThingWall
+    public class AS_CompProperties_ThingWall : CompProperties_AbilityEffect
     {
+        public int wallHieght = 1;
+        public int wallLWidth = 3;
+        //public ThingDef wallThing = 
+        public AS_CompProperties_ThingWall()
+        {
+            compClass = typeof(AS_CompAbilityEffect_ThingWall);
+        }
     }
 }

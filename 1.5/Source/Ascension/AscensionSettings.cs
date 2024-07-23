@@ -24,9 +24,11 @@ namespace Ascension
         public float EssenceChance = 0.1f;
         public bool disableProgressLetters = true;
         public bool disableHTLetters = false;
+        public float SMRandStacks = 12f;
 
         public override void ExposeData()
         {
+
             Scribe_Values.Look(ref disableHTLetters, "disableHTLetters", false);
             Scribe_Values.Look(ref disableProgressLetters, "disableProgressLetters", true);
             Scribe_Values.Look(ref displayQiGrid, "displayQiGrid", true);
@@ -36,13 +38,14 @@ namespace Ascension
             Scribe_Values.Look(ref opGoldenPillsBool, "opGoldenPillsBool");
             Scribe_Values.Look(ref logHealsBool, "logHealsBool");
             Scribe_Values.Look(ref CultivatorChance, "CultivatorChance", 0.1f);
-            Scribe_Values.Look(ref GoldenCoreMax, "GoldenCoreMax", 5000);
-            Scribe_Values.Look(ref AnimaCMax, "AnimaCMax", 5000);
+            Scribe_Values.Look(ref GoldenCoreMax, "GoldenCoreMax", 5000f);
+            Scribe_Values.Look(ref AnimaCMax, "AnimaCMax", 5000f);
             Scribe_Values.Look(ref EssenceChance, "EssenceChance", 0.1f);
             Scribe_Values.Look(ref PIChance, "PIChance", 0.1f);
             Scribe_Values.Look(ref AbilityChance, "AbilityChance", 0.2f);
             Scribe_Values.Look(ref PCChance, "PCChance", 0.1f);
             Scribe_Values.Look(ref SMTickRate, "SMTickRate", 100f);
+            Scribe_Values.Look(ref SMRandStacks, "SMRandStacks", 12f);
             base.ExposeData();
         }
     }
@@ -98,6 +101,9 @@ namespace Ascension
 
             listingStandard.Label("AS_SMTickRate".Translate() + this.settings.SMTickRate.ToString("#") + "\n", -1, "AS_SMTickRateDesc".Translate());
             settings.SMTickRate = listingStandard.Slider(settings.SMTickRate, 0f, 10000f);
+
+            listingStandard.Label("AS_SMRandStacks".Translate() + this.settings.SMRandStacks.ToString("#") + "\n", -1, "AS_SSMRandStacksDesc".Translate());
+            settings.SMRandStacks = listingStandard.Slider(settings.SMRandStacks, 1f, 240f);
 
             listingStandard.End();
             Widgets.EndScrollView();

@@ -131,6 +131,9 @@
   
       <!-- Settings -->
   
+  <AS_DisableHTLetters>Disable Heavenly Tribulation Letters/Notifications: </AS_DisableHTLetters>
+  <AS_DisableHTLettersDesc>Disable Heavenly Tribulation letters incase you have too many cultivates and are getting spammed. False by default to prevent accidental tribulation deaths/injuries.</AS_DisableHTLettersDesc>
+  
   <AS_DisablePLetters>Disable Progress Letters/Notifications: </AS_DisablePLetters>
   <AS_DisablePLettersDesc>Disable progress letters such as breakthrough possible. True by default due to these letters being a remanent of before the mod had auto-cultivation.</AS_DisablePLettersDesc>
   
@@ -144,6 +147,8 @@
   <AS_SMTickRate>Soul Mend Tick Rate:</AS_SMTickRate>
   <AS_SMTickRateDesc>The amount of ticks between each check if a pawn using soul mend is dead. Higher values means less lag with high amounts of soul menders but also a longer wait for resurrection.</AS_SMTickRateDesc>
 
+  <AS_SMRandStacks>Max Random Soul Mend Stacks:</AS_SMRandStacks>
+  <AS_SSMRandStacksDesc>The max amount of soul mend stacks a random cultivator with the soul mend ability can generate with.</AS_SSMRandStacksDesc>
 
   <AS_GoldenCoreMax>Max Random Golden Core Score: </AS_GoldenCoreMax>
   <AS_GoldenCoreMaxDesc>The maximum Golden Core score generated for a random cultivator. This is not the maximum possible from a Golden Core breakthrough and only effects randomly generated cultivators.  Random Immortal cultivators can have no less than between 1x - 4x this score (excluding the lucky psuedo-immortal Powerful Cultivators) and Powerful Cultivators can have up to 2x this score.</AS_GoldenCoreMaxDesc>

@@ -159,7 +159,7 @@
     <Compile Include="JobDriver_BreakthroughEssence.cs" />
     <Compile Include="QiPool_Hediff.cs" />
     <Compile Include="Scroll_Hediff.cs" />
-    <Compile Include="SoulMendMapComponent.cs" />
+    <Compile Include="SoulMendGameComponent.cs" />
     <Compile Include="SoulMend_Hediff.cs" />
     <Compile Include="SpiritPill_Hediff.cs" />
     <Compile Include="SpiritSword_Hediff.cs" />
