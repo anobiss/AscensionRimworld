@@ -17,17 +17,16 @@ namespace Ascension
 
         private void CreateWall(LocalTargetInfo target)
         {
-            if (target != null && target.Thing.Map != null)
+            if (parent.pawn.Map != null)
             {
-                Map map = target.Thing.Map;
+                Map map = parent.pawn.Map;
                 IntVec3 center = target.Cell;
                 IntVec3 casterPos = parent.pawn.Position;
                 ThingDef wallThing = Props.wallThing;
 
-                // Determine wall orientation based on relative position
+                // wall orientation based on position
                 bool isHorizontal = Mathf.Abs(center.x - casterPos.x) > Mathf.Abs(center.z - casterPos.z);
 
-                // Create the wall
                 List<IntVec3> wallCells = new List<IntVec3>();
                 if (isHorizontal)
                 {
@@ -50,7 +49,7 @@ namespace Ascension
                     }
                 }
 
-                // Place wall things
+                // wallinate the things
                 foreach (IntVec3 cell in wallCells)
                 {
                     if (cell.InBounds(map) && cell.Walkable(map))

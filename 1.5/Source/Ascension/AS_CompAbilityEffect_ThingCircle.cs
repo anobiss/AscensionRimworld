@@ -19,9 +19,9 @@ namespace Ascension
 
         private void CreateThingCircle(LocalTargetInfo target)
         {
-            if (target != null && target.Thing.Map != null)
+            if (parent.pawn.Map != null)
             {
-                Map map = target.Thing.Map;
+                Map map = parent.pawn.Map;
                 IntVec3 center = target.Cell;
                 float innerRadius = Props.innerCircleRadius;
                 float outerRadius = Props.outerCircleRadius;

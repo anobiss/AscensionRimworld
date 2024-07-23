@@ -13,6 +13,7 @@
     <building>
       <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
       <isNaturalRock>false</isNaturalRock>
+      <claimable>false</claimable>
       <mineableYieldWasteable>false</mineableYieldWasteable>
     </building>
 	<saveCompressible>false</saveCompressible>

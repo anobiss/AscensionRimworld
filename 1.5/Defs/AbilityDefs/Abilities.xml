@@ -437,7 +437,7 @@
     <iconPath>UI/Abilities/StoneCircle</iconPath>
 	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
     <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
-    <cooldownTicksRange>60</cooldownTicksRange>
+    <cooldownTicksRange>120</cooldownTicksRange>
     <category>QiTechnique</category>
     <displayOrder>200</displayOrder>
     <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
@@ -447,8 +447,12 @@
 	  <ai_IsWeapon>false</ai_IsWeapon>
       <verbClass>Verb_CastAbility</verbClass>
       <range>14</range>
-      <warmupTime>0.5</warmupTime>
+      <warmupTime>1</warmupTime>
       <soundCast>QiBullet</soundCast>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <mapObjectTargetsMustBeAutoAttackable>False</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
     </verbProperties>
     <comps>
       <li Class="Ascension.CompProperties_AbilityQiCost">
@@ -473,7 +477,7 @@
     <iconPath>UI/Abilities/StoneWall</iconPath>
 	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
     <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
-    <cooldownTicksRange>60</cooldownTicksRange>
+    <cooldownTicksRange>120</cooldownTicksRange>
     <category>QiTechnique</category>
     <displayOrder>200</displayOrder>
     <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
@@ -483,8 +487,12 @@
 	  <ai_IsWeapon>false</ai_IsWeapon>
       <verbClass>Verb_CastAbility</verbClass>
       <range>14</range>
-      <warmupTime>0.5</warmupTime>
+      <warmupTime>1</warmupTime>
       <soundCast>QiBullet</soundCast>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <mapObjectTargetsMustBeAutoAttackable>False</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
     </verbProperties>
     <comps>
       <li Class="Ascension.CompProperties_AbilityQiCost">
@@ -571,6 +579,10 @@
       <range>14</range>
       <warmupTime>0.5</warmupTime>
       <soundCast>QiBullet</soundCast>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <mapObjectTargetsMustBeAutoAttackable>False</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
     </verbProperties>
     <comps>
       <li Class="Ascension.CompProperties_AbilityQiCost">
@@ -606,6 +618,10 @@
       <range>14</range>
       <warmupTime>0.5</warmupTime>
       <soundCast>QiBullet</soundCast>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <mapObjectTargetsMustBeAutoAttackable>False</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
     </verbProperties>
     <comps>
       <li Class="Ascension.CompProperties_AbilityQiCost">
