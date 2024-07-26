@@ -20,6 +20,7 @@
     <label>Qi heal</label>
     <description>Use qi to quickly heal wounds.</description>
     <iconPath>UI/Abilities/QiHeal</iconPath>
+	 <cooldownTicksRange>1500</cooldownTicksRange><!-- Lightning arts-->
     <stunTargetWhileCasting>true</stunTargetWhileCasting>
     <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
     <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
@@ -154,6 +155,7 @@
     <sendMessageOnCooldownComplete>true</sendMessageOnCooldownComplete>
     <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
 	<targetRequired>false</targetRequired>
+    <cooldownTicksRange>420000</cooldownTicksRange><!-- 7 days-->
     <verbProperties>
       <verbClass>Verb_CastAbility</verbClass>
 	  <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
@@ -222,7 +224,7 @@
     <label>lightning bolt</label>
     <description>Manifest electricity with qi to create a bolt of lightning that summons a lightning strike upon its target.</description>
     <iconPath>UI/Abilities/LightningBolt</iconPath>
-    <cooldownTicksRange>60</cooldownTicksRange>
+    <cooldownTicksRange>1250</cooldownTicksRange>
     <category>QiTechnique</category>
     <displayOrder>200</displayOrder>
     <aiCanUse>true</aiCanUse>
@@ -280,7 +282,7 @@
 	  <ai_IsWeapon>false</ai_IsWeapon>
       <verbClass>Verb_CastAbility</verbClass>
       <range>14</range>
-      <warmupTime>0.5</warmupTime>
+      <warmupTime>2</warmupTime>
       <soundCast>QiBullet</soundCast>
     </verbProperties>
     <comps>
@@ -323,7 +325,7 @@
     <label>qi explosion</label>
     <description>Manifest an explosion at the target using qi.</description>
     <iconPath>UI/Abilities/QiExplosion</iconPath>
-    <cooldownTicksRange>60</cooldownTicksRange>
+    <cooldownTicksRange>1250</cooldownTicksRange>
     <category>QiTechnique</category>
     <displayOrder>200</displayOrder>
     <aiCanUse>true</aiCanUse>
@@ -388,7 +390,7 @@
     <label>stone shot</label>
     <description>Manifest stone with qi to shoot stone at the target.</description>
     <iconPath>UI/Abilities/StoneShot</iconPath>
-    <cooldownTicksRange>60</cooldownTicksRange>
+    <cooldownTicksRange>1800</cooldownTicksRange>
     <category>QiTechnique</category>
     <displayOrder>200</displayOrder>
     <aiCanUse>true</aiCanUse>
@@ -406,7 +408,7 @@
         <projectileDef>AS_StoneShotBullet</projectileDef>
       </li>
 	  <li Class="Ascension.AS_CompProperties_ShootThing">
-        <shotThing>Slate</shotThing>
+        <shotThing>AS_Stone</shotThing>
       </li>
 	  <li Class="CompProperties_AbilityRequiresCapacity">
         <capacity>Manipulation</capacity>
@@ -415,14 +417,14 @@
   </AbilityDef>
   <ThingDef ParentName="BaseBullet">
     <defName>AS_StoneShotBullet</defName>
-    <label>stone bullet</label>
+    <label>stone shot</label>
     <graphicData>
       <texPath>Things/Projectile/StoneShot</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <projectile>
-      <damageDef>Bullet</damageDef>
-      <damageAmountBase>5</damageAmountBase>
+      <damageDef>Crush</damageDef>
+      <damageAmountBase>10</damageAmountBase>
       <armorPenetrationBase>1</armorPenetrationBase>
       <stoppingPower>1</stoppingPower>
       <speed>90</speed>
@@ -437,7 +439,7 @@
     <iconPath>UI/Abilities/StoneCircle</iconPath>
 	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
     <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
-    <cooldownTicksRange>120</cooldownTicksRange>
+    <cooldownTicksRange>5000</cooldownTicksRange>
     <category>QiTechnique</category>
     <displayOrder>200</displayOrder>
     <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
@@ -456,10 +458,10 @@
     </verbProperties>
     <comps>
       <li Class="Ascension.CompProperties_AbilityQiCost">
-        <cost>1200</cost>
+        <cost>2400</cost>
       </li>
 	  <li Class="Ascension.AS_CompProperties_ThingCircle">
-        <circleThing>Slate</circleThing>
+        <circleThing>AS_Stone</circleThing>
       </li>
 	  <li Class="CompProperties_AbilityRequiresCapacity">
         <capacity>Manipulation</capacity>
@@ -477,7 +479,7 @@
     <iconPath>UI/Abilities/StoneWall</iconPath>
 	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
     <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
-    <cooldownTicksRange>120</cooldownTicksRange>
+    <cooldownTicksRange>5000</cooldownTicksRange>
     <category>QiTechnique</category>
     <displayOrder>200</displayOrder>
     <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
@@ -499,7 +501,7 @@
         <cost>1200</cost>
       </li>
 	  <li Class="Ascension.AS_CompProperties_ThingWall">
-        <wallThing>Slate</wallThing>
+        <wallThing>AS_Stone</wallThing>
       </li>
 	  <li Class="CompProperties_AbilityRequiresCapacity">
         <capacity>Manipulation</capacity>
@@ -517,7 +519,7 @@
     <label>ice shot</label>
     <description>Manifest ice with qi to shoot stone at the target.</description>
     <iconPath>UI/Abilities/IceShot</iconPath>
-    <cooldownTicksRange>60</cooldownTicksRange>
+    <cooldownTicksRange>700</cooldownTicksRange>
     <category>QiTechnique</category>
     <displayOrder>200</displayOrder>
     <aiCanUse>true</aiCanUse>
@@ -544,13 +546,13 @@
   </AbilityDef>
   <ThingDef ParentName="BaseBullet">
     <defName>AS_IceShotBullet</defName>
-    <label>ice bullet</label>
+    <label>ice shot</label>
     <graphicData>
       <texPath>Things/Projectile/IceShot</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <projectile>
-      <damageDef>Bullet</damageDef>
+      <damageDef>Crush</damageDef>
       <damageAmountBase>5</damageAmountBase>
       <armorPenetrationBase>1</armorPenetrationBase>
       <stoppingPower>1</stoppingPower>
@@ -567,7 +569,7 @@
     <iconPath>UI/Abilities/IceCircle</iconPath>
 	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
     <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
-    <cooldownTicksRange>60</cooldownTicksRange>
+    <cooldownTicksRange>2500</cooldownTicksRange>
     <category>QiTechnique</category>
     <displayOrder>200</displayOrder>
     <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
@@ -586,7 +588,7 @@
     </verbProperties>
     <comps>
       <li Class="Ascension.CompProperties_AbilityQiCost">
-        <cost>1200</cost>
+        <cost>2400</cost>
       </li>
 	  <li Class="Ascension.AS_CompProperties_ThingCircle">
         <circleThing>AS_Ice</circleThing>
@@ -606,7 +608,7 @@
     <iconPath>UI/Abilities/IceWall</iconPath>
 	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
     <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
-    <cooldownTicksRange>60</cooldownTicksRange>
+    <cooldownTicksRange>2500</cooldownTicksRange>
     <category>QiTechnique</category>
     <displayOrder>200</displayOrder>
     <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
@@ -647,10 +649,10 @@
     <defName>AS_StunSeed</defName>
     <label>stun seed</label>
     <description>Manifest ice with qi to shoot stone at the target.</description>
-    <iconPath>UI/Abilities/IceShot</iconPath>
+    <iconPath>UI/Abilities/StunSeed</iconPath>
     <cooldownTicksRange>60</cooldownTicksRange>
     <category>QiTechnique</category>
-    <displayOrder>200</displayOrder>
+    <displayOrder>1250</displayOrder>
     <aiCanUse>true</aiCanUse>
     <verbProperties>
       <verbClass>Verb_CastAbility</verbClass>
@@ -663,10 +665,7 @@
         <cost>1200</cost>
       </li>
       <li Class="CompProperties_AbilityLaunchProjectile">
-        <projectileDef>AS_IceShotBullet</projectileDef>
-      </li>
-	  <li Class="Ascension.AS_CompProperties_ShootThing">
-        <shotThing>AS_Ice</shotThing>
+        <projectileDef>AS_StunSeedBullet</projectileDef>
       </li>
 	  <li Class="CompProperties_AbilityRequiresCapacity">
         <capacity>Manipulation</capacity>
@@ -675,14 +674,14 @@
   </AbilityDef>
   <ThingDef ParentName="BaseBullet">
     <defName>AS_StunSeedBullet</defName>
-    <label>ice bullet</label>
+    <label>stun seed</label>
     <graphicData>
-      <texPath>Things/Projectile/IceShot</texPath>
+      <texPath>Things/Projectile/StunSeed</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <projectile>
-      <damageDef>Bullet</damageDef>
-      <damageAmountBase>5</damageAmountBase>
+      <damageDef>AS_StunSeedDamage</damageDef>
+      <damageAmountBase>1</damageAmountBase>
       <armorPenetrationBase>1</armorPenetrationBase>
       <stoppingPower>1</stoppingPower>
       <speed>90</speed>
@@ -693,9 +692,9 @@
       		<!-- Growth Skip: Skip ahead in plant growth using qi-->
     <AbilityDef>
     <defName>AS_GrowthSkip</defName>
-    <label>ice circle</label>
-    <description>Encircle the target in ice manifested by qi.</description>
-    <iconPath>UI/Abilities/IceCircle</iconPath>
+    <label>growth skip</label>
+    <description>Skip ahead growth of a plant by 7 days using qi.</description>
+    <iconPath>UI/Abilities/GrowthSkip</iconPath>
 	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
     <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
     <cooldownTicksRange>60</cooldownTicksRange>
@@ -710,13 +709,16 @@
       <range>14</range>
       <warmupTime>0.5</warmupTime>
       <soundCast>QiBullet</soundCast>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <mapObjectTargetsMustBeAutoAttackable>False</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
     </verbProperties>
     <comps>
       <li Class="Ascension.CompProperties_AbilityQiCost">
         <cost>1200</cost>
       </li>
-	  <li Class="Ascension.AS_CompProperties_ThingCircle">
-        <circleThing>AS_Ice</circleThing>
+	  <li Class="Ascension.AS_CompProperties_GrowPlants">
       </li>
 	  <li Class="CompProperties_AbilityRequiresCapacity">
         <capacity>Manipulation</capacity>

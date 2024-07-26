@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <DamageDef Name="Bullet">
+    <defName>AS_StunSeedDamage</defName>
+    <label>stun seed</label>
+    <workerClass>Ascension.AS_DamageWorker_StunSeed</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been stun seeded to death.</deathMessage>
+    <hediff>AS_StunSeedHediff</hediff>
+    <impactSoundType>Bullet</impactSoundType>
+    <harmsHealth>false</harmsHealth>
+    <armorCategory>Sharp</armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <isRanged>true</isRanged>
+	<causeStun>true</causeStun>
+    <makesAnimalsFlee>true</makesAnimalsFlee>
+  </DamageDef>
+
+</Defs>

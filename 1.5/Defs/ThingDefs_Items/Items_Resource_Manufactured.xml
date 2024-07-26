@@ -31,6 +31,18 @@
       <MaxHitPoints>120</MaxHitPoints>
     </statBases>
   </ThingDef>
+  
+    <ThingDef ParentName="TempSolidBase">
+    <defName>AS_Stone</defName>
+    <label>Stone</label>
+    <description>Stone manifested by a earth cultivator.</description>
+    <graphicData>
+      <color>(60,60,60)</color>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+    </statBases>
+  </ThingDef>
 
       <!-- Ores-->
   <ThingDef ParentName="ResourceBase">
@@ -975,5 +987,46 @@
   </ThingDef>
   
   
+    <ThingDef ParentName="ResourceBase">
+    <defName>BasicHerbalScroll</defName>
+    <label>Basic Lightning Arts Scroll</label>
+    <description>A basic Lightning Arts scroll, capable of teaching those with the foundation establisment essence realm or higher: Stun Seed, Growth Skip.</description>
+    <graphicData>
+      <texPath>Things/Item/Misc/BasicHerbalScroll</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stackLimit>12</stackLimit>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <statBases>
+      <MaxHitPoints>12</MaxHitPoints>
+      <MarketValue>555</MarketValue>
+      <Mass>0.8</Mass>
+      <Flammability>0.0</Flammability>
+      <DeteriorationRate>0.0</DeteriorationRate>
+    </statBases>
+    <intricate>true</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags>
+      <li>RewardStandardHighFreq</li>
+    </thingSetMakerTags>
+	<tradeability>None</tradeability>
+	<comps>
+      <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Use {0_label}</useLabel><!-- text_todo -->
+        <useDuration>0</useDuration>
+        <warmupMote>Mote_QiMistStencil</warmupMote>
+      </li>
+      <li Class="Ascension.CompProperties_UseEffect_AbilityScroll"><!-- abilities are defined in the hediff comps -->
+		<scrollHediffDef>AS_BasicHerbalArts</scrollHediffDef>
+      </li>
+    </comps>
+	<allowedArchonexusCount>100</allowedArchonexusCount>
+  </ThingDef>
   
 </Defs>

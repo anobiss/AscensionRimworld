@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <HediffDef>
+    <hediffClass>Ascension.AS_StunSeed_Hediff</hediffClass>
+    <defName>AS_StunSeedHediff</defName>
+    <label>Stun Seed</label>
+    <description>This being has been shot with a stun seed from a wood cultivator using herbal arts. They will be stunned in half an hour.</description>
+	<defaultLabelColor>(1.0, 1.0, 1.0)</defaultLabelColor>
+    <isBad>true</isBad>
+  </HediffDef>
+</Defs>

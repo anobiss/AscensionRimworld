@@ -24,6 +24,7 @@ namespace Ascension
         public static ThingDef AS_HeavensBreath;
 
         //misc stuffs
+        public static HediffDef AS_StunSeedHediff;
         public static HediffDef HeavenlyQiArts;
         public static HediffDef QiPool;
         public static HediffDef AS_SoulMend;
