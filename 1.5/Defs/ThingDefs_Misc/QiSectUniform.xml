@@ -3,7 +3,7 @@
   <ThingDef ParentName="ApparelMakeableBase">
     <defName>AS_Apparel_QiSectUniform</defName>
     <label>qi infused sect uniform</label>
-    <description>A sect uniform used by cultivators that is infused with a large amount of Qi. Provides 1-4x Cultivation Speed, 1-4x Qi Recovery Speed, and 0.5-2x Max Qi to cultivators depending on quality.</description>
+    <description>A sect uniform used by cultivators that is infused with a large amount of Qi. Provides 1-4x Cultivation Speed, 1-4x Qi Recovery Speed, and 0.5-2x Max Qi to cultivators depending on quality. Does not provide Foundation Training Speed.</description>
     <graphicData>
       <texPath>Things/Pawn/Humanlike/Apparel/QiSectUniform/QiSectUniform</texPath>
       <graphicClass>Graphic_Single</graphicClass>

@@ -54,6 +54,7 @@ namespace Ascension
         public static JobDef AS_BreakthroughEssence;
         public static JobDef AS_BreakthroughBody;
         public static JobDef AS_GoldenCoreBreakthrough;
+        public static JobDef AS_FoundationTrainingJob;
 
         public static WorkTypeDef Cultivation;
 

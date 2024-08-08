@@ -14,6 +14,7 @@
     <pathCost>14</pathCost>
     <ingestible />
     <plant>
+      <neverBlightable>true</neverBlightable>
       <immatureGraphicPath>Things/Plant/SpritLeaf_Immature</immatureGraphicPath>
       <growDays>24</growDays>
       <dieIfLeafless>false</dieIfLeafless>

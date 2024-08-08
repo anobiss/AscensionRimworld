@@ -6,6 +6,7 @@ namespace Ascension
 {
     public static class Toils_Cultivation
     {
+        private static readonly JobDef fTrainingJobDef = AscensionDefOf.AS_FoundationTrainingJob;
         private static readonly JobDef qiGatherDef = AscensionDefOf.AS_QiGatheringJob;
         private static readonly JobDef qiRefineDef = AscensionDefOf.AS_RefineQiJob;
         private static readonly JobDef exerciseDef = AscensionDefOf.AS_ExerciseJob;
@@ -54,32 +55,37 @@ namespace Ascension
                     Cultivator_Hediff cultivatorHediff = toil.actor.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
                     if (cultivatorHediff != null)
                     {
-                        if (cultivatioJob == AscensionDefOf.AS_QiGatheringJob)
+                        if (cultivatioJob == qiGatherDef)
                         {
                             cultivatorHediff.qiGatheringJobProg += 1; // we add to it incase they dont finish multiple jobs
                             //Log.Message(toil.actor.Name + " prog is " + cultivatorHediff.qiGatheringJobProg.ToString("#"));
                         }
-                        if (cultivatioJob == AscensionDefOf.AS_RefineQiJob)
+                        if (cultivatioJob == qiRefineDef)
                         {
                             cultivatorHediff.refineQiJobProg += 1;
                         }
-                        if (cultivatioJob == AscensionDefOf.AS_ExerciseJob)
+                        if (cultivatioJob == exerciseDef)
                         {
                             cultivatorHediff.exerciseJobProg += 1;
                         }
-                        if (cultivatioJob == AscensionDefOf.AS_RefineQiCauldronJob)
+                        if (cultivatioJob == icRefineDef)
                         {
                             cultivatorHediff.refineICJobProg += 1;
                         }
-                        if (cultivatioJob == AscensionDefOf.AS_BreakthroughBody)
+                        if (cultivatioJob == bBreakDef)
                         {
                             cultivatorHediff.bodyBreakthrouchJobProg += 1;
                         }
-                        if (cultivatioJob == AscensionDefOf.AS_BreakthroughEssence)
+                        if (cultivatioJob == eBreakDef)
                         {
                             cultivatorHediff.essenceBreakthrouchJobProg += 1;
                         }
-                    }else
+                        if (cultivatioJob == fTrainingJobDef)
+                        {
+                            cultivatorHediff.foundationTrainingJobProg += 1;
+                        }
+                    }
+                    else
                     {
                         //Log.Message(toil.actor.Name + " cultivator hediff null");
                     }
@@ -128,6 +134,10 @@ namespace Ascension
                     if (cultivationJob == eBreakDef && cultivatorHediff.essenceBreakthrouchJobProg > 0)
                     {
                         calculatedDurationTicks -= cultivatorHediff.essenceBreakthrouchJobProg;
+                    }
+                    if (cultivationJob == fTrainingJobDef && cultivatorHediff.foundationTrainingJobProg > 0)
+                    {
+                        calculatedDurationTicks -= cultivatorHediff.foundationTrainingJobProg;
                     }
                 }
 

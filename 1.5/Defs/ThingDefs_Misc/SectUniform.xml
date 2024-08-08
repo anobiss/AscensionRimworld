@@ -3,7 +3,7 @@
   <ThingDef ParentName="ApparelMakeableBase">
     <defName>AS_Apparel_SectUniform</defName>
     <label>sect uniform</label>
-    <description>A sect uniform used by cultivators. Provides 0.5-2x Cultivation Speed and 0.5-2x Qi Recovery Speed to cultivators depending on quality.</description>
+    <description>A sect uniform used by cultivators. Provides 0.5-2x Cultivation Speed, 0.5-2x Foundation Training Speed and 0.5-2x Qi Recovery Speed to cultivators depending on quality.</description>
     <graphicData>
       <texPath>Things/Pawn/Humanlike/Apparel/SectUniform/SectUniform</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -57,6 +57,7 @@
 	  <li Class="Ascension.CompProperties_CultivationUniform">
 		<qiRecSpeedOffset>1</qiRecSpeedOffset>
         <cultSpeedOffset>1</cultSpeedOffset>
+        <fTrainingOffset>1</fTrainingOffset>
       </li>
     </comps>
   </ThingDef>

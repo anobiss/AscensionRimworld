@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 using Verse.AI;
+using Verse.Noise;
 using static RimWorld.PsychicRitualRoleDef;
 using static Verse.SpecificApparelRequirement;
 using Random = System.Random;
@@ -13,6 +14,28 @@ namespace Ascension
 {
     public class Cultivator_Hediff : HediffWithComps
     {
+        AscensionSettings settings = LoadedModManager.GetMod<AscensionMod>().GetSettings<AscensionSettings>();
+        public readonly int fMax = 1200;
+        public enum LawType
+        {
+            None = 0,
+            Body = 1,
+            Essence = 2,
+        }
+        public ElementEmitMapComponent.Element element = ElementEmitMapComponent.Element.None;
+
+        //chosen law is overwritten for random cultivators
+        public LawType chosenLawType = LawType.Essence; //actual default is loaded during scribe. this is just a placeholder
+
+        public LawType lawType = LawType.None; //stores characters permanent law type, should only be changed when assigned.
+
+        //store if the law is confirmed for auto-choosing
+        public bool confirmedLaw = false;
+        //store if the 
+
+
+        public int Foundation = 0;
+
         public float breakthroughChance = 0f;
         public float breakthroughChanceOffset = 0f;
 
@@ -33,6 +56,7 @@ namespace Ascension
 
 
         //we only minus the ticks by these to only really give back the progress they put in
+        public int foundationTrainingJobProg = 0;
         public int qiGatheringJobProg = 0; //0.99 is 99% done
         public int refineQiJobProg = 0;
         public int refineICJobProg = 0;
@@ -40,8 +64,7 @@ namespace Ascension
         public int bodyBreakthrouchJobProg = 0;
         public int essenceBreakthrouchJobProg = 0;
 
-
-        public ElementEmitMapComponent.Element element = ElementEmitMapComponent.Element.None;
+        public float foundationTrainingOffset = 1f;
 
         public override void PostMake()
         {
@@ -55,10 +78,18 @@ namespace Ascension
         public override void PostAdd(DamageInfo? dinfo)
         {
             base.PostAdd(dinfo);
+            AscensionUtilities.GetBaseLifespan(this);
             if (element == ElementEmitMapComponent.Element.None)
             {
                 element = AscensionUtilities.AssignElement();
             }
+        }
+
+        public override void PostTick()
+        {
+            base.PostTick();
+
+
         }
         public override bool Visible
         {
@@ -67,8 +98,21 @@ namespace Ascension
                 return false;
             }
         }
+        public LawType DefaultChosen()
+        {
+            if (settings.defaultEssenceType)
+            {
+                return LawType.Essence;
+            }else
+            {
+                return LawType.Body;
+            }
+        }
         public override void ExposeData()
         {
+            Scribe_Values.Look(ref confirmedLaw, "confirmedLaw");
+            Scribe_Values.Look(ref Foundation, "Foundation");
+            Scribe_Values.Look(ref foundationTrainingJobProg, "foundationTrainingJobProg");
             Scribe_Values.Look(ref qiGatheringJobProg, "qiGatheringJobProg");
             Scribe_Values.Look(ref exerciseJobProg, "exerciseJobProg");
             Scribe_Values.Look(ref bodyBreakthrouchJobProg, "bodyBreakthrouchJobProg");
@@ -77,6 +121,8 @@ namespace Ascension
             Scribe_Values.Look(ref refineICJobProg, "refineICJobProg");
             Scribe_Values.Look(ref goldenCoreScore, "goldenCoreScore");// this, the cultivators element and inner cauldron should be the only things we NEED to store permanently. 
             Scribe_Values.Look(ref element, "element");
+            Scribe_Values.Look(ref chosenLawType, "chosenLawType", DefaultChosen());
+            Scribe_Values.Look(ref lawType, "lawType");
             Scribe_Values.Look(ref startTime, "startTime");
             Scribe_Values.Look(ref endTime, "endTime");
             Scribe_Values.Look(ref autoCultivateType, "autoCultivateType");

@@ -45,6 +45,12 @@
     <reportString>exercising</reportString>
   </JobDef>
   
+   <JobDef>
+    <defName>AS_FoundationTrainingJob</defName>
+    <driverClass>Ascension.JobDriver_FoundationTraining</driverClass>
+    <reportString>training foundation</reportString>
+  </JobDef>
+  
     <!--========= Weird odd jobs
 something
 	============-->

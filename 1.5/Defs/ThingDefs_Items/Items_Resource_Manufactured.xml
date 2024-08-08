@@ -123,6 +123,36 @@
       </li>
     </comps>
   </ThingDef>
+  
+    <ThingDef ParentName="RockBase">
+    <defName>AS_MineableSpiritStoneOre</defName>
+    <label>spirit stone ore</label>
+    <description>Rock containing spirit stone.</description>
+    <graphicData>
+      <texPath>Things/Building/Linked/RockFlecked_Atlas</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(89,68,68)</color>
+      <colorTwo>(255,20,20)</colorTwo>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>1500</MaxHitPoints>
+    </statBases>
+    <building>
+      <isResourceRock>true</isResourceRock>
+      <mineableThing>AS_SpiritStone</mineableThing>
+      <mineableYield>7</mineableYield>
+      <mineableScatterCommonality>0.05</mineableScatterCommonality>
+      <mineableScatterLumpSizeRange>2~8</mineableScatterLumpSizeRange>
+      <veinMineable>true</veinMineable>
+    </building>
+	<comps>
+	   <li Class="Ascension.CompProperties_GatherQi">
+		<range>1</range>
+        <amount>7</amount>
+      </li>
+    </comps>
+  </ThingDef>
 
   
   <ThingDef ParentName="ResourceBase">

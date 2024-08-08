@@ -15,19 +15,24 @@ namespace Ascension
             string csoTranslated = "";
             string qrsoTranslated = "";
             string mqTranslated = "";
-            if (Props.cultSpeedOffset > 0)
+            string ftTranslated = "";
+            if (Props.cultSpeedOffset > 0f)
             {
                 csoTranslated = "AS_CultivationUniformCSInspect".Translate((Props.cultSpeedOffset * AscensionUtilities.GetApparelQualityMultiplier(parent as Apparel)).ToString("0.#").Named("CSO"));
             }
-            if (Props.qiRecSpeedOffset > 0)
+            if (Props.qiRecSpeedOffset > 0f)
             {
                 qrsoTranslated = "AS_CultivationUniformQRSInspect".Translate((Props.qiRecSpeedOffset * AscensionUtilities.GetApparelQualityMultiplier(parent as Apparel)).ToString("0.#").Named("QRSO"));
             }
-            if (Props.maxQiOffset > 0)
+            if (Props.maxQiOffset > 0f)
             {
                 mqTranslated = "AS_CultivationUniformMQInspect".Translate((Props.maxQiOffset * AscensionUtilities.GetApparelQualityMultiplier(parent as Apparel)).ToString("0.#").Named("MQO"));
             }
-            return "AS_CultivationUniformInspect".Translate(csoTranslated.Named("CS"), qrsoTranslated.Named("QRS"), mqTranslated.Named("MQ"));
+            if (Props.fTrainingOffset > 0f)
+            {
+                ftTranslated = "AS_CultivationUniformFTInspect".Translate((Props.fTrainingOffset * AscensionUtilities.GetApparelQualityMultiplier(parent as Apparel)).ToString("0.#").Named("FTO"));
+            }
+            return "AS_CultivationUniformInspect".Translate(csoTranslated.Named("CS"), qrsoTranslated.Named("QRS"), mqTranslated.Named("MQ"), ftTranslated.Named("FT"));
         }
         public override IEnumerable<StatDrawEntry> SpecialDisplayStats()
         {
@@ -65,6 +70,16 @@ namespace Ascension
                     category: AscensionDefOf.CultivationUniform,
                     label: "AS_CultivationUniformMQ".Translate(), valueString: "AS_CultivationUniformMultiplierSymbol".Translate((Props.maxQiOffset * AscensionUtilities.GetApparelQualityMultiplier(parent as Apparel)).ToString("0.#").Named("OFFSET")),
                     reportText: "AS_CultivationUniformMQDesc".Translate(),
+                    displayPriorityWithinCategory: 200
+                );
+            }
+
+            if (Props.fTrainingOffset > 0f)
+            {
+                yield return new StatDrawEntry(
+                    category: AscensionDefOf.CultivationUniform,
+                    label: "AS_CultivationUniformFT".Translate(), valueString: "AS_CultivationUniformMultiplierSymbol".Translate((Props.fTrainingOffset * AscensionUtilities.GetApparelQualityMultiplier(parent as Apparel)).ToString("0.#").Named("OFFSET")),
+                    reportText: "AS_CultivationUniformFTDesc".Translate(),
                     displayPriorityWithinCategory: 200
                 );
             }

@@ -52,9 +52,11 @@
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
       <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
       <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -147,12 +149,15 @@
     <Compile Include="IncidentWorker_QiBurst.cs" />
     <Compile Include="IncidentWorker_SpiritTreeConversion.cs" />
     <Compile Include="IngestionOutcomeDoer_Exercise.cs" />
+    <Compile Include="IngestionOutcomeDoer_FormingPill.cs" />
     <Compile Include="IngestionOutcomeDoer_GiveBreakthrough.cs" />
+    <Compile Include="IngestionOutcomeDoer_RebirthPill.cs" />
     <Compile Include="IngestionOutcomeDoer_RefineQi.cs" />
     <Compile Include="IngestionOutcomeDoer_SpiritPill.cs" />
     <Compile Include="JobDriver_BreakthroughBody.cs" />
     <Compile Include="JobDriver_BreakthroughGoldenCore.cs" />
     <Compile Include="JobDriver_Exercise.cs" />
+    <Compile Include="JobDriver_FoundationTraining.cs" />
     <Compile Include="JobDriver_QiGathering.cs" />
     <Compile Include="JobDriver_RefineQiCauldron.cs" />
     <Compile Include="JobDriver_RefineQi.cs" />

@@ -155,8 +155,8 @@
         <label>Flesh Molding</label>
         <minSeverity>7</minSeverity>
 		<extraTooltip>The flesh of the body is molded to surpass its previous limits. Improves all bodily functions.</extraTooltip>
-		<naturalHealingFactor>3</naturalHealingFactor>
-		<painFactor>0.5</painFactor>
+		<naturalHealingFactor>777.77</naturalHealingFactor>
+		<painFactor>0.05</painFactor>
 		<capMods>
           <li>
             <capacity>Consciousness</capacity>

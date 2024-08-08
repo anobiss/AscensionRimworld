@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
+  <AS_TMastery>Mastery: {CURRENT} / {MAX}</AS_TMastery>
+
+  <AS_AssignCType>Assign cultivation type, this cannot be undone if they have finished foundation training. If toggled before foundation progress is maxed they wil automatically begin that cultivation type after foundation is maxed.</AS_AssignCType>
+
+  <AS_EssenceCultivation>Essence Cultivation</AS_EssenceCultivation>
+    <AS_EssenceCultivationDesc>Cultivate immortality using Qi, progression grants use of various Technique Arts that provide various combat and utility abilities that use Qi, and increases various qi related stat offsets.</AS_EssenceCultivationDesc>
+	
+  <AS_BodyCultivation>Body Cultivation</AS_BodyCultivation>
+    <AS_BodyCultivationDesc>Cultivate immortality using Exercise, progression grants increased bodily functions. (WIP, needs True Qi, Remoulding, Secret Bodies, etc.., will be added in Body Cultivation update.)</AS_BodyCultivationDesc>
+  
+  <AS_NoneCultDesc>No cultivation type selected. A selection is required before progressing past foundation training.</AS_NoneCultDesc>
+
+
+  <AS_TMasteryDesc>Mastery: {CURRENT} / {MAX}</AS_TMasteryDesc>
 
   <AS_StunSeedSeverity>Stun in {STUNTIME}</AS_StunSeedSeverity>
 
@@ -8,6 +22,7 @@
     <!-- display realms in dao tab-->
   <AS_RealmProgress>{REALM} Realm - {CURRENT} / {MAX}</AS_RealmProgress>
 
+  <AS_FoundationProgress>Foundation - {CURRENT} / {MAX}</AS_FoundationProgress>
 
     <!-- display for cauldrons -->
   <AS_CultivationCauldronInspect>Base Qi: {BASEQI}\nCurrent Qi: {QI}\nMax Quality: {QUALITY}</AS_CultivationCauldronInspect>
@@ -24,16 +39,21 @@
   <AS_ShowElementToggleButton>Toggle the Element display.\n\nDisplay the Element of the world as would be present where the cursor is pointing.</AS_ShowElementToggleButton>
 	
     <!-- display for uniforms, unused inspect elements will be blank -->
-  <AS_CultivationUniformInspect>{CS}{QRS}{MQ}</AS_CultivationUniformInspect>
+  <AS_CultivationUniformInspect>{CS}{QRS}{MQ}{FT}</AS_CultivationUniformInspect>
   <AS_CultivationUniformCSInspect>Cultivation Speed Offset: {CSO}x</AS_CultivationUniformCSInspect>
   <AS_CultivationUniformQRSInspect>\nQi Recovery Speed Offset: {QRSO}x</AS_CultivationUniformQRSInspect>
   <AS_CultivationUniformMQInspect>\nMax Qi Offset: {MQO}x</AS_CultivationUniformMQInspect>
+    <AS_CultivationUniformFTInspect>\nFoundation Training Offset: {FTO}x</AS_CultivationUniformFTInspect>
   <AS_CultivationUniformCS>Cultivation Speed Offset</AS_CultivationUniformCS>
   <AS_CultivationUniformCSDesc>The amount of offset to Cultivation Speed granted to its wearer.</AS_CultivationUniformCSDesc>
   <AS_CultivationUniformQRS>Qi Recovery Speed Offset</AS_CultivationUniformQRS>
   <AS_CultivationUniformQRSDesc>The amount of offset to Cultivation Speed granted to its wearer.</AS_CultivationUniformQRSDesc>
   <AS_CultivationUniformMQ>Max Qi Offset</AS_CultivationUniformMQ>
   <AS_CultivationUniformMQDesc>The amount of offset to Max Qi granted to its wearer.</AS_CultivationUniformMQDesc>
+  
+  <AS_CultivationUniformFT>Foundation Training Offset</AS_CultivationUniformFT>
+  <AS_CultivationUniformFTDesc>The amount of offset to cultivation speed granted to its wearer if they are training thier foundation.</AS_CultivationUniformFTDesc>
+  
   <AS_CultivationUniformMultiplierSymbol>{OFFSET}x</AS_CultivationUniformMultiplierSymbol>
   
       <!-- display for spirit pill -->
@@ -125,50 +145,94 @@
   <AS_TranslatedSpeedMinutes>{SPEED} minutes</AS_TranslatedSpeedMinutes>
   <AS_TranslatedSpeedMinute>minute</AS_TranslatedSpeedMinute>
   <AS_TranslatedSpeedSeconds>{SPEED} seconds</AS_TranslatedSpeedSeconds>
+  
+        <!-- confirm button -->
+  <AS_Confirm>Confirm</AS_Confirm>
+  <AS_ConfirmDesc>Confirm the selected cultivation type, letting the cultivator begin this type of cultivation after they have finished thier foundation. Cannot confirm before choosing a cultivation type.</AS_ConfirmDesc>
+  
+    <AS_Unconfirm>Unconfirm</AS_Unconfirm>
+	<AS_UnconfirmDesc>Unconfirm the selected cultivation type.</AS_UnconfirmDesc>
 
-  <AS_Foundation>Foundation</AS_Foundation>
+	  
+	  
+      <!-- Settings categories -->
+  <AS_RandomCultivators>---Randomly Generated Cultivators---</AS_RandomCultivators>
+  <AS_RandomCultivatorsDesc>Settings for randomly generated cultivators. </AS_RandomCultivatorsDesc>
+  
+	  
+  <AS_TickRates>---Tick Rates---</AS_TickRates>
+  <AS_TickRatesDesc>Settings for tick rates of various features. Lowering will reduce lag but increase the amount of time it takes for the feature to act properly.</AS_TickRatesDesc>
+  
+  <AS_Notifications>---Notifications---</AS_Notifications>
+  <AS_NotificationsDesc>Settings to disable or enable various notifications, letters, etc...</AS_NotificationsDesc>
+  
+  <AS_Misc>---Misc---</AS_Misc>
+  <AS_MiscDesc>Miscellaneous settings that done fit anywhere in particular.</AS_MiscDesc>
+	  
+	        <!-- Settings -->
+  <AS_BaseCultivationSpeed>Base Cultivation Speed:  {SETTING}</AS_BaseCultivationSpeed>
+  <AS_BaseCultivationSpeedDesc>Base cultivation speed, 1 by default. Keep in mind most cultivation is balanced around time spent, so anything above 1 can be really OP.</AS_BaseCultivationSpeedDesc>
+			
+  <AS_CultivatorChance>Cultivator Spawn Chance: {SETTING}%</AS_CultivatorChance>
+  <AS_CultivatorChanceDesc>Determines the probability of a pawn being a cultivator with random realm progression when spawned.</AS_CultivatorChanceDesc>
+  
+    <AS_AbilityChance>Cultivator Ability Chance: {SETTING}%</AS_AbilityChance>
+  <AS_AbilityChanceDesc>Determines the probability of a cultivator gaining random scroll arts / abilities when spawned. Slightly below displayed percentage if no useable scrolls are found.</AS_AbilityChanceDesc>
+  <AS_PCChance>Powerful Cultivator Chance: {SETTING}%</AS_PCChance>
+  <AS_PCChanceDesc>Determines the probability of a random cultivators realm progression being high end when spawned, while also increasing max Golden Core scores if the cultivator is a essence cultivator and Anima Conversion amounts generated by 2x.</AS_PCChanceDesc>
+  <AS_ERChance>Essence Realm Chance: {SETTING}%</AS_ERChance>
+  <AS_ERChanceDesc>Determines the probability of random cultivators being in a essence realm when spawned. Essence realms are after body realms.</AS_ERChanceDesc>
   
   
-      <!-- Settings -->
+  <AS_FoundationChance>Foundation Chance: {SETTING}%</AS_FoundationChance>
+  <AS_FoundationChanceDesc>Chance for a randomly generated cultivator to not have foundation training finished. This overrides powerful cultivators too, meaning that if this is too high you wont see many powerful cultivators regardless of the chance for them.</AS_FoundationChanceDesc>
+	  
+  <AS_DefaultEssenceType>Default Cultivation Type Essence:</AS_DefaultEssenceType>
+  <AS_DefaultEssenceTypeDesc>Default cultivation type of controllable cultivators is essence while enabled, body while disabled. Non-controllable cultivators type is determined by essence chance.</AS_DefaultEssenceTypeDesc>
   
-  <AS_DisableHTLetters>Disable Heavenly Tribulation Letters/Notifications: </AS_DisableHTLetters>
+  
+  <AS_DefaultConfirm>Auto-Confirm Cultivation Type:</AS_DefaultConfirm>
+  <AS_DefaultConfirmDesc>All controllable cultivators will have thier cultivation type confirmed by default when enabled, the inverse is true if disabled. Disabled by default. Non-controllable cultivators are always confirmed.</AS_DefaultConfirmDesc>
+  
+  <AS_DisableHTLetters>Disable Heavenly Tribulation Letters/Notifications:</AS_DisableHTLetters>
   <AS_DisableHTLettersDesc>Disable Heavenly Tribulation letters incase you have too many cultivates and are getting spammed. False by default to prevent accidental tribulation deaths/injuries.</AS_DisableHTLettersDesc>
   
-  <AS_DisablePLetters>Disable Progress Letters/Notifications: </AS_DisablePLetters>
+  <AS_DisablePLetters>Disable Progress Letters/Notifications:</AS_DisablePLetters>
   <AS_DisablePLettersDesc>Disable progress letters such as breakthrough possible. True by default due to these letters being a remanent of before the mod had auto-cultivation.</AS_DisablePLettersDesc>
   
-  <AS_DisplayQi>Display Gather Qi Grid: </AS_DisplayQi>
+  <AS_DisplayQi>Display Gather Qi Grid:</AS_DisplayQi>
   <AS_DisplayQiDesc>Display the gather qi values on the map/screen.</AS_DisplayQiDesc>
   
   <AS_DisplayElement>Display Element Grid: </AS_DisplayElement>
   <AS_DisplayElementDesc>Display the element values on the map/screen.</AS_DisplayElementDesc>
   
 
-  <AS_SMTickRate>Soul Mend Tick Rate:</AS_SMTickRate>
+  <AS_SMTickRate>Soul Mend Tick Rate: {SETTING}</AS_SMTickRate>
   <AS_SMTickRateDesc>The amount of ticks between each check if a pawn using soul mend is dead. Higher values means less lag with high amounts of soul menders but also a longer wait for resurrection.</AS_SMTickRateDesc>
 
-  <AS_SMRandStacks>Max Random Soul Mend Stacks:</AS_SMRandStacks>
+  <AS_SMRandStacks>Max Random Soul Mend Stacks: {SETTING}}</AS_SMRandStacks>
   <AS_SSMRandStacksDesc>The max amount of soul mend stacks a random cultivator with the soul mend ability can generate with.</AS_SSMRandStacksDesc>
 
-  <AS_GoldenCoreMax>Max Random Golden Core Score: </AS_GoldenCoreMax>
+  <AS_GoldenCoreMax>Max Random Golden Core Score: {SETTING}</AS_GoldenCoreMax>
   <AS_GoldenCoreMaxDesc>The maximum Golden Core score generated for a random cultivator. This is not the maximum possible from a Golden Core breakthrough and only effects randomly generated cultivators.  Random Immortal cultivators can have no less than between 1x - 4x this score (excluding the lucky psuedo-immortal Powerful Cultivators) and Powerful Cultivators can have up to 2x this score.</AS_GoldenCoreMaxDesc>
 	
-  <AS_AnimaCMax>Max Random Anima Conversion: </AS_AnimaCMax>
+  <AS_AnimaCMax>Max Random Anima Conversion: {SETTING}</AS_AnimaCMax>
   <AS_AnimaCMaxDesc>The maximum Anima Conversion amount generated for a random cultivator. Inner Cauldron random generation is always 0-1200 and turns into Anima Conversion after achieving a Golden Core, removing its previously mentioned limit. Random Immortal cultivators can have no less than between 1x - 4x this amount (excluding the lucky psuedo-immortal Powerful Cultivators) and Powerful Cultivators can have up to 2x this amount.</AS_AnimaCMaxDesc>
 
-  <AS_AbilityChance>Cultivator Ability Chance: </AS_AbilityChance>
-  <AS_AbilityChanceDesc>Determines the probability of a cultivator gaining random scroll arts / abilities when spawned. Slightly below displayed percentage if no useable scrolls are found.</AS_AbilityChanceDesc>
-  <AS_PCChance>Powerful Cultivator Chance: </AS_PCChance>
-  <AS_PCChanceDesc>Determines the probability of a random cultivators realm progression being high end when spawned, while also increasing max Golden Core scores and Anima Conversion amounts generated by 2x. This only effects thier given realm, so if essence realm chance is at 0 you wont get any truly powerful cultivators.</AS_PCChanceDesc>
-  <AS_ERChance>Essence Realm Chance: </AS_ERChance>
-  <AS_ERChanceDesc>Determines the probability of random cultivators being in a essence realm when spawned. Essence realms are after body realms.</AS_ERChanceDesc>
+
   <AS_LogHeals>Log Heals</AS_LogHeals>
   <AS_LogHealsDesc>Enable if you want to log heals from this mod in console. May flood the console if too many heals take place.</AS_LogHealsDesc>
-  <AS_CultivatorChance>Cultivator Spawn Chance: </AS_CultivatorChance>
-  <AS_CultivatorChanceDesc>Determines the probability of a pawn being a cultivator with random realm progression when spawned.</AS_CultivatorChanceDesc>
-  <AS_PIChance>Pseudo-Immortal Spawn Chance: </AS_PIChance>
-  <AS_PIChanceDesc>Determines the probability of a pawn being a Pseudo-Immortal cultivator when spawned, while also increasing max Golden Core scores and Anima Conversion amounts generated by 4x and preventing random amounts/scores below max. Includes a 10% chance to be a Profound Immortal. Only effects randomly generated cultivators.</AS_PIChanceDesc>
+
   
+    <AS_PCMax>Powerful Cultivator Maximum Realm: {SETTING}</AS_PCMax>
+  <AS_PCMaxDesc>Maximum realm that a powerful random cultivator is spawned at.</AS_PCMaxDesc>
+  
+  <AS_PCMin>Powerful Cultivator Minimum Realm: {SETTING}</AS_PCMin>
+  <AS_PCMinDesc>Minimum realm that a powerful random cultivator is spawned at.</AS_PCMinDesc>
+  
+  
+  
+  	        <!-- UI -->
   
   <AS_CultivationSpeed>Cultivation Speed: {SPEED}</AS_CultivationSpeed>
   <AS_CultivationSpeedDesc>The speed at which cultivators do cultivation jobs like Exercise, Refine Qi, Gather Qi, Breakthroughs, etc.</AS_CultivationSpeedDesc>
@@ -199,6 +263,7 @@
   <AS_CSFactorMood> * ( 0.4 + Mood: {MOOD} )</AS_CSFactorMood>
   <AS_CSFactorQiTile> * ( 1 + 1% Gather Qi: {QITILE} )</AS_CSFactorQiTile>
   <AS_CSFactorElement> * ( 1 + 1% {ELEMENT}: {AMOUNT} )</AS_CSFactorElement>
+  <AS_CSFactorFTOffset> * (Foundation Training Offset: {OFFSET} )</AS_CSFactorFTOffset>
   <AS_CSFactorResult>\n = {SPEED} Cultivation Speed</AS_CSFactorResult>
   <AS_CSFactorsDesc>The factors influencing cultivation speed. </AS_CSFactorsDesc>
   
@@ -253,7 +318,18 @@
   <AS_RealmOnlyAutoDesc>Auto-cultivate Current Realm only. (This excludes gathering qi if they are in a essence realm)</AS_RealmOnlyAutoDesc>
   <AS_QiGatheringAuto>Gather Qi</AS_QiGatheringAuto>
   <AS_QiGatheringAutoDesc>Automatically gather Qi only.</AS_QiGatheringAutoDesc>
+  <AS_InnerCAuto>Inner Cauldron</AS_InnerCAuto>
+  <AS_AnimaCAuto>Anima Conversion</AS_AnimaCAuto>
+  <AS_InnerCAutoDesc>Automatically refine qi into {IC} only. Includes qi </AS_InnerCAutoDesc>
   
+  
+  <AS_FoundationTraining>Foundation Training</AS_FoundationTraining>
+    <AS_FoundationTrainingDesc>Train for 1 hour to progress in your foundation by 10. </AS_FoundationTrainingDesc>
+	
+	  <AS_Foundation>Foundation</AS_Foundation>
+	  <AS_FoundationDesc>A foundation must be established by a mortal before they can truly begin cultivation. The type of cultivation can be chosen and changed before the foundation is built but afterwards when they begin cultivating that type the choice is permanent (excluding rebirth pills).</AS_FoundationDesc>
+  
+  <AS_NoCultChosenError>You must choose a cultivation type to progress further.</AS_NoCultChosenError>
   
   <AS_TConversionsLeft> Qi to essence realm progress conversions left.</AS_TConversionsLeft>
   <AS_RefineQi>Refine Qi</AS_RefineQi>
@@ -336,5 +412,7 @@
 
   <AS_QFSLabel> Dao Energy</AS_QFSLabel>
   <AS_QPAmountLabel> Qi</AS_QPAmountLabel>
+
+  <AS_LifespanBar>Lifespan - {LIFESPAN} years - {EFFICIENCY}% Efficiency</AS_LifespanBar>
 
 </LanguageData>

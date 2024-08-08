@@ -27,6 +27,7 @@
       <Beauty>9</Beauty>
     </statBases>
     <plant>
+      <neverBlightable>true</neverBlightable>
       <growDays>120</growDays>
 	  <harvestedThingDef>AS_Spiritwood</harvestedThingDef>
       <leaflessGraphicPath>Things/Plant/SpiritTree_Leafless</leaflessGraphicPath>

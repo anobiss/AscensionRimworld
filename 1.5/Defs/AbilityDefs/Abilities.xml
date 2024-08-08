@@ -768,6 +768,7 @@
     </comps>
   </AbilityDef>
 
+      		<!-- Basic Qi Sword Arts-->
   <AbilityDef>
     <defName>SpiritSwordQiThrow</defName>
     <label>qi spirit sword throw</label>
@@ -902,6 +903,67 @@
       <speed>50</speed>
     </projectile>
   </ThingDef>
+
+      		<!-- Advanced Qi Sword Arts-->
+
+      		<!-- cool new spirit sword combat ability-->
+  <AbilityDef>
+    <defName>SpiritSwordQiBarrage</defName>
+    <label>qi spirit sword barrage</label>
+    <description>Summon an absorbed spirit sword and infuse it with qi to divide it into several smaller spirit swords to launch at a target.</description>
+    <iconPath>UI/Abilities/QiSpiritSwordThrow</iconPath>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <aiCanUse>true</aiCanUse>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>7</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>QiBullet</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>12000</cost>
+		<reqHediffDef>AS_SpiritSwordFusion</reqHediffDef>
+      </li>
+      <li Class="CompProperties_AbilityLaunchProjectile">
+        <projectileDef>ThrownQiSpiritSword</projectileDef>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>
+      		<!-- qi sword flight-->
+	  <AbilityDef>
+    <defName>SpiritSwordQiFlight</defName>
+    <label>qi spirit sword flight</label>
+    <description>Summon an absorbed spirit sword and infuse it with qi to use it as a mode of transport.</description>
+    <iconPath>UI/Abilities/QiSpiritSwordThrow</iconPath>
+    <cooldownTicksRange>60</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <aiCanUse>true</aiCanUse>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>7</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>QiBullet</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>12000</cost>
+		<reqHediffDef>AS_SpiritSwordFusion</reqHediffDef>
+      </li>
+      <li Class="CompProperties_AbilityLaunchProjectile">
+        <projectileDef>ThrownQiSpiritSword</projectileDef>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+    </comps>
+  </AbilityDef>		
 
 
 </Defs>

@@ -87,8 +87,11 @@ namespace Ascension
             RollDivineBreath();
             Realm_Hediff essenceRealm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
             Realm_Hediff bodyRealm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm) as Realm_Hediff;
+
+            HediffDef realmDef = essenceRealm.def;
             if (essenceRealm != null)
             {
+                realmDef = essenceRealm.def;
                 if (amount > essenceRealm.maxProgress)
                 {
                     essenceRealm.progress = essenceRealm.maxProgress;
@@ -99,6 +102,7 @@ namespace Ascension
 
             }else if (bodyRealm != null)
             {
+                realmDef = bodyRealm.def;
                 if (amount > bodyRealm.maxProgress)
                 {
                     bodyRealm.progress = bodyRealm.maxProgress;
@@ -108,6 +112,7 @@ namespace Ascension
                     bodyRealm.progress += amount;
                 }
             }
+            AscensionUtilities.TierProgress(pawn, realmDef, amount);
             convertedQi = 0f;
         }
         private void RollDivineBreath()

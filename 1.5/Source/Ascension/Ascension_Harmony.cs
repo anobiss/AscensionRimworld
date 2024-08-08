@@ -71,11 +71,14 @@ namespace Ascension
                         float randC = Rand.Range(0, 1f);
                         float randER = Rand.Range(0, 1f);
                         float randSM = Rand.Range(0, 1f);
+                        float randF = Rand.Range(0, 1f);
 
                         float chanceC = settings.CultivatorChance;
                         float chanceER = settings.EssenceChance;
                         float chancePC = settings.PCChance;
-                        float chancePI = settings.PIChance;
+                        float chanceF = settings.foundationChance;
+
+                        int minPCRealm = Math.Max(1, (int)Math.Floor(settings.PCMinRealm));
 
                         int maxGoldenCore = (int)settings.GoldenCoreMax;
                         int maxAnimaC = (int)settings.AnimaCMax;
@@ -84,91 +87,99 @@ namespace Ascension
                         float chanceA = settings.AbilityChance;
                         Cultivator_Hediff cultivatorHediff;
                         QiPool_Hediff qiPool;
+                        HediffDef RealmDef;
+                        Realm_Hediff realmHediff = HediffMaker.MakeHediff(AscensionDefOf.BodyRealm, pawn) as Realm_Hediff;
+                        int randRealmStage;
                         //if the chance number is greater or equal to the rng number it gives the hediff, this makes it so a 0.07 chance would be a 7% chance.
 
                         if (randC <= chanceC)
                         {
+                            //cultivators always have these two
                             cultivatorHediff = HediffMaker.MakeHediff(AscensionDefOf.Cultivator, pawn) as Cultivator_Hediff;
                             qiPool = HediffMaker.MakeHediff(AscensionDefOf.QiPool, pawn) as QiPool_Hediff;
-
-                            //generate randon cauldron from 0-1200 at the start, 
-                            cultivatorHediff.innerCauldronQi = rnd.Next(1, Math.Max(1, 1200));//use math max in all randoms to prevent exceptions
-
-                            int randRealmStage = rnd.Next(1, 4);
-                            //if they failed to get psuedo immortality roll for random cultivation realms.
-                            randC = Rand.Range(0, 1f);
-                            HediffDef RealmDef = AscensionDefOf.BodyRealm;
-                            if (randER <= chanceER)
+                            if (randF <= chanceF)//does foundation stuff instead of realm stuff
                             {
-                                RealmDef = AscensionDefOf.EssenceRealm;
-                                if (randRealmStage >= 3)
+                                cultivatorHediff.Foundation = (int)(((float)rnd.NextDouble() * (float)cultivatorHediff.fMax));//random progress
+                                realmHediff = null;
+                                if (randER <= chanceER)
                                 {
-                                    //we can use int rng for this because the setting number cant go to high.
-                                    cultivatorHediff.goldenCoreScore = rnd.Next(1, Math.Max(1, maxGoldenCore));
-                                    cultivatorHediff.innerCauldronQi = rnd.Next(1, Math.Max(1, maxAnimaC));
-                                }
-                            }
-                            if (randC <= chancePC)
-                            {
-                                //upgrade to strong rand realms and to essence realm if powerful
-                                randRealmStage = rnd.Next(3, 6);
-                                RealmDef = AscensionDefOf.EssenceRealm;
-
-                                cultivatorHediff.goldenCoreScore = rnd.Next(maxGoldenCore, Math.Max(maxGoldenCore, maxGoldenCore * 2));
-                                cultivatorHediff.innerCauldronQi = rnd.Next(1, Math.Max(1, maxAnimaC*2));
-                            }
-                            else
-                            {
-                                randRealmStage = rnd.Next(1, 3);
-                            }
-
-
-                            //if they are essence realm and the severity is three or above we should generate a random golden core.
-                            //higher random golden core score if they are powerful cultivatior
-                            if (RealmDef == AscensionDefOf.EssenceRealm && randRealmStage >= 3)
-                            {
-                                cultivatorHediff.innerCauldronQi = rnd.Next(1, Math.Max(1, maxAnimaC));
-                                cultivatorHediff.goldenCoreScore = rnd.Next(1, Math.Max(1, maxGoldenCore));
-                            }
-
-
-                            Realm_Hediff realmHediff = HediffMaker.MakeHediff(RealmDef, pawn) as Realm_Hediff;
-
-                            if (randpi <= chancePI)
-                            {
-                                realmHediff = HediffMaker.MakeHediff(AscensionDefOf.EssenceRealm, pawn) as Realm_Hediff;
-                                cultivatorHediff.goldenCoreScore = rnd.Next(maxGoldenCore, Math.Max(maxGoldenCore, maxGoldenCore * 4));
-                                cultivatorHediff.innerCauldronQi = rnd.Next(maxAnimaC, Math.Max(maxAnimaC, maxAnimaC * 4));
-                                randpi = Rand.Range(0, 1f);
-                                //0.1f makes it a 10% chance for a high level
-                                if (randpi <= 0.1f)
-                                {
-                                    //profound immortal.
-                                    realmHediff.Severity = 7;
+                                    cultivatorHediff.chosenLawType = Cultivator_Hediff.LawType.Essence;
                                 }
                                 else
                                 {
-                                    //psuedo immortal
-                                    realmHediff.Severity = 6;
+                                    cultivatorHediff.chosenLawType = Cultivator_Hediff.LawType.Body;
                                 }
                             }
                             else
                             {
-                                realmHediff.Severity = randRealmStage;
-                            }
+                                randRealmStage = rnd.Next(1, 4);
+                                randC = Rand.Range(0, 1f);
 
+                                if (randER <= chanceER)//essence cultivator logic
+                                {
+                                    cultivatorHediff.lawType = Cultivator_Hediff.LawType.Essence;
+                                    cultivatorHediff.innerCauldronQi = rnd.Next(1, Math.Max(1, 1200));//default random cauldron
+                                    if (randRealmStage >= 3)
+                                    {
+                                        //we can use int rng for this because the setting number cant go to high.
+                                        cultivatorHediff.goldenCoreScore = rnd.Next(1, Math.Max(1, maxGoldenCore));// default random golden core score
+                                        cultivatorHediff.innerCauldronQi = rnd.Next(1, Math.Max(1, maxAnimaC));// default random cauldron for anima conversion
+                                    }
+                                }
+                                else
+                                {
+                                    cultivatorHediff.lawType = Cultivator_Hediff.LawType.Body;
+                                }
+                                if (randC <= chancePC)//powerful cultivator logic
+                                {
+                                    //upgrade to strong rand realms and to essence realm if powerful
+                                    randRealmStage = rnd.Next((int)settings.PCMinRealm, Math.Max((int)settings.PCMinRealm, (int)settings.PCMaxRealm));
+
+
+                                    if (cultivatorHediff.lawType == Cultivator_Hediff.LawType.Essence)
+                                    {
+                                        cultivatorHediff.goldenCoreScore = rnd.Next(maxGoldenCore, Math.Max(maxGoldenCore, maxGoldenCore * 2));
+                                        cultivatorHediff.innerCauldronQi = rnd.Next(1, Math.Max(1, maxAnimaC * 2));
+                                    }
+
+                                }
+                                else
+                                {
+                                    randRealmStage = rnd.Next(1, 3);
+                                }
+
+
+                                if (cultivatorHediff.lawType == Cultivator_Hediff.LawType.Essence && randRealmStage >= 3)//extra realm bits for essence cultivators that should have golden cores
+                                {
+                                    cultivatorHediff.innerCauldronQi = rnd.Next(1, Math.Max(1, maxAnimaC));
+                                    cultivatorHediff.goldenCoreScore = rnd.Next(1, Math.Max(1, maxGoldenCore));
+                                }
+
+                                if (cultivatorHediff.lawType == Cultivator_Hediff.LawType.Essence)
+                                {
+                                    realmHediff = HediffMaker.MakeHediff(AscensionDefOf.EssenceRealm, pawn) as Realm_Hediff;
+                                }
+                                realmHediff.Severity = randRealmStage;
+                                AscensionUtilities.UpdateMaxProg(realmHediff);
+                                realmHediff.progress = ((float)rnd.NextDouble()) * realmHediff.maxProgress;//random progress
+
+                                pawn.health.AddHediff(realmHediff);
+                                if (cultivatorHediff.lawType == Cultivator_Hediff.LawType.Essence)//after severity for accurate calcs
+                                {
+                                    AscensionUtilities.UpdateQiRecoveryAmount(qiPool);
+                                    AscensionUtilities.UpdateQiRecoverySpeed(qiPool);
+                                }
+                            }
                             cultivatorHediff.element = AscensionUtilities.AssignElement();//assign for checking in scroll art reqs later
 
                             pawn.health.AddHediff(cultivatorHediff);
                             pawn.health.AddHediff(qiPool);
-                            pawn.health.AddHediff(realmHediff);
-                            AscensionUtilities.UpdateMaxProg(realmHediff);
 
                             AscensionUtilities.UpdateQiRecoveryAmount(qiPool);
                             AscensionUtilities.UpdateQiRecoverySpeed(qiPool);
                             qiPool.amount = ((float)rnd.NextDouble()) * AscensionUtilities.UpdateQiMax(qiPool); ;
 
-                            realmHediff.progress = ((float)rnd.NextDouble()) * realmHediff.maxProgress;
+                            
                             float randA = Rand.Range(0, 1f);//only need to roll if its a cultivator
                             //now do random abilities here
                             if (randA <= chanceA)
@@ -228,20 +239,35 @@ namespace Ascension
                                                     {
                                                         if (scrollAbilityComp.Props.reqEssence > 0)//checks if pawn has required realms
                                                         {
-                                                            if (RealmDef == AscensionDefOf.BodyRealm)
+                                                            if (realmHediff == null)
                                                             {
                                                                 randomScrollSetReqList.RemoveAt(reqi);
                                                             }
-                                                            else if ((int)Math.Floor(realmHediff.Severity) < scrollAbilityComp.Props.reqEssence)
+                                                            else
                                                             {
-                                                                randomScrollSetReqList.RemoveAt(reqi);
+                                                                if (realmHediff.def == AscensionDefOf.BodyRealm)
+                                                                {
+                                                                    randomScrollSetReqList.RemoveAt(reqi);
+                                                                }
+                                                                else if ((int)Math.Floor(realmHediff.Severity) < scrollAbilityComp.Props.reqEssence)
+                                                                {
+                                                                    randomScrollSetReqList.RemoveAt(reqi);
+                                                                }
                                                             }
+
                                                         }
                                                         else if (scrollAbilityComp.Props.reqBody > 0)
                                                         {
-                                                            if (RealmDef != AscensionDefOf.EssenceRealm)
+                                                            if (realmHediff == null)
                                                             {
-                                                                if ((int)Math.Floor(realmHediff.Severity) < scrollAbilityComp.Props.reqBody)
+                                                                randomScrollSetReqList.RemoveAt(reqi);
+                                                            }else
+                                                            {
+                                                                if (realmHediff.def == AscensionDefOf.EssenceRealm)
+                                                                {
+                                                                    randomScrollSetReqList.RemoveAt(reqi);
+                                                                }
+                                                                else if ((int)Math.Floor(realmHediff.Severity) < scrollAbilityComp.Props.reqBody)
                                                                 {
                                                                     randomScrollSetReqList.RemoveAt(reqi);
                                                                 }

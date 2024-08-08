@@ -219,7 +219,7 @@ namespace Ascension
             GUI.color = Color.white;
             Widgets.FillableBar(barRect.ContractedBy(2f), qiRatio);
             string qiBarText = "AS_QiPoolBar".Translate(qiPoolHediff.amount.ToString("#").Named("QI"), qiMax.ToString("#").Named("MAXQI"));
-            if (CultivatorHediff != null && eRealmHediff != null)
+            if (CultivatorHediff != null)
             {
                 if (qiRecSpeed != 0)
                 {
@@ -227,7 +227,7 @@ namespace Ascension
                 }
             }
             Widgets.Label(barRect, qiBarText);
-            if (CanControl() && qiPoolHediff.amount < qiPoolHediff.maxAmount)
+            if (CanControl() && qiPoolHediff.amount < qiPoolHediff.maxAmount && lawType == essenceLaw)
             {
                 if (Widgets.ButtonText(gatherButtonRect, "AS_QiGathering".Translate()))
                 {
@@ -254,66 +254,73 @@ namespace Ascension
 
         private static void DrawPawnRealm(Rect rect)
         {
-            Realm_Hediff realm = bRealmHediff;
-            if (eRealmHediff != null)
+            //shows selected realm if foundation is maxed. otherwise shows foundation and foundation training
+
+            //the displayed realm progression
+            string displayTranslatedLabel = "AS_FoundationProgress".Translate(CultivatorHediff.Foundation.Named("CURRENT"), CultivatorHediff.fMax.Named("MAX"));
+            string displayTranslatedTTip = "AS_FoundationDesc".Translate();
+            float displayProg = 0;
+            float displayMaxProg = 1;
+
+            if (isFoundation)
             {
-                realm = eRealmHediff;
+                //foundation stuff
+                displayProg = CultivatorHediff.Foundation;
+                displayMaxProg = CultivatorHediff.fMax;
+
+            }
+            else
+            {
+                //realm stuff
+                displayTranslatedTTip = currentRealmHediff.CurStage.extraTooltip;
+                displayTranslatedLabel = "AS_RealmProgress".Translate(currentRealmHediff.CurStage.label.Named("REALM"),
+                    currentRealmHediff.progress.Named("CURRENT"), currentRealmHediff.maxProgress.Named("MAX"));
+
+                displayProg = currentRealmHediff.progress;
+                displayMaxProg = currentRealmHediff.maxProgress;
             }
 
-            if (realm != null)
+            Rect realmTextureRect = new Rect(rect.x, rect.y + 35, rect.width, rect.height);
+            Rect realmLabelRect = new Rect(realmTextureRect.x, realmTextureRect.yMin - 20f, rect.width, 35f);
+
+            if (Mouse.IsOver(realmLabelRect))
             {
-                Rect realmTextureRect = new Rect(rect.x, rect.y + 35, rect.width, rect.height);
-                Rect realmLabelRect = new Rect(realmTextureRect.x, realmTextureRect.yMin - 20f, rect.width, 35f);
+                Widgets.DrawHighlight(realmLabelRect);
+                TooltipHandler.TipRegion(realmLabelRect, displayTranslatedTTip);
+            }
 
-                if (Mouse.IsOver(realmLabelRect))
-                {
-                    Widgets.DrawHighlight(realmLabelRect);
-                    TooltipHandler.TipRegion(realmLabelRect, realm.CurStage.extraTooltip);
-                }
+            float realmRatio = displayProg / displayMaxProg;
 
-                float realmRatio = (float)realm.progress / realm.maxProgress;
+            // Draw the empty texture
+            GUI.DrawTexture(realmTextureRect, cultivatorEmptyTexture);
+            // Draw the full texture based on the progress
+            if (realmRatio > 0)
+            {
+                Rect fullRect = new Rect(realmTextureRect.x, realmTextureRect.y + realmTextureRect.height - (realmTextureRect.height * realmRatio), realmTextureRect.width, realmTextureRect.height * realmRatio);
+                Rect texCoords = new Rect(0f, 0f, 1f, realmRatio);
+                GUI.DrawTextureWithTexCoords(fullRect, cultivatorFullTexture, texCoords);
+            }
+            GUI.color = Color.white; // Reset color for the text
+            Text.Anchor = TextAnchor.MiddleCenter;
+            Text.Font = GameFont.Small;
+            GUI.color = Color.white;
+            Widgets.Label(realmLabelRect, displayTranslatedLabel);
+            if (CultivatorHediff.goldenCoreScore > 0 && !isFoundation)
+            {
+                Rect goldenCoreTextureRect = new Rect(realmTextureRect.x + (realmTextureRect.width - 32f) / 2f, realmTextureRect.y + (realmTextureRect.height - 32f) / 2f, 32f, 32f);
+                GUI.DrawTexture(goldenCoreTextureRect, goldenCoreTexture);
 
-                // Draw the empty texture
-                GUI.DrawTexture(realmTextureRect, cultivatorEmptyTexture);
-
-
-                // Draw the full texture based on the progress
-                if (realmRatio > 0)
-                {
-                    Rect fullRect = new Rect(realmTextureRect.x, realmTextureRect.y + realmTextureRect.height - (realmTextureRect.height * realmRatio), realmTextureRect.width, realmTextureRect.height * realmRatio);
-                    Rect texCoords = new Rect(0f, 0f, 1f, realmRatio);
-                    GUI.DrawTextureWithTexCoords(fullRect, cultivatorFullTexture, texCoords);
-                }
-
-                Color barColor = realm.def == AscensionDefOf.EssenceRealm ? new Color(0.8f, 0.8f, 1f - realm.Severity / 5f, 1f) : new Color(0.8f, 1f - realm.Severity / 5f, 1f - realm.Severity / 5f, 1f);
-
-                GUI.color = Color.white; // Reset color for the text
-                Text.Anchor = TextAnchor.MiddleCenter;
-                Text.Font = GameFont.Small;
-                string realmProgressText = "AS_RealmProgress".Translate(realm.CurStage.label.Named("REALM"), realm.progress.Named("CURRENT"), realm.maxProgress.Named("MAX"));
+                Rect goldenCoreLabelRect = new Rect(realmTextureRect.x, goldenCoreTextureRect.y, rect.width, 35f);
+                GUI.color = new Color(1f, 0.5f, 1.0f);
+                Widgets.Label(goldenCoreLabelRect, "AS_GoldenCoreLabel".Translate(CultivatorHediff.goldenCoreScore.Named("SCORE")));
                 GUI.color = Color.white;
-
-                Widgets.Label(realmLabelRect, realmProgressText);
-
-                if (CultivatorHediff.goldenCoreScore > 0)
+                if (Mouse.IsOver(goldenCoreTextureRect))
                 {
-                    Rect goldenCoreTextureRect = new Rect(realmTextureRect.x + (realmTextureRect.width - 32f) / 2f, realmTextureRect.y + (realmTextureRect.height - 32f) / 2f, 32f, 32f);
-                    GUI.DrawTexture(goldenCoreTextureRect, goldenCoreTexture);
-
-                    Rect goldenCoreLabelRect = new Rect(realmTextureRect.x, goldenCoreTextureRect.y, rect.width, 35f);
-                    GUI.color = new Color(1f, 0.5f, 1.0f);
-                    Widgets.Label(goldenCoreLabelRect, "AS_GoldenCoreLabel".Translate(CultivatorHediff.goldenCoreScore.Named("SCORE")));
-                    GUI.color = Color.white;
-                    if (Mouse.IsOver(goldenCoreTextureRect))
-                    {
-                        Widgets.DrawHighlight(goldenCoreTextureRect);
-                        TooltipHandler.TipRegion(goldenCoreTextureRect, "AS_GoldenCoreDesc".Translate(CultivatorHediff.goldenCoreScore.Named("SCORE")));
-                    }
+                    Widgets.DrawHighlight(goldenCoreTextureRect);
+                    TooltipHandler.TipRegion(goldenCoreTextureRect, "AS_GoldenCoreDesc".Translate(CultivatorHediff.goldenCoreScore.Named("SCORE")));
                 }
-
-                GUI.color = Color.white; // Ensure GUI color is reset after drawing
             }
-
+            GUI.color = Color.white; // Ensure GUI color is reset after drawing
         }
 
         private static void DrawRealmBreakthrough(Rect rect, Realm_Hediff realm)
@@ -351,67 +358,92 @@ namespace Ascension
 
         private static void DrawMeditationButton(Rect rect, bool isExercise)
         {
+            Rect medButtonRect = new Rect(rect.x + (rect.width - rect.width / 1.25f) / 2, rect.y + rect.height, rect.width / 1.25f, rect.height);
             QiPool_Hediff qiPool = selectedPawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
-
+            if (isFoundation)
+            {
+                if (Widgets.ButtonText(medButtonRect, "AS_FoundationTraining".Translate()))
+                {
+                    Job job = JobMaker.MakeJob(AscensionDefOf.AS_FoundationTrainingJob, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn, AscensionDefOf.AS_FoundationTrainingJob));
+                    selectedPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+                }
+                if (Mouse.IsOver(medButtonRect))
+                {
+                    Widgets.DrawHighlight(medButtonRect);
+                    TooltipHandler.TipRegion(medButtonRect, "AS_FoundationTrainingDesc".Translate());
+                }
+            }
+            else
             if (isExercise)
             {
-                if (Widgets.ButtonText(rect, "AS_Exercise".Translate()))
+                if (Widgets.ButtonText(medButtonRect, "AS_Exercise".Translate()))
                 {
                     Job job = JobMaker.MakeJob(AscensionDefOf.AS_ExerciseJob, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn, AscensionDefOf.AS_ExerciseJob));
                     selectedPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
                 }
-                if (Mouse.IsOver(rect))
+                if (Mouse.IsOver(medButtonRect))
                 {
-                    Widgets.DrawHighlight(rect);
-                    TooltipHandler.TipRegion(rect, "AS_ExerciseDesc".Translate(elementText.Translate().Named("ELEMENT"), (elementTile/10).ToString("#").Named("ELEMENTAMOUNT")));
+                    Widgets.DrawHighlight(medButtonRect);
+                    TooltipHandler.TipRegion(medButtonRect, "AS_ExerciseDesc".Translate(elementText.Translate().Named("ELEMENT"), (elementTile/10).ToString("#").Named("ELEMENTAMOUNT")));
                 }
             }
             else if (qiPool != null && qiPool.amount >= 2 + qiPool.maxAmount / 10)
             {
-                if (Widgets.ButtonText(rect, "AS_RefineQi".Translate()))
+                if (Widgets.ButtonText(medButtonRect, "AS_RefineQi".Translate()))
                 {
                     Job job = JobMaker.MakeJob(AscensionDefOf.AS_RefineQiJob, selectedPawn, CultivationJobUtility.FindCultivationSpot(selectedPawn, AscensionDefOf.AS_RefineQiJob));
                     selectedPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
                 }
-                if (Mouse.IsOver(rect))
+                if (Mouse.IsOver(medButtonRect))
                 {
-                    Widgets.DrawHighlight(rect);
-                    TooltipHandler.TipRegion(rect, "AS_RefineQiDesc".Translate());
+                    Widgets.DrawHighlight(medButtonRect);
+                    TooltipHandler.TipRegion(medButtonRect, "AS_RefineQiDesc".Translate());
                 }
             }
         }
 
         private static void DrawRealms(Rect rect, float height, float curY)
         {
-            Realm_Hediff realmHediff = null;
             Rect realmRect = new Rect(rect.width / 4, (curY + (rect.width / 5)), rect.width / 2, rect.width / 2);
+
             Rect meditationRect = new Rect(0f, curY + height + realmRect.height, rect.width, 20f);
             Rect cultivationStatsRect = new Rect(meditationRect.x, meditationRect.y+ meditationRect.height, meditationRect.width, 20f);
 
-            if (eRealmHediff != null)
-            {
-                realmHediff = eRealmHediff as Realm_Hediff;
-            }
-            else if (bRealmHediff != null)
-            {
-                realmHediff = bRealmHediff as Realm_Hediff;
-            }
 
-            if (realmHediff != null)
+            //type choose/select button rect
+
+            //type confirm button rect
+
+
+            if (CultivatorHediff != null)
             {
                 DrawPawnRealm(realmRect);
+                if (isFoundation)
+                {
 
-                if (CanControl() && realmHediff.progress >= realmHediff.maxProgress && realmHediff.Severity < 7)// this displays breakthrough when it should
+
+                    if (CultivatorHediff.Foundation < CultivatorHediff.fMax) //this displays foundation training
+                    {
+                        DrawMeditationButton(meditationRect, false);
+                        cultivationStatsRect.y += meditationRect.height;
+                    }
+                }
+                else
                 {
-                    DrawRealmBreakthrough(meditationRect, realmHediff);
-                    // meditation button because if they can breakthrough they shouldnt be able to refine qi
-                    cultivationStatsRect.y += meditationRect.height;
-                }else if (CanControl() && realmHediff.progress < realmHediff.maxProgress) //this displays the qi refine button instead if they cant breakthrough.
-                {
-                    DrawMeditationButton(meditationRect, realmHediff != null && realmHediff.def == AscensionDefOf.BodyRealm);
-                    cultivationStatsRect.y += meditationRect.height;
+                    if (CanControl() && currentRealmHediff.progress >= currentRealmHediff.maxProgress && currentRealmHediff.Severity < 7)// this displays breakthrough when it should
+                    {
+                        DrawRealmBreakthrough(meditationRect, currentRealmHediff);
+                        // meditation button because if they can breakthrough they shouldnt be able to refine qi
+                        cultivationStatsRect.y += meditationRect.height;
+                    }
+                    else if (CanControl() && currentRealmHediff.progress < currentRealmHediff.maxProgress) //this displays the qi refine button instead if they cant breakthrough.
+                    {
+                        DrawMeditationButton(meditationRect, currentRealmHediff != null && currentRealmHediff.def == bRealmHediffDef);
+                        cultivationStatsRect.y += meditationRect.height;
+                    }
                 }
 
+                //insert the foundation training button here
                 DrawCultivationStatsBasic(cultivationStatsRect);
             }
 
@@ -432,9 +464,19 @@ namespace Ascension
                 return;
 
             DrawCultivationSpeed(rect);
-            DrawQiTile(qiTileRect);
-            DrawInnerCauldron(innerCRect);
+            if (!isFoundation)
+            {
+                if (lawType == essenceLaw)
+                {
+                    DrawQiTile(qiTileRect);
+                    DrawInnerCauldron(innerCRect);
+                }
 
+            }else
+            {
+                DrawCultivationTypeButton(qiTileRect);
+                DrawCultivationTypeConfirmButton(innerCRect);
+            }
             DrawHighlightsAndTooltips(rect, qiTileRect, innerCRect);
         }
 
@@ -466,9 +508,13 @@ namespace Ascension
 
             DrawElementFactors(elementFactorsRect);
             DrawSpeedFactors(speedFactorsRect);
-            DrawMaxQiFactors(maxQiFactorRect);
-            DrawBreakthroughChanceFactors(bChanceFactorRect);
-            DrawQiRecoveryFactors(qiRecFactorRect);
+            if (!isFoundation)
+            {
+
+                DrawMaxQiFactors(maxQiFactorRect);//
+                DrawQiRecoveryFactors(qiRecFactorRect);//
+                DrawBreakthroughChanceFactors(bChanceFactorRect);
+            }
         }
 
         private static void DrawElementFactors(Rect rect)
@@ -552,9 +598,9 @@ namespace Ascension
 
             StringBuilder translatedBCFactorText = new StringBuilder();
             translatedBCFactorText.Append("AS_BCFactorBase".Translate((breakthroughBaseChance * 100f).ToString("0.#").Named("BASE")));
-            if (qiGatherMapComp != null)
+            if (qiGatherMapComp != null && !isFoundation)
             {
-                if (eRealmHediff != null)
+                if (currentRealmHediff.def == eRealmHediffDef)
                 {
                     float qiBonus = qiTile / 50;
                     translatedBCFactorText.Append("AS_BCFactorQiTile".Translate((qiBonus).ToString("0.#").Named("QI")));
@@ -612,6 +658,11 @@ namespace Ascension
                     elementText.Translate().Named("ELEMENT"),
                     (1 + (elementTile / 100f))
                         .ToString("0.#").Named("AMOUNT"));
+            }
+            if (isFoundation)
+            {
+                translatedSpeedFactorText += "AS_CSFactorFTOffset".Translate(
+                    fTrainingOffset.ToString("0.#").Named("OFFSET"));
             }
             translatedSpeedFactorText += "AS_CSFactorResult".Translate(AscensionUtilities.UpdateCultivationSpeed(CultivatorHediff).ToString("0.#").Named("SPEED"));
             speedFactorsRect.height = 30f;
@@ -679,7 +730,7 @@ namespace Ascension
             string innerCJobDesc = "AS_InnerCJobDesc".Translate();
 
             GUI.color = Color.yellow;
-            if (eRealmHediff != null && eRealmHediff.Severity >= 3)
+            if (currentRealmHediff.def == AscensionDefOf.EssenceRealm && currentRealmHediff.Severity >= 3)
             {
                 GUI.color = Color.magenta;
                 innerCText = "AS_AnimaC".Translate(CultivatorHediff.innerCauldronQi.Named("ICQI"));
@@ -718,9 +769,11 @@ namespace Ascension
             Color highlightColor = new Color(0.8f, 0.8f, 0.8f, 0.5f); // Slightly darker highlight color
 
             AddHighlightAndTooltip(rect, "AS_CultivationSpeedDesc", highlightColor);
-
-            AddHighlightAndTooltip(qiTileRect, "AS_QiTileDesc", highlightColor);
-            AddHighlightAndTooltip(innerCRect, "AS_InnerCDesc", highlightColor);
+            if (!isFoundation && CultivatorHediff.lawType == Cultivator_Hediff.LawType.Essence)//only shown when past foundation and u need to choose type to pass foundation
+            {
+                AddHighlightAndTooltip(qiTileRect, "AS_QiTileDesc", highlightColor);
+                AddHighlightAndTooltip(innerCRect, "AS_InnerCDesc", highlightColor);
+            }
 
             GUI.color = Color.white;
         }
@@ -754,6 +807,11 @@ namespace Ascension
             rect.width -= 20f;
             Rect viewRect = rect;// scrollview content rect
             viewRect.height += contentHeight;// Adjust height as needed
+            if (isFoundation)
+            {
+                viewRect.height = 500f;
+            }
+
             Widgets.BeginScrollView(outRect, ref scrollPosition, viewRect);
 
             float scheduleBarHieght = 20f;
@@ -777,12 +835,102 @@ namespace Ascension
             DrawCultivationStats(cultivationStatsRect);
             Widgets.EndScrollView();
         }
+        //if your law is none we should replace autocultivation type with this
 
+        private static void DrawCultivationTypeLabel(Rect rect)
+        {
+            Text.Anchor = TextAnchor.MiddleLeft;
+            Widgets.Label(rect, "".Translate());
+            Text.Anchor = TextAnchor.UpperLeft;
+        }
 
+        private static void DrawCultivationTypeButton(Rect buttonRect)
+        {
+            Rect cTypeButtonRect = new Rect(buttonRect.x + (buttonRect.width - buttonRect.width/1.5f)/2, buttonRect.y + buttonRect.height, buttonRect.width / 1.5f, buttonRect.height);
+            string autoCultivatorTypeText;
+            string autoCultivatorTypeDescText;
 
+            switch (CultivatorHediff.chosenLawType)
+            {
+                case Cultivator_Hediff.LawType.Essence:
+                    autoCultivatorTypeText = "AS_EssenceCultivation".Translate();
+                    autoCultivatorTypeDescText = "AS_EssenceCultivationDesc".Translate();
+                    GUI.color = Color.yellow;
+                    CultivatorHediff.chosenLawType = Cultivator_Hediff.LawType.Essence;
 
+                    break;
+                case Cultivator_Hediff.LawType.Body:
+                    autoCultivatorTypeText = "AS_BodyCultivation".Translate();
+                    autoCultivatorTypeDescText = "AS_BodyCultivationDesc".Translate();
+                    GUI.color = Color.red;
+                    CultivatorHediff.chosenLawType = Cultivator_Hediff.LawType.Body;
+                    break;
+                default:
+                    return;
+            }
 
+            if (Widgets.ButtonText(cTypeButtonRect, autoCultivatorTypeText))
+            {
+                CultivatorHediff.chosenLawType = (Cultivator_Hediff.LawType)(((int)CultivatorHediff.chosenLawType == 1) ? 2 : 1);
 
+            }
+            GUI.color = Color.white;
+            if (Mouse.IsOver(cTypeButtonRect))
+            {
+                Widgets.DrawHighlight(cTypeButtonRect);
+                TooltipHandler.TipRegion(cTypeButtonRect, autoCultivatorTypeDescText);
+            }
+            
+        }
+
+        private static void DrawCultivationTypeConfirmButton(Rect buttonRect)
+        {
+            Rect confirmButtonRect = new Rect(buttonRect.x + buttonRect.width / 4, buttonRect.y + buttonRect.height, buttonRect.width / 2f, buttonRect.height);
+
+            string autoCultivatorTypeText;
+            string autoCultivatorTypeDescText;
+
+            switch (CultivatorHediff.confirmedLaw)
+            {
+                case false:
+                    autoCultivatorTypeText = "AS_Confirm".Translate();
+                    autoCultivatorTypeDescText = "AS_ConfirmDesc".Translate();
+
+                    break;
+                case true:
+                    autoCultivatorTypeText = "AS_Unconfirm".Translate();
+                    autoCultivatorTypeDescText = "AS_UnconfirmDesc".Translate();
+                    break;
+                default:
+                    return;
+            }
+
+            if (Widgets.ButtonText(confirmButtonRect, autoCultivatorTypeText))
+            {
+                switch (CultivatorHediff.confirmedLaw)
+                {
+                    case false:
+                        CultivatorHediff.confirmedLaw = true;
+                        AscensionUtilities.AttemptChooseCultivationType(CultivatorHediff);
+                        break;
+                    case true:
+                        CultivatorHediff.confirmedLaw = false;
+                        break;
+                    default:
+                        return;
+                }
+            }
+
+            if (Mouse.IsOver(confirmButtonRect))
+            {
+                Widgets.DrawHighlight(confirmButtonRect);
+                TooltipHandler.TipRegion(confirmButtonRect, autoCultivatorTypeDescText);
+            }
+        }
+
+        
+
+        //
         private static void DrawAutoTypeLabel(Rect rect, string translationKey)
         {
             Text.Anchor = TextAnchor.MiddleLeft;
@@ -792,6 +940,9 @@ namespace Ascension
 
         private static void DrawAutoCultivationButton(Rect buttonRect)
         {
+            //add inner cauldron and gather qi options only for essence
+
+
             string autoCultivatorTypeText;
             string autoCultivatorTypeDescText;
 
@@ -802,12 +953,44 @@ namespace Ascension
                     autoCultivatorTypeDescText = "AS_RealmAutoDesc".Translate();
                     break;
                 case 2:
-                    autoCultivatorTypeText = "AS_RealmOnlyAuto".Translate();
-                    autoCultivatorTypeDescText = "AS_RealmOnlyAutoDesc".Translate();
+                    if (CultivatorHediff.lawType == Cultivator_Hediff.LawType.Essence)
+                    {
+                        autoCultivatorTypeText = "AS_RealmOnlyAuto".Translate();
+                        autoCultivatorTypeDescText = "AS_RealmOnlyAutoDesc".Translate();
+                    }else
+                    {
+                        autoCultivatorTypeText = "AS_RealmAuto".Translate();
+                        autoCultivatorTypeDescText = "AS_RealmAutoDesc".Translate();
+                    }
                     break;
                 case 3:
-                    autoCultivatorTypeText = "AS_QiGatheringAuto".Translate();
-                    autoCultivatorTypeDescText = "AS_QiGatheringAutoDesc".Translate();
+                    if (CultivatorHediff.lawType == Cultivator_Hediff.LawType.Essence)
+                    {
+                        autoCultivatorTypeText = "AS_QiGatheringAuto".Translate();
+                        autoCultivatorTypeDescText = "AS_QiGatheringAutoDesc".Translate();
+                    }else
+                    {
+                        autoCultivatorTypeText = "AS_RealmAuto".Translate();
+                        autoCultivatorTypeDescText = "AS_RealmAutoDesc".Translate();
+                    }
+                    break;
+                case 4:
+                    if (CultivatorHediff.lawType == Cultivator_Hediff.LawType.Essence)
+                    {
+                        if (currentRealmHediff.Severity >= 3)
+                        {
+                            autoCultivatorTypeText = "AS_AnimaCAuto".Translate();
+                        }
+                        else
+                        {
+                            autoCultivatorTypeText = "AS_InnerCAuto".Translate();
+                        }
+                        autoCultivatorTypeDescText = "AS_InnerCAutoDesc".Translate(autoCultivatorTypeText.Named("IC"));
+                    }else
+                    {
+                        autoCultivatorTypeText = "AS_RealmAuto".Translate();
+                        autoCultivatorTypeDescText = "AS_RealmAutoDesc".Translate();
+                    }
                     break;
                 default:
                     return;
@@ -815,7 +998,14 @@ namespace Ascension
 
             if (Widgets.ButtonText(buttonRect, autoCultivatorTypeText))
             {
-                CultivatorHediff.autoCultivateType = CultivatorHediff.autoCultivateType < 3 ? CultivatorHediff.autoCultivateType + 1 : 1;
+                if (CultivatorHediff.lawType == Cultivator_Hediff.LawType.Essence)
+                {
+                    CultivatorHediff.autoCultivateType = CultivatorHediff.autoCultivateType < 3 ? CultivatorHediff.autoCultivateType + 1 : 1;
+                }else
+                {
+                    CultivatorHediff.autoCultivateType = 1;
+                }
+                
             }
 
             if (Mouse.IsOver(buttonRect))
@@ -864,10 +1054,14 @@ namespace Ascension
         public static readonly HediffDef CultivatorHediffDef = AscensionDefOf.Cultivator;
 
         public static QiPool_Hediff qiPoolHediff;
-        public static Realm_Hediff eRealmHediff;
-        public static Realm_Hediff bRealmHediff;
         public static Cultivator_Hediff CultivatorHediff;
+        public static Realm_Hediff currentRealmHediff;
 
+        public static Cultivator_Hediff.LawType lawType;
+        public static Cultivator_Hediff.LawType chosenLawType;
+        public static bool isFoundation;
+
+        public static float fTrainingOffset;
 
         //these 
 
@@ -895,16 +1089,80 @@ namespace Ascension
         public static float qiTile;
         public static float elementTile;
 
+        private static readonly Cultivator_Hediff.LawType essenceLaw = Cultivator_Hediff.LawType.Essence;
+        private static readonly Cultivator_Hediff.LawType bodyLaw = Cultivator_Hediff.LawType.Body;
+        private static readonly Cultivator_Hediff.LawType noneLaw = Cultivator_Hediff.LawType.None;
         private static float DrawCultivationTab(Rect rect, float curY)
         {
-            
+
+
+
             //set values for things commonly used so we dont search over and over again in the same frame
 
             CultivatorHediff = selectedPawn.health.hediffSet.GetFirstHediffOfDef(CultivatorHediffDef) as Cultivator_Hediff;
+            if (CultivatorHediff == null)
+            {
+                //why show if no hediff?
+                return curY;
+            }
+            fTrainingOffset = AscensionUtilities.UpdateFoundationTrainingSpeedOffset(CultivatorHediff);
             qiPoolHediff = selectedPawn.health.hediffSet.GetFirstHediffOfDef(qiPoolHediffDef) as QiPool_Hediff;
-            eRealmHediff = selectedPawn.health.hediffSet.GetFirstHediffOfDef(eRealmHediffDef) as Realm_Hediff;
-            bRealmHediff = selectedPawn.health.hediffSet.GetFirstHediffOfDef(bRealmHediffDef) as Realm_Hediff;
 
+
+
+            if (selectedPawn.health.hediffSet.GetFirstHediffOfDef(eRealmHediffDef) is Realm_Hediff eRealm)
+            {
+                currentRealmHediff = eRealm;
+            }
+            else if (selectedPawn.health.hediffSet.GetFirstHediffOfDef(bRealmHediffDef) is Realm_Hediff bRealm)
+            {
+                currentRealmHediff = bRealm;
+            }else
+            {
+                currentRealmHediff = null;
+            }
+
+
+            if (currentRealmHediff != null)//this part for old saves.
+            {
+                if (currentRealmHediff.def == eRealmHediffDef)
+                {
+                    CultivatorHediff.lawType = essenceLaw;
+                }
+                else if (currentRealmHediff.def == bRealmHediffDef)
+                {
+                    CultivatorHediff.lawType = bodyLaw;
+                }
+            }
+
+            if (CultivatorHediff.lawType == essenceLaw)
+            {
+                lawType = essenceLaw;
+                //Log.Message("essence law type"+currentRealmHediff.Label);
+            }
+            else if (CultivatorHediff.lawType == bodyLaw)
+            {
+                lawType = bodyLaw;
+                //Log.Message("body law type" + currentRealmHediff.Label);
+            }
+            else
+            {
+                //Log.Message("none law type");
+                lawType = noneLaw;
+            }
+
+
+            if (lawType == noneLaw)
+            {
+                isFoundation = true;//is founation when law type is none, beacuse they need to choose law type before proceeding past foundation
+                //Log.Message("is foundation no law and no realm hediiff");
+            }
+            else
+            {
+                isFoundation = false;
+                //Log.Message("not foundation");
+
+            }
             elementEmitMapComp = CultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
             qiGatherMapComp = CultivatorHediff.pawn.Map.GetComponent<QiGatherMapComponent>();
             elementText = AscensionUtilities.TranslateElement(CultivatorHediff.element);
@@ -912,6 +1170,11 @@ namespace Ascension
             qiTile = qiGatherMapComp.GetQiGatherAt(selectedPawn.Position.x, selectedPawn.Position.z);
             elementTile = elementEmitMapComp.CalculateElementValueAt(new IntVec2(selectedPawn.Position.x, selectedPawn.Position.z), CultivatorHediff.element);
             
+
+            
+
+
+
             //for factors and such \/
 
             cultivationSpeedBase = AscensionUtilities.UpdateCultivationSpeedBase(CultivatorHediff);

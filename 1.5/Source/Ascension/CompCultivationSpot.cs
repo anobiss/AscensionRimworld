@@ -52,6 +52,9 @@ namespace Ascension
                 case 7:
                     translatedJob = "AS_InnerCJob";
                     break;
+                case 8:
+                    translatedJob = "AS_FoundationTraining";
+                    break;
             }
             return translatedJob;
         }
@@ -183,6 +186,9 @@ namespace Ascension
                     jobType = 7;
                     break;
                 case 7:
+                    jobType = 8;
+                    break;
+                case 8:
                     jobType = 0;
                     break;
             }

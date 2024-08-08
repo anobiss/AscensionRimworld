@@ -371,7 +371,7 @@
     <label>Make ascension pill</label>
     <description>Make a ascension pill. Ascension pills will explode when made at awful quality.</description>
 	<researchPrerequisite>AS_AscensionPillProduction</researchPrerequisite>
-    <jobString>Creating Ascension Pill.</jobString>
+    <jobString>Creating ascension pill.</jobString>
     <workAmount>7777</workAmount>
 	<workSkill>Crafting</workSkill>
     <workSpeedStat>SmeltingSpeed</workSpeedStat>
@@ -420,7 +420,7 @@
     <label>Make spirit pill</label>
     <description>Make a spirit pill. Spirit pills will explode when made at awful quality.</description>
 	<researchPrerequisite>AS_SpiritPillProduction</researchPrerequisite>
-    <jobString>Creating Spirit Pill.</jobString>
+    <jobString>Creating spirit pill.</jobString>
     <workAmount>7777</workAmount>
 	<workSkill>Crafting</workSkill>
     <workSpeedStat>SmeltingSpeed</workSpeedStat>
@@ -452,6 +452,88 @@
           </thingDefs>
         </filter>
         <count>1</count>
+      </li>
+    </ingredients>
+  </RecipeDef>
+  
+    <RecipeDef>
+    <defName>AS_MakeRebirthPill</defName>
+    <label>Make rebirth pill</label>
+    <description>Make a rebirth pill. Rebirth pills will reset a cultivators progress when consumed.</description>
+	<researchPrerequisite>AS_BasicPillProduction</researchPrerequisite>
+    <jobString>Creating rebirth pill.</jobString>
+    <workAmount>7777</workAmount>
+	<workSkill>Crafting</workSkill>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+	<soundWorking>Recipe_Smelt</soundWorking>
+	<skillRequirements>
+      <Crafting>5</Crafting>
+	  <Cooking>5</Cooking>
+    </skillRequirements>
+    <recipeUsers>
+      <li>SpiritCauldron</li>
+    </recipeUsers>
+    <products>
+      <AS_RebirthPill>1</AS_RebirthPill>
+    </products>
+    <ingredients>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>AS_SpiritCrystal</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>AS_Spiritleaf</li>
+          </thingDefs>
+        </filter>
+        <count>7</count>
+      </li>
+    </ingredients>
+  </RecipeDef>
+  
+      <RecipeDef>
+    <defName>AS_MakeFormingPill</defName>
+    <label>Make forming pill</label>
+    <description>Make a forming pill. Forming pills will instantly finish a cultivators foundation when consumed.</description>
+	<researchPrerequisite>AS_BasicPillProduction</researchPrerequisite>
+    <jobString>Creating forming pill.</jobString>
+    <workAmount>7777</workAmount>
+	<workSkill>Crafting</workSkill>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+	<soundWorking>Recipe_Smelt</soundWorking>
+	<skillRequirements>
+      <Crafting>5</Crafting>
+	  <Cooking>5</Cooking>
+    </skillRequirements>
+    <recipeUsers>
+      <li>SpiritCauldron</li>
+    </recipeUsers>
+    <products>
+      <AS_FormingPill>1</AS_FormingPill>
+    </products>
+    <ingredients>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>AS_SpiritStone</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>AS_Spiritleaf</li>
+          </thingDefs>
+        </filter>
+        <count>7</count>
       </li>
     </ingredients>
   </RecipeDef>

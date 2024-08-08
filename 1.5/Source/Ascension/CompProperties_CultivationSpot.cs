@@ -21,7 +21,7 @@ namespace Ascension
 
         public ElementEmitMapComponent.Element elementType = ElementEmitMapComponent.Element.None;
 
-        public int jobType = 0;//0 is Any, 1 is exercise, 2 qi gathering, 3 is qi refining, 4 is body breaktrough, 5 is essence breakthrough, 6 is gc breakthrough, 7 is inner cauldron refinement
+        public int jobType = 0;//0 is Any, 1 is exercise, 2 qi gathering, 3 is qi refining, 4 is body breaktrough, 5 is essence breakthrough, 6 is gc breakthrough, 7 is inner cauldron refinement, 8 is foundation training
 
         public string realmType = "Any";
         public CompProperties_CultivationSpot()

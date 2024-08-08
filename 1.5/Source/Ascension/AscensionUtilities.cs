@@ -121,6 +121,69 @@ namespace Ascension
             return translatedText;
         }
 
+
+        public static void FoundationProgress(Pawn pawn, int amount)
+        {
+            Cultivator_Hediff cultivatorHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator, false) as Cultivator_Hediff;
+            if (cultivatorHediff != null)
+            {
+                int total = cultivatorHediff.Foundation + amount;
+                if (total < cultivatorHediff.fMax)
+                {
+                    cultivatorHediff.Foundation += amount;
+                }
+                else if (total >= cultivatorHediff.fMax)
+                {
+                    cultivatorHediff.Foundation = cultivatorHediff.fMax;
+                    AttemptChooseCultivationType(cultivatorHediff);
+                }
+            }
+        }
+
+        public static void AttemptChooseCultivationType(Cultivator_Hediff cultivatorHediff)
+        {
+            if (cultivatorHediff != null)
+            {
+                if (cultivatorHediff.Foundation >= cultivatorHediff.fMax)
+                {
+                    if (cultivatorHediff.confirmedLaw)
+                    {
+                        if (cultivatorHediff.chosenLawType != 0)
+                        {
+                            AssignChosenCultivationType(cultivatorHediff);
+                        }
+                    }
+                }
+            }
+        }
+
+        public static void AssignChosenCultivationType(Cultivator_Hediff cultivatorHediff)//
+        {
+            if (cultivatorHediff != null && cultivatorHediff.chosenLawType != 0)
+            {
+                if (cultivatorHediff.Foundation >= cultivatorHediff.fMax)
+                {
+                    if (cultivatorHediff.chosenLawType == Cultivator_Hediff.LawType.Essence)
+                    {
+                        cultivatorHediff.lawType = Cultivator_Hediff.LawType.Essence;
+                        if (cultivatorHediff.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) == null)
+                        {
+                            cultivatorHediff.pawn.health.AddHediff(AscensionDefOf.EssenceRealm);
+                        }
+                    }
+                    else if (cultivatorHediff.chosenLawType == Cultivator_Hediff.LawType.Body)
+                    {
+                        cultivatorHediff.lawType = Cultivator_Hediff.LawType.Body;
+                        if (cultivatorHediff.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm) == null)
+                        {
+                            cultivatorHediff.pawn.health.AddHediff(AscensionDefOf.BodyRealm);
+                        }
+                    }
+                    cultivatorHediff.lawType = cultivatorHediff.chosenLawType;
+                }
+            }
+        }
+
         public static float UpdateTribulationQiOffset(HeavenlyTribulation_Hediff tribulationHediff)
         {
             float offset = 1f;
@@ -343,10 +406,34 @@ namespace Ascension
         }
 
 
+        public static float UniformFTrainingOffset(Pawn pawn)//the offset granted to various offsets from cultivation clothes
+        {
+            float offset = 0f;
+            if (pawn != null)
+            {
+                if (pawn.apparel != null)
+                {
+                    if (!pawn.apparel.WornApparel.NullOrEmpty())
+                    {
+                        foreach (Apparel apparel in pawn.apparel.WornApparel)
+                        {
+                            CompCultivationUniform offsetComp = apparel.TryGetComp<CompCultivationUniform>();
+                            if (offsetComp != null)
+                            {
+                                offset += (offsetComp.Props.fTrainingOffset * GetApparelQualityMultiplier(apparel));
+                            }
+                        }
+                    }
+                }
+            }
+            return offset;
+        }
+
+        private static AscensionSettings settings = LoadedModManager.GetMod<AscensionMod>().GetSettings<AscensionSettings>();
         public static float UpdateCultivationSpeedBase(Cultivator_Hediff cultivatorHediff)
         {
             //only qirecovery comp effect cultivation speed offset
-            float speedOffset = 1;
+            float speedOffset = Math.Max(0.1f, settings.BaseCultivationSpeed);
 
             foreach (Hediff hediff in cultivatorHediff.pawn.health.hediffSet.hediffs)
             {
@@ -384,6 +471,31 @@ namespace Ascension
             cultivatorHediff.cultivationSpeedOffset = speedOffset;
             return speedOffset;
         }
+
+        public static float UpdateFoundationTrainingSpeedOffset(Cultivator_Hediff cultivatorHediff)
+        {
+            //only qirecovery comp effect cultivation speed offset
+            float fOffset = 1;
+
+            //always check for sect uniform and its quality.
+            fOffset += UniformFTrainingOffset(cultivatorHediff.pawn);
+
+            foreach (Hediff hediff in cultivatorHediff.pawn.health.hediffSet.hediffs)
+            {
+                HediffComp_QiRecovery offsetComp = hediff.TryGetComp<HediffComp_QiRecovery>();
+                if (offsetComp != null)
+                {
+                    if (offsetComp.Props.spirit == false)
+                    {
+                        fOffset += offsetComp.Props.foundationTrainingOffset;
+                    }
+                }
+            }
+            cultivatorHediff.cultivationSpeedOffset = fOffset;
+            return fOffset;
+        }
+
+
         public static float UpdateCultivationSpeed(Cultivator_Hediff cultivatorHediff)//we do this before starting jobs to update the cultivation speed, we return a float to make sure we have cultivation speed after update, we also take in optional cords if they have a cultivation spot to walk to
         {
 
@@ -392,6 +504,8 @@ namespace Ascension
             ElementEmitMapComponent elementEmitMapComp = cultivatorHediff.pawn.Map.GetComponent<ElementEmitMapComponent>();
             if (cultivatorHediff != null)
             {
+
+
                 //we do these speed calcs in all cultivation realms                  here we do the base times the speedoffset 
                 cultivationSpeed = (UpdateCultivationSpeedBase(cultivatorHediff) * UpdateCultivationSpeedOffset(cultivatorHediff));
                 if (cultivatorHediff.pawn.needs.mood != null)
@@ -410,8 +524,17 @@ namespace Ascension
                 }
                 if (elementEmitMapComp != null)
                 {
+
                     cultivationSpeed *= 1 + (elementEmitMapComp.CalculateElementValueAt(new IntVec2(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z), cultivatorHediff.element) / 100f);
                 }
+                if (cultivatorHediff.lawType != Cultivator_Hediff.LawType.None)
+                {
+
+                }else
+                {
+                    cultivationSpeed *= UpdateFoundationTrainingSpeedOffset(cultivatorHediff);
+                }
+
                 cultivatorHediff.cultivationSpeed = cultivationSpeed;
             }
             if (cultivationSpeed < 0.1f)//slowest is 0.1.
@@ -720,10 +843,6 @@ namespace Ascension
             if (!pawn.health.hediffSet.HasHediff(AscensionDefOf.Cultivator))
             {
                 pawn.health.AddHediff(AscensionDefOf.Cultivator);
-                if (!pawn.health.hediffSet.HasHediff(AscensionDefOf.BodyRealm) && !pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm))
-                {
-                    pawn.health.AddHediff(AscensionDefOf.BodyRealm).Severity = 1;
-                }
             }
         }
 
@@ -853,18 +972,22 @@ namespace Ascension
                     pawn.health.AddHediff(AscensionDefOf.BodyRealm).Severity = 1;
                 }
             }
-            Realm_Hediff hediff = (Realm_Hediff)pawn.health.hediffSet.GetFirstHediffOfDef(hediffDef, false);
+            Realm_Hediff hediff = pawn.health.hediffSet.GetFirstHediffOfDef(hediffDef, false) as Realm_Hediff;
 
-            if (percent == true)
+            if (hediff != null)
             {
-                ProgressTier(hediff, progress, true);
+                if (percent == true)
+                {
+                    ProgressTier(hediff, progress, true);
+                }
+                else
+                {
+                    ProgressTier(hediff, progress);
+                }
             }
-            else
-            {
-                ProgressTier(hediff, progress);
-            }
-            
         }
+
+
 
         public static void CauldronIncrease(Pawn pawn, float amount)
         {
@@ -942,7 +1065,7 @@ namespace Ascension
 
             if (randomScroll == null)
             {
-                Log.Message("null random scroll");
+                //Log.Message("null random scroll");
             }
 
             return randomScroll;
@@ -988,14 +1111,14 @@ namespace Ascension
         //    for (int i = 0; i < hediffs.Count; i++)
         //    {
         //        //check if its a realm and is the type we want
-        //        if (hediffs[i] is Realm_Hediff hediff_Realm2 && (hediff_Realm.type == realmType))
+        //        if (hediffs[i] is Realm_Hediff hediff_Realm2 && (hediff_Realma.type == realmType))
         //        {
         //            hediff_Realm = hediff_Realm2;
         //        }
         //    }
         //    return hediff_Realm;
         //}
-        public static readonly int[] maxProgressionRatesBody = { 100, 200, 420, 500, 700, 1200, 2400}; // max qi offset to set to when advancing. first is tier 2
+        public static readonly int[] maxProgressionRatesBody = { 7000, 120000, 700000, 7000000, 12000000, 70000000, 120000000 }; // max qi offset to set to when advancing. first is tier 2
         public static readonly int[] maxProgressionRatesEssence = { 7000, 120000, 700000, 7000000, 12000000, 70000000, 120000000 }; // max qi offset to set to when advancing. first is tier 2
         public static void UpdateMaxProg(Realm_Hediff realmHediff)
         {
@@ -1016,10 +1139,17 @@ namespace Ascension
 
             }else
             {
-                if (tier >= 2 && tier <= 5)
+                if (tier <= 7)
                 {
-                    int progMax = maxProgressionRatesBody[tier - 1];
-                    realmHediff.maxProgress = progMax;
+                    if (tier >= 2)
+                    {
+                        int progMax = maxProgressionRatesBody[tier - 1];
+                        realmHediff.maxProgress = progMax;
+                    }
+                    else
+                    {
+                        realmHediff.maxProgress = 100;
+                    }
                 }
             }
 
@@ -1078,7 +1208,32 @@ namespace Ascension
             }
         }
 
-
+        public static float LifespanDeAge(Cultivator_Hediff cultivatorHediff)// returns new age for lifespan de age, 0 if none
+        {
+            float newBioAge = 0;
+            if (cultivatorHediff != null)
+            {
+                if (cultivatorHediff.pawn.ageTracker.AgeBiologicalYearsFloat > cultivatorHediff.pawn.ageTracker.AdultMinAge)
+                {
+                    newBioAge = cultivatorHediff.pawn.ageTracker.AdultMinAge;
+                }
+                if (ModsConfig.IdeologyActive && cultivatorHediff.pawn.ageTracker.AgeReversalDemandedDeadlineTicks <= 0 && cultivatorHediff.pawn.MapHeld != null)
+                {
+                    newBioAge = cultivatorHediff.pawn.ageTracker.AdultMinAge;//later do the age they want somehow
+                }
+            }
+            return newBioAge;
+        }
+        public static float GetBaseLifespan(Cultivator_Hediff cultivatorHediff)
+        {
+            float lifespan = 0f;
+            if (cultivatorHediff.pawn.RaceProps != null)
+            {
+                lifespan = Math.Max(0,cultivatorHediff.pawn.RaceProps.lifeExpectancy - cultivatorHediff.pawn.ageTracker.AgeBiologicalYearsFloat);
+                //Log.Message(cultivatorHediff.pawn.Name+"lifespan is " + lifespan);
+            }
+            return lifespan;
+        }
         //We use this to breakthrough to the next tier if progression is at 100% of the current tier, psuedo-immortality takes ascension to do this.
         public static void TierBreakthrough(Realm_Hediff realmHediff)
         {
@@ -1116,12 +1271,6 @@ namespace Ascension
                                 Find.LetterStack.ReceiveLetter(realmHediff.Label + " " + "AS_Breakthrough".Translate(), realmHediff.pawn.NameFullColored + " " + realmHediff.CurStage.extraTooltip, AscensionDefOf.AS_CultivationBreakthroughMessage, realmHediff.pawn);
                             }
                         }
-                    }else if (realmHediff.Severity >= maxSeverityCap && realmHediff.def == AscensionDefOf.BodyRealm)// if its maxcap and its body we move onto essence realms
-                    {
-                        Pawn pawn = realmHediff.pawn;
-                        pawn.health.AddHediff(AscensionDefOf.EssenceRealm).Severity = 1;
-                        pawn.health.RemoveHediff(realmHediff);
-                        
                     }
                     if (Rand.Range(0, 1f) >= 0.75f)//25% chance
                     {
