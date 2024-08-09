@@ -216,7 +216,7 @@ namespace Ascension
             }
 
             float qiRatio = qiPoolHediff.amount / qiMax;
-            GUI.color = Color.white;
+            GUI.color = Color.grey;
             Widgets.FillableBar(barRect.ContractedBy(2f), qiRatio);
             string qiBarText = "AS_QiPoolBar".Translate(qiPoolHediff.amount.ToString("#").Named("QI"), qiMax.ToString("#").Named("MAXQI"));
             if (CultivatorHediff != null)
@@ -226,7 +226,7 @@ namespace Ascension
                     qiBarText += "AS_QiPoolBarRecovery".Translate(qiRecAmount.ToString().Named("QIRECOVERYAMOUNT"), AscensionUtilities.TranslateSpeedHour(qiRecSpeed).Named("TRANSLATEDRECOVERYSPEED"));
                 }
             }
-            GUI.color = Color.black;
+            GUI.color = Color.white;
             Widgets.Label(barRect, qiBarText);
             GUI.color = Color.white;
             if (CanControl() && qiPoolHediff.amount < qiPoolHediff.maxAmount && lawType == essenceLaw)
