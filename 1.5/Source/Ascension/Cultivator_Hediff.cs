@@ -106,11 +106,14 @@ namespace Ascension
                         {
                             lifespan = AscensionUtilities.GetBaseLifespan(this);
                         }
-                        if (lastCheckAge != 0f)
+                        if (lastCheckAge != 0f)//logic for losing lifespan when gaining age, or gaining lifespan when losing age.
                         {
                             float yearsPast = pawn.ageTracker.AgeBiologicalYearsFloat - lastCheckAge;//3,600,000	ticks per year
-                            lifespan -= yearsPast;// should add if de aged since last check too
-                            //Log.Message(pawn.Name.ToString()+"decreased lifespan by yearspast"+yearsPast);
+                            if (yearsPast >= 0.1f)//so that it stays consistent and doesnt clip from point pricision we do it in large chunks
+                            {
+                                lifespan -= yearsPast;// should add if de aged since last check too
+                                //Log.Message(pawn.Name.ToString()+"decreased lifespan by yearspast"+yearsPast);
+                            }
                         }
                         lastCheckAge = pawn.ageTracker.AgeBiologicalYearsFloat;
 

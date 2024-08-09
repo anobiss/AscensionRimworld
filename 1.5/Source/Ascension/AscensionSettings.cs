@@ -16,8 +16,8 @@ namespace Ascension
         public float LifespanAgeRatio = 0.15f;
         public string LifespanAgeRatioString = "0.15";
 
-        public float MaxRandLifespan = 70f;
-        public string MaxRandLifespanString = "70";
+        public float MaxRandLifespan = 0.5f;
+        public string MaxRandLifespanString = "0.5";
 
 
         public bool displayQiGrid = true;
@@ -98,7 +98,7 @@ namespace Ascension
             Scribe_Values.Look(ref SMTickRate, "SMTickRate", 100f);
             Scribe_Values.Look(ref LifespanTickRate, "LifespanTickRate", 1200f);
             Scribe_Values.Look(ref SMRandStacks, "SMRandStacks", 12f);
-            Scribe_Values.Look(ref MaxRandLifespan, "MaxRandLifespan", 70f);
+            Scribe_Values.Look(ref MaxRandLifespan, "MaxRandLifespan", 0.5f);
             base.ExposeData();
         }
     }
@@ -173,9 +173,9 @@ namespace Ascension
             settings.SMRandStacksString = settings.SMRandStacks.ToString("#");
             listingStandard.TextFieldNumeric(ref settings.SMRandStacks, ref settings.SMRandStacksString, 1, 100000f);
 
-            listingStandard.Label("AS_MaxRandLifespan".Translate(this.settings.MaxRandLifespan.ToString("0.#").Named("SETTING")), -1, "AS_MaxRandLifespanDesc".Translate());
-            settings.MaxRandLifespanString = settings.MaxRandLifespan.ToString("0.#");
-            listingStandard.TextFieldNumeric(ref settings.MaxRandLifespan, ref settings.MaxRandLifespanString, 1, 100000f);
+            listingStandard.Label("AS_MaxRandLifespan".Translate(SettingsChanceString(settings.MaxRandLifespan).Named("SETTING")), -1, "AS_MaxRandLifespanDesc".Translate());
+            settings.MaxRandLifespanString = SettingsChanceString(settings.MaxRandLifespan);
+            listingStandard.TextFieldNumeric(ref settings.MaxRandLifespan, ref settings.MaxRandLifespanString, 0.00f, 100000.00f);
 
             listingStandard.Label("AS_Notifications".Translate() + "\n", -1, "AS_NotificationsDesc".Translate());
 

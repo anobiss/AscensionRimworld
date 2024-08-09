@@ -175,7 +175,17 @@ namespace Ascension
 
                             pawn.health.AddHediff(cultivatorHediff);
                             pawn.health.AddHediff(qiPool);
-                            cultivatorHediff.lifespan = AscensionUtilities.GetBaseLifespan(cultivatorHediff) + ((settings.MaxRandLifespan* AscensionUtilities.randLifespanRealmMultiplier(pawn)) * randLS);
+                            float randBonusLifespan = 0;
+                            if (pawn.RaceProps != null && pawn.ageTracker != null)
+                            {
+                                randBonusLifespan += pawn.RaceProps.lifeExpectancy - pawn.ageTracker.AgeBiologicalYearsFloat;
+                            }
+                            randBonusLifespan = randBonusLifespan * ((settings.MaxRandLifespan * AscensionUtilities.randLifespanRealmMultiplier(pawn)) * randLS);
+                            if (randBonusLifespan < 0f)
+                            {
+                                randBonusLifespan = 0f;
+                            }
+                            cultivatorHediff.lifespan = AscensionUtilities.GetBaseLifespan(cultivatorHediff)+ randBonusLifespan;
                             AscensionUtilities.UpdateQiRecoveryAmount(qiPool);
                             AscensionUtilities.UpdateQiRecoverySpeed(qiPool);
                             qiPool.amount = ((float)rnd.NextDouble()) * AscensionUtilities.UpdateQiMax(qiPool); ;
