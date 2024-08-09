@@ -1015,7 +1015,14 @@ namespace Ascension
             {
                 if (CultivatorHediff.lawType == Cultivator_Hediff.LawType.Essence)
                 {
-                    CultivatorHediff.autoCultivateType = CultivatorHediff.autoCultivateType < 3 ? CultivatorHediff.autoCultivateType + 1 : 1;
+                    if (CultivatorHediff.autoCultivateType == 4)
+                    {
+                        CultivatorHediff.autoCultivateType = 1;
+                    }
+                    else
+                    {
+                        CultivatorHediff.autoCultivateType += 1;
+                    }
                 }else
                 {
                     CultivatorHediff.autoCultivateType = 1;

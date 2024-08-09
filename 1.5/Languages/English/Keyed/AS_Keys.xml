@@ -176,7 +176,7 @@
   <AS_MiscDesc>Miscellaneous settings that done fit anywhere in particular.</AS_MiscDesc>
 	  
 	        <!-- Settings -->
-  <AS_LifespanAgeRatio>Lifespan Age Ratio:  {SETTING}%</AS_LifespanAgeRatio>
+  <AS_LifespanAgeRatio>Lifespan Age Ratio:  {SETTING}% of Remaining Life-Expectancy</AS_LifespanAgeRatio>
   <AS_LifespanAgeRatioDesc>For determining the target biological age to de-age to when the lifespan is above life-expectency. The target age is the minimum adult age of the cultivator (13 years for most humanoids), plus a percentage of thier remaining life-expectancy (life-expectancy minus min adult age) determined by this setting. 15% by default.</AS_LifespanAgeRatioDesc>
   
   <AS_MaxRandLifespan>Maximum Random Lifespan:  {SETTING}% of Life-Expectancy</AS_MaxRandLifespan>
@@ -218,13 +218,13 @@
   <AS_DisplayElement>Display Element Grid: </AS_DisplayElement>
   <AS_DisplayElementDesc>Display the element values on the map/screen.</AS_DisplayElementDesc>
   
-    <AS_LifespanTickRate>Lifespan Tick Rate: {SETTING}</AS_LifespanTickRate>
+    <AS_LifespanTickRate>Lifespan Tick Rate: Per {SETTING} Ticks</AS_LifespanTickRate>
   <AS_LifespanTickRateDesc>The amount of ticks between each check for de-aging colonist with high lifespans. De-aging is not gradual so large tick rates are ideal for large colonies.</AS_LifespanTickRateDesc>
 
-  <AS_SMTickRate>Soul Mend Tick Rate: {SETTING}</AS_SMTickRate>
+  <AS_SMTickRate>Soul Mend Tick Rate: Per {SETTING} Ticks</AS_SMTickRate>
   <AS_SMTickRateDesc>The amount of ticks between each check if a pawn using soul mend is dead. Higher values means less lag with high amounts of soul menders but also a longer wait for resurrection.</AS_SMTickRateDesc>
 
-  <AS_SMRandStacks>Max Random Soul Mend Stacks: {SETTING}}</AS_SMRandStacks>
+  <AS_SMRandStacks>Max Random Soul Mend Stacks: {SETTING} Charges</AS_SMRandStacks>
   <AS_SSMRandStacksDesc>The max amount of soul mend stacks a random cultivator with the soul mend ability can generate with.</AS_SSMRandStacksDesc>
 
   <AS_GoldenCoreMax>Max Random Golden Core Score: {SETTING}</AS_GoldenCoreMax>
@@ -334,7 +334,7 @@
   <AS_QiGatheringAutoDesc>Automatically gather Qi only.</AS_QiGatheringAutoDesc>
   <AS_InnerCAuto>Inner Cauldron</AS_InnerCAuto>
   <AS_AnimaCAuto>Anima Conversion</AS_AnimaCAuto>
-  <AS_InnerCAutoDesc>Automatically refine qi into {IC} only. Includes qi </AS_InnerCAutoDesc>
+  <AS_InnerCAutoDesc>Automatically refine qi into {IC} only. Includes qi gathering.</AS_InnerCAutoDesc>
   
   
   <AS_FoundationTraining>Foundation Training</AS_FoundationTraining>

@@ -113,9 +113,17 @@ namespace Ascension
             this.settings = GetSettings<AscensionSettings>();
         }
 
-        private static string SettingsChanceString(float chance)
+        private static string SettingsChanceString(float chance, bool isLabel = true)
         {
-            return (chance * 100f).ToString("0.0#");
+            if (isLabel == true)
+            {
+                return (chance * 100f).ToString("0.0#");
+            }
+            else
+            {
+                return (chance).ToString("0.0#");
+            }
+
         }
 
         public override void DoSettingsWindowContents(Rect inRect)
@@ -135,18 +143,18 @@ namespace Ascension
             listingStandard.CheckboxLabeled("AS_MachineCultivator".Translate(), ref settings.machineCultivatorBool, "AS_MachineCultivatorDesc".Translate());
 
             listingStandard.Label("AS_CultivatorChance".Translate(SettingsChanceString(settings.CultivatorChance).Named("SETTING"), -1, "AS_CultivatorChanceDesc".Translate()));
-            settings.CultivatorChanceString = SettingsChanceString(settings.CultivatorChance);
+            settings.CultivatorChanceString = SettingsChanceString(settings.CultivatorChance, false);
             listingStandard.TextFieldNumeric(ref settings.CultivatorChance, ref settings.CultivatorChanceString, 0.00f, 1.00f);
             listingStandard.Label("AS_FoundationChance".Translate(SettingsChanceString(settings.foundationChance).Named("SETTING"), -1, "AS_FoundationChanceDesc".Translate()));
-            settings.foundationChanceString = SettingsChanceString(settings.foundationChance);
+            settings.foundationChanceString = SettingsChanceString(settings.foundationChance, false);
             listingStandard.TextFieldNumeric(ref settings.foundationChance, ref settings.foundationChanceString, 0.00f, 1.00f);
             listingStandard.Label("AS_ERChance".Translate(SettingsChanceString(settings.EssenceChance).Named("SETTING"), -1, "AS_ERChanceDesc".Translate()));
-            settings.EssenceChanceString = SettingsChanceString(settings.EssenceChance);
+            settings.EssenceChanceString = SettingsChanceString(settings.EssenceChance, false);
             listingStandard.TextFieldNumeric(ref settings.EssenceChance, ref settings.EssenceChanceString, 0.00f, 1.00f);
 
             listingStandard.Label("AS_PCChance".Translate(SettingsChanceString(settings.PCChance).Named("SETTING"), -1, "AS_PCChanceDesc".Translate()));
 
-            settings.PCChanceString = SettingsChanceString(settings.PCChance);
+            settings.PCChanceString = SettingsChanceString(settings.PCChance, false);
             listingStandard.TextFieldNumeric(ref settings.PCChance, ref settings.PCChanceString, 0.00f, 1.00f);
 
             listingStandard.Label("AS_PCMin".Translate(this.settings.PCMinRealm.ToString("#").Named("SETTING")), -1, "AS_PCMinDesc".Translate());
@@ -166,7 +174,7 @@ namespace Ascension
             listingStandard.TextFieldNumeric(ref settings.AnimaCMax, ref settings.AnimaCMaxString, 1, 1000000f);
 
             listingStandard.Label("AS_AbilityChance".Translate(SettingsChanceString(settings.AbilityChance).Named("SETTING"), -1, "AS_AbilityChanceDesc".Translate()));
-            settings.AbilityChanceString = SettingsChanceString(settings.AbilityChance);
+            settings.AbilityChanceString = SettingsChanceString(settings.AbilityChance, false);
             listingStandard.TextFieldNumeric(ref settings.AbilityChance, ref settings.AbilityChanceString, 0.00f, 1.00f);
 
             listingStandard.Label("AS_SMRandStacks".Translate(this.settings.SMRandStacks.ToString("#").Named("SETTING")), -1, "AS_SSMRandStacksDesc".Translate());
@@ -174,7 +182,7 @@ namespace Ascension
             listingStandard.TextFieldNumeric(ref settings.SMRandStacks, ref settings.SMRandStacksString, 1, 100000f);
 
             listingStandard.Label("AS_MaxRandLifespan".Translate(SettingsChanceString(settings.MaxRandLifespan).Named("SETTING")), -1, "AS_MaxRandLifespanDesc".Translate());
-            settings.MaxRandLifespanString = SettingsChanceString(settings.MaxRandLifespan);
+            settings.MaxRandLifespanString = SettingsChanceString(settings.MaxRandLifespan, false);
             listingStandard.TextFieldNumeric(ref settings.MaxRandLifespan, ref settings.MaxRandLifespanString, 0.00f, 100000.00f);
 
             listingStandard.Label("AS_Notifications".Translate() + "\n", -1, "AS_NotificationsDesc".Translate());
@@ -205,7 +213,7 @@ namespace Ascension
             listingStandard.TextFieldNumeric(ref settings.BaseCultivationSpeed, ref settings.BaseCultivationSpeedString, 1, 10000f);
 
             listingStandard.Label("AS_LifespanAgeRatio".Translate(SettingsChanceString(settings.LifespanAgeRatio).Named("SETTING"), -1, "AS_LifespanAgeRatioDesc".Translate()));
-            settings.LifespanAgeRatioString = SettingsChanceString(settings.LifespanAgeRatio);
+            settings.LifespanAgeRatioString = SettingsChanceString(settings.LifespanAgeRatio, false);
             listingStandard.TextFieldNumeric(ref settings.LifespanAgeRatio, ref settings.LifespanAgeRatioString, 0.00f, 1.00f);
 
             listingStandard.End();

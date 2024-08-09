@@ -120,15 +120,19 @@ namespace Ascension
             }
             QiPool_Hediff qiPool = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
 
+            Realm_Hediff realm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm) as Realm_Hediff;
             if (cultivatorHediff.lawType == Cultivator_Hediff.LawType.Essence)
             {
                 if (cultivatorHediff.autoCultivateType == 4)
                 {
-                    Realm_Hediff essenceRealm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
-                    if (essenceRealm != null)
+                    realm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
+                    if (realm != null)
                     {
-
-                        if (essenceRealm.Severity >= 3)
+                        if (realm.Severity >= 7 && realm.progress >= realm.maxProgress && qiPool.amount > AscensionUtilities.UpdateQiMax(qiPool))
+                        {
+                            return false;
+                        }
+                        if (realm.Severity >= 3)
                         {
                             return true;
                         }
