@@ -520,7 +520,6 @@ namespace Ascension
                 DrawBreakthroughChanceFactors(bChanceFactorRect);
             }
         }
-
         private static void DrawElementFactors(Rect rect)
         {
             Rect labelRect = rect;
@@ -567,7 +566,6 @@ namespace Ascension
 
             Text.Anchor = TextAnchor.MiddleLeft;
         }
-
         private static void DrawQiRecoveryFactors(Rect rect)
         {
             if (qiPoolHediff == null || CultivatorHediff == null) return;
@@ -593,7 +591,6 @@ namespace Ascension
             Widgets.Label(rect, "AS_QiRecoverySpeedFactors".Translate(qiRecSpeedBase.Named("BASE"), qiRecSpeedOffset.Named("OFFSET"), speedElementBonus.ToString("0.#").Named("ELEMENTTILE"), elementText.Translate().Named("ELEMENT"), speed.ToString("0.#").Named("SPEED"), AscensionUtilities.TranslateSpeedHour(qiRecSpeed).Named("TRANSLATEDRECOVERYSPEED")));
             AddHighlightAndTooltip(rect, "AS_QiRecoverySpeedFactorsDesc", Color.white);
         }
-
         private static void DrawBreakthroughChanceFactors(Rect rect)
         {
             rect.height = 50f;
@@ -628,17 +625,6 @@ namespace Ascension
             rect.height = 52f;
             Widgets.Label(rect, translatedBCFactorText.ToString());
             AddHighlightAndTooltip(rect, "AS_BCFactorsDesc", Color.white);
-        }
-
-        private static void DrawCultivationSpeed(Rect rect)
-        {
-            Widgets.Label(rect, "AS_CultivationSpeed".Translate(
-                cultivationSpeed.ToString("0.#").Named("SPEED")));
-        }
-        private static void DrawLifespan(Rect rect)
-        {
-            Widgets.Label(rect, "AS_LifespanBar".Translate(
-                lifespan.ToString("0.#").Named("LIFESPAN"), (lifespanEfficiency*100).ToString("0.#").Named("EFFICIENCY")));
         }
         private static void DrawSpeedFactors(Rect speedFactorsRect)
         {
@@ -680,7 +666,6 @@ namespace Ascension
             Widgets.Label(speedFactorsRect, translatedSpeedFactorText);
             AddHighlightAndTooltip(speedFactorsRect, "AS_CSFactorsDesc", Color.white);
         }
-
         private static void DrawMaxQiFactors(Rect speedFactorsRect)
         {
             speedFactorsRect.height = 50f;
@@ -714,6 +699,19 @@ namespace Ascension
             AddHighlightAndTooltip(speedFactorsRect, "AS_MQFactorsDesc", Color.white);
         }
 
+
+
+
+        private static void DrawCultivationSpeed(Rect rect)
+        {
+            Widgets.Label(rect, "AS_CultivationSpeed".Translate(
+                cultivationSpeed.ToString("0.#").Named("SPEED")));
+        }
+        private static void DrawLifespan(Rect rect)
+        {
+            Widgets.Label(rect, "AS_LifespanBar".Translate(
+                lifespan.ToString("0.#").Named("LIFESPAN"), (lifespanEfficiency * 100).ToString("0.#").Named("EFFICIENCY")));
+        }
         private static void DrawQiTile(Rect qiTileRect)
         {
 

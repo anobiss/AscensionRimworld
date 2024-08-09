@@ -13,6 +13,8 @@ namespace Ascension
         public string SMTickRateString = "100";
         public float LifespanTickRate = 1200f;
         public string LifespanTickRateString = "1200";
+        public float LifespanAgeRatio = 0.15f;
+        public string LifespanAgeRatioString = "0.15";
 
         public float MaxRandLifespan = 70f;
         public string MaxRandLifespanString = "70";
@@ -68,6 +70,8 @@ namespace Ascension
 
         public override void ExposeData()
         {
+            
+            Scribe_Values.Look(ref LifespanAgeRatio, "LifespanAgeRatio", 0.15f);
             Scribe_Values.Look(ref BaseCultivationSpeed, "BaseCultivationSpeed", 1f);
             Scribe_Values.Look(ref foundationChance, "foundationChance", 0.2f);
             Scribe_Values.Look(ref defaultConfirm, "defaultConfirm", false);
@@ -109,6 +113,11 @@ namespace Ascension
             this.settings = GetSettings<AscensionSettings>();
         }
 
+        private static string SettingsChanceString(float chance)
+        {
+            return (chance * 100f).ToString("0.0#");
+        }
+
         public override void DoSettingsWindowContents(Rect inRect)
         {
             Listing_Standard listingStandard = new Listing_Standard();
@@ -125,19 +134,19 @@ namespace Ascension
             listingStandard.CheckboxLabeled("AS_HumanoidCultivator".Translate(), ref settings.humanoidOnlyBool, "AS_HumanoidCultivatorDesc".Translate());
             listingStandard.CheckboxLabeled("AS_MachineCultivator".Translate(), ref settings.machineCultivatorBool, "AS_MachineCultivatorDesc".Translate());
 
-            listingStandard.Label("AS_CultivatorChance".Translate((Math.Floor(this.settings.CultivatorChance * 1000) / 10).Named("SETTING")), -1, "AS_CultivatorChanceDesc".Translate());
-            settings.CultivatorChanceString = settings.CultivatorChance.ToString("0.0#");
+            listingStandard.Label("AS_CultivatorChance".Translate(SettingsChanceString(settings.CultivatorChance).Named("SETTING"), -1, "AS_CultivatorChanceDesc".Translate()));
+            settings.CultivatorChanceString = SettingsChanceString(settings.CultivatorChance);
             listingStandard.TextFieldNumeric(ref settings.CultivatorChance, ref settings.CultivatorChanceString, 0.00f, 1.00f);
-            listingStandard.Label("AS_FoundationChance".Translate((Math.Floor(this.settings.foundationChance * 1000) / 10).Named("SETTING")), -1, "AS_FoundationChanceDesc".Translate());
-            settings.foundationChanceString = settings.foundationChance.ToString("0.0#");
+            listingStandard.Label("AS_FoundationChance".Translate(SettingsChanceString(settings.foundationChance).Named("SETTING"), -1, "AS_FoundationChanceDesc".Translate()));
+            settings.foundationChanceString = SettingsChanceString(settings.foundationChance);
             listingStandard.TextFieldNumeric(ref settings.foundationChance, ref settings.foundationChanceString, 0.00f, 1.00f);
-            listingStandard.Label("AS_ERChance".Translate((Math.Floor(this.settings.EssenceChance * 1000) / 10).Named("SETTING")), -1, "AS_ERChanceDesc".Translate());
-            settings.EssenceChanceString = settings.EssenceChance.ToString("0.0#");
+            listingStandard.Label("AS_ERChance".Translate(SettingsChanceString(settings.EssenceChance).Named("SETTING"), -1, "AS_ERChanceDesc".Translate()));
+            settings.EssenceChanceString = SettingsChanceString(settings.EssenceChance);
             listingStandard.TextFieldNumeric(ref settings.EssenceChance, ref settings.EssenceChanceString, 0.00f, 1.00f);
 
-            listingStandard.Label("AS_PCChance".Translate((Math.Floor(this.settings.PCChance * 1000) / 10).Named("SETTING")), -1, "AS_PCChanceDesc".Translate());
+            listingStandard.Label("AS_PCChance".Translate(SettingsChanceString(settings.PCChance).Named("SETTING"), -1, "AS_PCChanceDesc".Translate()));
 
-            settings.PCChanceString = settings.PCChance.ToString("0.0#");
+            settings.PCChanceString = SettingsChanceString(settings.PCChance);
             listingStandard.TextFieldNumeric(ref settings.PCChance, ref settings.PCChanceString, 0.00f, 1.00f);
 
             listingStandard.Label("AS_PCMin".Translate(this.settings.PCMinRealm.ToString("#").Named("SETTING")), -1, "AS_PCMinDesc".Translate());
@@ -156,8 +165,8 @@ namespace Ascension
             settings.AnimaCMaxString = settings.AnimaCMax.ToString("#");
             listingStandard.TextFieldNumeric(ref settings.AnimaCMax, ref settings.AnimaCMaxString, 1, 1000000f);
 
-            listingStandard.Label("AS_AbilityChance".Translate((Math.Floor(this.settings.AbilityChance * 1000) / 10).Named("SETTING")), -1, "AS_AbilityChanceDesc".Translate());
-            settings.AbilityChanceString = settings.AbilityChance.ToString("0.0#");
+            listingStandard.Label("AS_AbilityChance".Translate(SettingsChanceString(settings.AbilityChance).Named("SETTING"), -1, "AS_AbilityChanceDesc".Translate()));
+            settings.AbilityChanceString = SettingsChanceString(settings.AbilityChance);
             listingStandard.TextFieldNumeric(ref settings.AbilityChance, ref settings.AbilityChanceString, 0.00f, 1.00f);
 
             listingStandard.Label("AS_SMRandStacks".Translate(this.settings.SMRandStacks.ToString("#").Named("SETTING")), -1, "AS_SSMRandStacksDesc".Translate());
@@ -194,6 +203,10 @@ namespace Ascension
             listingStandard.Label("AS_BaseCultivationSpeed".Translate(this.settings.BaseCultivationSpeed.ToString("#").Named("SETTING")), -1, "AS_BaseCultivationSpeedDesc".Translate());
             settings.BaseCultivationSpeedString = settings.BaseCultivationSpeed.ToString("0.0#");
             listingStandard.TextFieldNumeric(ref settings.BaseCultivationSpeed, ref settings.BaseCultivationSpeedString, 1, 10000f);
+
+            listingStandard.Label("AS_LifespanAgeRatio".Translate(SettingsChanceString(settings.LifespanAgeRatio).Named("SETTING"), -1, "AS_LifespanAgeRatioDesc".Translate()));
+            settings.LifespanAgeRatioString = SettingsChanceString(settings.LifespanAgeRatio);
+            listingStandard.TextFieldNumeric(ref settings.LifespanAgeRatio, ref settings.LifespanAgeRatioString, 0.00f, 1.00f);
 
             listingStandard.End();
             Widgets.EndScrollView();

@@ -1256,11 +1256,12 @@ namespace Ascension
             {
                 if (cultivatorHediff.pawn.ageTracker.AgeBiologicalYearsFloat > cultivatorHediff.pawn.ageTracker.AdultMinAge)
                 {
-                    newBioAge = cultivatorHediff.pawn.ageTracker.AdultMinAge;
+                    newBioAge = cultivatorHediff.pawn.ageTracker.AdultMinAge+((cultivatorHediff.pawn.RaceProps.lifeExpectancy - cultivatorHediff.pawn.ageTracker.AdultMinAge)*settings.LifespanAgeRatio);
                 }
                 if (ModsConfig.IdeologyActive && cultivatorHediff.pawn.ageTracker.AgeReversalDemandedDeadlineTicks <= 0 && cultivatorHediff.pawn.MapHeld != null)
                 {
-                    newBioAge = cultivatorHediff.pawn.ageTracker.AdultMinAge;//later do the age they want somehow
+                    newBioAge = cultivatorHediff.pawn.ageTracker.AdultMinAge + ((cultivatorHediff.pawn.RaceProps.lifeExpectancy - cultivatorHediff.pawn.ageTracker.AdultMinAge) * settings.LifespanAgeRatio);
+                    //later do the age they want somehow
                 }
             }
             return newBioAge;

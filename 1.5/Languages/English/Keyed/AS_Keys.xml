@@ -176,7 +176,10 @@
   <AS_MiscDesc>Miscellaneous settings that done fit anywhere in particular.</AS_MiscDesc>
 	  
 	        <!-- Settings -->
-  <AS_MaxRandLifespan>Max Random Lifespan:  {SETTING} Years</AS_MaxRandLifespan>
+  <AS_LifespanAgeRatio>Lifespan Age Ratio:  {SETTING}%</AS_LifespanAgeRatio>
+  <AS_LifespanAgeRatioDesc>For determining the target biological age to de-age to when the lifespan is above life-expectency. The target age is the minimum adult age of the cultivator (13 years for most humanoids), plus a percentage of thier remaining life-expectancy (life-expectancy minus min adult age) determined by this setting. 15% by default.</AS_LifespanAgeRatioDesc>
+  
+  <AS_MaxRandLifespan>Maximum Random Lifespan:  {SETTING} Years</AS_MaxRandLifespan>
   <AS_MaxRandLifespanDesc>Maximum random lifespan of random cultivators. Amount is multiplied by realm tier (7x is max), and added after base lifespan generated from the cultivators race and current age.</AS_MaxRandLifespanDesc>
 			
   <AS_BaseCultivationSpeed>Base Cultivation Speed:  {SETTING}</AS_BaseCultivationSpeed>
