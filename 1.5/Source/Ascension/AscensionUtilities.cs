@@ -45,6 +45,25 @@ namespace Ascension
         public static readonly float[] passiveQiBaseAmounts = { 10f, 100f, 1200f, 7000f, 12000f, 24000f, 77000f };
         public static readonly float[] passiveQiBaseSpeeds = { 1f, 1.5f, 2.7f, 3f, 4f, 5f, 7f };
 
+        public static float randLifespanRealmMultiplier(Pawn pawn)
+        {
+            float mult = 1;
+            Realm_Hediff realm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
+            if (realm != null)
+            {
+                mult += RealmIndex(realm);
+            }
+            else
+            {
+                realm = pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm) as Realm_Hediff;
+                if (realm != null)
+                {
+                    mult += RealmIndex(realm);
+                }
+            }
+            return mult;
+        }
+
         public static int RealmIndex(Realm_Hediff essenceRealmHediff)
         {
             int index = -1; //so we know when we arent getting a index
@@ -78,6 +97,8 @@ namespace Ascension
 
         public static readonly float[] spiritPillOffsetRates = { 5f, 7f, 10f, 12f, 17f, 20f };
         public static readonly float[] spiritPillCostRates = {77000f, 100000f, 120000f, 200000f, 1000000f, 12000000f };//how much qi each tier costs	Poor,Normal,Good,Excellent,Masterwork,Legendary
+
+
 
         //updateqirecoveryamount
         public static string TranslateSpeedHour(float speed, bool isTicks = false)
@@ -226,6 +247,25 @@ namespace Ascension
             return offset;
         }
 
+
+        public static float UpdateLifespanEfficiency(Cultivator_Hediff cultivatorHediff)
+        {
+            float efficiency = 1f;
+            Realm_Hediff realm = cultivatorHediff.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.EssenceRealm) as Realm_Hediff;
+            if (realm != null)
+            {
+                efficiency = realmLifespanEfficiency[RealmIndex(realm)];
+            }else
+            {
+                realm = cultivatorHediff.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.BodyRealm) as Realm_Hediff;
+                if (realm != null)
+                {
+                    efficiency = realmLifespanEfficiency[RealmIndex(realm)];
+                }
+            }
+            cultivatorHediff.lifespanEfficiency = efficiency;
+            return efficiency;
+        }
         public static float UpdateBreakthroughChanceBase(Cultivator_Hediff cultivatorHediff)
         {
             float chanceBase = 0.05f;
@@ -1118,6 +1158,7 @@ namespace Ascension
         //    }
         //    return hediff_Realm;
         //}
+        public static readonly float[] realmLifespanEfficiency = { 1.5f,2f,2.5f,5f,7f,12f,24f};
         public static readonly int[] maxProgressionRatesBody = { 7000, 120000, 700000, 7000000, 12000000, 70000000, 120000000 }; // max qi offset to set to when advancing. first is tier 2
         public static readonly int[] maxProgressionRatesEssence = { 7000, 120000, 700000, 7000000, 12000000, 70000000, 120000000 }; // max qi offset to set to when advancing. first is tier 2
         public static void UpdateMaxProg(Realm_Hediff realmHediff)

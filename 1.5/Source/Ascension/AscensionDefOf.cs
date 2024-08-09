@@ -65,6 +65,7 @@ namespace Ascension
         public static StatCategoryDef ElementEmit;
         public static StatCategoryDef CultivationCauldron;
         public static StatCategoryDef SpiritPill;
+        public static StatCategoryDef LifePill;
         public static StatCategoryDef GoldenPill;
         public static StatCategoryDef CultivationUniform;
 

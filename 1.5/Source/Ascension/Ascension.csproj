@@ -102,6 +102,7 @@
     <Compile Include="CompGatherQi.cs" />
     <Compile Include="CompConstantHeatPusher.cs" />
     <Compile Include="CompGoldenPill.cs" />
+    <Compile Include="CompLifePill.cs" />
     <Compile Include="CompProperties_AbilityBodyMelee.cs" />
     <Compile Include="CompProperties_AbilityHediffToggle.cs" />
     <Compile Include="CompProperties_AbilityQiCost.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="CompProperties_ElementEmit.cs" />
     <Compile Include="CompProperties_GatherQi.cs" />
     <Compile Include="CompProperties_GoldenPill.cs" />
+    <Compile Include="CompProperties_LifePill.cs" />
     <Compile Include="CompProperties_TorchFireEmit.cs" />
     <Compile Include="CompProperties_UseEffect_AbilityScroll.cs" />
     <Compile Include="CompProperties_UseEffect_Absorb_SpiritSword.cs" />
@@ -151,6 +153,7 @@
     <Compile Include="IngestionOutcomeDoer_Exercise.cs" />
     <Compile Include="IngestionOutcomeDoer_FormingPill.cs" />
     <Compile Include="IngestionOutcomeDoer_GiveBreakthrough.cs" />
+    <Compile Include="IngestionOutcomeDoer_LifePill.cs" />
     <Compile Include="IngestionOutcomeDoer_RebirthPill.cs" />
     <Compile Include="IngestionOutcomeDoer_RefineQi.cs" />
     <Compile Include="IngestionOutcomeDoer_SpiritPill.cs" />
@@ -176,7 +179,6 @@
     <Compile Include="Toils_Cultivation.cs" />
     <Compile Include="Tribulation_Hediff.cs" />
     <Compile Include="HediffComp_QiFeed.cs" />
-    <Compile Include="HediffComp_PseudoImmortalAgeless.cs" />
     <Compile Include="HediffComp_PseudoImmortalEffect.cs" />
     <Compile Include="HediffComp_PseudoImmortalHeal.cs" />
     <Compile Include="IngestionOutcomeDoer_GiveHediffFromQuality.cs" />

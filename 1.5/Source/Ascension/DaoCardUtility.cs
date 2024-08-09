@@ -226,7 +226,9 @@ namespace Ascension
                     qiBarText += "AS_QiPoolBarRecovery".Translate(qiRecAmount.ToString().Named("QIRECOVERYAMOUNT"), AscensionUtilities.TranslateSpeedHour(qiRecSpeed).Named("TRANSLATEDRECOVERYSPEED"));
                 }
             }
+            GUI.color = Color.black;
             Widgets.Label(barRect, qiBarText);
+            GUI.color = Color.white;
             if (CanControl() && qiPoolHediff.amount < qiPoolHediff.maxAmount && lawType == essenceLaw)
             {
                 if (Widgets.ButtonText(gatherButtonRect, "AS_QiGathering".Translate()))
@@ -457,13 +459,15 @@ namespace Ascension
         {
             GUI.color = Color.white;
 
-            Rect qiTileRect = new Rect(rect.x,rect.y+ rect.height, rect.width, rect.height);
-            Rect innerCRect = new Rect(rect.x, qiTileRect.y + qiTileRect.height + 10f, rect.width, rect.height);
+            Rect lifespanRect = rect;
+            Rect cultivationSpeedRect = new Rect(lifespanRect.x, lifespanRect.y + lifespanRect.height, lifespanRect.width, lifespanRect.height);
+            Rect qiTileRect = new Rect(rect.x, cultivationSpeedRect.y + cultivationSpeedRect.height, rect.width, rect.height);
+            Rect innerCRect = new Rect(rect.x, qiTileRect.y + qiTileRect.height, rect.width, rect.height);
 
             if (CultivatorHediff == null)
                 return;
-
-            DrawCultivationSpeed(rect);
+            DrawLifespan(lifespanRect);
+            DrawCultivationSpeed(cultivationSpeedRect);
             if (!isFoundation)
             {
                 if (lawType == essenceLaw)
@@ -477,7 +481,7 @@ namespace Ascension
                 DrawCultivationTypeButton(qiTileRect);
                 DrawCultivationTypeConfirmButton(innerCRect);
             }
-            DrawHighlightsAndTooltips(rect, qiTileRect, innerCRect);
+            DrawHighlightsAndTooltips(lifespanRect, cultivationSpeedRect, qiTileRect, innerCRect);
         }
 
         private static void DrawCultivationStats(Rect rect)
@@ -631,7 +635,11 @@ namespace Ascension
             Widgets.Label(rect, "AS_CultivationSpeed".Translate(
                 cultivationSpeed.ToString("0.#").Named("SPEED")));
         }
-
+        private static void DrawLifespan(Rect rect)
+        {
+            Widgets.Label(rect, "AS_LifespanBar".Translate(
+                lifespan.ToString("0.#").Named("LIFESPAN"), (lifespanEfficiency*100).ToString("0.#").Named("EFFICIENCY")));
+        }
         private static void DrawSpeedFactors(Rect speedFactorsRect)
         {
             string translatedSpeedFactorText = "AS_CSFactorBaseOffset".Translate(
@@ -764,16 +772,17 @@ namespace Ascension
             }
         }
 
-        private static void DrawHighlightsAndTooltips(Rect rect, Rect qiTileRect, Rect innerCRect)
+        private static void DrawHighlightsAndTooltips(Rect lifespanRect, Rect cultivationSpeedRect, Rect qiTileRect, Rect innerCRect)
         {
             Color highlightColor = new Color(0.8f, 0.8f, 0.8f, 0.5f); // Slightly darker highlight color
-
-            AddHighlightAndTooltip(rect, "AS_CultivationSpeedDesc", highlightColor);
+            AddHighlightAndTooltip(lifespanRect, "AS_LifespanDesc", highlightColor);
+            AddHighlightAndTooltip(cultivationSpeedRect, "AS_CultivationSpeedDesc", highlightColor);
             if (!isFoundation && CultivatorHediff.lawType == Cultivator_Hediff.LawType.Essence)//only shown when past foundation and u need to choose type to pass foundation
             {
                 AddHighlightAndTooltip(qiTileRect, "AS_QiTileDesc", highlightColor);
                 AddHighlightAndTooltip(innerCRect, "AS_InnerCDesc", highlightColor);
             }
+
 
             GUI.color = Color.white;
         }
@@ -784,7 +793,15 @@ namespace Ascension
             {
                 GUI.color = highlightColor;
                 Widgets.DrawHighlight(rect);
-                TooltipHandler.TipRegion(rect, tooltipKey.Translate());
+                if (tooltipKey == "AS_LifespanDesc")
+                {
+                    TooltipHandler.TipRegion(rect, tooltipKey.Translate(selectedPawn.RaceProps.lifeExpectancy.ToString("0.0#").Named("LEYEARS")));
+                }
+                else
+                {
+                    TooltipHandler.TipRegion(rect, tooltipKey.Translate());
+                }
+
                 GUI.color = Color.white;
             }
         }
@@ -1055,6 +1072,10 @@ namespace Ascension
 
         public static QiPool_Hediff qiPoolHediff;
         public static Cultivator_Hediff CultivatorHediff;
+
+        public static float lifespan;
+        public static float lifespanEfficiency;
+
         public static Realm_Hediff currentRealmHediff;
 
         public static Cultivator_Hediff.LawType lawType;
@@ -1107,7 +1128,8 @@ namespace Ascension
             }
             fTrainingOffset = AscensionUtilities.UpdateFoundationTrainingSpeedOffset(CultivatorHediff);
             qiPoolHediff = selectedPawn.health.hediffSet.GetFirstHediffOfDef(qiPoolHediffDef) as QiPool_Hediff;
-
+            lifespan = CultivatorHediff.lifespan;
+            lifespanEfficiency = CultivatorHediff.lifespanEfficiency;
 
 
             if (selectedPawn.health.hediffSet.GetFirstHediffOfDef(eRealmHediffDef) is Realm_Hediff eRealm)

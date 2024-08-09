@@ -72,6 +72,7 @@ namespace Ascension
                         float randER = Rand.Range(0, 1f);
                         float randSM = Rand.Range(0, 1f);
                         float randF = Rand.Range(0, 1f);
+                        float randLS = Rand.Range(0, 1f);
 
                         float chanceC = settings.CultivatorChance;
                         float chanceER = settings.EssenceChance;
@@ -174,7 +175,7 @@ namespace Ascension
 
                             pawn.health.AddHediff(cultivatorHediff);
                             pawn.health.AddHediff(qiPool);
-
+                            cultivatorHediff.lifespan = AscensionUtilities.GetBaseLifespan(cultivatorHediff) + ((settings.MaxRandLifespan* AscensionUtilities.randLifespanRealmMultiplier(pawn)) * randLS);
                             AscensionUtilities.UpdateQiRecoveryAmount(qiPool);
                             AscensionUtilities.UpdateQiRecoverySpeed(qiPool);
                             qiPool.amount = ((float)rnd.NextDouble()) * AscensionUtilities.UpdateQiMax(qiPool); ;

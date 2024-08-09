@@ -15,9 +15,6 @@
 	  <li>
 		<compClass>Ascension.HediffComp_PseudoImmortalHeal</compClass>
 	  </li>
-	  <li>
-		<compClass>Ascension.HediffComp_PseudoImmortalAgeless</compClass>
-	  </li>
 	</comps>
     <stages>
 	  <li>

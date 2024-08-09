@@ -537,6 +537,47 @@
       </li>
     </ingredients>
   </RecipeDef>
+  
+        <RecipeDef>
+    <defName>AS_MakeLifePill</defName>
+    <label>Make life pill</label>
+    <description>Make a life pill. Grants between 10-100 years of Lifespan upon consumption depending on quality. Explodes when made at awful quality.</description>
+	<researchPrerequisite>AS_BasicPillProduction</researchPrerequisite>
+    <jobString>Creating forming pill.</jobString>
+    <workAmount>7777</workAmount>
+	<workSkill>Crafting</workSkill>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+	<soundWorking>Recipe_Smelt</soundWorking>
+	<skillRequirements>
+      <Crafting>5</Crafting>
+	  <Cooking>5</Cooking>
+    </skillRequirements>
+    <recipeUsers>
+      <li>SpiritCauldron</li>
+    </recipeUsers>
+    <products>
+      <AS_LifePill>1</AS_LifePill>
+    </products>
+    <ingredients>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>AS_HeavensBreath</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+	  <li>
+        <filter>
+          <thingDefs>
+            <li>AS_Spiritleaf</li>
+          </thingDefs>
+        </filter>
+        <count>77</count>
+      </li>
+    </ingredients>
+  </RecipeDef>
 
   <RecipeDef>
     <defName>AS_ManifestSpiritSword</defName>

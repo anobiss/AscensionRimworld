@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="DrugPillBase">
+    <defName>AS_LifePill</defName>
+    <label>Life Pill</label>
+    <description>The coveted life pill. Grants between 10-100 years of Lifespan upon consumption depending on quality. Explodes when made at awful quality.</description>
+    <graphicData>
+      <texPath>Things/Item/Drug/LifePill</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <statBases>
+      <Mass>0.03</Mass>
+    </statBases>
+    <techLevel>Neolithic</techLevel>
+    <minRewardCount>3</minRewardCount>
+    <ingestible>
+      <drugCategory>Medical</drugCategory>
+      <outcomeDoers>
+        <li Class="Ascension.IngestionOutcomeDoer_LifePill">
+          <amount>10</amount>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+	<comps>
+	  <li Class="Ascension.CompProperties_AwfulExplosive">
+        <explosiveDamageType>Flame</explosiveDamageType>
+      </li>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+      <li Class="Ascension.CompProperties_LifePill">
+		<amount>10</amount>
+      </li>
+      <li Class="CompProperties_Drug">
+		<isCombatEnhancingDrug>false</isCombatEnhancingDrug>
+        <listOrder>1011</listOrder>
+      </li>
+    </comps>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <thingSetMakerTags><li>RewardStandardLowFreq</li></thingSetMakerTags>
+    <allowedArchonexusCount>7</allowedArchonexusCount>
+  </ThingDef>
+</Defs>

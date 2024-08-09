@@ -56,6 +56,12 @@
   
   <AS_CultivationUniformMultiplierSymbol>{OFFSET}x</AS_CultivationUniformMultiplierSymbol>
   
+        <!-- display for life pill -->
+  <AS_LifePillInspect>Lifespan Increase: {AMOUNT} years.</AS_LifePillInspect>
+  <AS_LifePillLifespanAmount>Lifespan Amount</AS_LifePillLifespanAmount>
+  <AS_LifePillYears>{AMOUNT} Years</AS_LifePillYears>
+  <AS_LifePillLifespanAmountDesc>The amount of lifespan granted upon consumption.</AS_LifePillLifespanAmountDesc>
+  
       <!-- display for spirit pill -->
   <AS_SpiritPillInspect>Qi Cost: {COST}\nMultiplier: {OFFSET}x Max Qi and Qi Recovery</AS_SpiritPillInspect>
   <AS_SpiritPillQiCost>Qi Cost</AS_SpiritPillQiCost>
@@ -170,8 +176,11 @@
   <AS_MiscDesc>Miscellaneous settings that done fit anywhere in particular.</AS_MiscDesc>
 	  
 	        <!-- Settings -->
+  <AS_MaxRandLifespan>Max Random Lifespan:  {SETTING} Years</AS_MaxRandLifespan>
+  <AS_MaxRandLifespanDesc>Maximum random lifespan of random cultivators. Amount is multiplied by realm tier (7x is max), and added after base lifespan generated from the cultivators race and current age.</AS_MaxRandLifespanDesc>
+			
   <AS_BaseCultivationSpeed>Base Cultivation Speed:  {SETTING}</AS_BaseCultivationSpeed>
-  <AS_BaseCultivationSpeedDesc>Base cultivation speed, 1 by default. Keep in mind most cultivation is balanced around time spent, so anything above 1 can be really OP.</AS_BaseCultivationSpeedDesc>
+  <AS_BaseCultivationSpeedDesc>Base cultivation speed, 1 by default. Keep in mind most cultivation is balanced around time spent, so anything above 1 can be really OP. Beware that the lightning strike speed of Heavenly Tribulations scale with cultivation speed of its victim upon creation.</AS_BaseCultivationSpeedDesc>
 			
   <AS_CultivatorChance>Cultivator Spawn Chance: {SETTING}%</AS_CultivatorChance>
   <AS_CultivatorChanceDesc>Determines the probability of a pawn being a cultivator with random realm progression when spawned.</AS_CultivatorChanceDesc>
@@ -206,6 +215,8 @@
   <AS_DisplayElement>Display Element Grid: </AS_DisplayElement>
   <AS_DisplayElementDesc>Display the element values on the map/screen.</AS_DisplayElementDesc>
   
+    <AS_LifespanTickRate>Lifespan Tick Rate: {SETTING}</AS_LifespanTickRate>
+  <AS_LifespanTickRateDesc>The amount of ticks between each check for de-aging colonist with high lifespans. De-aging is not gradual so large tick rates are ideal for large colonies.</AS_LifespanTickRateDesc>
 
   <AS_SMTickRate>Soul Mend Tick Rate: {SETTING}</AS_SMTickRate>
   <AS_SMTickRateDesc>The amount of ticks between each check if a pawn using soul mend is dead. Higher values means less lag with high amounts of soul menders but also a longer wait for resurrection.</AS_SMTickRateDesc>
@@ -413,6 +424,9 @@
   <AS_QFSLabel> Dao Energy</AS_QFSLabel>
   <AS_QPAmountLabel> Qi</AS_QPAmountLabel>
 
+
+  
   <AS_LifespanBar>Lifespan - {LIFESPAN} years - {EFFICIENCY}% Efficiency</AS_LifespanBar>
+  <AS_LifespanDesc>The cultivators Lifespan. De-ages them to thier races minimum adult age when above thier life-expectancy. Efficiency divides the cost of the de-ageing. Current life-expectancy is {LEYEARS} years.</AS_LifespanDesc>
 
 </LanguageData>

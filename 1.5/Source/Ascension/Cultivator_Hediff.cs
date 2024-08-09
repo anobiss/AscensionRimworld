@@ -32,7 +32,7 @@ namespace Ascension
         //store if the law is confirmed for auto-choosing
         public bool confirmedLaw = false;
         //store if the 
-
+        public int ticksToDeAge = 0;
 
         public int Foundation = 0;
 
@@ -75,20 +75,69 @@ namespace Ascension
             }
         }
 
+        public float lifespan = -1000f;//to show we havent set it which is a problem
+        public float lifespanEfficiency = 1f;
         public override void PostAdd(DamageInfo? dinfo)
         {
             base.PostAdd(dinfo);
             AscensionUtilities.GetBaseLifespan(this);
+            AscensionUtilities.UpdateLifespanEfficiency(this);
             if (element == ElementEmitMapComponent.Element.None)
             {
                 element = AscensionUtilities.AssignElement();
             }
+            if (lifespan == 0)
+            {
+                lifespan = AscensionUtilities.GetBaseLifespan(this);
+            }
         }
-
-        public override void PostTick()
+        public float lastCheckAge = 0f;
+        public override void PostTick()//lifespan logic here
         {
             base.PostTick();
+            this.ticksToDeAge--;
+            if (this.ticksToDeAge <= 0)
+            {
+                if (pawn.RaceProps != null)
+                {
+                    if (pawn.ageTracker != null)
+                    {
+                        if (lifespan == -1000f)
+                        {
+                            lifespan = AscensionUtilities.GetBaseLifespan(this);
+                        }
+                        if (lastCheckAge != 0f)
+                        {
+                            float yearsPast = pawn.ageTracker.AgeBiologicalYearsFloat - lastCheckAge;//3,600,000	ticks per year
+                            lifespan -= yearsPast;// should add if de aged since last check too
+                            //Log.Message(pawn.Name.ToString()+"decreased lifespan by yearspast"+yearsPast);
+                        }
+                        lastCheckAge = pawn.ageTracker.AgeBiologicalYearsFloat;
 
+                        if (lifespan > pawn.RaceProps.lifeExpectancy)
+                        {
+                            float newAgeYears = AscensionUtilities.LifespanDeAge(this);
+                            if (pawn.ageTracker.AgeBiologicalYearsFloat > newAgeYears && newAgeYears != 0)
+                            {
+                                if (newAgeYears != 0)
+                                {
+                                    float yearsReduced = pawn.ageTracker.AgeBiologicalYearsFloat - newAgeYears;
+                                    float lifespanCost = yearsReduced / AscensionUtilities.UpdateLifespanEfficiency(this);
+                                    if (lifespan >= lifespanCost + pawn.RaceProps.lifeExpectancy)
+                                    {
+                                        lifespan -= lifespanCost;
+                                        //Log.Message($"Years Reduced: {yearsReduced}, Lifespan Efficiency: {lifespanEfficiency}, Calculated Cost: {lifespanCost}");
+                                        pawn.ageTracker.AgeBiologicalTicks = (int)(newAgeYears * 3600000);//3,600,000	ticks per year
+                                        pawn.ageTracker.ResetAgeReversalDemand(Pawn_AgeTracker.AgeReversalReason.ViaTreatment, false);
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                ticksToDeAge = (int)settings.LifespanTickRate;
+            }
 
         }
         public override bool Visible
@@ -110,6 +159,13 @@ namespace Ascension
         }
         public override void ExposeData()
         {
+            
+
+            Scribe_Values.Look(ref lifespan, "lifespan", -1000f);
+            Scribe_Values.Look(ref lifespanEfficiency, "lifespanEfficiency", 1f);
+            Scribe_Values.Look(ref ticksToDeAge, "ticksToDeAge", 0);
+            Scribe_Values.Look(ref lastCheckAge, "lastCheckAge", 0f);//float for big numbers
+
             Scribe_Values.Look(ref confirmedLaw, "confirmedLaw");
             Scribe_Values.Look(ref Foundation, "Foundation");
             Scribe_Values.Look(ref foundationTrainingJobProg, "foundationTrainingJobProg");

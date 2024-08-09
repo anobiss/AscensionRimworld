@@ -8,6 +8,12 @@
     <displayOrder>27</displayOrder>
   </StatCategoryDef>
   
+    <StatCategoryDef>
+    <defName>LifePill</defName>
+    <label>Life Pill</label>
+    <displayOrder>27</displayOrder>
+  </StatCategoryDef>
+  
   <StatCategoryDef>
     <defName>ElementEmit</defName>
     <label>Element Emit</label>

@@ -11,6 +11,13 @@ namespace Ascension
     {
         public float SMTickRate = 100f; //soul mend tick rate, if 0 do every tick
         public string SMTickRateString = "100";
+        public float LifespanTickRate = 1200f;
+        public string LifespanTickRateString = "1200";
+
+        public float MaxRandLifespan = 70f;
+        public string MaxRandLifespanString = "70";
+
+
         public bool displayQiGrid = true;
         public bool displayElementGrid = true;
         public bool humanoidOnlyBool = false;
@@ -85,7 +92,9 @@ namespace Ascension
             Scribe_Values.Look(ref AbilityChance, "AbilityChance", 0.2f);
 
             Scribe_Values.Look(ref SMTickRate, "SMTickRate", 100f);
+            Scribe_Values.Look(ref LifespanTickRate, "LifespanTickRate", 1200f);
             Scribe_Values.Look(ref SMRandStacks, "SMRandStacks", 12f);
+            Scribe_Values.Look(ref MaxRandLifespan, "MaxRandLifespan", 70f);
             base.ExposeData();
         }
     }
@@ -104,7 +113,7 @@ namespace Ascension
         {
             Listing_Standard listingStandard = new Listing_Standard();
             Rect outRect = new Rect(inRect.x, inRect.y, inRect.width, inRect.height);
-            Rect viewRect = new Rect(0f, 0f, inRect.width - 16f, 1000f); // Adjust height as needed
+            Rect viewRect = new Rect(0f, 0f, inRect.width - 16f, 1100f); // Adjust height as needed
 
             Widgets.BeginScrollView(outRect, ref scrollPosition, viewRect);
             listingStandard.Begin(viewRect);
@@ -155,6 +164,10 @@ namespace Ascension
             settings.SMRandStacksString = settings.SMRandStacks.ToString("#");
             listingStandard.TextFieldNumeric(ref settings.SMRandStacks, ref settings.SMRandStacksString, 1, 100000f);
 
+            listingStandard.Label("AS_MaxRandLifespan".Translate(this.settings.MaxRandLifespan.ToString("0.#").Named("SETTING")), -1, "AS_MaxRandLifespanDesc".Translate());
+            settings.MaxRandLifespanString = settings.MaxRandLifespan.ToString("0.#");
+            listingStandard.TextFieldNumeric(ref settings.MaxRandLifespan, ref settings.MaxRandLifespanString, 1, 100000f);
+
             listingStandard.Label("AS_Notifications".Translate() + "\n", -1, "AS_NotificationsDesc".Translate());
 
             listingStandard.CheckboxLabeled("AS_LogHeals".Translate(), ref settings.logHealsBool, "AS_LogHealsDesc".Translate());
@@ -162,6 +175,10 @@ namespace Ascension
             listingStandard.CheckboxLabeled("AS_DisablePLetters".Translate(), ref settings.disableProgressLetters, "AS_DisablePLettersDesc".Translate());
 
             listingStandard.Label("AS_TickRates".Translate() + "\n", -1, "AS_TickRatesDesc".Translate());
+
+            listingStandard.Label("AS_LifespanTickRate".Translate(this.settings.LifespanTickRate.ToString("#").Named("SETTING")), -1, "AS_LifespanTickRateDesc".Translate());
+            settings.LifespanTickRateString = settings.LifespanTickRate.ToString("#");
+            listingStandard.TextFieldNumeric(ref settings.LifespanTickRate, ref settings.LifespanTickRateString, 1, 100000f);
 
 
             listingStandard.Label("AS_SMTickRate".Translate(this.settings.SMTickRate.ToString("#").Named("SETTING")),-1, "AS_SMTickRateDesc".Translate());
