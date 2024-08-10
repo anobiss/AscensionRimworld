@@ -9,7 +9,17 @@ namespace Ascension
 {
     public class AscensionUtilities
     {
-
+        public static string PercentageString(float chance, bool isLabel = true)
+        {
+            if (isLabel == true)
+            {
+                return (chance * 100f).ToString("0.0#");
+            }
+            else
+            {
+                return (chance).ToString("0.00#");
+            }
+        }
         public static string TranslateElement(ElementEmitMapComponent.Element element)
         {
             return element switch
