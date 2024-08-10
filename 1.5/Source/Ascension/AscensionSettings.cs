@@ -9,60 +9,104 @@ namespace Ascension
 {
     public class AscensionSettings : ModSettings
     {
-        public float SMTickRate = 100f; //soul mend tick rate, if 0 do every tick
-        public string SMTickRateString = "100";
-        public float LifespanTickRate = 1200f;
-        public string LifespanTickRateString = "1200";
-        public float LifespanAgeRatio = 0.15f;
-        public string LifespanAgeRatioString = "0.15";
+        public static readonly float SMTickRateDefault = 100f; //soul mend tick rate, if 0 do every tick
+        public static readonly float LifespanTickRateDefault = 1200f;
+        public static readonly float LifespanAgeRatioDefault = 0.15f;
 
-        public float MaxRandLifespan = 0.5f;
-        public string MaxRandLifespanString = "0.5";
+        public static readonly float MaxRandLifespanDefault = 0.5f;
 
 
-        public bool displayQiGrid = true;
-        public bool displayElementGrid = true;
-        public bool humanoidOnlyBool = false;
-        public bool logHealsBool = false;
-        public bool opGoldenPillsBool = false;
-        public bool machineCultivatorBool = false;//psuedo immortality default chance must be way lower than foundation chance, as psuedo immortality and beyond are considered as heavy time and resource investments.
+        public static readonly bool displayQiGridDefault = true;
+        public static readonly bool displayElementGridDefault = true;
+        public static readonly bool humanoidOnlyBoolDefault = false;
+        public static readonly bool logHealsBoolDefault = false;
+        public static readonly bool opGoldenPillsBoolDefault = false;
+        public static readonly bool machineCultivatorBoolDefault = false;//psuedo immortality default chance must be way lower than foundation chance, as psuedo immortality and beyond are considered as heavy time and resource investments.
 
-        public float GoldenCoreMax = 5000f;
-        public string GoldenCoreMaxString = "5000";
-        public float AnimaCMax = 5000f;
-        public string AnimaCMaxString = "5000";
+        public static readonly float GoldenCoreMaxDefault = 5000f;
+        public static readonly float AnimaCMaxDefault = 5000f;
 
-        public float CultivatorChance = 0.1f;
-        public string CultivatorChanceString = "0.10";
+        public static readonly float CultivatorChanceDefault = 0.1f;
 
-        public float AbilityChance = 0.2f;
-        public string AbilityChanceString = "0.20";
+        public static readonly float AbilityChanceDefault = 0.2f;
 
-        public float PCChance = 0.1f;//powerful cultivator, always past 3rd realm and 4x scores. 
-        public string PCChanceString = "0.10";
-        public float PCMinRealm = 3f;
-        public string PCMinRealmString = "3";
-        public float PCMaxRealm = 6f;
-        public string PCMaxRealmString = "6";
+        public static readonly float PCChanceDefault = 0.1f;//powerful cultivator, always past 3rd realm and 4x scores. 
+        public static readonly float PCMinRealmDefault = 3f;
+        public static readonly float PCMaxRealmDefault = 6f;
 
 
-        public float EssenceChance = 0.1f;//chance for randomly generated cultivators to be essence cultivators instead of body cultivators if past foundation. do 0% for only body 
-        public string EssenceChanceString = "0.10";
-        public float foundationChance = 0.2f;
-        public string foundationChanceString = "0.20";
-        public bool disableProgressLetters = true;
-        public bool disableHTLetters = false;
-        public float SMRandStacks = 12f;
-        public string SMRandStacksString = "12";
+        public static readonly float EssenceChanceDefault = 0.1f;//chance for randomly generated cultivators to be essence cultivators instead of body cultivators if past foundation. do 0% for only body 
+        public static readonly float foundationChanceDefault = 0.2f;
+        public static readonly bool disableProgressLettersDefault = true;
+        public static readonly bool disableHTLettersDefault = false;
+        public static readonly float SMRandStacksDefault = 12f;
 
 
-        public float BaseCultivationSpeed = 1f;
-        public string BaseCultivationSpeedString = "1.00";
+        public static readonly float BaseCultivationSpeedDefault = 1f;
 
         //all controllable pawns auto choose by default if this is true;
-        public bool defaultConfirm = false;
+        public static readonly bool defaultConfirmDefault = false;
 
-        public bool defaultEssenceType = true;//colonist cultivation type is essence by defaut, body if disabled
+        public static readonly bool defaultEssenceTypeDefault = true;//colonist cultivation type is essence by defaut, body if disabled
+
+
+
+
+
+        public float SMTickRate = SMTickRateDefault; //soul mend tick rate, if 0 do every tick
+        public string SMTickRateString = SMTickRateDefault.ToString("#");
+        public float LifespanTickRate = LifespanTickRateDefault;
+        public string LifespanTickRateString = LifespanTickRateDefault.ToString("#");
+        public float LifespanAgeRatio = LifespanAgeRatioDefault;
+        public string LifespanAgeRatioString = LifespanAgeRatioDefault.ToString("0.0#");
+
+        public float MaxRandLifespan = MaxRandLifespanDefault;
+        public string MaxRandLifespanString = MaxRandLifespanDefault.ToString("0.0#");
+
+
+        public bool displayQiGrid = displayQiGridDefault;
+        public bool displayElementGrid = displayElementGridDefault;
+        public bool humanoidOnlyBool = humanoidOnlyBoolDefault;
+        public bool logHealsBool = logHealsBoolDefault;
+        public bool opGoldenPillsBool = opGoldenPillsBoolDefault;
+        public bool machineCultivatorBool = machineCultivatorBoolDefault;//psuedo immortality default chance must be way lower than foundation chance, as psuedo immortality and beyond are considered as heavy time and resource investments.
+
+        public float GoldenCoreMax = GoldenCoreMaxDefault;
+        public string GoldenCoreMaxString = GoldenCoreMaxDefault.ToString("#");
+        public float AnimaCMax = AnimaCMaxDefault;
+        public string AnimaCMaxString = AnimaCMaxDefault.ToString("#");
+
+        public float CultivatorChance = CultivatorChanceDefault;
+        public string CultivatorChanceString = CultivatorChanceDefault.ToString("0.0#");
+
+        public float AbilityChance = AbilityChanceDefault;
+        public string AbilityChanceString = AbilityChanceDefault.ToString("0.0#");
+
+        public float PCChance = PCChanceDefault;//powerful cultivator, always past 3rd realm and 4x scores. 
+        public string PCChanceString = PCChanceDefault.ToString("0.0#");
+        public float PCMinRealm = PCMinRealmDefault;
+        public string PCMinRealmString = PCMinRealmDefault.ToString("#");
+        public float PCMaxRealm = PCMaxRealmDefault;
+        public string PCMaxRealmString = PCMaxRealmDefault.ToString("#");
+
+
+        public float EssenceChance = EssenceChanceDefault;//chance for randomly generated cultivators to be essence cultivators instead of body cultivators if past foundation. do 0% for only body 
+        public string EssenceChanceString = EssenceChanceDefault.ToString("0.0#");
+        public float foundationChance = foundationChanceDefault;
+        public string foundationChanceString = foundationChanceDefault.ToString("0.0#");
+        public bool disableProgressLetters = disableProgressLettersDefault;
+        public bool disableHTLetters = disableHTLettersDefault;
+        public float SMRandStacks = SMRandStacksDefault;
+        public string SMRandStacksString = SMRandStacksDefault.ToString("#");
+
+
+        public float BaseCultivationSpeed = BaseCultivationSpeedDefault;
+        public string BaseCultivationSpeedString = BaseCultivationSpeedDefault.ToString("0.0#");
+
+        //all controllable pawns auto choose by default if this is true;
+        public bool defaultConfirm = defaultConfirmDefault;
+
+        public bool defaultEssenceType = defaultEssenceTypeDefault;//colonist cultivation type is essence by defaut, body if disabled
 
 
 
@@ -130,11 +174,14 @@ namespace Ascension
         {
             Listing_Standard listingStandard = new Listing_Standard();
             Rect outRect = new Rect(inRect.x, inRect.y, inRect.width, inRect.height);
-            Rect viewRect = new Rect(0f, 0f, inRect.width - 16f, 1100f); // Adjust height as needed
+            Rect viewRect = new Rect(0f, 0f, inRect.width - 16f, 1200f); // Adjust height as needed
 
             Widgets.BeginScrollView(outRect, ref scrollPosition, viewRect);
             listingStandard.Begin(viewRect);
-
+            if (listingStandard.ButtonText("AS_ResetSettings".Translate()))
+            {
+                AllDefault(settings);
+            }
             listingStandard.Label("AS_RandomCultivators".Translate()+ "\n", -1, "AS_RandomCultivatorsDesc".Translate());
 
             listingStandard.CheckboxLabeled("AS_DefaultEssenceType".Translate(), ref settings.defaultEssenceType, "AS_DefaultEssenceTypeDesc".Translate());
@@ -216,10 +263,56 @@ namespace Ascension
             settings.LifespanAgeRatioString = SettingsChanceString(settings.LifespanAgeRatio, false);
             listingStandard.TextFieldNumeric(ref settings.LifespanAgeRatio, ref settings.LifespanAgeRatioString, 0.00f, 1.00f);
 
+
+
             listingStandard.End();
             Widgets.EndScrollView();
             base.DoSettingsWindowContents(inRect);
         }
+
+        private static void AllDefault(AscensionSettings settings)
+        {
+            settings.SMTickRate = AscensionSettings.SMTickRateDefault;
+            settings.SMTickRateString = AscensionSettings.SMTickRateDefault.ToString("#");
+            settings.LifespanTickRate = AscensionSettings.LifespanTickRateDefault;
+            settings.LifespanTickRateString = AscensionSettings.LifespanTickRateDefault.ToString("#");
+            settings.LifespanAgeRatio = AscensionSettings.LifespanAgeRatioDefault;
+            settings.LifespanAgeRatioString = AscensionSettings.LifespanAgeRatioDefault.ToString("0.0#");
+            settings.MaxRandLifespan = AscensionSettings.MaxRandLifespanDefault;
+            settings.MaxRandLifespanString = AscensionSettings.MaxRandLifespanDefault.ToString("0.0#");
+            settings.displayQiGrid = AscensionSettings.displayQiGridDefault;
+            settings.displayElementGrid = AscensionSettings.displayElementGridDefault;
+            settings.humanoidOnlyBool = AscensionSettings.humanoidOnlyBoolDefault;
+            settings.logHealsBool = AscensionSettings.logHealsBoolDefault;
+            settings.opGoldenPillsBool = AscensionSettings.opGoldenPillsBoolDefault;
+            settings.machineCultivatorBool = AscensionSettings.machineCultivatorBoolDefault;
+            settings.GoldenCoreMax = AscensionSettings.GoldenCoreMaxDefault;
+            settings.GoldenCoreMaxString = AscensionSettings.GoldenCoreMaxDefault.ToString("#");
+            settings.AnimaCMax = AscensionSettings.AnimaCMaxDefault;
+            settings.AnimaCMaxString = AscensionSettings.AnimaCMaxDefault.ToString("#");
+            settings.CultivatorChance = AscensionSettings.CultivatorChanceDefault;
+            settings.CultivatorChanceString = AscensionSettings.CultivatorChanceDefault.ToString("0.0#");
+            settings.AbilityChance = AscensionSettings.AbilityChanceDefault;
+            settings.AbilityChanceString = AscensionSettings.AbilityChanceDefault.ToString("0.0#");
+            settings.PCChance = AscensionSettings.PCChanceDefault;
+            settings.PCChanceString = AscensionSettings.PCChanceDefault.ToString("0.0#");
+            settings.PCMinRealm = AscensionSettings.PCMinRealmDefault;
+            settings.PCMinRealmString = AscensionSettings.PCMinRealmDefault.ToString("#");
+            settings.PCMaxRealm = AscensionSettings.PCMaxRealmDefault;
+            settings.PCMaxRealmString = AscensionSettings.PCMaxRealmDefault.ToString("#");
+            settings.EssenceChance = AscensionSettings.EssenceChanceDefault;
+            settings.EssenceChanceString = AscensionSettings.EssenceChanceDefault.ToString("0.0#");
+            settings.foundationChance = AscensionSettings.foundationChanceDefault;
+            settings.foundationChanceString = AscensionSettings.foundationChanceDefault.ToString("0.0#");
+            settings.disableProgressLetters = AscensionSettings.disableProgressLettersDefault;
+            settings.disableHTLetters = AscensionSettings.disableHTLettersDefault;
+            settings.SMRandStacks = AscensionSettings.SMRandStacksDefault;
+            settings.SMRandStacksString = AscensionSettings.SMRandStacksDefault.ToString("#");
+            settings.BaseCultivationSpeed = AscensionSettings.BaseCultivationSpeedDefault;
+            settings.BaseCultivationSpeedString = AscensionSettings.BaseCultivationSpeedDefault.ToString("0.0#");
+            settings.defaultConfirm = AscensionSettings.defaultConfirmDefault;
+            settings.defaultEssenceType = AscensionSettings.defaultEssenceTypeDefault;
+    }
 
         public override string SettingsCategory()
         {
