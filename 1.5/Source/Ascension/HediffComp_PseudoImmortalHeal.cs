@@ -29,7 +29,7 @@ namespace Ascension
                     HealthUtility.FixWorstHealthCondition(Pawn);
                     if (settings.logHealsBool)
                     {
-                        Log.Message($"Healed pawn {Pawn.LabelShort}");
+                        Log.Message($"Healed high realm pawn {Pawn.LabelShort}");
                     }
                     this.Reset();
                 }
@@ -47,7 +47,7 @@ namespace Ascension
             }
             if (settings.logHealsBool)
             {
-                Log.Message($"Next heal will take {ticksToHeal / 2500} hours.");
+                Log.Message($"Next high realm heal will take {ticksToHeal / 2500} hours.");
             }
         }
 

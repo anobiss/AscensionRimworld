@@ -9,6 +9,8 @@ namespace Ascension
 {
     public class AscensionUtilities
     {
+
+        #region String Utils
         public static string PercentageString(float chance, bool isLabel = true)
         {
             if (isLabel == true)
@@ -32,6 +34,10 @@ namespace Ascension
                 _ => "AS_None"
             };
         }
+
+        #endregion
+
+
         public static ElementEmitMapComponent.Element AssignElement()
         {
             ElementEmitMapComponent.Element[] possibleElements = new ElementEmitMapComponent.Element[]

@@ -8,6 +8,11 @@
 	<scenarioCanAdd>true</scenarioCanAdd>
 	<defaultLabelColor>(0.7, 1.0, 0.7)</defaultLabelColor>
     <isBad>false</isBad>
+	<comps>
+	  <li>
+		<compClass>Ascension.HediffComp_PseudoImmortalHeal</compClass>
+	  </li>
+	</comps>
     <stages>
 	  <li>
         <label>Body Forging</label>
@@ -154,7 +159,7 @@
 		<tale>AS_FleshMoldingBreakthrough</tale>
         <label>Flesh Molding</label>
         <minSeverity>7</minSeverity>
-		<extraTooltip>The flesh of the body is molded to surpass its previous limits. Improves all bodily functions.</extraTooltip>
+		<extraTooltip>The flesh of the body is molded to surpass its previous limits. Grants many greatly improved bodily functions.</extraTooltip>
 		<naturalHealingFactor>777.77</naturalHealingFactor>
 		<painFactor>0.05</painFactor>
 		<capMods>
