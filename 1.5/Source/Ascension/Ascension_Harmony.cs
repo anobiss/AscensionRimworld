@@ -208,7 +208,7 @@ namespace Ascension
                                 //use randA again to scale the chance for more with the setting
                                 int scrollAmount = rnd.Next(1, 4);//just do 1-2 for now
                                 //Log.Message("adding scrolls amount "+scrollAmount);
-                                for (int i = 0; i < scrollAmount; i++)
+                                for (int i = 0; i < scrollAmount; i++)//this part adds the scrolls
                                 {
                                     //Log.Message("adding scroll");
                                     //give random ability scroll and its abilities here
@@ -242,6 +242,7 @@ namespace Ascension
                                                     {
                                                         if (cultivatorHediff.element != scrollAbilityComp.Props.reqElement)
                                                         {
+                                                            //Log.Message("removed not req element");
                                                             randomScrollSetReqList.RemoveAt(reqi);
                                                             alreadyRemoved = true;
                                                         }
@@ -252,16 +253,21 @@ namespace Ascension
                                                         {
                                                             if (realmHediff == null)
                                                             {
+                                                                //Log.Message("realm null");
                                                                 randomScrollSetReqList.RemoveAt(reqi);
                                                             }
                                                             else
                                                             {
-                                                                if (realmHediff.def == AscensionDefOf.BodyRealm)
+                                                                if (realmHediff.def == AscensionDefOf.EssenceRealm)
                                                                 {
-                                                                    randomScrollSetReqList.RemoveAt(reqi);
-                                                                }
-                                                                else if ((int)Math.Floor(realmHediff.Severity) < scrollAbilityComp.Props.reqEssence)
+                                                                    if ((int)realmHediff.Severity < scrollAbilityComp.Props.reqEssence)
+                                                                    {
+                                                                        //Log.Message("removed not high enough essence");
+                                                                        randomScrollSetReqList.RemoveAt(reqi);
+                                                                    }
+                                                                }else
                                                                 {
+                                                                    //Log.Message("removed not essence");
                                                                     randomScrollSetReqList.RemoveAt(reqi);
                                                                 }
                                                             }
@@ -271,15 +277,20 @@ namespace Ascension
                                                         {
                                                             if (realmHediff == null)
                                                             {
+                                                                //Log.Message("realm null");
                                                                 randomScrollSetReqList.RemoveAt(reqi);
                                                             }else
                                                             {
-                                                                if (realmHediff.def == AscensionDefOf.EssenceRealm)
+                                                                if (realmHediff.def == AscensionDefOf.BodyRealm)
                                                                 {
-                                                                    randomScrollSetReqList.RemoveAt(reqi);
-                                                                }
-                                                                else if ((int)Math.Floor(realmHediff.Severity) < scrollAbilityComp.Props.reqBody)
+                                                                    if ((int)realmHediff.Severity < scrollAbilityComp.Props.reqBody)
+                                                                    {
+                                                                        randomScrollSetReqList.RemoveAt(reqi);
+                                                                        //Log.Message("removied not high enough body");
+                                                                    }
+                                                                }else
                                                                 {
+                                                                    //Log.Message("removed realmdef not body");
                                                                     randomScrollSetReqList.RemoveAt(reqi);
                                                                 }
                                                             }
@@ -290,6 +301,9 @@ namespace Ascension
 
                                             //sets scrollset to new one after removing all ones with too high realm reqs
                                             randomScrollSet = new HashSet<HediffDef>(randomScrollSetReqList);//maybe this is returning null?
+                                        }else
+                                        {
+                                            //Log.Message("randomScrollSet null");
                                         }
 
 

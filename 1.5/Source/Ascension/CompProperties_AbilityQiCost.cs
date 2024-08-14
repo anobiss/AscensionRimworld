@@ -11,6 +11,7 @@ namespace Ascension
 {
     public class CompProperties_AbilityQiCost : CompProperties_AbilityEffect
     {
+
         public CompProperties_AbilityQiCost()
         {
             compClass = typeof(CompAbilityEffect_AbilityQiCost);
@@ -18,16 +19,13 @@ namespace Ascension
 
         public override IEnumerable<string> ExtraStatSummary()
         {
-            yield return "AbilityQiCost".Translate() + ": " + Mathf.RoundToInt(this.cost);
+            yield return "AS_AbilityQiCost".Translate(cost.Named("COST"));
             yield break;
         }
         public float minSeverity = 0f;
         public HediffDef reqHediffDef = null;
 
         public bool cannotCastIfMissing = true;
-        public bool removeHediffAfterCasting = false;
-
-        public string missingErrorString = "ARR_Ability_Missing_Hediff";
 
         public int cost;
     }

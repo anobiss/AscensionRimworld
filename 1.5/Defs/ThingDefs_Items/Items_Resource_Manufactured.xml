@@ -21,6 +21,21 @@
 
 
   <ThingDef ParentName="TempSolidBase">
+    <defName>AS_EntombmentBarrier</defName>
+    <label>Entombment Barrier</label>
+    <description>Entombment Barrier manifested by a cultivator.</description>
+    <graphicData>
+      <texPath>Things/Building/Linked/RockSmooth_Atlas</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(10,10,10)</color>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>10000</MaxHitPoints>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="TempSolidBase">
     <defName>AS_Ice</defName>
     <label>Ice</label>
     <description>Ice manifested by a water cultivator.</description>
@@ -682,16 +697,16 @@
   <ThingDef ParentName="ResourceBase">
     <defName>BasicQiScroll</defName>
     <label>Basic Qi Arts Scroll</label>
-    <description>A basic Qi Arts scroll, capable of teaching those with the foundation establisment essence realm or higher: Qi Shoot and Qi Heal abilities.</description>
+    <description>A basic Qi Arts scroll, capable of teaching those with the Core Shaping essence realm or higher: Qi Shoot and Qi Heal abilities.</description>
     <graphicData>
       <texPath>Things/Item/Misc/BasicQiScroll</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <stackLimit>12</stackLimit>
+    <stackLimit>1</stackLimit>
     <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
-      <MaxHitPoints>12</MaxHitPoints>
-      <MarketValue>555</MarketValue>
+      <MaxHitPoints>70</MaxHitPoints>
+      <MarketValue>1200</MarketValue>
       <Mass>0.8</Mass>
       <Flammability>0.0</Flammability>
       <DeteriorationRate>0.0</DeteriorationRate>
@@ -724,16 +739,16 @@
   <ThingDef ParentName="ResourceBase">
     <defName>AdvancedQiScroll</defName>
     <label>Advanced Qi Arts Scroll</label>
-    <description>A advanced Qi Arts scroll, capable of teaching those with the soul transformation essence realm and Basic Qi Arts the Qi Ressurection ability.</description>
+    <description>A advanced Qi Arts scroll, capable of teaching those with the Soul Transformation essence realm and Basic Qi Arts the Qi Ressurection ability.</description>
     <graphicData>
       <texPath>Things/Item/Misc/AdvancedQiScroll</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <stackLimit>12</stackLimit>
+    <stackLimit>1</stackLimit>
     <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
-      <MaxHitPoints>777</MaxHitPoints>
-      <MarketValue>2222</MarketValue>
+      <MaxHitPoints>70</MaxHitPoints>
+      <MarketValue>2400</MarketValue>
       <Mass>0.8</Mass>
       <Flammability>0.0</Flammability>
       <DeteriorationRate>0.0</DeteriorationRate>
@@ -766,16 +781,16 @@
   <ThingDef ParentName="ResourceBase">
     <defName>HeavenlyQiScroll</defName>
     <label>Heavenly Qi Arts Scroll</label>
-    <description>A heavenly Qi Arts scroll, capable of teaching those with profound immortality the Soul Mending ability. This ability creates charges that resurrects the user instantly upon death and can be stacked for more resurrections.</description>
+    <description>A heavenly Qi Arts scroll, capable of teaching those with Profound Immortality the Soul Mending ability. This ability creates charges that resurrects the user instantly upon death and can be stacked for more resurrections.</description>
     <graphicData>
       <texPath>Things/Item/Misc/HeavenlyQiScroll</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <stackLimit>12</stackLimit>
+    <stackLimit>1</stackLimit>
     <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
-      <MaxHitPoints>777</MaxHitPoints>
-      <MarketValue>2222</MarketValue>
+      <MaxHitPoints>70</MaxHitPoints>
+      <MarketValue>5000</MarketValue>
       <Mass>0.8</Mass>
       <Flammability>0.0</Flammability>
       <DeteriorationRate>0.0</DeteriorationRate>
@@ -808,16 +823,16 @@
   <ThingDef ParentName="ResourceBase">
     <defName>BasicQiSwordScroll</defName>
     <label>Basic Qi Spirit Sword Arts Scroll</label>
-    <description>A basic Qi Spirit Sword Arts scroll, capable of teaching those with the soul transformation essence realm and Basic Qi Arts the following spirit sword abilities: qi spirit sword throw, qi spirit sword stab and qi spirit sword slash.</description>
+    <description>A basic Qi Spirit Sword Arts scroll, capable of teaching those with the Soul Transformation essence realm and Basic Qi Arts the following spirit sword abilities: qi spirit sword throw, qi spirit sword stab and qi spirit sword slash.</description>
     <graphicData>
       <texPath>Things/Item/Misc/BasicQiSwordScroll</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <stackLimit>12</stackLimit>
+    <stackLimit>1</stackLimit>
     <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
-      <MaxHitPoints>777</MaxHitPoints>
-      <MarketValue>555</MarketValue>
+      <MaxHitPoints>70</MaxHitPoints>
+      <MarketValue>1200</MarketValue>
       <Mass>0.8</Mass>
       <Flammability>0.0</Flammability>
       <DeteriorationRate>0.0</DeteriorationRate>
@@ -850,16 +865,16 @@
     <ThingDef ParentName="ResourceBase">
     <defName>BasicLightningScroll</defName>
     <label>Basic Lightning Arts Scroll</label>
-    <description>A basic Lightning Arts scroll, capable of teaching those with the foundation establisment essence realm or higher: Lightning Bolt and Lightning Charge abilities.</description>
+    <description>A basic Lightning Arts scroll, capable of teaching those with the Core Shaping essence realm or higher: Lightning Bolt and Lightning Charge abilities.</description>
     <graphicData>
       <texPath>Things/Item/Misc/BasicLightningScroll</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <stackLimit>12</stackLimit>
+    <stackLimit>1</stackLimit>
     <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
-      <MaxHitPoints>12</MaxHitPoints>
-      <MarketValue>555</MarketValue>
+      <MaxHitPoints>70</MaxHitPoints>
+      <MarketValue>1200</MarketValue>
       <Mass>0.8</Mass>
       <Flammability>0.0</Flammability>
       <DeteriorationRate>0.0</DeteriorationRate>
@@ -892,16 +907,16 @@
       <ThingDef ParentName="ResourceBase">
     <defName>BasicExplosionScroll</defName>
     <label>Basic Explosion Arts Scroll</label>
-    <description>A basic Explosion Arts scroll, capable of teaching those with the foundation establisment essence realm or higher: Qi Explosion and Controlled Combustion abilities.</description>
+    <description>A basic Explosion Arts scroll, capable of teaching those with the Core Shaping essence realm or higher: Qi Explosion and Controlled Combustion abilities.</description>
     <graphicData>
       <texPath>Things/Item/Misc/BasicExplosionScroll</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <stackLimit>12</stackLimit>
+    <stackLimit>1</stackLimit>
     <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
-      <MaxHitPoints>12</MaxHitPoints>
-      <MarketValue>555</MarketValue>
+      <MaxHitPoints>70</MaxHitPoints>
+      <MarketValue>1200</MarketValue>
       <Mass>0.8</Mass>
       <Flammability>0.0</Flammability>
       <DeteriorationRate>0.0</DeteriorationRate>
@@ -934,16 +949,16 @@
   <ThingDef ParentName="ResourceBase">
     <defName>BasicIceScroll</defName>
     <label>Basic Ice Arts Scroll</label>
-    <description>A basic Ice Arts scroll, capable of teaching those with the foundation establisment essence realm or higher: Ice Shot, Ice Wall and Ice Circle.</description>
+    <description>A basic Ice Arts scroll, capable of teaching those with the Core Shaping essence realm or higher: Ice Shot, Ice Wall and Ice Circle.</description>
     <graphicData>
       <texPath>Things/Item/Misc/BasicIceScroll</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <stackLimit>12</stackLimit>
+    <stackLimit>1</stackLimit>
     <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
-      <MaxHitPoints>12</MaxHitPoints>
-      <MarketValue>555</MarketValue>
+      <MaxHitPoints>70</MaxHitPoints>
+      <MarketValue>1200</MarketValue>
       <Mass>0.8</Mass>
       <Flammability>0.0</Flammability>
       <DeteriorationRate>0.0</DeteriorationRate>
@@ -977,16 +992,16 @@
     <ThingDef ParentName="ResourceBase">
     <defName>BasicStoneScroll</defName>
     <label>Basic Stone Arts Scroll</label>
-    <description>A basic Stone Arts scroll, capable of teaching those with the foundation establisment essence realm or higher: Stone Shot, Stone Wall and Stone Circle.</description>
+    <description>A basic Stone Arts scroll, capable of teaching those with the Core Shaping essence realm or higher: Stone Shot, Stone Wall and Stone Circle.</description>
     <graphicData>
       <texPath>Things/Item/Misc/BasicStoneScroll</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <stackLimit>12</stackLimit>
+    <stackLimit>1</stackLimit>
     <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
-      <MaxHitPoints>12</MaxHitPoints>
-      <MarketValue>555</MarketValue>
+      <MaxHitPoints>70</MaxHitPoints>
+      <MarketValue>1200</MarketValue>
       <Mass>0.8</Mass>
       <Flammability>0.0</Flammability>
       <DeteriorationRate>0.0</DeteriorationRate>
@@ -1020,16 +1035,16 @@
     <ThingDef ParentName="ResourceBase">
     <defName>BasicHerbalScroll</defName>
     <label>Basic Lightning Arts Scroll</label>
-    <description>A basic Lightning Arts scroll, capable of teaching those with the foundation establisment essence realm or higher: Stun Seed, Growth Skip.</description>
+    <description>A basic Lightning Arts scroll, capable of teaching those with the Core Shaping essence realm or higher: Stun Seed, Growth Skip.</description>
     <graphicData>
       <texPath>Things/Item/Misc/BasicHerbalScroll</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <stackLimit>12</stackLimit>
+    <stackLimit>1</stackLimit>
     <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
-      <MaxHitPoints>12</MaxHitPoints>
-      <MarketValue>555</MarketValue>
+      <MaxHitPoints>70</MaxHitPoints>
+      <MarketValue>1200</MarketValue>
       <Mass>0.8</Mass>
       <Flammability>0.0</Flammability>
       <DeteriorationRate>0.0</DeteriorationRate>

@@ -573,7 +573,7 @@ namespace Ascension
                 if (cultivatorHediff.pawn.health.hediffSet.HasHediff(AscensionDefOf.EssenceRealm) && qiGatherMapComp != null)
                 {
                     //we increase the speed here by the amount of gather qi in the tile divided by 100
-                    int qiTile = qiGatherMapComp.GetQiGatherAt(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z);
+                    float qiTile = qiGatherMapComp.GetQiGatherAt(cultivatorHediff.pawn.Position.x, cultivatorHediff.pawn.Position.z);
                     //Log.Message("qi at position is" + qiTile);
                     cultivationSpeed *= (1 + qiTile / 100);//its 1 plus 1% qitile
                     //Log.Message("essence realm cultivation speed is" + cultivationSpeed);
@@ -1332,7 +1332,28 @@ namespace Ascension
                     }
                     if (Rand.Range(0, 1f) >= 0.75f)//25% chance
                     {
-                        realmHediff.pawn.health.AddHediff(AscensionDefOf.AS_HeavenlyTribulation);
+                        if (Rand.Range(0, 1f) >= 0.75f)//25% chance
+                        {
+                            Cultivator_Hediff cultivatorHediff = realmHediff.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.Cultivator) as Cultivator_Hediff;
+                            if (cultivatorHediff != null)
+                            {
+                                if (cultivatorHediff.lifespan > 1000)
+                                {
+                                    //lifespan tribulation
+                                }
+                            }
+                        }else
+                        {
+                            if (realmHediff.def == AscensionDefOf.EssenceRealm)
+                            {
+                                realmHediff.pawn.health.AddHediff(AscensionDefOf.AS_HeavenlyTribulation);
+                            }else
+                            {
+                                //body heavenly tribulation
+                            }
+                        }
+
+
                     }
                     FleckMaker.AttachedOverlay(realmHediff.pawn, AscensionDefOf.FlashQi, Vector3.zero, 1.5f, -1f);
 

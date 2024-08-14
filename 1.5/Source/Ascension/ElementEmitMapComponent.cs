@@ -56,7 +56,7 @@ namespace Ascension
                                 {
                                     Color color = GetElementColor(element, amount);
                                     Vector3 labelPos = (Vector3)GenMapUI.LabelDrawPosFor(new IntVec3(intVec2Cell.x, 0, intVec2Cell.z)) + Vector3.up * yOffset;
-                                    GenMapUI.DrawThingLabel(labelPos, amount.ToString(), color);
+                                    GenMapUI.DrawThingLabel(labelPos, amount.ToString("0.##"), color);
                                     yOffset += 10f; // Adjust vertical position for next element
                                 }
                             }
@@ -66,41 +66,91 @@ namespace Ascension
             }
         }
 
+        private static ElementEmitMapComponent.Element GetPropsElement(string elementText)
+        {
+            ElementEmitMapComponent.Element element = ElementEmitMapComponent.Element.None;
+            if (elementText == "Metal")
+            {
+                element = ElementEmitMapComponent.Element.Metal;
+            }
+            else if (elementText == "Water")
+            {
+                element = ElementEmitMapComponent.Element.Water;
+            }
+            else if (elementText == "Wood")
+            {
+                element = ElementEmitMapComponent.Element.Wood;
+            }
+            else if (elementText == "Fire")
+            {
+                element = ElementEmitMapComponent.Element.Fire;
+            }
+            else if (elementText == "Earth")
+            {
+                element = ElementEmitMapComponent.Element.Earth;
+            }
+            return element;
+        }
+        public void UpdateMapElement()
+        {
+            cellElements = new int[gridSize * gridSize * ElementCount];
+
+            //basic element emit things
+            foreach (Thing thing in map.listerThings.AllThings)
+            {
+                CompRefuelable torchFuelComp = thing.TryGetComp<CompRefuelable>();
+                CompTorchFireEmit torchFireEmitComp = thing.TryGetComp<CompTorchFireEmit>();
+                CompElementEmit elementComp = thing.TryGetComp<CompElementEmit>();
+                if (elementComp != null)
+                {
+                    int amount = elementComp.Props.amount * thing.stackCount;
+                    int radius = elementComp.Props.range;
+                    for (int x = thing.Position.x - radius; x <= thing.Position.x + radius; x++)
+                    {
+                        for (int z = thing.Position.z - radius; z <= thing.Position.z + radius; z++)
+                        {
+                            IntVec2 cell = new IntVec2(x, z);
+                            if (IsValidCell(cell) && IsWithinCircle(new IntVec2(thing.Position.x, thing.Position.z), radius, cell))
+                            {
+                                Element propsElement = GetPropsElement(elementComp.element);
+                                int index = GetIndex(cell, propsElement);
+                                cellElements[index] += amount;
+                            }
+                        }
+                    }
+                }
+                if (torchFireEmitComp != null)
+                {
+                    if (torchFuelComp != null)
+                    {
+                        if (torchFuelComp.HasFuel)
+                        {
+                            int amount = torchFireEmitComp.Props.amount * thing.stackCount;
+                            int radius = torchFireEmitComp.Props.range;
+                            for (int x = thing.Position.x - radius; x <= thing.Position.x + radius; x++)
+                            {
+                                for (int z = thing.Position.z - radius; z <= thing.Position.z + radius; z++)
+                                {
+                                    IntVec2 cell = new IntVec2(x, z);
+                                    if (IsValidCell(cell) && IsWithinCircle(new IntVec2(thing.Position.x, thing.Position.z), radius, cell))
+                                    {
+                                        int index = GetIndex(cell, Element.Fire);
+                                        cellElements[index] += amount;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        public void UpdateFloorElement()//recalcs element values for floors/terrain
+        {
+
+        }
         private int GetIndex(IntVec2 cell, Element element)
         {
             return (cell.z * gridSize + cell.x) * ElementCount + (int)element;
-        }
-
-        public void AddElementAt(IntVec2 centerCell, int radius, int amount, Element element)
-        {
-            for (int x = centerCell.x - radius; x <= centerCell.x + radius; x++)
-            {
-                for (int z = centerCell.z - radius; z <= centerCell.z + radius; z++)
-                {
-                    IntVec2 cell = new IntVec2(x, z);
-                    if (IsValidCell(cell) && IsWithinCircle(centerCell, radius, cell))
-                    {
-                        int index = GetIndex(cell, element);
-                        cellElements[index] += amount;
-                    }
-                }
-            }
-        }
-
-        public void RemoveElementAt(IntVec2 centerCell, int radius, int amount, Element element)
-        {
-            for (int x = centerCell.x - radius; x <= centerCell.x + radius; x++)
-            {
-                for (int z = centerCell.z - radius; z <= centerCell.z + radius; z++)
-                {
-                    IntVec2 cell = new IntVec2(x, z);
-                    if (IsValidCell(cell) && IsWithinCircle(centerCell, radius, cell))
-                    {
-                        int index = GetIndex(cell, element);
-                        cellElements[index] = Mathf.Max(0, cellElements[index] - amount);
-                    }
-                }
-            }
         }
 
         private bool IsWithinCircle(IntVec2 centerCell, int radius, IntVec2 cell)

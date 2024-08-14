@@ -18,7 +18,7 @@ namespace Ascension
     {
         private static readonly int[] QualityQiThresholds = { 0, 100, 250, 500, 1500, 2000, 2500 };
         public CompProperties_CultivationCauldron Props => (CompProperties_CultivationCauldron)props;
-        public int currentQi = 0;
+        public float currentQi = 0;
         public string translatedMaxQuality;
 
         public override string CompInspectStringExtra()
@@ -58,7 +58,7 @@ namespace Ascension
         public void UpdateCurrentQi()
         {
             QiGatherMapComponent qiGatherMapComp = parent.Map.GetComponent<QiGatherMapComponent>();
-            int newCurrentQi = Props.baseQi;
+            float newCurrentQi = Props.baseQi;
 
             foreach (IntVec3 cauldronCell in parent.OccupiedRect())
             {

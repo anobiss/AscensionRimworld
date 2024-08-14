@@ -3,7 +3,7 @@
   <HediffDef>
     <defName>BodyRealm</defName>
 	<label>Body Realm</label>
-    <description>The current body realm, body realms grant progressive improvements to bodily functions. Cultivators must first make thier bodies strong enough through these realms in order to be able to gather more Qi (Leading to the essence realms). Body cultivation speed is not influenced by a tiles Qi.</description>
+    <description>The current body realm, body realms grant progressive improvements to bodily functions.  Body cultivation speed is not influenced by a tiles Qi unlike Essence cultivation.\n\nBody Realm Progression: Body Forging > Blood Refining > Organ Refining > Muscle Forging > Tendon Refining > Bone Forging > Flesh Molding.</description>
 	<hediffClass>Ascension.Realm_Hediff</hediffClass>
 	<scenarioCanAdd>true</scenarioCanAdd>
 	<defaultLabelColor>(0.7, 1.0, 0.7)</defaultLabelColor>
@@ -18,13 +18,20 @@
         <label>Body Forging</label>
         <minSeverity>0.01</minSeverity>
 		<extraTooltip>The body is trained and forged to withstand the strains imposed by further realms.</extraTooltip>
+		<naturalHealingFactor>1.2</naturalHealingFactor>
+        <capMods>
+          <li>
+            <capacity>Breathing</capacity>
+            <offset>0.1</offset>
+          </li>
+        </capMods>
       </li>
 	  <li>
 		<tale>AS_BloodRefiningBreakthrough</tale>
         <label>Blood Refining</label>
         <minSeverity>2</minSeverity>
 		<extraTooltip>Circulation of blood is refined to supply enough oxygen for muscles in the next realm. Grants improved breathing, blood filtration and blood pumping.</extraTooltip>
-		<naturalHealingFactor>1.1</naturalHealingFactor>
+		<naturalHealingFactor>1.5</naturalHealingFactor>
 		<capMods>
           <li>
             <capacity>BloodFiltration</capacity>
@@ -36,7 +43,7 @@
           </li>
           <li>
             <capacity>Breathing</capacity>
-            <offset>0.1</offset>
+            <offset>0.2</offset>
           </li>
         </capMods>
       </li>
@@ -45,7 +52,7 @@
         <label>Organ Refining</label>
         <minSeverity>3</minSeverity>
 		<extraTooltip>Circulation of blood is refined to supply enough oxygen for muscles in the next realm. Grants improved breathing, blood filtration and blood pumping.</extraTooltip>
-		<naturalHealingFactor>1.1</naturalHealingFactor>
+		<naturalHealingFactor>2.5</naturalHealingFactor>
 		<capMods>
           <li>
             <capacity>BloodFiltration</capacity>
@@ -70,7 +77,7 @@
         <label>Muscle Forging</label>
         <minSeverity>4</minSeverity>
 		<extraTooltip>Muscles are strengthened and forged to have to enough power to forge bones in the next realm. Grants improved manipulation, breathing, blood filtration and blood pumping.</extraTooltip>
-		<naturalHealingFactor>1.3</naturalHealingFactor>
+		<naturalHealingFactor>5</naturalHealingFactor>
 		<painFactor>0.9</painFactor>
 		<capMods>
           <li>
@@ -100,7 +107,7 @@
         <label>Tendon Refining</label>
         <minSeverity>5</minSeverity>
 		<extraTooltip>Muscles are strengthened and forged to have to enough power to forge bones in the next realm. Grants improved manipulation, breathing, blood filtration and blood pumping.</extraTooltip>
-		<naturalHealingFactor>1.3</naturalHealingFactor>
+		<naturalHealingFactor>7</naturalHealingFactor>
 		<painFactor>0.9</painFactor>
 		<capMods>
           <li>
@@ -130,7 +137,7 @@
         <label>Bone Forging</label>
         <minSeverity>6</minSeverity>
 		<extraTooltip>Bones are hardened and forged to be able to withstand the forces imposed by further realms. Grants improved manipulation, breathing, blood filtration and blood pumping.</extraTooltip>
-		<naturalHealingFactor>1.7</naturalHealingFactor>
+		<naturalHealingFactor>12</naturalHealingFactor>
 		<painFactor>0.7</painFactor>
 		<capMods>
           <li>

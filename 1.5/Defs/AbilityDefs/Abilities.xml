@@ -101,48 +101,14 @@
     </projectile>
   </ThingDef>
 
-  <AbilityDef ParentName="AbilityTouchBase">
-    <defName>QiResurrection</defName>
-    <label>qi resurrect</label>
-    <description>Use a massive amount of qi to infuse a corpse's body with new life, repairing degenerated cell structures and kickstarting vital functions. The older and worse-preserved the corpse is, the more likely it is that they will come back with memory loss or health conditions. This ability seems to clog the qi pathways used in it somehow, so it can only be used once every 3 days.</description>
-    <iconPath>UI/Abilities/QiResurrection</iconPath>
-	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
-    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
-    <cooldownTicksRange>180000</cooldownTicksRange> <!-- 3 days -->
-    <warmupMote>Mote_QiMistStencil</warmupMote>
-    <warmupEffecter>QiMist</warmupEffecter>
-    <warmupStartSound>QiHeal_Cast</warmupStartSound>
-    <category>QiTechnique</category>
-    <displayOrder>600</displayOrder>
-    <hostile>false</hostile>
-    <sendMessageOnCooldownComplete>true</sendMessageOnCooldownComplete>
-    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
-    <verbProperties>
-      <verbClass>Verb_CastAbilityTouch</verbClass>
-      <drawAimPie>false</drawAimPie>
-      <range>-1</range>
-      <warmupTime>120</warmupTime>
-      <soundCast>QiHeal_Cast</soundCast>
-	  <ai_IsWeapon>false</ai_IsWeapon>
-      <targetParams>
-        <canTargetPawns>false</canTargetPawns>
-        <canTargetBuildings>false</canTargetBuildings>
-        <canTargetCorpses>true</canTargetCorpses>
-        <canTargetMechs>false</canTargetMechs>
-      </targetParams>
-    </verbProperties>
-    <comps>
-      <li Class="CompProperties_Resurrect" />
-      <li Class="Ascension.CompProperties_AbilityQiCost">
-        <cost>10000000</cost>
-      </li>
-    </comps>
-  </AbilityDef>
+
+  
+  <!-- Heavenly qi arts-->
   
   <AbilityDef ParentName="AbilityTouchBase">
     <defName>SoulMending</defName>
     <label>soul mending</label>
-    <description>Create a Soul Mending charge that resurrects you instantly upon death. Can be stacked for repeated resurrections.</description>
+    <description>Create a Soul Mending charge that resurrects you instantly upon death at the cost of a massive amount of qi and 70 years of lifespan. Can be stacked for repeated resurrections.</description>
     <iconPath>UI/Abilities/SoulMending</iconPath>
 	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
     <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
@@ -161,7 +127,7 @@
 	  <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
       <drawAimPie>false</drawAimPie>
       <range>-1</range>
-      <warmupTime>77</warmupTime>
+      <warmupTime>7</warmupTime>
       <soundCast>QiHeal_Cast</soundCast>
 	  <ai_IsWeapon>false</ai_IsWeapon>
       <targetParams>
@@ -169,8 +135,11 @@
       </targetParams>
     </verbProperties>
     <comps>
+	  <li Class="Ascension.AS_CompProperties_AbilityLifespanCost">
+        <cost>70</cost>
+      </li>
       <li Class="Ascension.CompProperties_AbilityQiCost">
-        <cost>24000000</cost><!-- 24000000 -->
+        <cost>24000000</cost><!-- 24,000,000 -->
       </li>
       <li Class="Ascension.CompProperties_AbilitySoulMend">
       </li>
@@ -179,7 +148,95 @@
       </li>
     </comps>
   </AbilityDef>
- 
+  
+  <AbilityDef>
+    <defName>AS_EntombmentCircle</defName>
+    <label>entombment circle</label>
+    <description>Encircle yourself with a large extremley durable barrier at the cost of your life, a massive amount of qi and 100 years of your lifespan. Soul Mending charges recomended before use.</description>
+    <iconPath>UI/Abilities/EntombmentCircle</iconPath>
+	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <cooldownTicksRange>5000</cooldownTicksRange>
+    <category>QiTechnique</category>
+    <displayOrder>200</displayOrder>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <aiCanUse>false</aiCanUse>
+	<hostile>false</hostile>
+    <verbProperties>
+	  <ai_IsWeapon>false</ai_IsWeapon>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>-1</range>
+      <warmupTime>12</warmupTime>
+      <soundCast>QiBullet</soundCast>
+      <targetParams>
+		<canTargetSelf>true</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+    <comps>
+	  <li Class="Ascension.AS_CompProperties_AbilityLifespanCost">
+        <cost>100</cost>
+      </li>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>24000000</cost>
+      </li>
+	  <li Class="Ascension.AS_CompProperties_ThingCircle">
+        <circleThing>AS_EntombmentBarrier</circleThing>
+		<outerCircleRadius>12</outerCircleRadius>
+		<innerCircleRadius>2</innerCircleRadius>
+      </li>
+	  <li Class="CompProperties_AbilityRequiresCapacity">
+        <capacity>Manipulation</capacity>
+      </li>
+	  <li Class="Ascension.AS_CompProperties_DeathOnUse">
+        <destroy>false</destroy>
+      </li>
+    </comps>
+  </AbilityDef>
+  
+   <!-- advanced qi arts-->
+  
+    <AbilityDef ParentName="AbilityTouchBase">
+    <defName>QiResurrection</defName>
+    <label>qi resurrect</label>
+    <description>Use a massive amount of qi and 50 years of lifespan to infuse a corpse's body with new life, repairing degenerated cell structures and kickstarting vital functions. The older and worse-preserved the corpse is, the more likely it is that they will come back with memory loss or health conditions. This ability seems to clog the qi pathways used in it somehow, so it can only be used once every 3 days.</description>
+    <iconPath>UI/Abilities/QiResurrection</iconPath>
+	<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <cooldownTicksRange>180000</cooldownTicksRange> <!-- 3 days -->
+    <warmupMote>Mote_QiMistStencil</warmupMote>
+    <warmupEffecter>QiMist</warmupEffecter>
+    <warmupStartSound>QiHeal_Cast</warmupStartSound>
+    <category>QiTechnique</category>
+    <displayOrder>600</displayOrder>
+    <hostile>false</hostile>
+    <sendMessageOnCooldownComplete>true</sendMessageOnCooldownComplete>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <verbProperties>
+      <verbClass>Verb_CastAbilityTouch</verbClass>
+      <drawAimPie>false</drawAimPie>
+      <range>-1</range>
+      <warmupTime>20</warmupTime>
+      <soundCast>QiHeal_Cast</soundCast>
+	  <ai_IsWeapon>false</ai_IsWeapon>
+      <targetParams>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetCorpses>true</canTargetCorpses>
+        <canTargetMechs>false</canTargetMechs>
+      </targetParams>
+    </verbProperties>
+    <comps>
+	  <li Class="Ascension.AS_CompProperties_AbilityLifespanCost">
+        <cost>50</cost>
+      </li>
+      <li Class="CompProperties_Resurrect"/>
+      <li Class="Ascension.CompProperties_AbilityQiCost">
+        <cost>10000000</cost>
+      </li>
+    </comps>
+  </AbilityDef>
+  
+
    <AbilityDef ParentName="AbilityTouchBase">
     <defName>QiFeed</defName>
     <label>qi feed</label>
@@ -214,6 +271,9 @@
       </li>
     </comps>
   </AbilityDef>
+  
+  
+  
   
   
           <!-- Lightning arts-->

@@ -7,8 +7,6 @@ namespace Ascension
     public class CompTorchFireEmit : ThingComp
     {
         public CompProperties_TorchFireEmit Props => (CompProperties_TorchFireEmit)props;
-        public int amount = 0;
-        public int range = 0;
         private ElementEmitMapComponent.Element element = ElementEmitMapComponent.Element.Fire;
         private ElementEmitMapComponent qiGatherMapComp;
         public override IEnumerable<StatDrawEntry> SpecialDisplayStats()
@@ -47,49 +45,35 @@ namespace Ascension
         private CompRefuelable torchFuelComp;
         bool addedFire = false;
         int ticks;
-        private static readonly int tickRate = 700;
+        private static readonly int tickRate = 1400;
         public override void CompTick()
         {
-            if (torchFuelComp != null)
+            if (qiGatherMapComp != null)
             {
-                ticks--;
-                if (ticks <= 0)
+                if (torchFuelComp != null)
                 {
-                    ticks = tickRate;
-                    if (addedFire == false)
+                    ticks--;
+                    if (ticks <= 0)
                     {
-                        if (torchFuelComp.HasFuel)
-                        {
-                            qiGatherMapComp.AddElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, amount, element);
-                            addedFire = true;
-                        }
-                    }
-                    else
-                    {
-                        if (!torchFuelComp.HasFuel)
-                        {
-                            qiGatherMapComp.RemoveElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, amount, element);
-                            addedFire = false;
-                        }
+                        ticks = tickRate;
+                        qiGatherMapComp.UpdateMapElement();
                     }
                 }
             }
+
         }
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             torchFuelComp = parent.TryGetComp<CompRefuelable>();
             //find and assign thier comp
-
-            amount = Props.amount;
-            range = Props.range;
             qiGatherMapComp = parent.Map.GetComponent<ElementEmitMapComponent>();
             base.PostSpawnSetup(respawningAfterLoad);
         }
         public override void PostDeSpawn(Map map)
         {
-            if (addedFire)
+            if (qiGatherMapComp != null)
             {
-                qiGatherMapComp.RemoveElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, amount, element);
+                qiGatherMapComp.UpdateMapElement();
             }
             base.PostDeSpawn(map);
         }

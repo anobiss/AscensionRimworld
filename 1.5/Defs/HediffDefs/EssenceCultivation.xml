@@ -3,7 +3,7 @@
   <HediffDef>
     <defName>EssenceRealm</defName>
 	<label>Essence Realm</label>
-	<description>The current essence realm. Essence realms grant progressive increasess in max qi and passive qi gathering, along with the improved bodily functions like the previous body realms.</description>
+	<description>The current essence realm. Essence realms grant progressive increasess in max qi and passive qi gathering.\n\n Essence Realm Progression: Qi Refinement > Core Shaping > Golden Core > Nascent Soul > Soul Transformation > Pseudo-Immortal > Profound Immortal.</description>
 	<hediffClass>Ascension.Realm_Hediff</hediffClass>
 	<scenarioCanAdd>true</scenarioCanAdd>
 	<defaultLabelColor>(0.7, 1.0, 0.7)</defaultLabelColor>

@@ -35,7 +35,7 @@ namespace Ascension
         public static readonly float PCMaxRealmDefault = 6f;
 
 
-        public static readonly float EssenceChanceDefault = 0.1f;//chance for randomly generated cultivators to be essence cultivators instead of body cultivators if past foundation. do 0% for only body 
+        public static readonly float EssenceChanceDefault = 0.5f;//chance for randomly generated cultivators to be essence cultivators instead of body cultivators if past foundation. do 0% for only body 
         public static readonly float foundationChanceDefault = 0.2f;
         public static readonly bool disableProgressLettersDefault = true;
         public static readonly bool disableHTLettersDefault = false;
@@ -58,10 +58,10 @@ namespace Ascension
         public float LifespanTickRate = LifespanTickRateDefault;
         public string LifespanTickRateString = LifespanTickRateDefault.ToString("#");
         public float LifespanAgeRatio = LifespanAgeRatioDefault;
-        public string LifespanAgeRatioString = AscensionStaticStartUtils.PercentageString(LifespanAgeRatioDefault, false);
+        public string LifespanAgeRatioString = AscensionStaticUtils.PercentageString(LifespanAgeRatioDefault, false);
 
         public float MaxRandLifespan = MaxRandLifespanDefault;
-        public string MaxRandLifespanString = AscensionStaticStartUtils.PercentageString(MaxRandLifespanDefault, false);
+        public string MaxRandLifespanString = AscensionStaticUtils.PercentageString(MaxRandLifespanDefault, false);
 
 
         public bool displayQiGrid = displayQiGridDefault;
@@ -77,13 +77,13 @@ namespace Ascension
         public string AnimaCMaxString = AnimaCMaxDefault.ToString("#");
 
         public float CultivatorChance = CultivatorChanceDefault;
-        public string CultivatorChanceString = AscensionStaticStartUtils.PercentageString(CultivatorChanceDefault, false);
+        public string CultivatorChanceString = AscensionStaticUtils.PercentageString(CultivatorChanceDefault, false);
 
         public float AbilityChance = AbilityChanceDefault;
-        public string AbilityChanceString = AscensionStaticStartUtils.PercentageString(AbilityChanceDefault, false);
+        public string AbilityChanceString = AscensionStaticUtils.PercentageString(AbilityChanceDefault, false);
 
         public float PCChance = PCChanceDefault;//powerful cultivator, always past 3rd realm and 4x scores. 
-        public string PCChanceString = AscensionStaticStartUtils.PercentageString(PCChanceDefault, false);
+        public string PCChanceString = AscensionStaticUtils.PercentageString(PCChanceDefault, false);
         public float PCMinRealm = PCMinRealmDefault;
         public string PCMinRealmString = PCMinRealmDefault.ToString("#");
         public float PCMaxRealm = PCMaxRealmDefault;
@@ -91,9 +91,9 @@ namespace Ascension
 
 
         public float EssenceChance = EssenceChanceDefault;//chance for randomly generated cultivators to be essence cultivators instead of body cultivators if past foundation. do 0% for only body 
-        public string EssenceChanceString = AscensionStaticStartUtils.PercentageString(EssenceChanceDefault, false);
+        public string EssenceChanceString = AscensionStaticUtils.PercentageString(EssenceChanceDefault, false);
         public float foundationChance = foundationChanceDefault;
-        public string foundationChanceString = AscensionStaticStartUtils.PercentageString(foundationChanceDefault, false);
+        public string foundationChanceString = AscensionStaticUtils.PercentageString(foundationChanceDefault, false);
         public bool disableProgressLetters = disableProgressLettersDefault;
         public bool disableHTLetters = disableHTLettersDefault;
         public float SMRandStacks = SMRandStacksDefault;
@@ -101,7 +101,7 @@ namespace Ascension
 
 
         public float BaseCultivationSpeed = BaseCultivationSpeedDefault;
-        public string BaseCultivationSpeedString = AscensionStaticStartUtils.PercentageString(BaseCultivationSpeedDefault, false);
+        public string BaseCultivationSpeedString = AscensionStaticUtils.PercentageString(BaseCultivationSpeedDefault, false);
 
         //all controllable pawns auto choose by default if this is true;
         public bool defaultConfirm = defaultConfirmDefault;
@@ -173,19 +173,19 @@ namespace Ascension
             listingStandard.CheckboxLabeled("AS_HumanoidCultivator".Translate(), ref settings.humanoidOnlyBool, "AS_HumanoidCultivatorDesc".Translate());
             listingStandard.CheckboxLabeled("AS_MachineCultivator".Translate(), ref settings.machineCultivatorBool, "AS_MachineCultivatorDesc".Translate());
 
-            listingStandard.Label("AS_CultivatorChance".Translate(AscensionStaticStartUtils.PercentageString(settings.CultivatorChance).Named("SETTING"), -1, "AS_CultivatorChanceDesc".Translate()));
-            settings.CultivatorChanceString = AscensionStaticStartUtils.PercentageString(settings.CultivatorChance, false);
+            listingStandard.Label("AS_CultivatorChance".Translate(AscensionStaticUtils.PercentageString(settings.CultivatorChance).Named("SETTING"), -1, "AS_CultivatorChanceDesc".Translate()));
+            settings.CultivatorChanceString = AscensionStaticUtils.PercentageString(settings.CultivatorChance, false);
             listingStandard.TextFieldNumeric(ref settings.CultivatorChance, ref settings.CultivatorChanceString, 0.00f, 1.00f);
-            listingStandard.Label("AS_FoundationChance".Translate(AscensionStaticStartUtils.PercentageString(settings.foundationChance).Named("SETTING"), -1, "AS_FoundationChanceDesc".Translate()));
-            settings.foundationChanceString = AscensionStaticStartUtils.PercentageString(settings.foundationChance, false);
+            listingStandard.Label("AS_FoundationChance".Translate(AscensionStaticUtils.PercentageString(settings.foundationChance).Named("SETTING"), -1, "AS_FoundationChanceDesc".Translate()));
+            settings.foundationChanceString = AscensionStaticUtils.PercentageString(settings.foundationChance, false);
             listingStandard.TextFieldNumeric(ref settings.foundationChance, ref settings.foundationChanceString, 0.00f, 1.00f);
-            listingStandard.Label("AS_ERChance".Translate(AscensionStaticStartUtils.PercentageString(settings.EssenceChance).Named("SETTING"), -1, "AS_ERChanceDesc".Translate()));
-            settings.EssenceChanceString = AscensionStaticStartUtils.PercentageString(settings.EssenceChance, false);
+            listingStandard.Label("AS_ERChance".Translate(AscensionStaticUtils.PercentageString(settings.EssenceChance).Named("SETTING"), -1, "AS_ERChanceDesc".Translate()));
+            settings.EssenceChanceString = AscensionStaticUtils.PercentageString(settings.EssenceChance, false);
             listingStandard.TextFieldNumeric(ref settings.EssenceChance, ref settings.EssenceChanceString, 0.00f, 1.00f);
 
-            listingStandard.Label("AS_PCChance".Translate(AscensionStaticStartUtils.PercentageString(settings.PCChance).Named("SETTING"), -1, "AS_PCChanceDesc".Translate()));
+            listingStandard.Label("AS_PCChance".Translate(AscensionStaticUtils.PercentageString(settings.PCChance).Named("SETTING"), -1, "AS_PCChanceDesc".Translate()));
 
-            settings.PCChanceString = AscensionStaticStartUtils.PercentageString(settings.PCChance, false);
+            settings.PCChanceString = AscensionStaticUtils.PercentageString(settings.PCChance, false);
             listingStandard.TextFieldNumeric(ref settings.PCChance, ref settings.PCChanceString, 0.00f, 1.00f);
 
             listingStandard.Label("AS_PCMin".Translate(this.settings.PCMinRealm.ToString("#").Named("SETTING")), -1, "AS_PCMinDesc".Translate());
@@ -204,16 +204,16 @@ namespace Ascension
             settings.AnimaCMaxString = settings.AnimaCMax.ToString("#");
             listingStandard.TextFieldNumeric(ref settings.AnimaCMax, ref settings.AnimaCMaxString, 1, 1000000f);
 
-            listingStandard.Label("AS_AbilityChance".Translate(AscensionStaticStartUtils.PercentageString(settings.AbilityChance).Named("SETTING"), -1, "AS_AbilityChanceDesc".Translate()));
-            settings.AbilityChanceString = AscensionStaticStartUtils.PercentageString(settings.AbilityChance, false);
+            listingStandard.Label("AS_AbilityChance".Translate(AscensionStaticUtils.PercentageString(settings.AbilityChance).Named("SETTING"), -1, "AS_AbilityChanceDesc".Translate()));
+            settings.AbilityChanceString = AscensionStaticUtils.PercentageString(settings.AbilityChance, false);
             listingStandard.TextFieldNumeric(ref settings.AbilityChance, ref settings.AbilityChanceString, 0.00f, 1.00f);
 
             listingStandard.Label("AS_SMRandStacks".Translate(this.settings.SMRandStacks.ToString("#").Named("SETTING")), -1, "AS_SSMRandStacksDesc".Translate());
             settings.SMRandStacksString = settings.SMRandStacks.ToString("#");
             listingStandard.TextFieldNumeric(ref settings.SMRandStacks, ref settings.SMRandStacksString, 1, 100000f);
 
-            listingStandard.Label("AS_MaxRandLifespan".Translate(AscensionStaticStartUtils.PercentageString(settings.MaxRandLifespan).Named("SETTING")), -1, "AS_MaxRandLifespanDesc".Translate());
-            settings.MaxRandLifespanString = AscensionStaticStartUtils.PercentageString(settings.MaxRandLifespan, false);
+            listingStandard.Label("AS_MaxRandLifespan".Translate(AscensionStaticUtils.PercentageString(settings.MaxRandLifespan).Named("SETTING")), -1, "AS_MaxRandLifespanDesc".Translate());
+            settings.MaxRandLifespanString = AscensionStaticUtils.PercentageString(settings.MaxRandLifespan, false);
             listingStandard.TextFieldNumeric(ref settings.MaxRandLifespan, ref settings.MaxRandLifespanString, 0.00f, 100000.00f);
 
             listingStandard.Label("AS_Notifications".Translate() + "\n", -1, "AS_NotificationsDesc".Translate());
@@ -243,8 +243,8 @@ namespace Ascension
             settings.BaseCultivationSpeedString = settings.BaseCultivationSpeed.ToString("0.0#");
             listingStandard.TextFieldNumeric(ref settings.BaseCultivationSpeed, ref settings.BaseCultivationSpeedString, 1, 10000f);
 
-            listingStandard.Label("AS_LifespanAgeRatio".Translate(AscensionStaticStartUtils.PercentageString(settings.LifespanAgeRatio).Named("SETTING"), -1, "AS_LifespanAgeRatioDesc".Translate()));
-            settings.LifespanAgeRatioString = AscensionStaticStartUtils.PercentageString(settings.LifespanAgeRatio, false);
+            listingStandard.Label("AS_LifespanAgeRatio".Translate(AscensionStaticUtils.PercentageString(settings.LifespanAgeRatio).Named("SETTING"), -1, "AS_LifespanAgeRatioDesc".Translate()));
+            settings.LifespanAgeRatioString = AscensionStaticUtils.PercentageString(settings.LifespanAgeRatio, false);
             listingStandard.TextFieldNumeric(ref settings.LifespanAgeRatio, ref settings.LifespanAgeRatioString, 0.00f, 1.00f);
 
 
@@ -261,9 +261,9 @@ namespace Ascension
             settings.LifespanTickRate = AscensionSettings.LifespanTickRateDefault;
             settings.LifespanTickRateString = AscensionSettings.LifespanTickRateDefault.ToString("#");
             settings.LifespanAgeRatio = AscensionSettings.LifespanAgeRatioDefault;
-            settings.LifespanAgeRatioString = AscensionStaticStartUtils.PercentageString(AscensionSettings.LifespanAgeRatioDefault, false);
+            settings.LifespanAgeRatioString = AscensionStaticUtils.PercentageString(AscensionSettings.LifespanAgeRatioDefault, false);
             settings.MaxRandLifespan = AscensionSettings.MaxRandLifespanDefault;
-            settings.MaxRandLifespanString = AscensionStaticStartUtils.PercentageString(AscensionSettings.MaxRandLifespanDefault, false);
+            settings.MaxRandLifespanString = AscensionStaticUtils.PercentageString(AscensionSettings.MaxRandLifespanDefault, false);
             settings.displayQiGrid = AscensionSettings.displayQiGridDefault;
             settings.displayElementGrid = AscensionSettings.displayElementGridDefault;
             settings.humanoidOnlyBool = AscensionSettings.humanoidOnlyBoolDefault;
@@ -275,25 +275,25 @@ namespace Ascension
             settings.AnimaCMax = AscensionSettings.AnimaCMaxDefault;
             settings.AnimaCMaxString = AscensionSettings.AnimaCMaxDefault.ToString("#");
             settings.CultivatorChance = AscensionSettings.CultivatorChanceDefault;
-            settings.CultivatorChanceString = AscensionStaticStartUtils.PercentageString(AscensionSettings.CultivatorChanceDefault, false);
+            settings.CultivatorChanceString = AscensionStaticUtils.PercentageString(AscensionSettings.CultivatorChanceDefault, false);
             settings.AbilityChance = AscensionSettings.AbilityChanceDefault;
-            settings.AbilityChanceString = AscensionStaticStartUtils.PercentageString(AscensionSettings.AbilityChanceDefault, false);
+            settings.AbilityChanceString = AscensionStaticUtils.PercentageString(AscensionSettings.AbilityChanceDefault, false);
             settings.PCChance = AscensionSettings.PCChanceDefault;
-            settings.PCChanceString = AscensionStaticStartUtils.PercentageString(AscensionSettings.PCChanceDefault, false);
+            settings.PCChanceString = AscensionStaticUtils.PercentageString(AscensionSettings.PCChanceDefault, false);
             settings.PCMinRealm = AscensionSettings.PCMinRealmDefault;
             settings.PCMinRealmString = AscensionSettings.PCMinRealmDefault.ToString("#");
             settings.PCMaxRealm = AscensionSettings.PCMaxRealmDefault;
             settings.PCMaxRealmString = AscensionSettings.PCMaxRealmDefault.ToString("#");
             settings.EssenceChance = AscensionSettings.EssenceChanceDefault;
-            settings.EssenceChanceString = AscensionStaticStartUtils.PercentageString(AscensionSettings.EssenceChanceDefault, false);
+            settings.EssenceChanceString = AscensionStaticUtils.PercentageString(AscensionSettings.EssenceChanceDefault, false);
             settings.foundationChance = AscensionSettings.foundationChanceDefault;
-            settings.foundationChanceString = AscensionStaticStartUtils.PercentageString(AscensionSettings.foundationChanceDefault, false);
+            settings.foundationChanceString = AscensionStaticUtils.PercentageString(AscensionSettings.foundationChanceDefault, false);
             settings.disableProgressLetters = AscensionSettings.disableProgressLettersDefault;
             settings.disableHTLetters = AscensionSettings.disableHTLettersDefault;
             settings.SMRandStacks = AscensionSettings.SMRandStacksDefault;
             settings.SMRandStacksString = AscensionSettings.SMRandStacksDefault.ToString("#");
             settings.BaseCultivationSpeed = AscensionSettings.BaseCultivationSpeedDefault;
-            settings.BaseCultivationSpeedString = AscensionStaticStartUtils.PercentageString(AscensionSettings.BaseCultivationSpeedDefault, false);
+            settings.BaseCultivationSpeedString = AscensionStaticUtils.PercentageString(AscensionSettings.BaseCultivationSpeedDefault, false);
             settings.defaultConfirm = AscensionSettings.defaultConfirmDefault;
             settings.defaultEssenceType = AscensionSettings.defaultEssenceTypeDefault;
     }

@@ -17,7 +17,7 @@ namespace Ascension
             foreach (Map map in this.AffectedMaps)
             {
                 QiGatherMapComponent qiMapComp = map.GetComponent<QiGatherMapComponent>();
-                qiMapComp.AddQiGatherAt(100, 100, 500, 120);
+                qiMapComp.UpdateMapQi();
             }
             // Initialization logic for pawns with Qi resonance
             foreach (Pawn pawn in this.SingleMap.mapPawns.AllPawns)
@@ -35,7 +35,7 @@ namespace Ascension
             foreach (Map map in this.AffectedMaps) // before base in case end removes the map
             {
                 QiGatherMapComponent qiMapComp = map.GetComponent<QiGatherMapComponent>();
-                qiMapComp.RemoveQiGatherAt(100, 100, 500, 120);
+                qiMapComp.UpdateMapQi();
             }
             base.End();
         }
@@ -52,23 +52,23 @@ namespace Ascension
 
                 foreach (Map map in this.AffectedMaps)
                 {
-                    Log.Message("Attempting spirit tree conversion");
+                    //Log.Message("Attempting spirit tree conversion");
                     if (Rand.Range(0f, 1f) < SpiritTreeConversionChance)
                     {
                         IncidentParms incidentParms = new IncidentParms();
                         incidentParms.target = map;
                         if (AscensionDefOf.AS_SpiritTreeConversion.Worker.TryExecute(incidentParms))
                         {
-                            Log.Message("Spirit tree conversion succeeded");
+                            //Log.Message("Spirit tree conversion succeeded");
                         }
                         else
                         {
-                            Log.Message("Spirit tree conversion failed");
+                            //Log.Message("Spirit tree conversion failed");
                         }
                     }
                     else
                     {
-                        Log.Message("Spirit tree conversion roll failed");
+                        //Log.Message("Spirit tree conversion roll failed");
                     }
                 }
             }

@@ -23,7 +23,7 @@ namespace Ascension
                     if (compQuality != null)
                     {
                         QualityCategory newQuality = QualityCategory.Awful;
-                        int currentQi = cauldronComp.currentQi;
+                        float currentQi = cauldronComp.currentQi;
 
                         // Determine the highest quality allowed by current Qi
                         for (int i = QualityQiThresholds.Length - 1; i > 0; i--)

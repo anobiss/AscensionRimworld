@@ -23,6 +23,8 @@ namespace Ascension
 
         public static ThingDef AS_HeavensBreath;
 
+        public static GameConditionDef QiBurstGameCondition;
+
         //misc stuffs
         public static HediffDef AS_StunSeedHediff;
         public static HediffDef HeavenlyQiArts;

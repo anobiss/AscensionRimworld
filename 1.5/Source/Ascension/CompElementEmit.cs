@@ -77,7 +77,7 @@ namespace Ascension
             qiGatherMapComp = parent.Map.GetComponent<ElementEmitMapComponent>();
             if (parent != null && qiGatherMapComp != null)
             {
-                qiGatherMapComp.AddElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, ElementAmount(parent.stackCount), GetPropsElement(element));
+                qiGatherMapComp.UpdateMapElement();
             }
             
             base.PostSpawnSetup(respawningAfterLoad);
@@ -89,7 +89,7 @@ namespace Ascension
             base.PreAbsorbStack(otherStack, count);
             if (otherStack != null && qiGatherMapComp != null)
             {
-                qiGatherMapComp.AddElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, ElementAmount(otherStack.stackCount), GetPropsElement(element));
+                qiGatherMapComp.UpdateMapElement();
             }
         }
 
@@ -98,7 +98,7 @@ namespace Ascension
             base.PostSplitOff(piece);
             if (piece != null && parent.Spawned && qiGatherMapComp != null)
             {
-                qiGatherMapComp.RemoveElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, ElementAmount(piece.stackCount), GetPropsElement(Props.element));
+                qiGatherMapComp.UpdateMapElement();
                 //Log.Message("PostSplitOff removed element amount is" + ElementAmount(piece.stackCount));
             }
         }
@@ -114,7 +114,7 @@ namespace Ascension
                 qiGatherMapComp = map.GetComponent<ElementEmitMapComponent>();
                 if (parent != null && qiGatherMapComp != null)
                 {
-                    qiGatherMapComp.RemoveElementAt(new IntVec2(parent.Position.x, parent.Position.z), range, ElementAmount(parent.stackCount), GetPropsElement(Props.element));
+                    qiGatherMapComp.UpdateMapElement();
                     //Log.Message("PostDeSpawn removed element amount is" + ElementAmount(parent.stackCount));
                 }
             }

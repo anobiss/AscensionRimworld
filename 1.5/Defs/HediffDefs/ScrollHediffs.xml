@@ -42,7 +42,7 @@
   <HediffDef>
     <defName>HeavenlyQiArts</defName>
 	<label>Heavenly Qi Arts</label>
-	<description>Heavenly Qi Arts, includes the Soul Mending ability. This ability creates charges that resurrects the user instantly upon death if the corpse still exists and can be stacked for more resurrections.</description>
+	<description>Heavenly Qi Arts, includes the Soul Mending and Entombment Circle ability</description>
     <hediffClass>Ascension.Scroll_Hediff</hediffClass>
 	<defaultLabelColor>(1.0, 1.0, 0.2)</defaultLabelColor>
     <isBad>false</isBad>
@@ -50,6 +50,7 @@
       <li Class="Ascension.HediffCompProperties_AddScrollAbility">
 		<scrollCompAbilityDefList>
 			<li>SoulMending</li>
+			<li>AS_EntombmentCircle</li>
 		</scrollCompAbilityDefList>
 		<reqEssence>7</reqEssence>
       </li>

@@ -50,7 +50,7 @@ namespace Ascension
                 cultivatorHediff.qiGatheringJobProg = 0;
             }
             QiGatherMapComponent qiGatherMapComp = pawn.Map.GetComponent<QiGatherMapComponent>();
-            int qiAmount = qiGatherMapComp.GetQiGatherAt(pawn.Position.x, pawn.Position.z)+1;
+            float qiAmount = qiGatherMapComp.GetQiGatherAt(pawn.Position.x, pawn.Position.z)+1;
             AscensionUtilities.IncreaseQi(pawn, qiAmount, true);
             if (job.GetTarget(SpotInd) != pawn)
             {

@@ -413,10 +413,15 @@
   <AbilityDisabledERProgLow>Ability disabled, Essence Realm not high enough.</AbilityDisabledERProgLow>
   <AbilityDisabledBRProgLow>Ability disabled, Body Realm not high enough.</AbilityDisabledBRProgLow>
   <AbilityDisabledPIProgLow>Ability disabled, Pseudo-Immortality tier too low.</AbilityDisabledPIProgLow>
-  <AbilityDisabledNoQiPool>Ability disabled, no qi pool found.</AbilityDisabledNoQiPool>
-  <AbilityDisabledNoQi>Ability disabled, not enough qi in pool.</AbilityDisabledNoQi>
-  <AbilityDisabledNoHediff>Ability disabled, requires </AbilityDisabledNoHediff>
-  <AbilityQiCost>Dao cost</AbilityQiCost>
+  <AS_AbilityDisabledNoQiPool>Ability disabled, no qi pool found.</AS_AbilityDisabledNoQiPool>
+  <AS_AbilityDisabledNoQi>Ability disabled, not enough qi in pool.</AS_AbilityDisabledNoQi>
+  <AS_AbilityDisabledNoHediff>Ability disabled, requires {HEDIFF}.</AS_AbilityDisabledNoHediff>
+  <AS_AbilityQiCost>Qi Cost: {COST}</AS_AbilityQiCost>
+  
+  <AS_AbilityNotCultivator>Ability disabled, user not a cultivator.</AS_AbilityNotCultivator>
+  <AS_AbilityDisabledNoLifespan>Ability disabled, not enough lifespan.</AS_AbilityDisabledNoLifespan>
+  <AS_AbilityLifespanCost>Lifespan Cost: {COST} Years</AS_AbilityLifespanCost>
+  
   <AS_HumanoidCultivator>Humanoid Cultivator Spawns Only</AS_HumanoidCultivator>
   <AS_HumanoidCultivatorDesc>Enable if you want the spawn chance to only affect humanoid pawns.</AS_HumanoidCultivatorDesc>
   <AS_MachineCultivator>Machine Cultivators</AS_MachineCultivator>

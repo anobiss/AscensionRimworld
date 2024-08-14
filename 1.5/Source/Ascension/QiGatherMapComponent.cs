@@ -14,10 +14,16 @@ namespace Ascension
     // Updates to the grid should work almost exactly like the GlowGrid.
     public class QiGatherMapComponent : MapComponent
     {
+        public QiGatherMapComponent(Map map)
+    : base(map)
+        {
+            CultivationCauldrons = new List<CompCultivationCauldron>();
+            numGridCells = map.cellIndices.NumGridCells;
+            qiGrid = new float[numGridCells * 3]; // Initialize QiGrid with the number of grid cells
+        }
         public List<CompCultivationCauldron> CultivationCauldrons;
-
-        public int[] qiGrid; // 1D array acting as the QiGrid
-
+        public int numGridCells;
+        public float[] qiGrid; // 1D array acting as the QiGrid
         // Override MapComponentOnGUI to draw Qi amounts on the map
         public override void MapComponentOnGUI()
         {
@@ -28,43 +34,61 @@ namespace Ascension
                 int cellCount = GenRadial.NumCellsInRadius(8.9f); // Get the number of cells within the radius
                 int gridSize = Mathf.RoundToInt(Mathf.Sqrt(qiGrid.Length / 3));
 
-                for (int i = 0; i < cellCount; i++)
+                for (int i = 0; i < cellCount; i++)//int because grid is squares
                 {
-                    IntVec3 currentCell = mouseCell + GenRadial.RadialPattern[i];
+                    IntVec3 currentCell = mouseCell + GenRadial.RadialPattern[i];//grid is square so this should always be int
 
                     if (currentCell.x >= 0 && currentCell.x < gridSize && currentCell.z >= 0 && currentCell.z < gridSize)
                     {
-                        int qiAmount = GetQiGatherAt(currentCell.x, currentCell.z); // Access Qi amount using GetQiGatherAt method
+                        float qiAmount = GetQiGatherAt(currentCell.x, currentCell.z); // Access Qi amount using GetQiGatherAt method
                         if (qiAmount != 0)
                         {
                             Vector3 labelPos = (Vector3)GenMapUI.LabelDrawPosFor(new IntVec3(currentCell.x, 0, currentCell.z)); // Assuming y-coordinate is always 0
                             Color color = Color.Lerp(Color.white, Color.yellow, (float)qiAmount / 250f); // Example: Color based on qiAmount
-                            GenMapUI.DrawThingLabel(labelPos, qiAmount.ToString(), color);
+                            GenMapUI.DrawThingLabel(labelPos, qiAmount.ToString("0.##"), color);
                         }
                     }
                 }
             }
         }
-
-        // Adds qi at the given position within the specified radius.
-        public void AddQiGatherAt(int centerX, int centerZ, int radius, int amount)
+        public void UpdateMapQi()
         {
-            int gridSize = (int)Math.Sqrt(qiGrid.Length / 3);
-            // Iterate through the grid
-            for (int x = 0; x < gridSize; x++)
+            qiGrid = new float[numGridCells * 3];
+            //game condition gather qi
+            foreach (GameCondition gameCondition in map.gameConditionManager.ActiveConditions)
             {
-                for (int z = 0; z < gridSize; z++)
+                if (gameCondition.def == AscensionDefOf.QiBurstGameCondition)
                 {
-                    int index = z * gridSize + x;
-                    int dx = x - centerX;
-                    int dz = z - centerZ;
-                    // Check if the cell is within the circle
-                    if (dx * dx + dz * dz <= radius * radius)
+                    for (int i = 0; i < qiGrid.Length; i++)
                     {
-                        // Increase the qi amount for the cell
-                        qiGrid[index * 3 + 2] += amount;
-                        //update cauldrons at location when amount is changed
-                        UpdateCauldrons(x, z);
+                        qiGrid[i] += 120;
+                    }
+                }
+            }
+            //gather qi things
+            foreach (Thing thing in map.listerThings.AllThings)
+            {
+                CompGatherQi gatherQiComp = thing.TryGetComp<CompGatherQi>();
+                if (gatherQiComp != null)
+                {
+                    float amount = gatherQiComp.Props.amount * thing.stackCount;
+                    float radius = gatherQiComp.Props.range;
+                    int gridSize = (int)Math.Sqrt(qiGrid.Length / 3);
+                    for (int x = 0; x < gridSize; x++)
+                    {
+                        for (int z = 0; z < gridSize; z++)
+                        {
+                            int index = z * gridSize + x;
+                            int dx = x - thing.Position.x;
+                            int dz = z - thing.Position.z;
+                            // Check if the cell is within the circle
+                            if (dx * dx + dz * dz <= radius * radius)
+                            {
+                                // Increase the qi amount for the cell
+                                qiGrid[index * 3 + 2] += amount;
+                                UpdateCauldrons(x, z);
+                            }
+                        }
                     }
                 }
             }
@@ -85,7 +109,6 @@ namespace Ascension
                     }
                 }
             }
-
             // Update the cauldrons outside of the enumeration loop
             foreach (CompCultivationCauldron cauldronComp in cauldronsToUpdate)
             {
@@ -95,33 +118,8 @@ namespace Ascension
                 }
             }
         }
-
-        // Removes qi at the given position within the specified radius.
-        public void RemoveQiGatherAt(int centerX, int centerZ, int radius, int amount)
-        {
-            int gridSize = (int)Math.Sqrt(qiGrid.Length / 3);
-            // Iterate through the grid
-            for (int x = 0; x < gridSize; x++)
-            {
-                for (int z = 0; z < gridSize; z++)
-                {
-                    int index = z * gridSize + x;
-                    int dx = x - centerX;
-                    int dz = z - centerZ;
-                    // Check if the cell is within the circle
-                    if (dx * dx + dz * dz <= radius * radius)
-                    {
-                        // Decrease the qi amount for the cell
-                        qiGrid[index * 3 + 2] -= amount;
-                        //update cauldrons at location when amount is changed
-                        UpdateCauldrons(x, z);
-                    }
-                }
-            }
-        }
-
         // Gets the qi amount at the specified position.
-        public int GetQiGatherAt(int x, int z)
+        public float GetQiGatherAt(int x, int z)
         {
             int gridSize = (int)Math.Sqrt(qiGrid.Length / 3);
             if (x >= 0 && x < gridSize && z >= 0 && z < gridSize)
@@ -130,14 +128,6 @@ namespace Ascension
                 return qiGrid[index * 3 + 2];
             }
             return 0; // Return 0 if coordinates are out of bounds
-        }
-
-        public QiGatherMapComponent(Map map)
-            : base(map)
-        {
-            CultivationCauldrons = new List<CompCultivationCauldron>();
-            int numGridCells = map.cellIndices.NumGridCells;
-            qiGrid = new int[numGridCells * 3]; // Initialize QiGrid with the number of grid cells
         }
     }
 }

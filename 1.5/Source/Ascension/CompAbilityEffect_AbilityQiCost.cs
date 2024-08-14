@@ -26,19 +26,10 @@ namespace Ascension
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
             base.Apply(target, dest);
-            QiPool_Hediff hediff = (QiPool_Hediff)parent.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool);
-            hediff.amount = hediff.amount - this.Props.cost;
-        }
-
-        public override void PostApplied(List<LocalTargetInfo> targets, Map map)
-        {
-            if (Props.removeHediffAfterCasting)
+            QiPool_Hediff hediff = parent.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool) as QiPool_Hediff;
+            if (hediff != null)
             {
-                Hediff hediff = parent.pawn.health.hediffSet.GetFirstHediffOfDef(AscensionDefOf.QiPool);
-                if (hediff != null)
-                {
-                    parent.pawn.health.RemoveHediff(hediff);
-                }
+                hediff.amount = hediff.amount - this.Props.cost;
             }
         }
 
@@ -48,13 +39,13 @@ namespace Ascension
             QiPool_Hediff hediff_QiPool = (hediffs != null) ? (QiPool_Hediff)hediffs.GetFirstHediffOfDef(AscensionDefOf.QiPool) : null;
             if (hediff_QiPool == null)
             {
-                reason = "AbilityDisabledNoQiPool".Translate(this.parent.pawn);
+                reason = "AS_AbilityDisabledNoQiPool".Translate(this.parent.pawn);
                 //Log.Message($"No Qi pool found on {this.parent.pawn.LabelShort}");
                 return true;
             }
             if (hediff_QiPool.amount < this.Props.cost)
             {
-                reason = "AbilityDisabledNoQi".Translate(this.parent.pawn);
+                reason = "AS_AbilityDisabledNoQi".Translate(this.parent.pawn);
                 //Log.Message($"Not enough Qi for this ability on {this.parent.pawn.LabelShort} {hediff_QiPool.Severity} severity with cost of {this.Props.QiCost}");
                 return true;
             }
@@ -63,7 +54,7 @@ namespace Ascension
             {
                 if (hediffs.GetFirstHediffOfDef(this.Props.reqHediffDef) == null)
                 {
-                    reason = "AbilityDisabledNoHediff".Translate(this.parent.pawn)+ this.Props.reqHediffDef.label;
+                    reason = "AS_AbilityDisabledNoHediff".Translate(this.parent.pawn, this.Props.reqHediffDef.label.Named("HEDIFF"));
                     //Log.Message("Not right hediffoe");
                     return true;
                 }

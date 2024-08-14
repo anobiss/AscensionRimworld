@@ -7,19 +7,6 @@ namespace Ascension
     public static class AscensionStaticStartUtils
     {
         private static readonly HashSet<HediffDef> scrollHediffList = new HashSet<HediffDef>();
-
-
-        public static string PercentageString(float chance, bool isLabel = true)
-        {
-            if (isLabel == true)
-            {
-                return (chance * 100f).ToString("0.##");
-            }
-            else
-            {
-                return (chance).ToString("0.###");
-            }
-        }
         public static IReadOnlyCollection<HediffDef> ScrollHediffList
         {
             get { return scrollHediffList; }

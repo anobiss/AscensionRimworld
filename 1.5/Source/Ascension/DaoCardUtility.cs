@@ -274,7 +274,7 @@ namespace Ascension
             else
             {
                 //realm stuff
-                displayTranslatedTTip = currentRealmHediff.CurStage.extraTooltip;
+                displayTranslatedTTip = currentRealmHediff.def.Description + "\n\n" + currentRealmHediff.CurStage.extraTooltip;
                 displayTranslatedLabel = "AS_RealmProgress".Translate(currentRealmHediff.CurStage.label.Named("REALM"),
                     currentRealmHediff.progress.Named("CURRENT"), currentRealmHediff.maxProgress.Named("MAX"));
 
@@ -312,8 +312,8 @@ namespace Ascension
                 Rect goldenCoreTextureRect = new Rect(realmTextureRect.x + (realmTextureRect.width - 32f) / 2f, realmTextureRect.y + (realmTextureRect.height - 32f) / 2f, 32f, 32f);
                 GUI.DrawTexture(goldenCoreTextureRect, goldenCoreTexture);
 
-                Rect goldenCoreLabelRect = new Rect(realmTextureRect.x, goldenCoreTextureRect.y, rect.width, 35f);
-                GUI.color = new Color(1f, 0.5f, 1.0f);
+                Rect goldenCoreLabelRect = new Rect(realmTextureRect.x, goldenCoreTextureRect.y-20f, rect.width, 35f);
+                GUI.color = Color.black;
                 Widgets.Label(goldenCoreLabelRect, "AS_GoldenCoreLabel".Translate(CultivatorHediff.goldenCoreScore.Named("SCORE")));
                 GUI.color = Color.white;
                 if (Mouse.IsOver(goldenCoreTextureRect))
